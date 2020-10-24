@@ -7,11 +7,12 @@ import {TwelveMonthTrailingGraphComponent} from './components/twelve-month-trail
 import {TimeBasedStatSummaryComponent} from './components/time-based-stat-summary/time-based-stat-summary.component';
 import {StoreModule} from '@ngrx/store';
 import * as fromKhakiStatistics from './state';
-import { EffectsModule } from '@ngrx/effects';
-import { TimeBlockSummariesEffects } from './state/effects/time-block-summaries.effects';
-import { OrganizersStatisticsEffects } from './state/effects/organizers-statistics.effects';
-import { TrailingStatisticsEffects } from './state/effects/trailing-statistics.effects';
-import { PerDepartmentStatisticsEffects } from './state/effects/per-department-statistics.effects';
+import {EffectsModule} from '@ngrx/effects';
+import {TimeBlockSummariesEffects} from './state/effects/time-block-summaries.effects';
+import {OrganizersStatisticsEffects} from './state/effects/organizers-statistics.effects';
+import {TrailingStatisticsEffects} from './state/effects/trailing-statistics.effects';
+import {PerDepartmentStatisticsEffects} from './state/effects/per-department-statistics.effects';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 @NgModule({
@@ -31,7 +32,15 @@ import { PerDepartmentStatisticsEffects } from './state/effects/per-department-s
         metaReducers: fromKhakiStatistics.metaReducers
       }
     ),
-    EffectsModule.forFeature([TimeBlockSummariesEffects, OrganizersStatisticsEffects, TrailingStatisticsEffects, PerDepartmentStatisticsEffects])
+    EffectsModule.forFeature(
+      [
+        TimeBlockSummariesEffects,
+        OrganizersStatisticsEffects,
+        TrailingStatisticsEffects,
+        PerDepartmentStatisticsEffects
+      ]
+    ),
+    MatProgressSpinnerModule
   ],
   exports: [KhakiStatisticsComponent]
 })

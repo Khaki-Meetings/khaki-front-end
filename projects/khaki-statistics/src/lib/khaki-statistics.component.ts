@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {SpinnerService} from './state/facades/spinner.service';
 
 @Component({
   selector: 'lib-khaki-statistics',
@@ -11,8 +12,9 @@ import { Component, OnInit } from '@angular/core';
   ]
 })
 export class KhakiStatisticsComponent implements OnInit {
+  isSpinning = false;
 
-  constructor() { }
+  constructor(private spinnerService: SpinnerService) { }
 
   ngOnInit(): void {
   }
