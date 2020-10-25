@@ -1,7 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PerDepartmentGraphComponent } from './per-department-graph.component';
-import {PerDepartmentStatisticsService} from "../../state/facades/per-department-statistics.service";
+import { PerDepartmentGraphComponent } from './per-department-graph.component';import {PerDepartmentStatisticsService} from "../../state/facades/per-department-statistics.service";
+import {By} from "@angular/platform-browser";
+import {MatSpinner} from "@angular/material/progress-spinner";
 
 describe('PerDepartmentGraphComponent', () => {
   let component: PerDepartmentGraphComponent;
@@ -29,4 +30,12 @@ describe('PerDepartmentGraphComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  // it(
+  //   'should contain ngrx-charts-pie-chart',
+  //   () => {
+  //     const ngrxPieChartElement = fixture.debugElement.query(By.directive());
+  //     expect(ngrxPieChartElement).toBeTruthy('Ngrx pie chart required on this page');
+  //   }
+  // );
 });
