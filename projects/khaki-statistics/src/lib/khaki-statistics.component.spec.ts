@@ -2,7 +2,7 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {KhakiStatisticsComponent} from './khaki-statistics.component';
 import {SpinnerService} from './state/facades/spinner.service';
-import {Subject} from 'rxjs';
+import {Observable, Subject, Subscriber} from 'rxjs';
 import {By} from '@angular/platform-browser';
 import {MatProgressSpinnerModule, MatSpinner} from '@angular/material/progress-spinner';
 import {PerDepartmentGraphComponent} from './components/per-department-graph/per-department-graph.component';
@@ -19,9 +19,14 @@ describe('KhakiStatisticsComponent', () => {
 
   beforeEach(async () => {
     spinnerSubject = new Subject<boolean>();
+
     mockSpinnerService = {
-      spinner: spinnerSubject
+      // the 'Observable' part of Subject
+      spinner(): Observable<boolean> {
+        return spinnerSubject;
+      }
     };
+
     await TestBed.configureTestingModule({
       declarations: [KhakiStatisticsComponent],
       imports: [
@@ -49,6 +54,7 @@ describe('KhakiStatisticsComponent', () => {
     () => {
       const msg = 'isSpinning should have been set to';
       let valueShouldBe = true;
+      // the 'Subscriber' part of the Subject
       spinnerSubject.next(valueShouldBe);
       expect(component.isSpinning).toBe(valueShouldBe, `${msg} ${valueShouldBe}`);
       valueShouldBe = false;
