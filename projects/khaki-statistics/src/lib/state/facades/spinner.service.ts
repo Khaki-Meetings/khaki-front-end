@@ -5,6 +5,7 @@ import {Observable} from 'rxjs';
   providedIn: 'root'
 })
 export class SpinnerService {
+  otherProperty;
 
   constructor() { }
 
