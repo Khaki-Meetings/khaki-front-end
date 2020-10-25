@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PerDepartmentGraphComponent } from './per-department-graph.component';
-import {StatisticsServiceService} from "../../services/statistics-service.service";
+import {PerDepartmentStatisticsService} from "../../state/facades/per-department-statistics.service";
 
 describe('PerDepartmentGraphComponent', () => {
   let component: PerDepartmentGraphComponent;
   let fixture: ComponentFixture<PerDepartmentGraphComponent>;
-  let mockStatService: Partial<StatisticsServiceService>
+  let mockPerDepartmentStatisticsService: Partial<PerDepartmentStatisticsService>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ PerDepartmentGraphComponent ],
       imports: [],
       providers: [
-        {provide: StatisticsServiceService, useValue: mockStatService}
+        {provide: PerDepartmentStatisticsService, useValue: mockPerDepartmentStatisticsService}
 
       ]
     })
