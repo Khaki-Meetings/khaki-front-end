@@ -45,7 +45,7 @@ describe('KhakiStatisticsComponent', () => {
   });
 
   it(
-    'should change var based on subscription',
+    'should change isSpinning based on subscription',
     () => {
       const msg = 'isSpinning should have been set to';
       let valueShouldBe = true;

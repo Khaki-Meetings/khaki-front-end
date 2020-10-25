@@ -17,6 +17,7 @@ export class KhakiStatisticsComponent implements OnInit {
   constructor(private spinnerService: SpinnerService) { }
 
   ngOnInit(): void {
+    this.spinnerService.spinner().subscribe(isSpinning => this.isSpinning = isSpinning);
   }
 
 }
