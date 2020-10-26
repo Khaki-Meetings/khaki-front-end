@@ -5,7 +5,7 @@ import {SpinnerService} from './state/facades/spinner.service';
   selector: 'lib-khaki-statistics',
   template: `
     <p>
-      khaki-statistics works!
+      <lib-time-based-stat-summary></lib-time-based-stat-summary>
     </p>
   `,
   styles: [
@@ -17,7 +17,7 @@ export class KhakiStatisticsComponent implements OnInit {
   constructor(private spinnerService: SpinnerService) { }
 
   ngOnInit(): void {
-    this.spinnerService.spinner().subscribe(isSpinning => this.isSpinning = isSpinning);
+    // this.spinnerService.spinner().subscribe(isSpinning => this.isSpinning = isSpinning);
   }
 
 }
