@@ -5,6 +5,8 @@ import {PerDepartmentStatistics} from '../models/per-department-statistics';
 export const perDepartmentStatisticsFeatureKey = 'perDepartmentStatistics';
 
 export const initialState: PerDepartmentStatistics = {
+  departmentStatistics: undefined,
+  errors: []
 };
 
 
