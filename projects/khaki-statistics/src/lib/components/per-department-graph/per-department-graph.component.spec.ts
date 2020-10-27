@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PerDepartmentGraphComponent } from './per-department-graph.component';import {PerDepartmentStatisticsService} from "../../state/facades/per-department-statistics.service";
+import { PerDepartmentGraphComponent } from './per-department-graph.component';import {PerDepartmentStatisticsFacadeService} from "../../state/facades/per-department-statistics-facade.service";
 import {By} from "@angular/platform-browser";
 import {MatSpinner} from "@angular/material/progress-spinner";
 
 describe('PerDepartmentGraphComponent', () => {
   let component: PerDepartmentGraphComponent;
   let fixture: ComponentFixture<PerDepartmentGraphComponent>;
-  let mockPerDepartmentStatisticsService: Partial<PerDepartmentStatisticsService>
+  let mockPerDepartmentStatisticsService: Partial<PerDepartmentStatisticsFacadeService>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ PerDepartmentGraphComponent ],
       imports: [],
       providers: [
-        {provide: PerDepartmentStatisticsService, useValue: mockPerDepartmentStatisticsService}
+        {provide: PerDepartmentStatisticsFacadeService, useValue: mockPerDepartmentStatisticsService}
 
       ]
     })

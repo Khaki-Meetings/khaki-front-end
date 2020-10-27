@@ -3,13 +3,13 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { OrganizersTableComponent } from './organizers-table.component';
 import {By} from "@angular/platform-browser";
 import {MatTable} from "@angular/material/table";
-import {SpinnerService} from "../../state/facades/spinner.service";
-import {OranizersStatisticsService} from "../../state/facades/oranizers-statistics.service";
+import {SpinnerFacadeService} from "../../state/facades/spinner-facade.service";
+import {OrganizersStatisticsFacadeService} from "../../state/facades/organizers-statistics-facade.service";
 
 describe('OrganizersTableComponent', () => {
   let component: OrganizersTableComponent;
   let fixture: ComponentFixture<OrganizersTableComponent>;
-  let mockOranizersStatisticsService: Partial<OranizersStatisticsService>;
+  let mockOranizersStatisticsService: Partial<OrganizersStatisticsFacadeService>;
 
 
   beforeEach(async () => {
@@ -17,7 +17,7 @@ describe('OrganizersTableComponent', () => {
       declarations: [ OrganizersTableComponent ],
       imports: [],
       providers: [
-        {provide: OranizersStatisticsService, useValue: mockOranizersStatisticsService}
+        {provide: OrganizersStatisticsFacadeService, useValue: mockOranizersStatisticsService}
 
       ]
     })

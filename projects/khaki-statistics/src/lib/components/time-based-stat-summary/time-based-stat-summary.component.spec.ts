@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TimeBasedStatSummaryComponent } from './time-based-stat-summary.component';
-import {SinceTimeBlockSummariesService} from "../../state/facades/since-time-block-summaries.service";
+import {SinceTimeBlockSummariesFacadeService} from "../../state/facades/since-time-block-summaries-facade.service";
 
 describe('TimeBasedStatSummaryComponent', () => {
   let component: TimeBasedStatSummaryComponent;
   let fixture: ComponentFixture<TimeBasedStatSummaryComponent>;
-  let mockSinceTimeBlockSummariesService: Partial<SinceTimeBlockSummariesService>
+  let mockSinceTimeBlockSummariesService: Partial<SinceTimeBlockSummariesFacadeService>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ TimeBasedStatSummaryComponent ],
       imports: [],
       providers: [
-        {provide: SinceTimeBlockSummariesService, useValue: mockSinceTimeBlockSummariesService}
+        {provide: SinceTimeBlockSummariesFacadeService, useValue: mockSinceTimeBlockSummariesService}
       ]
     })
     .compileComponents();

@@ -9,7 +9,7 @@ import {perDepartmentStatisticsSelector} from '../statistics.selectors';
 @Injectable({
   providedIn: 'root'
 })
-export class PerDepartmentStatisticsService {
+export class PerDepartmentStatisticsFacadeService {
 
   constructor(private store: Store<StatisticsFeature>) {
   }

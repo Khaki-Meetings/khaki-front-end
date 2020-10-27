@@ -4,7 +4,7 @@ import {Observable} from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class SpinnerService {
+export class SpinnerFacadeService {
   otherProperty;
 
   constructor() { }

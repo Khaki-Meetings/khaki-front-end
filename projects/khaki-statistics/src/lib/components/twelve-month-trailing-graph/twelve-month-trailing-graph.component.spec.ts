@@ -1,21 +1,21 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TwelveMonthTrailingGraphComponent } from './twelve-month-trailing-graph.component';
-import {TrailingStatisticsService} from "../../state/facades/trailing-statistics.service";
+import {TrailingStatisticsFacadeService} from "../../state/facades/trailing-statistics-facade.service";
 import {By} from "@angular/platform-browser";
 import {MatSpinner} from "@angular/material/progress-spinner";
 
 describe('TwelveMonthTrailingGraphComponent', () => {
   let component: TwelveMonthTrailingGraphComponent;
   let fixture: ComponentFixture<TwelveMonthTrailingGraphComponent>;
-  let mockTrailingStatisticsService: Partial<TrailingStatisticsService>;
+  let mockTrailingStatisticsService: Partial<TrailingStatisticsFacadeService>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ TwelveMonthTrailingGraphComponent ],
       imports: [],
       providers: [
-        {provide: TrailingStatisticsService, useValue: mockTrailingStatisticsService}
+        {provide: TrailingStatisticsFacadeService, useValue: mockTrailingStatisticsService}
       ]
     })
     .compileComponents();
