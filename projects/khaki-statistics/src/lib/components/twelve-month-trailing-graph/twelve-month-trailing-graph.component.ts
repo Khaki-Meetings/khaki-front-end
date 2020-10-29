@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {TrailingStatisticsFacadeService} from '../../state/facades/trailing-statistics-facade.service';
-import {TimeBlockEnum} from '../../state/models/time-block.enum';
+import {TrailingStatisticsSm} from '../../state/models/trailing-statistics-sm';
 
 @Component({
   selector: 'lib-twelve-month-trailing-graph',
@@ -8,6 +8,7 @@ import {TimeBlockEnum} from '../../state/models/time-block.enum';
   styleUrls: ['./twelve-month-trailing-graph.component.scss']
 })
 export class TwelveMonthTrailingGraphComponent implements OnInit {
+  twelveMonthTrailingStatistics: TrailingStatisticsSm;
 
   constructor(private trailingStatisticsFacade: TrailingStatisticsFacadeService) { }
 
