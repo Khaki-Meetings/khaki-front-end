@@ -1,2 +1,5 @@
-export enum TimeBlock {
+export enum TimeBlockEnum {
+  Week,
+  Month,
+  Year
 }

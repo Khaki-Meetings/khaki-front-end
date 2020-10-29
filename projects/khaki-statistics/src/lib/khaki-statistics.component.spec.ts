@@ -20,12 +20,8 @@ describe('KhakiStatisticsComponent', () => {
   beforeEach(async () => {
     spinnerSubject = new Subject<boolean>();
 
-    mockSpinnerService = {
-      // the 'Observable' part of Subject
-      spinner(): Observable<boolean> {
-        return spinnerSubject;
-      }
-    };
+    mockSpinnerService = new SpinnerFacadeService();
+    spyOn(mockSpinnerService, 'spinner').and.returnValue(spinnerSubject);
 
     await TestBed.configureTestingModule({
       declarations: [KhakiStatisticsComponent],

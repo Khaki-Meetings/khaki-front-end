@@ -1,10 +1,16 @@
 import {createReducer} from '@ngrx/store';
-import {TimeBlockSummary} from '../models/time-block-summary';
+import {TimeBlockSummarySm} from '../models/time-block-summary-sm';
+import {TimeBlockEnum} from '../models/time-block.enum';
 
 
 export const timeBlockSummariesFeatureKey = 'timeBlockSummaries';
 
-export const initialState: TimeBlockSummary = {};
+export const initialState: TimeBlockSummarySm = {
+  averageCost: 0,
+  timeBlock: TimeBlockEnum.Year,
+  totalCost: 0,
+  totalTime: 0
+};
 
 
 export const timeBlockSummariesReducer = createReducer(

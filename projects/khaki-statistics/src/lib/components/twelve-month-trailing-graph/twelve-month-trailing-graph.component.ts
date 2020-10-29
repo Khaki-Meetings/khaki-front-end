@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {TrailingStatisticsFacadeService} from '../../state/facades/trailing-statistics-facade.service';
+import {TimeBlockEnum} from '../../state/models/time-block.enum';
 
 @Component({
   selector: 'lib-twelve-month-trailing-graph',
@@ -7,9 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TwelveMonthTrailingGraphComponent implements OnInit {
 
-  constructor() { }
+  constructor(private trailingStatisticsFacade: TrailingStatisticsFacadeService) { }
 
   ngOnInit(): void {
+    // this.trailingStatisticsFacade.requestTrailingStatistics(TimeBlock.Month, 1);
   }
 
 }

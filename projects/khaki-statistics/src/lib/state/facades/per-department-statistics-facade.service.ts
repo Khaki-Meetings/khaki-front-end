@@ -27,4 +27,3 @@ export class PerDepartmentStatisticsFacadeService {
     throw new Error('not implemented');
   }
 }
-throw new Error('not implemented');
