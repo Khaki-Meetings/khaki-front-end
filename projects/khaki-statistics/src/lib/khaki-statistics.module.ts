@@ -13,6 +13,8 @@ import {OrganizersStatisticsEffects} from './state/effects/organizers-statistics
 import {TrailingStatisticsEffects} from './state/effects/trailing-statistics.effects';
 import {PerDepartmentStatisticsEffects} from './state/effects/per-department-statistics.effects';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatTableModule} from "@angular/material/table";
+import {CommonModule} from "@angular/common";
 
 
 @NgModule({
@@ -40,7 +42,9 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
         PerDepartmentStatisticsEffects
       ]
     ),
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatTableModule,
+    CommonModule
   ],
   exports: [KhakiStatisticsComponent]
 })

@@ -7,6 +7,7 @@ import {SpinnerService} from './state/facades/spinner.service';
     <p>
       <lib-time-based-stat-summary></lib-time-based-stat-summary>
     </p>
+    <p><lib-organizers-table></lib-organizers-table></p>
   `,
   styles: [
   ]
