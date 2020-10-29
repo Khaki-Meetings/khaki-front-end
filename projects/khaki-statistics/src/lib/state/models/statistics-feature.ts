@@ -1,5 +1,5 @@
 import {organizersStatisticsFeatureKey} from '../reducers/organizers-statistics.reducer';
-import {OrganizersStatistics} from './organizers-statistics';
+import {OrganizersStatisticsSm} from './organizers-statistics-sm';
 import {perDepartmentStatisticsFeatureKey} from '../reducers/per-department-statistics.reducer';
 import {PerDepartmentStatisticsSm} from './per-department-statistics-sm';
 import {timeBlockSummariesFeatureKey} from '../reducers/time-block-summaries.reducer';
@@ -9,7 +9,7 @@ import {TrailingStatisticsSm} from './trailing-statistics-sm';
 import {spinnerFeatureKey} from '../reducers/spinner.reducer';
 
 export interface StatisticsFeature {
-  [organizersStatisticsFeatureKey]: OrganizersStatistics;
+  [organizersStatisticsFeatureKey]: OrganizersStatisticsSm;
   [perDepartmentStatisticsFeatureKey]: PerDepartmentStatisticsSm;
   [timeBlockSummariesFeatureKey]: TimeBlockSummarySm;
   [trailingStatisticsFeatureKey]: TrailingStatisticsSm;

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {OrganizersStatisticsSm} from '../../state/models/organizers-statistics-sm';
 
 @Component({
   selector: 'lib-organizers-table',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./organizers-table.component.scss']
 })
 export class OrganizersTableComponent implements OnInit {
+  organizersStatistics: OrganizersStatisticsSm;
 
   constructor() { }
 
