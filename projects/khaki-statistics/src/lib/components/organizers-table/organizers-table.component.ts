@@ -20,6 +20,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
   {meeting: 9, person: 'Fluorine', hours: 18.9984, costs: 7},
   {meeting: 10, person: 'Neon', hours: 20.1797, costs: 9},
 ];
+import {OrganizersStatisticsSm} from '../../state/models/organizers-statistics-sm';
 
 @Component({
   selector: 'lib-organizers-table',
@@ -27,15 +28,16 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./organizers-table.component.scss']
 })
 export class OrganizersTableComponent implements OnInit {
+  organizersStatistics: OrganizersStatisticsSm;
+
 
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = ELEMENT_DATA;
 
-
   constructor(private organizersStatisticsService: OranizersStatisticsService) { }
 
   // obs returns =>
-  organizersStatistics;
+  // organizersStatistics;
   ngOnInit(): void {
     this.loadOrganizerStatistics()
   }

@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import {PerDepartmentStatistics} from '../models/per-department-statistics';
+import {PerDepartmentStatisticsSm} from '../models/per-department-statistics-sm';
 import {Store} from '@ngrx/store';
 import {StatisticsFeature} from '../models/statistics-feature';
 import {loadPerDepartmentStatistics} from '../actions/per-department-statistics.actions';
@@ -9,7 +9,7 @@ import {perDepartmentStatisticsSelector} from '../statistics.selectors';
 @Injectable({
   providedIn: 'root'
 })
-export class PerDepartmentStatisticsService {
+export class PerDepartmentStatisticsFacadeService {
 
   constructor(private store: Store<StatisticsFeature>) {
   }
@@ -18,7 +18,7 @@ export class PerDepartmentStatisticsService {
     this.store.dispatch(loadPerDepartmentStatistics());
   }
 
-  perDepartmentStatistics(): Observable<PerDepartmentStatistics> {
+  perDepartmentStatistics(): Observable<PerDepartmentStatisticsSm> {
     return this.store
       .select(perDepartmentStatisticsSelector);
   }
@@ -27,4 +27,3 @@ export class PerDepartmentStatisticsService {
     throw new Error('not implemented');
   }
 }
-throw new Error('not implemented');

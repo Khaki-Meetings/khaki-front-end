@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {PerDepartmentStatisticsSm} from '../../state/models/per-department-statistics-sm';
 
 @Component({
   selector: 'lib-per-department-graph',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./per-department-graph.component.scss']
 })
 export class PerDepartmentGraphComponent implements OnInit {
+  perDepartmentStatistics: PerDepartmentStatisticsSm;
 
   constructor() { }
 

@@ -1,14 +1,14 @@
 import {TestBed} from '@angular/core/testing';
 
-import {PerDepartmentStatisticsService} from './per-department-statistics.service';
+import {PerDepartmentStatisticsFacadeService} from './per-department-statistics-facade.service';
 import {MockStore, provideMockStore} from '@ngrx/store/testing';
 import {StatisticsFeature} from '../models/statistics-feature';
 import {cold} from 'jasmine-marbles';
-import {PerDepartmentStatistics} from '../models/per-department-statistics';
+import {PerDepartmentStatisticsSm} from '../models/per-department-statistics-sm';
 import {loadPerDepartmentStatistics, loadPerDepartmentStatisticsSuccess} from '../actions/per-department-statistics.actions';
 
-describe('PerDepartmentStatisticsService', () => {
-  let service: PerDepartmentStatisticsService;
+describe('PerDepartmentStatisticsFacadeService', () => {
+  let service: PerDepartmentStatisticsFacadeService;
   let mockStore: MockStore<StatisticsFeature>;
 
   beforeEach(() => {
@@ -17,7 +17,7 @@ describe('PerDepartmentStatisticsService', () => {
         providers: [provideMockStore<StatisticsFeature>()]
       }
     );
-    service = TestBed.inject(PerDepartmentStatisticsService);
+    service = TestBed.inject(PerDepartmentStatisticsFacadeService);
     mockStore = TestBed.inject<MockStore<StatisticsFeature>>(MockStore);
     spyOn(mockStore, 'dispatch').and.callThrough();
   });
@@ -50,7 +50,7 @@ describe('PerDepartmentStatisticsService', () => {
         trailingStatistics: undefined
       };
       mockStore.setState(newState);
-      const expected = cold('(a|)', {a: {} as PerDepartmentStatistics});
+      const expected = cold('(a|)', {a: {} as PerDepartmentStatisticsSm});
       expect(service.perDepartmentStatistics()).toBeObservable(expected);
     }
   );

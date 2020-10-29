@@ -1,9 +1,9 @@
 import {createReducer} from '@ngrx/store';
-import {TrailingStatistics} from '../models/trailing-statistics';
+import {TrailingStatisticsSm} from '../models/trailing-statistics-sm';
 
 export const trailingStatisticsFeatureKey = 'trailingStatistics';
 
-export const initialState: TrailingStatistics = {};
+export const initialState: TrailingStatisticsSm = {};
 
 
 export const trailingStatisticsReducer = createReducer(

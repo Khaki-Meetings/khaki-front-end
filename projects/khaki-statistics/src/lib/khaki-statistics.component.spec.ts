@@ -1,7 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {KhakiStatisticsComponent} from './khaki-statistics.component';
-import {SpinnerService} from './state/facades/spinner.service';
+import {SpinnerFacadeService} from './state/facades/spinner-facade.service';
 import {Observable, Subject, Subscriber} from 'rxjs';
 import {By} from '@angular/platform-browser';
 import {MatProgressSpinnerModule, MatSpinner} from '@angular/material/progress-spinner';
@@ -13,19 +13,15 @@ import {TimeBasedStatSummaryComponent} from './components/time-based-stat-summar
 describe('KhakiStatisticsComponent', () => {
   let component: KhakiStatisticsComponent;
   let fixture: ComponentFixture<KhakiStatisticsComponent>;
-  let mockSpinnerService: Partial<SpinnerService>;
+  let mockSpinnerService: Partial<SpinnerFacadeService>;
 
   let spinnerSubject: Subject<boolean>;
 
   beforeEach(async () => {
     spinnerSubject = new Subject<boolean>();
 
-    mockSpinnerService = {
-      // the 'Observable' part of Subject
-      spinner(): Observable<boolean> {
-        return spinnerSubject;
-      }
-    };
+    mockSpinnerService = new SpinnerFacadeService();
+    spyOn(mockSpinnerService, 'spinner').and.returnValue(spinnerSubject);
 
     await TestBed.configureTestingModule({
       declarations: [KhakiStatisticsComponent],
@@ -33,7 +29,7 @@ describe('KhakiStatisticsComponent', () => {
         MatProgressSpinnerModule
       ],
       providers: [
-        {provide: SpinnerService, useValue: mockSpinnerService}
+        {provide: SpinnerFacadeService, useValue: mockSpinnerService}
       ]
     })
       .compileComponents();
