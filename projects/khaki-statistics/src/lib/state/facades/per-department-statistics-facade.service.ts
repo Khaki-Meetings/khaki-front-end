@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import {PerDepartmentStatistics} from '../models/per-department-statistics';
+import {PerDepartmentStatisticsSm} from '../models/per-department-statistics-sm';
 import {Store} from '@ngrx/store';
 import {StatisticsFeature} from '../models/statistics-feature';
 import {loadPerDepartmentStatistics} from '../actions/per-department-statistics.actions';
@@ -18,7 +18,7 @@ export class PerDepartmentStatisticsFacadeService {
     this.store.dispatch(loadPerDepartmentStatistics());
   }
 
-  perDepartmentStatistics(): Observable<PerDepartmentStatistics> {
+  perDepartmentStatistics(): Observable<PerDepartmentStatisticsSm> {
     return this.store
       .select(perDepartmentStatisticsSelector);
   }

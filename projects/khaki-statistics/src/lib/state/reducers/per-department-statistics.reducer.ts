@@ -1,10 +1,10 @@
 import {createReducer} from '@ngrx/store';
-import {PerDepartmentStatistics} from '../models/per-department-statistics';
+import {PerDepartmentStatisticsSm} from '../models/per-department-statistics-sm';
 
 
 export const perDepartmentStatisticsFeatureKey = 'perDepartmentStatistics';
 
-export const initialState: PerDepartmentStatistics = {
+export const initialState: PerDepartmentStatisticsSm = {
   departmentStatistics: undefined,
   errors: []
 };

@@ -4,7 +4,7 @@ import {PerDepartmentStatisticsFacadeService} from './per-department-statistics-
 import {MockStore, provideMockStore} from '@ngrx/store/testing';
 import {StatisticsFeature} from '../models/statistics-feature';
 import {cold} from 'jasmine-marbles';
-import {PerDepartmentStatistics} from '../models/per-department-statistics';
+import {PerDepartmentStatisticsSm} from '../models/per-department-statistics-sm';
 import {loadPerDepartmentStatistics, loadPerDepartmentStatisticsSuccess} from '../actions/per-department-statistics.actions';
 
 describe('PerDepartmentStatisticsFacadeService', () => {
@@ -50,7 +50,7 @@ describe('PerDepartmentStatisticsFacadeService', () => {
         trailingStatistics: undefined
       };
       mockStore.setState(newState);
-      const expected = cold('(a|)', {a: {} as PerDepartmentStatistics});
+      const expected = cold('(a|)', {a: {} as PerDepartmentStatisticsSm});
       expect(service.perDepartmentStatistics()).toBeObservable(expected);
     }
   );

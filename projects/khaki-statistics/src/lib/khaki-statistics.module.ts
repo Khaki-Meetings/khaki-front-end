@@ -13,6 +13,7 @@ import {OrganizersStatisticsEffects} from './state/effects/organizers-statistics
 import {TrailingStatisticsEffects} from './state/effects/trailing-statistics.effects';
 import {PerDepartmentStatisticsEffects} from './state/effects/per-department-statistics.effects';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {NgxChartsModule} from '@swimlane/ngx-charts';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
         PerDepartmentStatisticsEffects
       ]
     ),
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    NgxChartsModule
   ],
   exports: [KhakiStatisticsComponent]
 })
