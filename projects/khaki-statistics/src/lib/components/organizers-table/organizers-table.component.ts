@@ -1,26 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import {Observable, of} from "rxjs";
-import {delay} from "rxjs/operators";
-export interface PeriodicElement {
-  person: string;
-  meeting: number;
-  hours: number;
-  costs: number;
-}
-const ELEMENT_DATA: PeriodicElement[] = [
-  {meeting: 1, person: 'Hydrogen', hours: 1.0079, costs: 1},
-  {meeting: 2, person: 'Helium', hours: 4.0026, costs: 2},
-  {meeting: 3, person: 'Lithium', hours: 6.941, costs: 3},
-  {meeting: 4, person: 'Beryllium', hours: 9.0122, costs: 3},
-  {meeting: 5, person: 'Boron', hours: 10.811, costs: 4},
-  {meeting: 6, person: 'Carbon', hours: 12.0107, costs: 3},
-  {meeting: 7, person: 'Nitrogen', hours: 14.0067, costs: 2},
-  {meeting: 8, person: 'Oxygen', hours: 15.9994, costs: 4},
-  {meeting: 9, person: 'Fluorine', hours: 18.9984, costs: 7},
-  {meeting: 10, person: 'Neon', hours: 20.1797, costs: 9},
-];
+import {Component, OnInit} from '@angular/core';
 import {OrganizersStatisticsSm} from '../../state/models/organizers-statistics-sm';
 import {OrganizersStatisticsFacadeService} from "../../state/facades/organizers-statistics-facade.service";
+
+
+
 
 @Component({
   selector: 'lib-organizers-table',
@@ -29,17 +12,17 @@ import {OrganizersStatisticsFacadeService} from "../../state/facades/organizers-
 })
 export class OrganizersTableComponent implements OnInit {
   organizersStatistics: OrganizersStatisticsSm;
+  displayedColumns: string[] = ['person', 'meeting', 'hours', 'costs'];
 
 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = ELEMENT_DATA;
-
-  constructor(private organizersStatisticsService: OrganizersStatisticsFacadeService) { }
+  constructor(private organizersStatisticsService: OrganizersStatisticsFacadeService) {
+  }
 
   // obs returns =>
   // organizersStatistics;
   ngOnInit(): void {
-    this.loadOrganizerStatistics()
+    this.loadOrganizerStatistics();
+    console.log('org', this.organizersStatistics);
   }
 
   loadOrganizerStatistics() {

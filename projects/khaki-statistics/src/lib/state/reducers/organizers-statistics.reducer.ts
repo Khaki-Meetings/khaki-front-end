@@ -6,7 +6,22 @@ import {OrganizersStatisticsSm} from '../models/organizers-statistics-sm';
 export const organizersStatisticsFeatureKey = 'organizersStatistics';
 
 export const initialState: OrganizersStatisticsSm = {
-  bla: undefined
+  page: 1,
+  organizers: [
+    {
+      organizer: {
+        name: 'megan',
+        email: 'megan@s56.net',
+        imageUrl: 'www.google.com'
+      },
+      totalMeetings: 1,
+      totalHours: 2,
+      totalCost: 1
+    }],
+  error: [
+    {message: 'not valid'},
+    {message: 'error two'},
+  ]
 };
 
 

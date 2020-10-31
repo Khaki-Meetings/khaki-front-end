@@ -1,36 +1,23 @@
-<table mat-table [dataSource]="organizersStatistics" class="mat-elevation-z8">
-<!--<mat-table #table [dataSource]="dataSource" matSort>-->
+<!--<table mat-table [dataSource]="organizersStatistics" class="mat-elevation-z8">-->
 
 
 
-  <!--- Note that these columns can be defined in any order.
-        The actual rendered columns are set as a property on the row definition" -->
 
-  <!-- Position Column -->
-  <ng-container matColumnDef="position">
-    <td mat-cell> {{organizersStatistics}} </td>
-<!--    <td mat-cell *matCellDef="let element"> {{element.position}} </td>-->
-  </ng-container>
+<!--  <ng-container matColumnDef="person">-->
+<!--    <th mat-header-cell *matHeaderCellDef> Meetings </th>-->
+<!--    <td mat-cell *ngFor="let organizers of organizersStatistics"> {{organizers.name}} </td>-->
+<!--  </ng-container>-->
 
-  <!-- Name Column -->
-  <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef> Meetings </th>
-    <td mat-cell *matCellDef="let element"> {{element.organizer.name}} </td>
-  </ng-container>
+<!--  <ng-container matColumnDef="name">-->
+<!--    <th mat-header-cell *matHeaderCellDef> Meetings </th>-->
+<!--    <td mat-cell *matCellDef="let element"> {{element.organizer.totalCost}} </td>-->
+<!--  </ng-container>-->
 
-  <!-- Weight Column -->
-  <ng-container matColumnDef="weight">
-    <th mat-header-cell *matHeaderCellDef> Hours </th>
-    <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
-  </ng-container>
 
-  <!-- Symbol Column -->
-  <ng-container matColumnDef="symbol">
-    <th mat-header-cell *matHeaderCellDef> Cost </th>
-<!--    <td mat-cell *matCellDef="let element"> {{element.symbol | currency}}  </td>-->
-    <td mat-cell *matCellDef="let element"> {{ 1 | currency}}  </td>
-  </ng-container>
+<!--&lt;!&ndash;  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>&ndash;&gt;-->
+<!--&lt;!&ndash;  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>&ndash;&gt;-->
+<!--</table>-->
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+<div *ngFor="let organizers of organizersStatistics"> {{organizers.name}}</div>
+{{organizersStatistics.page}}
+{{organizersStatistics.organizers[0].organizer.name}}
