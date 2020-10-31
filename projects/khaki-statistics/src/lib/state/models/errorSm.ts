@@ -1,3 +1,4 @@
 export interface ErrorSm {
-  message: string;
+  message?: string;
+  name?: string;
 }
