@@ -5,6 +5,7 @@ import {Store} from '@ngrx/store';
 import {StatisticsFeature} from '../models/statistics-feature';
 import {loadPerDepartmentStatistics} from '../actions/per-department-statistics.actions';
 import {perDepartmentStatisticsSelector} from '../statistics.selectors';
+import {NotImplementedException} from '../../exceptions/not-implemented-exception';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +25,6 @@ export class PerDepartmentStatisticsFacadeService {
   }
 
   perDepartmentStatisticsErrors(): Observable<Error[]> {
-    throw new Error('not implemented');
+    throw new NotImplementedException();
   }
 }
