@@ -15,6 +15,9 @@ import {PerDepartmentStatisticsEffects} from './state/effects/per-department-sta
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatTableModule} from "@angular/material/table";
 import {CommonModule} from "@angular/common";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {MatCheckboxModule} from "@angular/material/checkbox";
+import {MatButtonModule} from "@angular/material/button";
 
 
 @NgModule({
@@ -44,7 +47,10 @@ import {CommonModule} from "@angular/common";
     ),
     MatProgressSpinnerModule,
     MatTableModule,
-    CommonModule
+    CommonModule,
+    // BrowserAnimationsModule,
+    MatCheckboxModule,
+    MatButtonModule
   ],
   exports: [KhakiStatisticsComponent]
 })

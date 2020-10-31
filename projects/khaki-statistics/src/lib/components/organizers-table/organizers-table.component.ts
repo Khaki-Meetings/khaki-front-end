@@ -16,12 +16,12 @@ export class OrganizersTableComponent implements OnInit {
   private organizer: OrganizerSm = {email: "bob@bob.com", imageUrl: "", name: "Bob Jones"};
   private organizerStat: OrganizerStatisticsSm = {organizer: this.organizer, totalCost: 100, totalHours: 222, totalMeetings: 2};
   organizersStatistics: OrganizersStatisticsSm = {
-    error: [], organizers: [
+    errors: [], organizers: [
       this.organizerStat
     ], page: 1
 
   };
-  displayedColumns: string[] = ['person', 'meeting', 'hours', 'costs'];
+  displayedColumns: string[] = ['name', 'meeting', 'hours', 'costs'];
 
 
   constructor(private organizersStatisticsService: OrganizersStatisticsFacadeService) {
