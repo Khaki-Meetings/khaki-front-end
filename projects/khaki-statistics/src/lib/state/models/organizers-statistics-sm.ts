@@ -1,8 +1,8 @@
-import {OrganizerStatisticsSm} from "./organizer-statistics-sm";
-import {ErrorSm} from "./errorSm";
+import {ErrorSm} from './errorSm';
+import {OrganizerStatisticsSm} from './organizer-statistics-sm';
 
 export interface OrganizersStatisticsSm {
   page: number;
-  organizers: OrganizerStatisticsSm[],
-  error: ErrorSm[]
+  organizers: OrganizerStatisticsSm[];
+  errors: ErrorSm[];
 }

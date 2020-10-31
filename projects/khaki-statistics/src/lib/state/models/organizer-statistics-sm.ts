@@ -1,8 +1,8 @@
-import {OrganizerSm} from "./organizerSm";
+import {OrganizerSm} from './organizerSm';
 
 export interface OrganizerStatisticsSm {
-  organizer: OrganizerSm,
-  totalMeetings: number,
-  totalHours: number,
-  totalCost: number
+  organizer: OrganizerSm;
+  totalMeetings: number;
+  totalHours: number;
+  totalCost: number;
 }

@@ -2,7 +2,6 @@ import {createReducer, on} from '@ngrx/store';
 import {loadOrganizersStatistics} from '../actions/organizers-statistics.actions';
 import {OrganizersStatisticsSm} from '../models/organizers-statistics-sm';
 
-
 export const organizersStatisticsFeatureKey = 'organizersStatistics';
 
 export const initialState: OrganizersStatisticsSm = {
@@ -18,12 +17,11 @@ export const initialState: OrganizersStatisticsSm = {
       totalHours: 2,
       totalCost: 1
     }],
-  error: [
+  errors: [
     {message: 'not valid'},
     {message: 'error two'},
   ]
 };
-
 
 export const organizersStatisticsReducer = createReducer(
   initialState,

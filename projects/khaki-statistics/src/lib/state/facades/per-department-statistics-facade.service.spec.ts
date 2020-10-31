@@ -45,7 +45,7 @@ describe('PerDepartmentStatisticsFacadeService', () => {
           },
           errors: []
         },
-        spinner: false,
+        spinner: {isSpinning: false},
         timeBlockSummaries: undefined,
         trailingStatistics: undefined
       };

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {Observable, of} from 'rxjs';
+import {Observable} from 'rxjs';
 import {OrganizersStatisticsSm} from '../models/organizers-statistics-sm';
-import {delay} from "rxjs/operators";
+import {NotImplementedException} from '../../exceptions/not-implemented-exception';
 
 @Injectable({
   providedIn: 'root'
@@ -12,25 +12,15 @@ export class OrganizersStatisticsFacadeService {
   }
 
   requestOrganizersStatistics(): void {
-    throw Error('not implemented');
+    throw new NotImplementedException();
   }
 
   organizersStatistics(): Observable<OrganizersStatisticsSm> {
-    return of(
-      {
-        page: 1,
-        organizers: [
-          {
-            organizer: {name: 'bob Jones'},
-            totalCost: 100,
-            totalHours: 100,
-            totalMeetings: 100
-          }
-        ],
-        error: null
-      } as OrganizersStatisticsSm
-    )
-      .pipe(delay(500))
-      ;
+    throw new NotImplementedException();
   }
+
+  setOrganizersStatistics(data: OrganizersStatisticsSm): void {
+    throw new NotImplementedException();
+  }
+
 }
