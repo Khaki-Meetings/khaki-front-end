@@ -1,3 +1,16 @@
 table {
   width: 100%;
+  margin: 0;
+  padding: 0;
+}
+.table-border {
+  border-bottom-style: none;
+
+}
+
+.header-font {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 14px;
+  color: black;
 }

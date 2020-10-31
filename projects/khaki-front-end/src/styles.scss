@@ -38,7 +38,7 @@ $khaki-front-end-theme: mat-light-theme((
 html, body { height: 100%;
 padding: 10px
 }
-::ng-deep th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
-  border-bottom-style: none;
-}
+//::ng-deep th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
+//  border-bottom-style: none;
+//}
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
