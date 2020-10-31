@@ -1,4 +1,4 @@
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<table mat-table [dataSource]="organizersStatistics" class="mat-elevation-z8">
 <!--<mat-table #table [dataSource]="dataSource" matSort>-->
 
 
@@ -8,14 +8,14 @@
 
   <!-- Position Column -->
   <ng-container matColumnDef="position">
-    <td mat-cell> {{organizersStatistics.name}} </td>
+    <td mat-cell> {{organizersStatistics}} </td>
 <!--    <td mat-cell *matCellDef="let element"> {{element.position}} </td>-->
   </ng-container>
 
   <!-- Name Column -->
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef> Meetings </th>
-    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.organizer.name}} </td>
   </ng-container>
 
   <!-- Weight Column -->

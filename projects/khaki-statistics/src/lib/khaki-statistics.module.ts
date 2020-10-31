@@ -42,7 +42,9 @@ import {CommonModule} from "@angular/common";
         PerDepartmentStatisticsEffects
       ]
     ),
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatTableModule,
+    CommonModule
   ],
   exports: [KhakiStatisticsComponent]
 })

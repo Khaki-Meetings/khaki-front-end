@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Observable, of} from "rxjs";
 import {delay} from "rxjs/operators";
-import {OranizersStatisticsService} from "../../state/facades/oranizers-statistics.service";
 export interface PeriodicElement {
   person: string;
   meeting: number;
@@ -21,6 +20,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
   {meeting: 10, person: 'Neon', hours: 20.1797, costs: 9},
 ];
 import {OrganizersStatisticsSm} from '../../state/models/organizers-statistics-sm';
+import {OrganizersStatisticsFacadeService} from "../../state/facades/organizers-statistics-facade.service";
 
 @Component({
   selector: 'lib-organizers-table',
@@ -34,7 +34,7 @@ export class OrganizersTableComponent implements OnInit {
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = ELEMENT_DATA;
 
-  constructor(private organizersStatisticsService: OranizersStatisticsService) { }
+  constructor(private organizersStatisticsService: OrganizersStatisticsFacadeService) { }
 
   // obs returns =>
   // organizersStatistics;
@@ -43,7 +43,7 @@ export class OrganizersTableComponent implements OnInit {
   }
 
   loadOrganizerStatistics() {
-    this.organizersStatisticsService.getOrganizerInfo().subscribe(
+    this.organizersStatisticsService.organizersStatistics().subscribe(
       availableInfoFromServer => {
         this.organizersStatistics = availableInfoFromServer;
         console.log('obs -->', this.organizersStatistics);

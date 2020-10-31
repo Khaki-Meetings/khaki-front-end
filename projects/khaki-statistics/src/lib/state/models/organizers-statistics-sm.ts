@@ -1,3 +1,8 @@
+import {OrganizerStatisticsSm} from "./organizer-statistics-sm";
+import {ErrorSm} from "./errorSm";
+
 export interface OrganizersStatisticsSm {
-  bla: string;
+  page: number;
+  organizers: OrganizerStatisticsSm[],
+  error: ErrorSm[]
 }
