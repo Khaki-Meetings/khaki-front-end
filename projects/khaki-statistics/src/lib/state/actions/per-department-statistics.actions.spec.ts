@@ -1,7 +1,7 @@
 import * as fromPerDepartmentStatistics from './per-department-statistics.actions';
 
-describe('loadPerDepartmentStatisticss', () => {
+describe('loadPerDepartmentStatistics', () => {
   it('should return an action', () => {
-    expect(fromPerDepartmentStatistics.loadPerDepartmentStatistics().type).toBe('[PerDepartmentStatistics] Load PerDepartmentStatisticss');
+    expect(fromPerDepartmentStatistics.loadPerDepartmentStatistics().type).toBe('[PerDepartmentStatistics] Load PerDepartmentStatistics');
   });
 });

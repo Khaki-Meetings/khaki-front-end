@@ -1,7 +1,9 @@
 import { createAction, props } from '@ngrx/store';
+import {SpinnerSm} from '../models/spinner-sm';
 
-export const loadSetSpinners = createAction(
-  '[SetSpinner] Load SetSpinners'
+export const setSpinner = createAction(
+  '[SetSpinner] Load SetSpinners',
+  props<SpinnerSm>()
 );
 
 

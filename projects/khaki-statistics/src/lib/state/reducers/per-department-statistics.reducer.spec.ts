@@ -15,7 +15,7 @@ describe('PerDepartmentStatistics Reducer', () => {
 
       const result = perDepartmentStatisticsReducer(initialState, action);
 
-      expect(result).toBe(initialState);
+      expect(result).toEqual(initialState);
     });
   });
 
@@ -35,7 +35,7 @@ describe('PerDepartmentStatistics Reducer', () => {
 
       const result = perDepartmentStatisticsReducer(initialState, action);
 
-      expect(result).toBe({...initialState, ...perDepartmentStatistics});
+      expect(result).toEqual({...initialState, ...perDepartmentStatistics});
     });
   });
 
@@ -50,7 +50,7 @@ describe('PerDepartmentStatistics Reducer', () => {
 
       const result = perDepartmentStatisticsReducer(initialState, action);
 
-      expect(result).toBe({...initialState, ...perDepartmentStatistics});
+      expect(result).toEqual({...initialState, ...perDepartmentStatistics});
     });
   });
 
