@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {OrganizersStatisticsSm} from '../../state/models/organizers-statistics-sm';
 import {OrganizersStatisticsFacadeService} from "../../state/facades/organizers-statistics-facade.service";
+import {OrganizerStatisticsSm} from "../../state/models/organizer-statistics-sm";
+import {OrganizerSm} from "../../state/models/organizerSm";
 
 
 
@@ -11,7 +13,14 @@ import {OrganizersStatisticsFacadeService} from "../../state/facades/organizers-
   styleUrls: ['./organizers-table.component.scss']
 })
 export class OrganizersTableComponent implements OnInit {
-  organizersStatistics: OrganizersStatisticsSm;
+  private organizer: OrganizerSm = {email: "bob@bob.com", imageUrl: "", name: "Bob Jones"};
+  private organizerStat: OrganizerStatisticsSm = {organizer: this.organizer, totalCost: 100, totalHours: 222, totalMeetings: 2};
+  organizersStatistics: OrganizersStatisticsSm = {
+    error: [], organizers: [
+      this.organizerStat
+    ], page: 1
+
+  };
   displayedColumns: string[] = ['person', 'meeting', 'hours', 'costs'];
 
 
