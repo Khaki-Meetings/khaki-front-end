@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {PerDepartmentStatisticsSm} from '../../state/models/per-department-statistics-sm';
+import {PerDepartmentStatisticsFacadeService} from '../../state/facades/per-department-statistics-facade.service';
 
 @Component({
   selector: 'lib-per-department-graph',
@@ -9,9 +10,16 @@ import {PerDepartmentStatisticsSm} from '../../state/models/per-department-stati
 export class PerDepartmentGraphComponent implements OnInit {
   perDepartmentStatistics: PerDepartmentStatisticsSm;
 
-  constructor() { }
+  constructor(private perDepartmentStatisticsFacade: PerDepartmentStatisticsFacadeService) { }
 
   ngOnInit(): void {
+    this.perDepartmentStatisticsFacade
+      .perDepartmentStatistics()
+      .subscribe(
+        (data) => {
+          this.perDepartmentStatistics = data;
+        }
+      );
   }
 
 }
