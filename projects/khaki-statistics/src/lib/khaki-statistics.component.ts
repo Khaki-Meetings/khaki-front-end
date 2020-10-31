@@ -5,7 +5,7 @@ import {SpinnerFacadeService} from './state/facades/spinner-facade.service';
   selector: 'lib-khaki-statistics',
   template: `
     <p>
-      <lib-time-based-stat-summary></lib-time-based-stat-summary>
+      <lib-per-department-graph></lib-per-department-graph>
     </p>
   `,
   styles: [

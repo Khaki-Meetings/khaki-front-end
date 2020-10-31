@@ -8,6 +8,7 @@ import {Observable, of} from 'rxjs';
 import {testPerDepartmentStatistics} from './test-data.spec';
 import {delay} from 'rxjs/operators';
 import {PerDepartmentStatisticsSm} from '../../state/models/per-department-statistics-sm';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 
 describe('PerDepartmentGraphComponent', () => {
   let component: PerDepartmentGraphComponent;
@@ -29,7 +30,7 @@ describe('PerDepartmentGraphComponent', () => {
       .callThrough();
     await TestBed.configureTestingModule({
       declarations: [PerDepartmentGraphComponent],
-      imports: [BrowserModule, NgxChartsModule],
+      imports: [BrowserModule, NgxChartsModule, NoopAnimationsModule],
       providers: [
         {provide: PerDepartmentStatisticsFacadeService, useValue: mockPerDepartmentStatisticsService}
       ]
