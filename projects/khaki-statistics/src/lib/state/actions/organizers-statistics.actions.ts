@@ -13,5 +13,5 @@ export const loadOrganizersStatisticsSuccess = createAction(
 
 export const loadOrganizersStatisticsFailure = createAction(
   '[OrganizersStatistics] Load OrganizersStatistics Failure',
-  props<{errors: ErrorSm[]}>()
+  props<ErrorSm>()
 );

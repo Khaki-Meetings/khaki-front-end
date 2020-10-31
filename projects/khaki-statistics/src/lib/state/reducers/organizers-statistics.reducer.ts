@@ -6,7 +6,7 @@ import {OrganizersStatisticsSm} from '../models/organizers-statistics-sm';
 export const organizersStatisticsFeatureKey = 'organizersStatistics';
 
 export const initialState: OrganizersStatisticsSm = {
-  bla: undefined
+  errors: [], organizers: [], page: 0
 };
 
 
