@@ -13,11 +13,11 @@ import {OrganizersStatisticsEffects} from './state/effects/organizers-statistics
 import {TrailingStatisticsEffects} from './state/effects/trailing-statistics.effects';
 import {PerDepartmentStatisticsEffects} from './state/effects/per-department-statistics.effects';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-import {MatTableModule} from "@angular/material/table";
-import {CommonModule} from "@angular/common";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {MatCheckboxModule} from "@angular/material/checkbox";
-import {MatButtonModule} from "@angular/material/button";
+import {MatTableModule} from '@angular/material/table';
+import {CommonModule} from '@angular/common';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatButtonModule} from '@angular/material/button';
+import {NgxChartsModule} from '@swimlane/ngx-charts';
 
 
 @NgModule({
@@ -30,6 +30,7 @@ import {MatButtonModule} from "@angular/material/button";
   ],
   imports: [
     KhakiStatisticsRoutingModule,
+    CommonModule,
     StoreModule.forFeature(
       fromKhakiStatistics.khakiStatisticsFeatureKey,
       fromKhakiStatistics.reducers,
@@ -47,10 +48,10 @@ import {MatButtonModule} from "@angular/material/button";
     ),
     MatProgressSpinnerModule,
     MatTableModule,
-    CommonModule,
     // BrowserAnimationsModule,
     MatCheckboxModule,
-    MatButtonModule
+    MatButtonModule,
+    NgxChartsModule
   ],
   exports: [KhakiStatisticsComponent]
 })

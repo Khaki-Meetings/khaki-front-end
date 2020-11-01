@@ -1,21 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {SpinnerFacadeService} from './state/facades/spinner-facade.service';
 
 @Component({
   selector: 'lib-khaki-statistics',
   template: `
-    <p>
+    <div>
       <lib-per-department-graph></lib-per-department-graph>
-    </p>
-    <p><lib-organizers-table></lib-organizers-table></p>
+    </div>
+    <div>
+      <lib-organizers-table></lib-organizers-table>
+    </div>
+    <div>
+      <lib-twelve-month-trailing-graph></lib-twelve-month-trailing-graph>
+    </div>
   `,
-  styles: [
-  ]
+  styles: []
 })
 export class KhakiStatisticsComponent implements OnInit {
   isSpinning = false;
 
-  constructor(private spinnerService: SpinnerFacadeService) { }
+  constructor(private spinnerService: SpinnerFacadeService) {
+  }
 
   ngOnInit(): void {
     // this.spinnerService.spinner().subscribe(isSpinning => this.isSpinning = isSpinning);
