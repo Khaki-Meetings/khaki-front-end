@@ -2,12 +2,13 @@ import {ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing'
 
 import {PerDepartmentGraphComponent} from './per-department-graph.component';
 import {PerDepartmentStatisticsFacadeService} from '../../state/facades/per-department-statistics-facade.service';
-import {By} from '@angular/platform-browser';
+import {BrowserModule, By} from '@angular/platform-browser';
 import {NgxChartsModule, PieChartComponent} from '@swimlane/ngx-charts';
-import {of} from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {testPerDepartmentStatistics} from './test-data.spec';
 import {delay} from 'rxjs/operators';
-import {timeBlockSummariesData} from '../time-based-stat-summary/test-data.spec';
+import {PerDepartmentStatisticsSm} from '../../state/models/per-department-statistics-sm';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 
 describe('PerDepartmentGraphComponent', () => {
   let component: PerDepartmentGraphComponent;
@@ -18,15 +19,18 @@ describe('PerDepartmentGraphComponent', () => {
     mockPerDepartmentStatisticsService = {
       requestPerDepartmentStatistics: () => {
       },
-      perDepartmentStatistics() {
+      perDepartmentStatistics(): Observable<PerDepartmentStatisticsSm> {
         return of(testPerDepartmentStatistics).pipe(delay(100));
+        // return of(testPerDepartmentStatistics);
       }
     };
     spyOn(mockPerDepartmentStatisticsService, 'requestPerDepartmentStatistics');
-    spyOn(mockPerDepartmentStatisticsService, 'perDepartmentStatistics');
+    spyOn(mockPerDepartmentStatisticsService, 'perDepartmentStatistics')
+      .and
+      .callThrough();
     await TestBed.configureTestingModule({
       declarations: [PerDepartmentGraphComponent],
-      imports: [NgxChartsModule],
+      imports: [BrowserModule, NgxChartsModule, NoopAnimationsModule],
       providers: [
         {provide: PerDepartmentStatisticsFacadeService, useValue: mockPerDepartmentStatisticsService}
       ]
@@ -63,8 +67,10 @@ describe('PerDepartmentGraphComponent', () => {
     'should set perDepartmentStatistics to data from service observable',
     fakeAsync(
       () => {
+        component.ngOnInit();
         expect(component.perDepartmentStatistics).toBeUndefined('sinceTimeBlockSummaries should not be set yet');
         tick(100);
+        fixture.detectChanges();
         expect(component.perDepartmentStatistics).toEqual(testPerDepartmentStatistics);
       }
     )
