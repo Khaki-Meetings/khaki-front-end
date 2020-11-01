@@ -170,6 +170,6 @@
   "defaultProject": "khaki-front-end",
   "cli": {
     "defaultCollection": "@ngrx/schematics",
-    "analytics": false
+    "analytics": "283c04d2-ebd0-494c-a134-0a725bf129b6"
   }
 }

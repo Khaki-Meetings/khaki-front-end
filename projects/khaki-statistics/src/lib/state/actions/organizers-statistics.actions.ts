@@ -1,6 +1,6 @@
 import {createAction, props} from '@ngrx/store';
-import {OrganizersStatistics} from '../models/organizers-statistics';
-import {Error} from '../models/error';
+import {OrganizersStatisticsSm} from '../models/organizers-statistics-sm';
+import {ErrorSm} from '../models/errorSm';
 
 export const loadOrganizersStatistics = createAction(
   '[OrganizersStatistics] Load OrganizersStatistics'
@@ -8,10 +8,10 @@ export const loadOrganizersStatistics = createAction(
 
 export const loadOrganizersStatisticsSuccess = createAction(
   '[OrganizersStatistics] Load OrganizersStatistics Success',
-  props<OrganizersStatistics>()
+  props<OrganizersStatisticsSm>()
 );
 
 export const loadOrganizersStatisticsFailure = createAction(
   '[OrganizersStatistics] Load OrganizersStatistics Failure',
-  props<{errors: Error[]}>()
+  props<ErrorSm>()
 );

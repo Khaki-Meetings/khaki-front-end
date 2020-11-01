@@ -1,17 +1,18 @@
 import {createReducer, on} from '@ngrx/store';
 import {loadOrganizersStatistics} from '../actions/organizers-statistics.actions';
-import {OrganizersStatistics} from '../models/organizers-statistics';
+import {OrganizersStatisticsSm} from '../models/organizers-statistics-sm';
 
 
 export const organizersStatisticsFeatureKey = 'organizersStatistics';
 
-export const initialState: OrganizersStatistics = {
-  bla: undefined
+export const initialState: OrganizersStatisticsSm = {
+  errors: [], organizers: [], page: 0
+
 };
 
 
 export const organizersStatisticsReducer = createReducer(
   initialState,
-  on(loadOrganizersStatistics, (state: OrganizersStatistics, action) => state),
+  on(loadOrganizersStatistics, (state: OrganizersStatisticsSm, action) => state),
 );
 
