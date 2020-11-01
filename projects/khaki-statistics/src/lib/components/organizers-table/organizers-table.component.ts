@@ -27,8 +27,7 @@ export class OrganizersTableComponent implements OnInit {
   constructor(private organizersStatisticsService: OrganizersStatisticsFacadeService) {
   }
 
-  // obs returns =>
-  // organizersStatistics;
+
   ngOnInit(): void {
     this.loadOrganizerStatistics();
     console.log('org', this.organizersStatistics);

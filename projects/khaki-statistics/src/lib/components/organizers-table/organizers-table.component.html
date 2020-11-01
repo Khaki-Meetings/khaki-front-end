@@ -1,6 +1,5 @@
 <h3>Top 5 Meeting Organizers</h3>
 <table mat-table [dataSource]="organizersStatistics.organizers">
-<!--<table mat-table [dataSource]="organizersStatistics.organizers" class="mat-elevation-z8">-->
 
   <ng-container matColumnDef="name" >
     <th mat-header-cell *matHeaderCellDef class="table-border header-font" > </th>
@@ -27,38 +26,5 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns" class="header-font"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
-
-<!--<table mat-table [dataSource]="organizersStatistics.organizers" class="mat-elevation-z8">-->
-
-<!--  &lt;!&ndash;- Note that these columns can be defined in any order.-->
-<!--        The actual rendered columns are set as a property on the row definition" &ndash;&gt;-->
-
-<!--  &lt;!&ndash; Position Column &ndash;&gt;-->
-<!--  <ng-container matColumnDef="position">-->
-<!--    <th mat-header-cell *matHeaderCellDef> No. </th>-->
-<!--    <td mat-cell *matCellDef="let element"> {{element.position}} </td>-->
-<!--  </ng-container>-->
-
-<!--  &lt;!&ndash; Name Column &ndash;&gt;-->
-<!--  <ng-container matColumnDef="name">-->
-<!--    <th mat-header-cell *matHeaderCellDef> Name </th>-->
-<!--    <td mat-cell *matCellDef="let element"> {{element.name}} </td>-->
-<!--  </ng-container>-->
-
-<!--  &lt;!&ndash; Weight Column &ndash;&gt;-->
-<!--  <ng-container matColumnDef="weight">-->
-<!--    <th mat-header-cell *matHeaderCellDef> Weight </th>-->
-<!--    <td mat-cell *matCellDef="let element"> {{element.weight}} </td>-->
-<!--  </ng-container>-->
-
-<!--  &lt;!&ndash; Symbol Column &ndash;&gt;-->
-<!--  <ng-container matColumnDef="symbol">-->
-<!--    <th mat-header-cell *matHeaderCellDef> Symbol </th>-->
-<!--    <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>-->
-<!--  </ng-container>-->
-
-<!--  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>-->
-<!--  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>-->
-<!--</table>-->
 
 
