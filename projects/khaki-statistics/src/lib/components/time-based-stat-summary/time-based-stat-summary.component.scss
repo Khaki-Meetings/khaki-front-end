@@ -7,13 +7,16 @@
   margin-top: 30px;
   height: 170px;
   justify-content: center;
-  font-family: avenir;
+}
+ 
+.row {
+    font-family: avenir;
+    position: absolute;
 }
 
 #data-names {
   font-size: 15px;
   padding-top: 130px;
-  position: absolute;
 }
 
 .time-in-internal-meetings {
@@ -39,29 +42,23 @@
 #data-points {
   font-size: 20px;
   padding-top: 100px;
-  position: absolute;
-  // font-size: 70px!important;
 }
 
 #data-names, #data-points {
+    display: flex;
 }
 
-//   .time {
-// margin-left: 110px;
-// margin-right: 110px;
-//   }
+  .time {
 
-//   .cost {
-//     margin-left: 110px;
-//     margin-right: 110px;
-//   }
+  }
 
-//   .average {
-//     margin-left: 110px;
-//     margin-right: 110px;
-//   }
+  .cost {
+  
+  }
 
-//   .count {
-//     margin-left: 110px;
-//     margin-right: 110px;
-//   }
+  .average {
+  }
+
+  .count {
+  
+  }
