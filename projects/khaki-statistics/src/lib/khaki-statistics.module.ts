@@ -13,11 +13,13 @@ import {OrganizersStatisticsEffects} from './state/effects/organizers-statistics
 import {TrailingStatisticsEffects} from './state/effects/trailing-statistics.effects';
 import {PerDepartmentStatisticsEffects} from './state/effects/per-department-statistics.effects';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
 import {MatTableModule} from '@angular/material/table';
 import {CommonModule} from '@angular/common';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatButtonModule} from '@angular/material/button';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 
 
 @NgModule({
@@ -47,6 +49,7 @@ import {NgxChartsModule} from '@swimlane/ngx-charts';
       ]
     ),
     MatProgressSpinnerModule,
+    FontAwesomeModule,
     MatTableModule,
     // BrowserAnimationsModule,
     MatCheckboxModule,

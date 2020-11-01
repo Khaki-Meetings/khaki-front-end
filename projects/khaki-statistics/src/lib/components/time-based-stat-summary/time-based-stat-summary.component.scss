@@ -1,0 +1,74 @@
+//#box-container-main {
+//  position: relative;
+//  display: flex;
+//  background-color: #d6eeff;
+//  margin-right: 150px;
+//  margin-left: 150px;
+//  margin-top: 30px;
+//  height: 170px;
+//  justify-content: center;
+//}
+//
+//.row {
+//    font-family: avenir;
+//    position: absolute;
+//}
+//
+//#data-names {
+//  font-size: 15px;
+//  padding-top: 130px;
+//}
+//
+//.time-in-internal-meetings {
+//  margin-left: 50px;
+//  margin-right: 50px;
+//}
+//
+//.cost-of-internal-meetings {
+//  margin-left: 50px;
+//  margin-right: 50px;
+//}
+//
+//.average-meeting-cost {
+//  margin-left: 50px;
+//  margin-right: 50px;
+//}
+//
+//.meeting-count {
+//  margin-left: 50px;
+//  margin-right: 50px;
+//}
+//
+//#data-points {
+//  font-size: 20px;
+//  padding-top: 100px;
+//}
+//
+//#data-names, #data-points {
+//    display: flex;
+//}
+//
+//  .time {
+//
+//  }
+//
+//  .cost {
+//
+//  }
+//
+//  .average {
+//  }
+//
+//  .count {
+//
+//  }
+
+.container{
+  height: 300px;
+  background: #D6EEFF;
+  padding: 10px;
+}
+.flex-container{
+  display: flex;
+  justify-content: space-around;
+}
