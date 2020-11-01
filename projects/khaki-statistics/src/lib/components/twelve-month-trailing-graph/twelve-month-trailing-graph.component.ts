@@ -70,6 +70,7 @@ export class TwelveMonthTrailingGraphComponent implements OnInit {
   view: any[] = [700, 400];
 
   // options
+  // class = 'border-radius: 45px';
   showXAxis = true;
   showYAxis = true;
   gradient = false;
@@ -80,7 +81,8 @@ export class TwelveMonthTrailingGraphComponent implements OnInit {
   yAxisLabel = 'Population';
 
   colorScheme = {
-    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+    domain: ['#CEEDE6', '#ADF8E6', '#BFDDF3', '#D6EEFF']
+
   };
 
   constructor(private trailingStatisticsFacade: TrailingStatisticsFacadeService) {
