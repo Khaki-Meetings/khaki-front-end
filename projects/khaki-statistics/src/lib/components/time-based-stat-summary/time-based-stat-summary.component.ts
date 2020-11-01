@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {faCoffee} from '@fortawesome/free-solid-svg-icons';
+import {faCaretDown} from '@fortawesome/free-solid-svg-icons';
+
 
 @Component({
   selector: 'lib-time-based-stat-summary',
@@ -7,7 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TimeBasedStatSummaryComponent implements OnInit {
 
-  constructor() { }
+  faCoffee = faCoffee;
+  faCaretDrop = faCaretDown;
+
+
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
