@@ -7,6 +7,7 @@ export const organizersStatisticsFeatureKey = 'organizersStatistics';
 
 export const initialState: OrganizersStatisticsSm = {
   errors: [], organizers: [], page: 0
+
 };
 
 
