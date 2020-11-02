@@ -4,23 +4,35 @@ import {SpinnerFacadeService} from './state/facades/spinner-facade.service';
 @Component({
   selector: 'lib-khaki-statistics',
   template: `
-    <div>
+    <div class="padding">
+
       <div>
         <lib-time-based-stat-summary></lib-time-based-stat-summary>
       </div>
-      <div>
-        <lib-per-department-graph></lib-per-department-graph>
+
+      <div class="space-between white-container">
+
+        <div>
+          <lib-organizers-table></lib-organizers-table>
+        </div>
+        <div>
+          <lib-per-department-graph></lib-per-department-graph>
+
+        </div>
       </div>
-      <div>
-        <lib-organizers-table></lib-organizers-table>
-      </div>
-      <div>
+      <div class="white-container around-twelve">
+
         <lib-twelve-month-trailing-graph></lib-twelve-month-trailing-graph>
       </div>
+      <div class="bottom-div"></div>
     </div>
-
   `,
-  styles: []
+  styles: [
+      '.space-between { display: flex; justify-content: space-around}',
+    '.padding { padding: 30px 50px ; background-color: #e3eef6}',
+    '.white-container { background-color: white; padding:30px}',
+    '.bottom-div { background-color: white; padding: 10px; height: 400px; width: 100%;}',
+  ]
 })
 export class KhakiStatisticsComponent implements OnInit {
   isSpinning = false;
