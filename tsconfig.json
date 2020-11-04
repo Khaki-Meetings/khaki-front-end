@@ -19,6 +19,10 @@
       "khaki-statistics": [
         "dist/khaki-statistics/khaki-statistics",
         "dist/khaki-statistics"
+      ],
+      "khaki-profile": [
+        "dist/khaki-profile/khaki-profile",
+        "dist/khaki-profile"
       ]
     }
   }
