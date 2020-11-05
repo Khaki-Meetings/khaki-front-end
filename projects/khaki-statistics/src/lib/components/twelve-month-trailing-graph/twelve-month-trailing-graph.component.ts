@@ -76,9 +76,9 @@ export class TwelveMonthTrailingGraphComponent implements OnInit {
   gradient = false;
   showLegend = true;
   showXAxisLabel = true;
-  xAxisLabel = 'Country';
+  xAxisLabel = 'Month';
   showYAxisLabel = true;
-  yAxisLabel = 'Population';
+  yAxisLabel = 'Current Costs';
 
   colorScheme = {
     domain: ['#CEEDE6', '#ADF8E6', '#BFDDF3', '#D6EEFF']

@@ -16,15 +16,19 @@ import {SpinnerFacadeService} from './state/facades/spinner-facade.service';
           <lib-organizers-table></lib-organizers-table>
         </div>
         <div>
-          <lib-per-department-graph></lib-per-department-graph>
+          <div class="white-container center">        <h3>Meeting time by department</h3></div>
+
+            <lib-per-department-graph></lib-per-department-graph>
 
         </div>
       </div>
-      <div class="white-container around-twelve center">
+      <div class="white-container center"><h3>Meeting costs this year</h3>
 
+      </div>
+      <div class="white-container around-twelve center">
         <lib-twelve-month-trailing-graph></lib-twelve-month-trailing-graph>
       </div>
-      <div class="bottom-div"></div>
+<!--      <div class="bottom-div"></div>-->
     </div>
 <!--<div class="padding">-->
 
@@ -52,7 +56,7 @@ import {SpinnerFacadeService} from './state/facades/spinner-facade.service';
 <!--</div>-->
   `,
   styles: [
-      '.space-between { display: flex; justify-content: space-around}',
+      '.space-between { display: flex; justify-content: space-around; flex-wrap: wrap}',
     '.padding { padding: 30px 50px ; background-color: #EEF8FF}',
     '.white-container { background-color: white; padding:30px}',
     '.bottom-div { background-color: white; padding: 10px; height: 400px;}',
