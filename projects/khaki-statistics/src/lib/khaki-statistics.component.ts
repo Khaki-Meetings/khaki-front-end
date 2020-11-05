@@ -20,7 +20,7 @@ import {SpinnerFacadeService} from './state/facades/spinner-facade.service';
 
         </div>
       </div>
-      <div class="white-container around-twelve">
+      <div class="white-container around-twelve center">
 
         <lib-twelve-month-trailing-graph></lib-twelve-month-trailing-graph>
       </div>
@@ -56,6 +56,7 @@ import {SpinnerFacadeService} from './state/facades/spinner-facade.service';
     '.padding { padding: 30px 50px ; background-color: #EEF8FF}',
     '.white-container { background-color: white; padding:30px}',
     '.bottom-div { background-color: white; padding: 10px; height: 400px;}',
+    '.center { display: flex; justify-content: center;}',
   ]
 })
 export class KhakiStatisticsComponent implements OnInit {
