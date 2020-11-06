@@ -3,12 +3,14 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node server.js",
+    "serve": "ng serve",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "test-once": "ng test --watch=false"
+    "test-once": "ng test --watch=false",
+    "heroku-postbuild": "ng build khaki-statistics && ng build --prod"
   },
   "private": true,
   "dependencies": {
@@ -29,6 +31,7 @@
     "@ngrx/schematics": "^10.0.1",
     "@ngrx/store": "^10.0.1",
     "@swimlane/ngx-charts": "^16.0.0",
+    "express": "^4.17.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
