@@ -18,47 +18,47 @@ export class TwelveMonthTrailingGraphComponent implements OnInit {
       },
       {
         timeBlock: TimeBlockEnum.Month,
-        totalCost: 100020000000.34
+        totalCost: 100099000000.34
       },
       {
         timeBlock: TimeBlockEnum.Month,
-        totalCost: 1000700000.34
+        totalCost: 100099000000.34
       },
       {
         timeBlock: TimeBlockEnum.Month,
-        totalCost: 1000000000.34
+        totalCost: 100099000000.34
       },
       {
         timeBlock: TimeBlockEnum.Month,
-        totalCost: 100000000000.34
+        totalCost: 100099000000.34
       },
       {
         timeBlock: TimeBlockEnum.Month,
-        totalCost: 10009000000.34
+        totalCost: 100099000000.34
       },
       {
         timeBlock: TimeBlockEnum.Month,
-        totalCost: 10003000000.34
+        totalCost: 100099000000.34
       },
       {
         timeBlock: TimeBlockEnum.Month,
-        totalCost: 10000000000.34
+        totalCost: 100099000000.34
       },
       {
         timeBlock: TimeBlockEnum.Month,
-        totalCost: 10009090000.34
+        totalCost: 100099000000.34
       },
       {
         timeBlock: TimeBlockEnum.Month,
-        totalCost: 100000000000.34
+        totalCost: 100099000000.34
       },
       {
         timeBlock: TimeBlockEnum.Month,
-        totalCost: 100000000000.34
+        totalCost: 100099000000.34
       },
       {
         timeBlock: TimeBlockEnum.Month,
-        totalCost: 100000000000.34
+        totalCost: 100099000000.34
       }
     ],
     count: 12
@@ -76,9 +76,9 @@ export class TwelveMonthTrailingGraphComponent implements OnInit {
   gradient = false;
   showLegend = true;
   showXAxisLabel = true;
-  xAxisLabel = 'Country';
+  xAxisLabel = 'Month';
   showYAxisLabel = true;
-  yAxisLabel = 'Population';
+  yAxisLabel = 'Current Costs';
 
   colorScheme = {
     domain: ['#CEEDE6', '#ADF8E6', '#BFDDF3', '#D6EEFF']
