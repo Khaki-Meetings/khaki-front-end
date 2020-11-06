@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {SinceTimeBlockSummariesSm} from '../../state/models/since-time-block-summaries-sm';
-import {faCaretDown, faCoffee} from '@fortawesome/free-solid-svg-icons';
+import {faCaretDown} from '@fortawesome/free-solid-svg-icons';
+import {SinceTimeBlockSummariesFacadeService} from '../../state/facades/since-time-block-summaries-facade.service';
+import {TimeBlockSummarySm} from '../../state/models/time-block-summary-sm';
 
 @Component({
   selector: 'lib-time-based-stat-summary',
@@ -9,13 +10,11 @@ import {faCaretDown, faCoffee} from '@fortawesome/free-solid-svg-icons';
 })
 export class TimeBasedStatSummaryComponent implements OnInit {
 
-  faCoffee = faCoffee;
   faCaretDrop = faCaretDown;
 
+  timeBlockSummary: TimeBlockSummarySm;
 
-  sinceTimeBlockSummaries: SinceTimeBlockSummariesSm;
-
-  constructor() {
+  constructor(private sinceTimeBlockSummariesFacade: SinceTimeBlockSummariesFacadeService) {
   }
 
   ngOnInit(): void {

@@ -1,16 +1,17 @@
 import {initialState, timeBlockSummariesReducer} from './time-block-summaries.reducer';
 import {trailingStatisticsReducer} from './trailing-statistics.reducer';
 import {
-  loadTimeBlockSummaries,
-  loadTimeBlockSummariesFailure,
-  loadTimeBlockSummariesSuccess
+  loadTimeBlockSummary,
+  loadTimeBlockSummaryFailure,
+  loadTimeBlockSummarySuccess
 } from '../actions/time-block-summaries.actions';
-import {SinceTimeBlockSummariesSm} from '../models/since-time-block-summaries-sm';
+import {TimeBlockSummarySm} from '../models/time-block-summary-sm';
+import {IntervalEnum} from '../../services/models/interval.enum';
 
 describe('TimeBlockSummaries Reducer', () => {
-  describe(`${loadTimeBlockSummaries.type}`, () => {
+  describe(`${loadTimeBlockSummary.type}`, () => {
     it('should return the previous state', () => {
-      const action = loadTimeBlockSummaries();
+      const action = loadTimeBlockSummary();
 
       const result = timeBlockSummariesReducer(initialState, action);
 
@@ -18,33 +19,27 @@ describe('TimeBlockSummaries Reducer', () => {
     });
   });
 
-  describe(`${loadTimeBlockSummariesSuccess.type}`, () => {
+  describe(`${loadTimeBlockSummarySuccess.type}`, () => {
     it('should return the new state', () => {
-      const timeBlockSummaries = {
-        week: {totalCost: 100},
-        month: {totalTime: 100},
-        year: {averageCost: 299}
-      } as SinceTimeBlockSummariesSm;
-      const action = loadTimeBlockSummariesSuccess(timeBlockSummaries);
+      const timeBlockSummary: TimeBlockSummarySm = {averageCost: 0, timeBlock: IntervalEnum.Day, totalTime: 0, totalCost: 100};
+      const action = loadTimeBlockSummarySuccess(timeBlockSummary);
 
       const result = trailingStatisticsReducer(initialState, action);
 
-      expect(result).toEqual({...initialState, ...timeBlockSummaries});
+      expect(result).toEqual({...initialState, ...timeBlockSummary});
     });
   });
 
-  describe(`${loadTimeBlockSummariesFailure.type}`, () => {
+  describe(`${loadTimeBlockSummaryFailure.type}`, () => {
     it('should set error', () => {
-      const timeBlockSummaries = {
-        errors: [
-          {message: 'you done fuckeled', name: '1d10t'}
-        ]
-      } as SinceTimeBlockSummariesSm;
-      const action = loadTimeBlockSummariesFailure(timeBlockSummaries.errors[0]);
+      const timeBlockSummary = {
+        error: {message: 'you done fuckeled', name: '1d10t'}
+      } as TimeBlockSummarySm;
+      const action = loadTimeBlockSummaryFailure(timeBlockSummary.error);
 
       const result = trailingStatisticsReducer(initialState, action);
 
-      expect(result).toEqual({...initialState, ...timeBlockSummaries});
+      expect(result).toEqual({...initialState, ...timeBlockSummary});
     });
   });
 });

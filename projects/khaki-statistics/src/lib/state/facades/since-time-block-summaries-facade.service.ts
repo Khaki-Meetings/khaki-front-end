@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import {SinceTimeBlockSummariesSm} from '../models/since-time-block-summaries-sm';
+import {TimeBlockSummarySm} from '../models/time-block-summary-sm';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ export class SinceTimeBlockSummariesFacadeService {
     throw Error('not implemented');
   }
 
-  timeBlockSummaries(): Observable<SinceTimeBlockSummariesSm> {
+  timeBlockSummaries(): Observable<TimeBlockSummarySm> {
     throw Error('not implemented');
   }
 }

@@ -3,8 +3,8 @@ import {ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing'
 import {TimeBasedStatSummaryComponent} from './time-based-stat-summary.component';
 import {SinceTimeBlockSummariesFacadeService} from '../../state/facades/since-time-block-summaries-facade.service';
 import {of} from 'rxjs';
-import {timeBlockSummariesData} from './test-data.spec';
 import {delay} from 'rxjs/operators';
+import {timeBlockSummaryData} from './test-data.spec';
 
 describe('TimeBasedStatSummaryComponent', () => {
   let component: TimeBasedStatSummaryComponent;
@@ -14,7 +14,7 @@ describe('TimeBasedStatSummaryComponent', () => {
   beforeEach(async () => {
     mockSinceTimeBlockSummariesService = new SinceTimeBlockSummariesFacadeService();
     spyOn(mockSinceTimeBlockSummariesService, 'requestTimeBlockSummaries');
-    spyOn(mockSinceTimeBlockSummariesService, 'timeBlockSummaries').and.returnValue(of(timeBlockSummariesData).pipe(delay(100)));
+    spyOn(mockSinceTimeBlockSummariesService, 'timeBlockSummaries').and.returnValue(of(timeBlockSummaryData).pipe(delay(100)));
 
     await TestBed.configureTestingModule({
       declarations: [TimeBasedStatSummaryComponent],
@@ -47,9 +47,9 @@ describe('TimeBasedStatSummaryComponent', () => {
     'should set sinceTimeBlockSummaries to data from service observable',
     fakeAsync(
       () => {
-        expect(component.sinceTimeBlockSummaries).toBeUndefined('sinceTimeBlockSummaries should not be set yet');
+        expect(component.timeBlockSummary).toBeUndefined('sinceTimeBlockSummaries should not be set yet');
         tick(100);
-        expect(component.sinceTimeBlockSummaries).toEqual(timeBlockSummariesData);
+        expect(component.timeBlockSummary).toEqual(timeBlockSummaryData);
       }
     )
   );

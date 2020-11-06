@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {TrailingStatisticsFacadeService} from '../../state/facades/trailing-statistics-facade.service';
 import {TrailingStatisticsSm} from '../../state/models/trailing-statistics-sm';
-import {TimeBlockEnum} from '../../state/models/time-block.enum';
+import {IntervalEnum} from '../../services/models/interval.enum';
 
 @Component({
   selector: 'lib-twelve-month-trailing-graph',
@@ -10,54 +10,54 @@ import {TimeBlockEnum} from '../../state/models/time-block.enum';
 })
 export class TwelveMonthTrailingGraphComponent implements OnInit {
   twelveMonthTrailingStatistics: TrailingStatisticsSm = {
-    timeBlock: TimeBlockEnum.Month,
+    timeBlock: IntervalEnum.Month,
     timeBlockSummaries: [
       {
-        timeBlock: TimeBlockEnum.Month,
+        timeBlock: IntervalEnum.Month,
         totalCost: 100099000000.34
       },
       {
-        timeBlock: TimeBlockEnum.Month,
+        timeBlock: IntervalEnum.Month,
         totalCost: 100099000000.34
       },
       {
-        timeBlock: TimeBlockEnum.Month,
+        timeBlock: IntervalEnum.Month,
         totalCost: 100099000000.34
       },
       {
-        timeBlock: TimeBlockEnum.Month,
+        timeBlock: IntervalEnum.Month,
         totalCost: 100099000000.34
       },
       {
-        timeBlock: TimeBlockEnum.Month,
+        timeBlock: IntervalEnum.Month,
         totalCost: 100099000000.34
       },
       {
-        timeBlock: TimeBlockEnum.Month,
+        timeBlock: IntervalEnum.Month,
         totalCost: 100099000000.34
       },
       {
-        timeBlock: TimeBlockEnum.Month,
+        timeBlock: IntervalEnum.Month,
         totalCost: 100099000000.34
       },
       {
-        timeBlock: TimeBlockEnum.Month,
+        timeBlock: IntervalEnum.Month,
         totalCost: 100099000000.34
       },
       {
-        timeBlock: TimeBlockEnum.Month,
+        timeBlock: IntervalEnum.Month,
         totalCost: 100099000000.34
       },
       {
-        timeBlock: TimeBlockEnum.Month,
+        timeBlock: IntervalEnum.Month,
         totalCost: 100099000000.34
       },
       {
-        timeBlock: TimeBlockEnum.Month,
+        timeBlock: IntervalEnum.Month,
         totalCost: 100099000000.34
       },
       {
-        timeBlock: TimeBlockEnum.Month,
+        timeBlock: IntervalEnum.Month,
         totalCost: 100099000000.34
       }
     ],

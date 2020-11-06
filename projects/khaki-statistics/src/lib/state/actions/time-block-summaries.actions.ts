@@ -1,17 +1,17 @@
 import { createAction, props } from '@ngrx/store';
-import {SinceTimeBlockSummariesSm} from '../models/since-time-block-summaries-sm';
 import {ErrorSm} from '../models/errorSm';
+import {TimeBlockSummarySm} from '../models/time-block-summary-sm';
 
-export const loadTimeBlockSummaries = createAction(
-  '[TimeBlockSummaries] Load TimeBlockSummariss'
+export const loadTimeBlockSummary = createAction(
+  '[TimeBlockSummary] Load TimeBlockSummary'
 );
 
-export const loadTimeBlockSummariesSuccess = createAction(
-  '[TimeBlockSummaries] Load TimeBlockSummaries Success',
-  props<SinceTimeBlockSummariesSm>()
+export const loadTimeBlockSummarySuccess = createAction(
+  '[TimeBlockSummary] Load TimeBlockSummary Success',
+  props<TimeBlockSummarySm>()
 );
 
-export const loadTimeBlockSummariesFailure = createAction(
-  '[TimeBlockSummaries] Load TimeBlockSummaries Failure',
+export const loadTimeBlockSummaryFailure = createAction(
+  '[TimeBlockSummary] Load TimeBlockSummary Failure',
   props<ErrorSm>()
 );
