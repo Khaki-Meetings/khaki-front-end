@@ -10,7 +10,9 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "test-once": "ng test --watch=false",
-    "heroku-postbuild": "ng build khaki-statistics && ng build --prod"
+    "build-statistics-with-watch": "ng build khaki-statistics --watch",
+    "build-profile-with-watch": "ng build khaki-profile --watch",
+    "heroku-postbuild": "ng build khaki-statistics && ng build khaki-profile && ng build --prod"
   },
   "private": true,
   "dependencies": {
