@@ -7,10 +7,13 @@ import {StoreModule} from '@ngrx/store';
 import {metaReducers, reducers} from './reducers';
 import {EffectsModule} from '@ngrx/effects';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { SideNavComponent } from './components/side-nav/side-nav.component';
+import {MatSidenavModule} from '@angular/material/sidenav';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SideNavComponent
   ],
   imports: [
     BrowserModule,
@@ -19,7 +22,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
       metaReducers
     }),
     EffectsModule.forRoot([]),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatSidenavModule
   ],
   providers: [],
   bootstrap: [AppComponent]
