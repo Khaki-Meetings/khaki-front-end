@@ -1,4 +1,4 @@
-import {initialState, timeBlockSummariesReducer} from './time-block-summaries.reducer';
+import {initialState, timeBlockSummaryReducer} from './time-block-summary.reducer';
 import {trailingStatisticsReducer} from './trailing-statistics.reducer';
 import {
   loadTimeBlockSummary,
@@ -13,7 +13,7 @@ describe('TimeBlockSummaries Reducer', () => {
     it('should return the previous state', () => {
       const action = loadTimeBlockSummary();
 
-      const result = timeBlockSummariesReducer(initialState, action);
+      const result = timeBlockSummaryReducer(initialState, action);
 
       expect(result).toEqual(initialState);
     });
@@ -24,7 +24,7 @@ describe('TimeBlockSummaries Reducer', () => {
       const timeBlockSummary: TimeBlockSummarySm = {averageCost: 0, timeBlock: IntervalEnum.Day, totalTime: 0, totalCost: 100};
       const action = loadTimeBlockSummarySuccess(timeBlockSummary);
 
-      const result = trailingStatisticsReducer(initialState, action);
+      const result = timeBlockSummaryReducer(initialState, action);
 
       expect(result).toEqual({...initialState, ...timeBlockSummary});
     });

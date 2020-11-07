@@ -16,7 +16,7 @@ describe('OrganizersStatisticsEffects', () => {
   let effects: OrganizersStatisticsEffects;
   let statisticsService: Partial<StatisticsService>;
   let organizerStatisticsFacade: Partial<OrganizersStatisticsFacadeService>;
-  const organizersStatisticsData: OrganizersStatisticsDto = {errors: [], organizers: [], page: 1};
+  const organizersStatisticsData: OrganizersStatisticsDto = {organizerStatistics: [], page: 0};
 
   beforeEach(() => {
     statisticsService = {

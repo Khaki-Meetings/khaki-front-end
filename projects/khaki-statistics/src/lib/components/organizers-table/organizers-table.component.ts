@@ -29,7 +29,7 @@ export class OrganizersTableComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.loadOrganizerStatistics();
+    // this.loadOrganizerStatistics();
     console.log('org', this.organizersStatistics);
   }
 
