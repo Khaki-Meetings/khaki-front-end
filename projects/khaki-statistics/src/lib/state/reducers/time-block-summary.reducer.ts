@@ -17,7 +17,13 @@ export const initialState: TimeBlockSummarySm = {
 
 export const timeBlockSummaryReducer = createReducer(
   initialState,
-  on(loadTimeBlockSummarySuccess, (state: TimeBlockSummarySm, action: Action | TimeBlockSummarySm) => ({...state, ...action})),
+  on(
+    loadTimeBlockSummarySuccess,
+    (state: TimeBlockSummarySm, action: Action | TimeBlockSummarySm) => {
+      const {type, ...newState} = {...state, ...action};
+      return newState;
+    }
+  ),
   on(loadTimeBlockSummaryFailure, (state: TimeBlockSummarySm, action: Action | ErrorSm) => ({error: {message: 'error'}}))
 );
 

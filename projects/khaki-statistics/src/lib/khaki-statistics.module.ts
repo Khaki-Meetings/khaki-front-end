@@ -20,7 +20,6 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatButtonModule} from '@angular/material/button';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
-import {KHAKI_STATISTICS_API_BASE} from './config/khaki-statistics-config-token';
 import {HttpClientModule} from '@angular/common/http';
 
 

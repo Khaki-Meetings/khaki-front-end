@@ -6,6 +6,7 @@ import {Store} from '@ngrx/store';
 import {loadTimeBlockSummary} from '../actions/time-block-summaries.actions';
 import {timeBlockSummariesFeatureKey} from '../reducers/time-block-summary.reducer';
 import {ErrorSm} from '../models/errorSm';
+import {timeBlockSummarySelector} from '../statistics.selectors';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,7 @@ export class TimeBlockSummariesFacadeService {
   }
 
   timeBlockSummary(): Observable<TimeBlockSummarySm> {
-    return this.store.select(state => state[timeBlockSummariesFeatureKey]);
+    return this.store.select(timeBlockSummarySelector);
   }
 
   timeBlockSummaryErrors(): Observable<ErrorSm> {

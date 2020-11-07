@@ -4,6 +4,7 @@ import {TimeBlockSummariesFacadeService} from '../../state/facades/time-block-su
 import {TimeBlockSummarySm} from '../../state/models/time-block-summary-sm';
 import {ErrorSm} from '../../state/models/errorSm';
 import {HistorianService, Logging} from '@natr/historian';
+import {tap} from 'rxjs/operators';
 
 @Logging
 @Component({
@@ -23,14 +24,12 @@ export class TimeBasedStatSummaryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.sinceTimeBlockSummariesFacade.timeBlockSummary().subscribe(
-      timeBlockSummary => {
-        this.logger.debug(timeBlockSummary);
-        this.timeBlockSummary = timeBlockSummary;
-      }
-    );
+    this.sinceTimeBlockSummariesFacade.timeBlockSummary()
+      .pipe(tap(data => this.logger.debug('data', data)))
+      .subscribe(timeBlockSummary => this.timeBlockSummary = timeBlockSummary);
+
     // this.sinceTimeBlockSummariesFacade.timeBlockSummaryErrors().subscribe(error => this.error = error);
-    //
+
     this.sinceTimeBlockSummariesFacade.requestTimeBlockSummary();
   }
 
