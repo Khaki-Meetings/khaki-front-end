@@ -10,24 +10,24 @@ import {TimeBlockSummarySm} from '../../state/models/time-block-summary-sm';
 describe('TimeBasedStatSummaryComponent', () => {
   let component: TimeBasedStatSummaryComponent;
   let fixture: ComponentFixture<TimeBasedStatSummaryComponent>;
-  let mockSinceTimeBlockSummariesService: Partial<TimeBlockSummariesFacadeService>;
+  let mockTimeBlockSummariesService: Partial<TimeBlockSummariesFacadeService>;
 
   beforeEach(async () => {
-    mockSinceTimeBlockSummariesService = {
+    mockTimeBlockSummariesService = {
       requestTimeBlockSummary(): void {
       },
       timeBlockSummary(): Observable<TimeBlockSummarySm> {
-        return null;
+        return of(timeBlockSummaryData).pipe(delay(50));
       }
     };
-    spyOn(mockSinceTimeBlockSummariesService, 'requestTimeBlockSummary');
-    spyOn(mockSinceTimeBlockSummariesService, 'timeBlockSummary').and.returnValue(of(timeBlockSummaryData).pipe(delay(100)));
+    spyOn(mockTimeBlockSummariesService, 'requestTimeBlockSummary');
+    spyOn(mockTimeBlockSummariesService, 'timeBlockSummary').and.callThrough();
 
     await TestBed.configureTestingModule({
       declarations: [TimeBasedStatSummaryComponent],
       imports: [],
       providers: [
-        {provide: TimeBlockSummariesFacadeService, useValue: mockSinceTimeBlockSummariesService}
+        {provide: TimeBlockSummariesFacadeService, useValue: mockTimeBlockSummariesService}
       ]
     })
       .compileComponents();
@@ -46,16 +46,19 @@ describe('TimeBasedStatSummaryComponent', () => {
   it(
     'should call \'requestTimeBlockSummaries\' once',
     () => {
-      expect(mockSinceTimeBlockSummariesService.requestTimeBlockSummary).toHaveBeenCalledTimes(1);
+      expect(mockTimeBlockSummariesService.requestTimeBlockSummary).toHaveBeenCalledTimes(1);
     }
   );
 
   it(
-    'should set sinceTimeBlockSummaries to data from service observable',
+    'should set timeBlockSummaries to data from service observable',
     fakeAsync(
       () => {
-        expect(component.timeBlockSummary).toBeUndefined('sinceTimeBlockSummaries should not be set yet');
-        tick(100);
+        component.ngOnInit();
+        expect(component.timeBlockSummary).toBeUndefined('timeBlockSummaries should not be set yet');
+        tick(50);
+        tick(50);
+        fixture.detectChanges();
         expect(component.timeBlockSummary).toEqual(timeBlockSummaryData);
       }
     )
