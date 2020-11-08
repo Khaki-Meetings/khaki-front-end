@@ -2,21 +2,25 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {OrganizersStatisticsSm} from '../models/organizers-statistics-sm';
 import {NotImplementedException} from '../../exceptions/not-implemented-exception';
+import {StatisticsFeature} from '../models/statistics-feature';
+import {Store} from '@ngrx/store';
+import {loadOrganizersStatistics} from '../actions/organizers-statistics.actions';
+import {organizersStatisticsSelector} from '../statistics.selectors';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrganizersStatisticsFacadeService {
 
-  constructor() {
+  constructor(private store: Store<StatisticsFeature>) {
   }
 
   requestOrganizersStatistics(): void {
-    throw new NotImplementedException();
+    this.store.dispatch(loadOrganizersStatistics());
   }
 
   organizersStatistics(): Observable<OrganizersStatisticsSm> {
-    throw new NotImplementedException();
+    return this.store.select(organizersStatisticsSelector);
   }
 
   setOrganizersStatistics(data: OrganizersStatisticsSm): void {

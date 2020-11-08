@@ -1,6 +1,6 @@
 
 export interface OrganizerDto {
-  name: string;
-  email: string;
-  imageUrl: string;
+  name?: string;
+  email?: string;
+  imageUrl?: string;
 }

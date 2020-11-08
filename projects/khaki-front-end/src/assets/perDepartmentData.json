@@ -1,0 +1,30 @@
+[
+  {
+    "department": "HR",
+    "totalHours": 170
+  },
+  {
+    "department": "Sales",
+    "totalHours": 123
+  },
+  {
+    "department": "Support",
+    "totalHours": 200
+  },
+  {
+    "department": "IT",
+    "totalHours": 100
+  },
+  {
+    "department": "Finance",
+    "totalHours": 98
+  },
+  {
+    "department": "Manufacturing",
+    "totalHours": 159
+  },
+  {
+    "department": "Design",
+    "totalHours": 87
+  }
+]

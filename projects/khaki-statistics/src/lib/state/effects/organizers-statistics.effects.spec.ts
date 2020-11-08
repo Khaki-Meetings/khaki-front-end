@@ -16,7 +16,7 @@ describe('OrganizersStatisticsEffects', () => {
   let effects: OrganizersStatisticsEffects;
   let statisticsService: Partial<StatisticsService>;
   let organizerStatisticsFacade: Partial<OrganizersStatisticsFacadeService>;
-  const organizersStatisticsData: OrganizersStatisticsDto = {errors: [], organizers: [], page: 1};
+  const organizersStatisticsData: OrganizersStatisticsDto = {organizersStatistics: [], page: 0};
 
   beforeEach(() => {
     statisticsService = {
@@ -58,7 +58,7 @@ describe('OrganizersStatisticsEffects', () => {
     () => {
       const expected = hot('---a', {a: loadOrganizersStatistics()});
 
-      expect(effects.organizersStatisticsEffect$()).toBeObservable(expected);
+      expect(effects.organizersStatisticsEffect$).toBeObservable(expected);
 
       expect(organizerStatisticsFacade.setOrganizersStatistics).toHaveBeenCalledTimes(1);
       expect(statisticsService.getOrganizersStatistics).toHaveBeenCalledTimes(1);

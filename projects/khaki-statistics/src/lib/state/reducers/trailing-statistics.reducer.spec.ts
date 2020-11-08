@@ -1,7 +1,7 @@
 import {initialState, trailingStatisticsReducer} from './trailing-statistics.reducer';
 import {loadTrailingStatistics, loadTrailingStatisticsFailure, loadTrailingStatisticsSuccess} from '../actions/trailing-statistics.actions';
 import {TrailingStatisticsSm} from '../models/trailing-statistics-sm';
-import {TimeBlockEnum} from '../models/time-block.enum';
+import {IntervalEnum} from '../../services/models/interval.enum';
 
 describe('TrailingStatistics Reducer', () => {
   describe(`${loadTrailingStatistics.type}`, () => {
@@ -17,7 +17,7 @@ describe('TrailingStatistics Reducer', () => {
   describe(`${loadTrailingStatisticsSuccess.type}`, () => {
     it('should return the new state', () => {
       const trailingStatistics = {
-        timeBlock: TimeBlockEnum.Year,
+        timeBlock: IntervalEnum.Year,
         timeBlockSummaries: [
           {totalCost: 1000}
         ]

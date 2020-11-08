@@ -29,11 +29,13 @@
     "@fortawesome/angular-fontawesome": "0.7.x",
     "@fortawesome/fontawesome-svg-core": "^1.2.32",
     "@fortawesome/free-solid-svg-icons": "^5.15.1",
+    "@natr/historian": "^0.2.1",
     "@ngrx/effects": "^10.0.1",
     "@ngrx/schematics": "^10.0.1",
     "@ngrx/store": "^10.0.1",
     "@swimlane/ngx-charts": "^16.0.0",
     "express": "^4.17.1",
+    "morphism": "^1.12.3",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"

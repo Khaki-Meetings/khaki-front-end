@@ -2,6 +2,11 @@ import {Component, OnInit} from '@angular/core';
 import {PerDepartmentStatisticsSm} from '../../state/models/per-department-statistics-sm';
 import {PerDepartmentStatisticsFacadeService} from '../../state/facades/per-department-statistics-facade.service';
 
+interface GraphData {
+  name: string;
+  value: number;
+}
+
 @Component({
   selector: 'lib-per-department-graph',
   templateUrl: './per-department-graph.component.html',
@@ -10,48 +15,13 @@ import {PerDepartmentStatisticsFacadeService} from '../../state/facades/per-depa
 export class PerDepartmentGraphComponent implements OnInit {
   perDepartmentStatistics: PerDepartmentStatisticsSm;
 
-  single = [
-    {
-      name: 'Sales',
-      value: 8940000
-    },
-    {
-      name: 'Finance',
-      value: 5000000
-    },
-    {
-      name: 'Development',
-      value: 7200000
-    },
-    {
-      name: 'Customer Service',
-      value: 7200000
-    },
-    {
-      name: 'IT Support',
-      value: 7200000
-    },
-    {
-      name: 'Manufacturing',
-      value: 7200000
-    },
-    {
-      name: 'Home',
-      value: 7200000
-    },
-    {
-      name: 'HR',
-      value: 6200000
-    }
-  ];
-
   view: any[] = [700, 400];
 
   // options
   showLegend = true;
 
   colorScheme = {
-    domain: ['#3991CF', '#D6EDFE', '#D6EDFE', '#70CDB8', '#98E3D1', '#ACF8E7', '#D7FFF5', '#80C1EF']
+    domain: ['#3991CF', '#D6EDFE', '#70CDB8', '#98E3D1', '#ACF8E7', '#D7FFF5', '#80C1EF']
   };
 
   // pie
@@ -59,9 +29,11 @@ export class PerDepartmentGraphComponent implements OnInit {
   explodeSlices = false;
   doughnut = false;
 
+  graphData: GraphData[] = [];
+
   constructor(private perDepartmentStatisticsFacade: PerDepartmentStatisticsFacadeService) {
-    // Object.assign(this, {single, multi});
   }
+
 
   ngOnInit(): void {
     this.perDepartmentStatisticsFacade
@@ -69,10 +41,22 @@ export class PerDepartmentGraphComponent implements OnInit {
       .subscribe(
         (data) => {
           this.perDepartmentStatistics = data;
+          this.createGraphData();
         }
       );
 
     this.perDepartmentStatisticsFacade.requestPerDepartmentStatistics();
+  }
+
+  private createGraphData(): void {
+    this.graphData = this.perDepartmentStatistics.departmentStatistics.map(
+      el => {
+        return {
+          name: el.department,
+          value: el.totalHours
+        };
+      }
+    );
   }
 
 }

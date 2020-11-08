@@ -8,7 +8,7 @@ import {TimeBasedStatSummaryComponent} from './components/time-based-stat-summar
 import {StoreModule} from '@ngrx/store';
 import * as fromKhakiStatistics from './state';
 import {EffectsModule} from '@ngrx/effects';
-import {TimeBlockSummariesEffects} from './state/effects/time-block-summaries.effects';
+import {TimeBlockSummaryEffects} from './state/effects/time-block-summary-effects.service';
 import {OrganizersStatisticsEffects} from './state/effects/organizers-statistics.effects';
 import {TrailingStatisticsEffects} from './state/effects/trailing-statistics.effects';
 import {PerDepartmentStatisticsEffects} from './state/effects/per-department-statistics.effects';
@@ -20,6 +20,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatButtonModule} from '@angular/material/button';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {HttpClientModule} from '@angular/common/http';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
   imports: [
     KhakiStatisticsRoutingModule,
     CommonModule,
+    HttpClientModule,
     StoreModule.forFeature(
       fromKhakiStatistics.khakiStatisticsFeatureKey,
       fromKhakiStatistics.reducers,
@@ -42,7 +44,7 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
     ),
     EffectsModule.forFeature(
       [
-        TimeBlockSummariesEffects,
+        TimeBlockSummaryEffects,
         OrganizersStatisticsEffects,
         TrailingStatisticsEffects,
         PerDepartmentStatisticsEffects
@@ -51,7 +53,6 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
     MatProgressSpinnerModule,
     FontAwesomeModule,
     MatTableModule,
-    // BrowserAnimationsModule,
     MatCheckboxModule,
     MatButtonModule,
     NgxChartsModule

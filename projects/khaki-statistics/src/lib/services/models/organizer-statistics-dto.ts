@@ -1,5 +1,8 @@
-import {OrganizerStatisticsSm} from '../../state/models/organizer-statistics-sm';
+import {OrganizerDto} from './organizer-dto';
 
-// tslint:disable-next-line:no-empty-interface
-export interface OrganizerStatisticsDto extends OrganizerStatisticsSm {
+export interface OrganizerStatisticsDto {
+  organizer: OrganizerDto;
+  totalMeetings: number;
+  totalHours: number;
+  totalCost: number;
 }

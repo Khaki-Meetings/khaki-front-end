@@ -7,8 +7,9 @@ import {StoreModule} from '@ngrx/store';
 import {metaReducers, reducers} from './reducers';
 import {EffectsModule} from '@ngrx/effects';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { SideNavComponent } from './components/side-nav/side-nav.component';
+import {SideNavComponent} from './components/side-nav/side-nav.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     StoreModule.forRoot(reducers, {
       metaReducers

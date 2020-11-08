@@ -2,21 +2,21 @@ import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { Observable } from 'rxjs';
 
-import { TimeBlockSummariesEffects } from './time-block-summaries.effects';
+import { TimeBlockSummaryEffects } from './time-block-summary-effects.service';
 
 describe('TimeBlockSummariesEffects', () => {
   let actions$: Observable<any>;
-  let effects: TimeBlockSummariesEffects;
+  let effects: TimeBlockSummaryEffects;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        TimeBlockSummariesEffects,
+        TimeBlockSummaryEffects,
         provideMockActions(() => actions$)
       ]
     });
 
-    effects = TestBed.inject(TimeBlockSummariesEffects);
+    effects = TestBed.inject(TimeBlockSummaryEffects);
   });
 
   it('should be created', () => {

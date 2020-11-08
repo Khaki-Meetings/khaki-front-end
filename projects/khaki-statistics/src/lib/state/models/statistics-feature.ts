@@ -2,7 +2,7 @@ import {organizersStatisticsFeatureKey} from '../reducers/organizers-statistics.
 import {OrganizersStatisticsSm} from './organizers-statistics-sm';
 import {perDepartmentStatisticsFeatureKey} from '../reducers/per-department-statistics.reducer';
 import {PerDepartmentStatisticsSm} from './per-department-statistics-sm';
-import {timeBlockSummariesFeatureKey} from '../reducers/time-block-summaries.reducer';
+import {timeBlockSummariesFeatureKey} from '../reducers/time-block-summary.reducer';
 import {TimeBlockSummarySm} from './time-block-summary-sm';
 import {trailingStatisticsFeatureKey} from '../reducers/trailing-statistics.reducer';
 import {TrailingStatisticsSm} from './trailing-statistics-sm';

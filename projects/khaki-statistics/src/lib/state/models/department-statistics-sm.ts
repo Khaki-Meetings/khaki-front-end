@@ -1,7 +1,7 @@
 import {DepartmentSm} from './departmentSm';
 
 export interface DepartmentStatisticsSm {
-  department: DepartmentSm;
+  department: string;
   totalHours?: number;
   totalCost?: number;
   averageCost?: number;
