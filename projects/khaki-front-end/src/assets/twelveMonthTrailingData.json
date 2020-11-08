@@ -1,0 +1,52 @@
+{
+  "timeBlockSummaries": [
+    {
+      "interval": 2,
+      "totalCost": 1100
+    },
+    {
+      "interval": 2,
+      "totalCost": 1200
+    },
+    {
+      "interval": 2,
+      "totalCost": 1300
+    },
+    {
+      "interval": 2,
+      "totalCost": 1400
+    },
+    {
+      "interval": 2,
+      "totalCost": 1500
+    },
+    {
+      "interval": 2,
+      "totalCost": 1600
+    },
+    {
+      "interval": 2,
+      "totalCost": 1700
+    },
+    {
+      "interval": 2,
+      "totalCost": 1800
+    },
+    {
+      "interval": 2,
+      "totalCost": 1900
+    },
+    {
+      "interval": 2,
+      "totalCost": 2000
+    },
+    {
+      "interval": 2,
+      "totalCost": 2100
+    },
+    {
+      "interval": 2,
+      "totalCost": 2200
+    }
+  ]
+}

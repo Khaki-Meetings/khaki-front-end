@@ -3,6 +3,7 @@ import {khakiStatisticsFeatureKey} from './index';
 import {StatisticsFeature} from './models/statistics-feature';
 import {timeBlockSummariesFeatureKey} from './reducers/time-block-summary.reducer';
 import {organizersStatisticsFeatureKey} from './reducers/organizers-statistics.reducer';
+import {trailingStatisticsFeatureKey} from './reducers/trailing-statistics.reducer';
 
 const featureSelector = createFeatureSelector(khakiStatisticsFeatureKey);
 
@@ -11,5 +12,9 @@ export const timeBlockSummarySelector = createSelector(featureSelector, (state: 
 export const organizersStatisticsSelector = createSelector(
   featureSelector,
   (state: StatisticsFeature) => state[organizersStatisticsFeatureKey]
+);
+export const trailingStatisticsSelector = createSelector(
+  featureSelector,
+  (state: StatisticsFeature) => state[trailingStatisticsFeatureKey]
 );
 

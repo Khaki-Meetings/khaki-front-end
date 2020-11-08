@@ -3,13 +3,15 @@ import {Observable} from 'rxjs';
 import {TimeBlockSummarySm} from '../state/models/time-block-summary-sm';
 import {HttpClient} from '@angular/common/http';
 import {TimeBlockSummaryResponseDto} from './models/time-block-summary-response-dto';
-import {map, tap} from 'rxjs/operators';
+import {map} from 'rxjs/operators';
 import {HistorianService, Logging} from '@natr/historian';
 import {OrganizersStatisticsSm} from '../state/models/organizers-statistics-sm';
 import {createSchema, morphism, StrictSchema} from 'morphism';
 import {OrganizersStatisticsDto} from './models/organizers-statistics-dto';
 import {DepartmentStatisticsSm} from '../state/models/department-statistics-sm';
 import {DepartmentStatisticsResponseDto} from './models/department-statistics-response-dto';
+import {TrailingStatisticsResponseDto} from './models/trailing-statistics-response-dto';
+import {TrailingStatisticsSm} from '../state/models/trailing-statistics-sm';
 
 @Logging
 @Injectable({
@@ -38,6 +40,17 @@ export class StatisticsService {
       );
   }
 
+  getTrailingStatistics(): Observable<TrailingStatisticsSm> {
+    return this.httpClient
+      .get('/assets/twelveMonthTrailingData.json')
+      .pipe(
+        map(
+          (data: TrailingStatisticsResponseDto) => data as TrailingStatisticsSm
+        ),
+      );
+  }
+
+
   getDepartmentStatistics(): Observable<DepartmentStatisticsSm[]> {
     return this.httpClient
       .get('/assets/perDepartmentData.json')
@@ -52,14 +65,8 @@ export class StatisticsService {
     return this.httpClient
       .get('/assets/timeBlockSummaryData.json')
       .pipe(
-        // tap(data => this.logger.debug('data from server', data)),
         map(
-          (timeBlockSummary: TimeBlockSummaryResponseDto) => ({
-            totalMeetings: timeBlockSummary.totalMeetings,
-            totalCost: timeBlockSummary.totalCost,
-            totalTime: timeBlockSummary.totalTime,
-            averageCost: timeBlockSummary.averageCost
-          } as TimeBlockSummarySm)
+          (timeBlockSummary: TimeBlockSummaryResponseDto) => timeBlockSummary as TimeBlockSummarySm
         )
       );
   }

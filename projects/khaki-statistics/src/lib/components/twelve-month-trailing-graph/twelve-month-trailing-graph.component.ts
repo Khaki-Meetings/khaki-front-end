@@ -2,70 +2,18 @@ import {Component, OnInit} from '@angular/core';
 import {TrailingStatisticsFacadeService} from '../../state/facades/trailing-statistics-facade.service';
 import {TrailingStatisticsSm} from '../../state/models/trailing-statistics-sm';
 import {IntervalEnum} from '../../services/models/interval.enum';
+import {HistorianService, Logging} from '@natr/historian';
 
+@Logging
 @Component({
   selector: 'lib-twelve-month-trailing-graph',
   templateUrl: './twelve-month-trailing-graph.component.html',
   styleUrls: ['./twelve-month-trailing-graph.component.scss']
 })
 export class TwelveMonthTrailingGraphComponent implements OnInit {
-  twelveMonthTrailingStatistics: TrailingStatisticsSm = {
-    timeBlock: IntervalEnum.Month,
-    timeBlockSummaries: [
-      {
-        timeBlock: IntervalEnum.Month,
-        totalCost: 100099000000.34
-      },
-      {
-        timeBlock: IntervalEnum.Month,
-        totalCost: 100099000000.34
-      },
-      {
-        timeBlock: IntervalEnum.Month,
-        totalCost: 100099000000.34
-      },
-      {
-        timeBlock: IntervalEnum.Month,
-        totalCost: 100099000000.34
-      },
-      {
-        timeBlock: IntervalEnum.Month,
-        totalCost: 100099000000.34
-      },
-      {
-        timeBlock: IntervalEnum.Month,
-        totalCost: 100099000000.34
-      },
-      {
-        timeBlock: IntervalEnum.Month,
-        totalCost: 100099000000.34
-      },
-      {
-        timeBlock: IntervalEnum.Month,
-        totalCost: 100099000000.34
-      },
-      {
-        timeBlock: IntervalEnum.Month,
-        totalCost: 100099000000.34
-      },
-      {
-        timeBlock: IntervalEnum.Month,
-        totalCost: 100099000000.34
-      },
-      {
-        timeBlock: IntervalEnum.Month,
-        totalCost: 100099000000.34
-      },
-      {
-        timeBlock: IntervalEnum.Month,
-        totalCost: 100099000000.34
-      }
-    ],
-    count: 12
-  };
+  private logger: HistorianService;
 
-
-  single = [];
+  graphData: { name: string, value: number }[] = [];
 
   view: any[] = [700, 400];
 
@@ -78,7 +26,7 @@ export class TwelveMonthTrailingGraphComponent implements OnInit {
   showXAxisLabel = true;
   xAxisLabel = 'Month';
   showYAxisLabel = true;
-  yAxisLabel = 'Current Costs';
+  yAxisLabel = 'Costs';
 
   colorScheme = {
     domain: ['#CEEDE6', '#ADF8E6', '#BFDDF3', '#D6EEFF']
@@ -86,8 +34,19 @@ export class TwelveMonthTrailingGraphComponent implements OnInit {
   };
 
   constructor(private trailingStatisticsFacade: TrailingStatisticsFacadeService) {
-    const monthName = ['J', 'F', 'M', 'A', 'M', 'J', 'J', 'A', 'S', 'O', 'N', 'D'];
-    this.single = this.twelveMonthTrailingStatistics.timeBlockSummaries.map(
+  }
+
+  ngOnInit(): void {
+    this.trailingStatisticsFacade.trailingStatistics()
+      .subscribe(
+        trailingStatistics => this.createGraphData(trailingStatistics)
+      );
+    this.trailingStatisticsFacade.requestTrailingStatistics(IntervalEnum.Month, 12);
+  }
+
+  private createGraphData(trailingStatistics: TrailingStatisticsSm): void {
+    const monthName = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    this.graphData = trailingStatistics.timeBlockSummaries.map(
       timeBlockSummary => {
         return {
           name: monthName.shift(),
@@ -95,9 +54,7 @@ export class TwelveMonthTrailingGraphComponent implements OnInit {
         };
       }
     );
-  }
 
-  ngOnInit(): void {
-    // this.trailingStatisticsFacade.requestTrailingStatistics(TimeBlock.Month, 1);
+    this.logger.debug('graphData', this.graphData);
   }
 }
