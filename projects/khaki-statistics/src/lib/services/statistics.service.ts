@@ -1,12 +1,15 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import {NotImplementedException} from '../exceptions/not-implemented-exception';
-import {OrganizersStatisticsDto} from './models/organizers-statistics-dto';
 import {TimeBlockSummarySm} from '../state/models/time-block-summary-sm';
 import {HttpClient} from '@angular/common/http';
 import {TimeBlockSummaryResponseDto} from './models/time-block-summary-response-dto';
 import {map, tap} from 'rxjs/operators';
 import {HistorianService, Logging} from '@natr/historian';
+import {OrganizersStatisticsSm} from '../state/models/organizers-statistics-sm';
+import {createSchema, morphism, StrictSchema} from 'morphism';
+import {OrganizersStatisticsDto} from './models/organizers-statistics-dto';
+import {DepartmentStatisticsSm} from '../state/models/department-statistics-sm';
+import {DepartmentStatisticsResponseDto} from './models/department-statistics-response-dto';
 
 @Logging
 @Injectable({
@@ -14,12 +17,35 @@ import {HistorianService, Logging} from '@natr/historian';
 })
 export class StatisticsService {
   logger: HistorianService;
+  private readonly organizersStatisticsSchema: StrictSchema<OrganizersStatisticsSm, OrganizersStatisticsDto>;
 
   constructor(private httpClient: HttpClient) {
+    this.organizersStatisticsSchema = createSchema<OrganizersStatisticsSm, OrganizersStatisticsDto>(
+      {
+        organizersStatistics: 'organizersStatistics',
+        page: 'page'
+      }
+    );
   }
 
-  getOrganizersStatistics(): Observable<OrganizersStatisticsDto> {
-    throw new NotImplementedException();
+  getOrganizersStatistics(): Observable<OrganizersStatisticsSm> {
+    return this.httpClient
+      .get('/assets/organizersTableData.json')
+      .pipe(
+        map(
+          (data: OrganizersStatisticsDto) => morphism(this.organizersStatisticsSchema, data)
+        ),
+      );
+  }
+
+  getDepartmentStatistics(): Observable<DepartmentStatisticsSm[]> {
+    return this.httpClient
+      .get('/assets/perDepartmentData.json')
+      .pipe(
+        map(
+          (data: DepartmentStatisticsResponseDto[]) => data as DepartmentStatisticsSm[]
+        ),
+      );
   }
 
   getTimeBlockSummary(): Observable<TimeBlockSummarySm> {
