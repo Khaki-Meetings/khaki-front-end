@@ -2,10 +2,10 @@
   <h3>This Month <fa-icon [icon]="faCaretDrop"></fa-icon>
   </h3>
   <div class="flex-container">
-    <div>307hr</div>
-    <div>{{153500 | currency}}</div>
-    <div>{{1800 | currency}}</div>
-    <div>82</div>
+    <div>{{timeBlockSummary?.totalTime}}</div>
+    <div>{{timeBlockSummary?.totalCost | currency}}</div>
+    <div>{{timeBlockSummary?.averageCost | currency}}</div>
+    <div>{{timeBlockSummary?.totalMeetings}}</div>
   </div>
   <div class="flex-container">
     <div>Time in internal meetings</div>

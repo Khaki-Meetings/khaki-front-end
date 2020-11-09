@@ -1,44 +1,31 @@
 import {Component, OnInit} from '@angular/core';
 import {OrganizersStatisticsSm} from '../../state/models/organizers-statistics-sm';
-import {OrganizersStatisticsFacadeService} from "../../state/facades/organizers-statistics-facade.service";
-import {OrganizerStatisticsSm} from "../../state/models/organizer-statistics-sm";
-import {OrganizerSm} from "../../state/models/organizerSm";
+import {OrganizersStatisticsFacadeService} from '../../state/facades/organizers-statistics-facade.service';
+import {HistorianService, Logging} from '@natr/historian';
+import {tap} from 'rxjs/operators';
 
-
-
-
+@Logging
 @Component({
   selector: 'lib-organizers-table',
   templateUrl: './organizers-table.component.html',
   styleUrls: ['./organizers-table.component.scss']
 })
 export class OrganizersTableComponent implements OnInit {
-  private organizer: OrganizerSm = {email: "bob@bob.com", imageUrl: "", name: "Bob Jones"};
-  private organizerStat: OrganizerStatisticsSm = {organizer: this.organizer, totalCost: 100, totalHours: 222, totalMeetings: 2};
-  organizersStatistics: OrganizersStatisticsSm = {
-    errors: [], organizers: [
-      this.organizerStat
-    ], page: 1
-
-  };
+  private logger: HistorianService;
+  organizersStatistics: OrganizersStatisticsSm;
   displayedColumns: string[] = ['name', 'meeting', 'hours', 'costs'];
 
 
   constructor(private organizersStatisticsService: OrganizersStatisticsFacadeService) {
   }
 
-
   ngOnInit(): void {
-    this.loadOrganizerStatistics();
-    console.log('org', this.organizersStatistics);
-  }
-
-  loadOrganizerStatistics() {
-    this.organizersStatisticsService.organizersStatistics().subscribe(
-      availableInfoFromServer => {
-        this.organizersStatistics = availableInfoFromServer;
-        console.log('obs -->', this.organizersStatistics);
-      }
-    );
+    this.organizersStatisticsService.organizersStatistics()
+      // .pipe(tap(data => this.logger.debug('subscription', data)))
+      .subscribe(organizersStatistics => {
+        this.logger.debug('onInit', organizersStatistics);
+        this.organizersStatistics = organizersStatistics;
+      });
+    this.organizersStatisticsService.requestOrganizersStatistics();
   }
 }

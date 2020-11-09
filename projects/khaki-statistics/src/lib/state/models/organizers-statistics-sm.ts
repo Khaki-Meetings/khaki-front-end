@@ -3,6 +3,6 @@ import {OrganizerStatisticsSm} from './organizer-statistics-sm';
 
 export interface OrganizersStatisticsSm {
   page: number;
-  organizers: OrganizerStatisticsSm[];
-  errors: ErrorSm[];
+  organizersStatistics: OrganizerStatisticsSm[];
+  errors?: ErrorSm[];
 }

@@ -39,10 +39,14 @@ describe('PerDepartmentStatisticsFacadeService', () => {
       const newState: StatisticsFeature = {
         organizersStatistics: undefined,
         perDepartmentStatistics: {
-          departmentStatistics: {
-            department: {name: 'finance'},
-            totalCost: 1000
-          },
+          departmentStatistics: [
+            {
+              totalCost: 1,
+              totalHours: 1,
+              averageCost: 1,
+              department: 'finance'
+            },
+          ],
           errors: []
         },
         spinner: {isSpinning: false},

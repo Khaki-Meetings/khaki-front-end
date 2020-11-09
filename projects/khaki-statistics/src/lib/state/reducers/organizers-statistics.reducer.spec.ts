@@ -21,7 +21,7 @@ describe('OrganizersStatistics Reducer', () => {
   describe(`${loadOrganizersStatisticsSuccess.type}`, () => {
     it('should return the new state', () => {
       const organizersStatistics: OrganizersStatisticsSm = {
-        errors: [{}], organizers: [], page: 1
+        errors: [{}], organizersStatistics: [], page: 1
       };
       const action = loadOrganizersStatisticsSuccess(organizersStatistics);
 

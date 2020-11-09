@@ -1,9 +1,9 @@
-import {TimeBlockEnum} from './time-block.enum';
 import {TimeBlockSummarySm} from './time-block-summary-sm';
 import {ErrorSm} from './errorSm';
+import {IntervalEnum} from '../../services/models/interval.enum';
 
 export interface TrailingStatisticsSm {
-  timeBlock?: TimeBlockEnum;
+  timeBlock?: IntervalEnum;
   timeBlockSummaries?: TimeBlockSummarySm[];
   count?: number;
   errors?: ErrorSm[];
