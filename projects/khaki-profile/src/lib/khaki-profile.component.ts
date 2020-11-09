@@ -2,13 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'lib-khaki-profile',
-  template: `
-    <p>
-      khaki-profile works!
-    </p>
-  `,
-  styles: [
-  ]
+  templateUrl: './khaki-profile.component.html',
+  styleUrls: ['./khaki-profile.component.scss']
 })
 export class KhakiProfileComponent implements OnInit {
 
