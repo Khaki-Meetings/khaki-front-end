@@ -23,6 +23,14 @@
       "khaki-profile": [
         "dist/khaki-profile/khaki-profile",
         "dist/khaki-profile"
+      ],
+      "khaki-settings": [
+        "dist/khaki-settings/khaki-settings",
+        "dist/khaki-settings"
+      ],
+      "khaki-info": [
+        "dist/khaki-info/khaki-info",
+        "dist/khaki-info"
       ]
     }
   }

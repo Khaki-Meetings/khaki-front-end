@@ -9,6 +9,7 @@ import {EffectsModule} from '@ngrx/effects';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {SideNavComponent} from './components/side-nav/side-nav.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatIconModule} from '@angular/material/icon';
 import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
@@ -25,7 +26,8 @@ import {HttpClientModule} from '@angular/common/http';
     }),
     EffectsModule.forRoot([]),
     BrowserAnimationsModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

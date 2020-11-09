@@ -4,7 +4,13 @@
   "lib": {
     "entryFile": "src/public-api.ts",
     "umdModuleIds": {
-      "@fortawesome/free-solid-svg-icons": "freeSolidSvgIcons"
+      "@fortawesome/free-solid-svg-icons": "freeSolidSvgIcons",
+      "@fortawesome/angular-fontawesome": "angularFontawesome",
+      "@ngrx/store": "ngrxStore",
+      "@ngrx/effects": "ngrxEffects",
+      "morphism": "morphism",
+      "@swimlane/ngx-charts": "swimlaneNgxCharts",
+      "@natr/historian": "natrHistorian"
     }
   }
 }
