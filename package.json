@@ -11,8 +11,14 @@
     "e2e": "ng e2e",
     "test-once": "ng test --watch=false",
     "build-statistics-with-watch": "ng build khaki-statistics --watch",
+    "build-statistics": "ng build khaki-statistics",
     "build-profile-with-watch": "ng build khaki-profile --watch",
-    "heroku-postbuild": "ng build khaki-statistics && ng build khaki-profile && ng build --prod"
+    "build-profile": "ng build khaki-profile",
+    "build-settings-with-watch": "ng build khaki-settings --watch",
+    "build-settings": "ng build khaki-settings",
+    "build-info-with-watch": "ng build khaki-info --watch",
+    "build-info": "ng build khaki-info",
+    "heroku-postbuild": "ng build khaki-statistics && ng build khaki-profile && ng build khaki-settings && ng build khaki-info && ng build --prod"
   },
   "private": true,
   "dependencies": {

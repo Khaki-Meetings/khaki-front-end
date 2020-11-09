@@ -9,6 +9,14 @@ const routes: Routes = [
   {
     path: 'profile',
     loadChildren: () => import('khaki-profile').then(m => m.KhakiProfileModule)
+  },
+  {
+    path: 'settings',
+    loadChildren: () => import('khaki-settings').then(m => m.KhakiSettingsModule)
+  },
+  {
+    path: 'info',
+    loadChildren: () => import('khaki-info').then(m => m.KhakiInfoModule)
   }
 ];
 
