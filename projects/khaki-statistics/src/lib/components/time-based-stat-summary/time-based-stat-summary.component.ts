@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {faCaretDown} from '@fortawesome/free-solid-svg-icons';
 import {TimeBlockSummariesFacadeService} from '../../state/facades/time-block-summaries-facade.service';
 import {TimeBlockSummarySm} from '../../state/models/time-block-summary-sm';
 import {ErrorSm} from '../../state/models/errorSm';
@@ -14,9 +13,6 @@ import {tap} from 'rxjs/operators';
 })
 export class TimeBasedStatSummaryComponent implements OnInit {
   logger: HistorianService;
-
-  faCaretDrop = faCaretDown;
-
   timeBlockSummary: TimeBlockSummarySm;
   error: ErrorSm;
 
@@ -24,13 +20,13 @@ export class TimeBasedStatSummaryComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.timeBlockData();
+
+  }
+
+  private timeBlockData(): void {
     this.sinceTimeBlockSummariesFacade.timeBlockSummary()
       .pipe(tap(data => this.logger.debug('data', data)))
       .subscribe(timeBlockSummary => this.timeBlockSummary = timeBlockSummary);
-
-    // this.sinceTimeBlockSummariesFacade.timeBlockSummaryErrors().subscribe(error => this.error = error);
-
-    this.sinceTimeBlockSummariesFacade.requestTimeBlockSummary();
   }
-
 }

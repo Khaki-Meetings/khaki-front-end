@@ -3,7 +3,7 @@ import {Observable} from 'rxjs';
 import {TimeBlockSummarySm} from '../state/models/time-block-summary-sm';
 import {HttpClient} from '@angular/common/http';
 import {TimeBlockSummaryResponseDto} from './models/time-block-summary-response-dto';
-import {map} from 'rxjs/operators';
+import {map, tap} from 'rxjs/operators';
 import {HistorianService, Logging} from '@natr/historian';
 import {OrganizersStatisticsSm} from '../state/models/organizers-statistics-sm';
 import {createSchema, morphism, StrictSchema} from 'morphism';
@@ -12,6 +12,7 @@ import {DepartmentStatisticsSm} from '../state/models/department-statistics-sm';
 import {DepartmentStatisticsResponseDto} from './models/department-statistics-response-dto';
 import {TrailingStatisticsResponseDto} from './models/trailing-statistics-response-dto';
 import {TrailingStatisticsSm} from '../state/models/trailing-statistics-sm';
+import {IntervalEnum} from './models/interval.enum';
 
 @Logging
 @Injectable({
@@ -30,9 +31,10 @@ export class StatisticsService {
     );
   }
 
-  getOrganizersStatistics(): Observable<OrganizersStatisticsSm> {
+  getOrganizersStatistics(interval: IntervalEnum): Observable<OrganizersStatisticsSm> {
+    const url = `/assets/organizersTable${interval}Data.json`;
     return this.httpClient
-      .get('/assets/organizersTableData.json')
+      .get(url)
       .pipe(
         map(
           (data: OrganizersStatisticsDto) => morphism(this.organizersStatisticsSchema, data)
@@ -41,8 +43,9 @@ export class StatisticsService {
   }
 
   getTrailingStatistics(): Observable<TrailingStatisticsSm> {
+    const url = '/assets/twelveMonthTrailingData.json';
     return this.httpClient
-      .get('/assets/twelveMonthTrailingData.json')
+      .get(url)
       .pipe(
         map(
           (data: TrailingStatisticsResponseDto) => data as TrailingStatisticsSm
@@ -51,9 +54,10 @@ export class StatisticsService {
   }
 
 
-  getDepartmentStatistics(): Observable<DepartmentStatisticsSm[]> {
+  getDepartmentStatistics(interval: IntervalEnum): Observable<DepartmentStatisticsSm[]> {
+    const url = `/assets/perDepartment${interval}Data.json`;
     return this.httpClient
-      .get('/assets/perDepartmentData.json')
+      .get(url)
       .pipe(
         map(
           (data: DepartmentStatisticsResponseDto[]) => data as DepartmentStatisticsSm[]
@@ -61,10 +65,13 @@ export class StatisticsService {
       );
   }
 
-  getTimeBlockSummary(): Observable<TimeBlockSummarySm> {
+  getTimeBlockSummary(interval: IntervalEnum): Observable<TimeBlockSummarySm> {
+    const url = `/assets/timeBlockSummary${interval}Data.json`;
+    this.logger.debug('url', url);
     return this.httpClient
-      .get('/assets/timeBlockSummaryData.json')
+      .get(url)
       .pipe(
+        tap(ret => this.logger.debug('timeBlockSummary data', ret)),
         map(
           (timeBlockSummary: TimeBlockSummaryResponseDto) => timeBlockSummary as TimeBlockSummarySm
         )

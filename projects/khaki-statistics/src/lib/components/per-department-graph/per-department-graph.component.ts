@@ -44,8 +44,6 @@ export class PerDepartmentGraphComponent implements OnInit {
           this.createGraphData();
         }
       );
-
-    this.perDepartmentStatisticsFacade.requestPerDepartmentStatistics();
   }
 
   private createGraphData(): void {

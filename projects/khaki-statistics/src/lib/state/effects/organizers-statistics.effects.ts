@@ -15,7 +15,7 @@ export class OrganizersStatisticsEffects {
     () => this.actions$.pipe(
       ofType(loadOrganizersStatistics),
       switchMap(
-        () => this.statisticsService.getOrganizersStatistics()
+        (action) => this.statisticsService.getOrganizersStatistics(action.interval)
           .pipe(
             map(organizersStatistics => loadOrganizersStatisticsSuccess(organizersStatistics)),
             catchError(

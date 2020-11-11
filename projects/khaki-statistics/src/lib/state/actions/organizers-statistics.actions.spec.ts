@@ -1,7 +1,9 @@
 import * as fromOrganizersStatistics from './organizers-statistics.actions';
+import {IntervalEnum} from '../../services/models/interval.enum';
 
 describe('loadOrganizersStatistics', () => {
   it('should return an action', () => {
-    expect(fromOrganizersStatistics.loadOrganizersStatistics().type).toBe('[OrganizersStatistics] Load OrganizersStatistics');
+    expect(fromOrganizersStatistics.loadOrganizersStatistics({interval: IntervalEnum.Week}).type)
+      .toBe('[OrganizersStatistics] Load OrganizersStatistics');
   });
 });

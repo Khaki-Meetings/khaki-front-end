@@ -7,6 +7,7 @@ import {loadTimeBlockSummary} from '../actions/time-block-summaries.actions';
 import {timeBlockSummariesFeatureKey} from '../reducers/time-block-summary.reducer';
 import {ErrorSm} from '../models/errorSm';
 import {timeBlockSummarySelector} from '../statistics.selectors';
+import {IntervalEnum} from '../../services/models/interval.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +17,8 @@ export class TimeBlockSummariesFacadeService {
   constructor(private store: Store<StatisticsFeature>) {
   }
 
-  requestTimeBlockSummary(): void {
-    this.store.dispatch(loadTimeBlockSummary());
+  requestTimeBlockSummary(interval: IntervalEnum): void {
+    this.store.dispatch(loadTimeBlockSummary({interval}));
   }
 
   timeBlockSummary(): Observable<TimeBlockSummarySm> {

@@ -14,7 +14,7 @@ export class PerDepartmentStatisticsEffects {
     () => this.actions$.pipe(
       ofType(loadPerDepartmentStatistics),
       switchMap(
-        () => this.statisticsService.getDepartmentStatistics()
+        (action) => this.statisticsService.getDepartmentStatistics(action.interval)
           .pipe(
             map(departmentStatistics => loadPerDepartmentStatisticsSuccess({departmentStatistics})),
             catchError(
