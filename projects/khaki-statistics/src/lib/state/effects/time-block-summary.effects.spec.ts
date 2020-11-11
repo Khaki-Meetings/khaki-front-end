@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { Observable } from 'rxjs';
 
-import { TimeBlockSummaryEffects } from './time-block-summary-effects.service';
+import { TimeBlockSummaryEffects } from './time-block-summary.effects';
 
 describe('TimeBlockSummariesEffects', () => {
   let actions$: Observable<any>;

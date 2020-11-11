@@ -1,0 +1,46 @@
+
+{
+  "organizersStatistics": [
+    {
+      "organizer": {
+        "name": "bob"
+      },
+      "totalCost": 2800,
+      "totalHours": 100,
+      "totalMeetings": 405
+    },
+    {
+      "organizer": {
+        "name": "fred"
+      },
+      "totalCost": 5500,
+      "totalHours": 40,
+      "totalMeetings": 405
+    },
+    {
+      "organizer": {
+        "name": "steve"
+      },
+      "totalCost": 2388,
+      "totalHours": 40,
+      "totalMeetings": 405
+    },
+    {
+      "organizer": {
+        "name": "ted"
+      },
+      "totalCost": 2339,
+      "totalHours": 40,
+      "totalMeetings": 405
+    },
+    {
+      "organizer": {
+        "name": "frank"
+      },
+      "totalCost": 1239,
+      "totalHours": 40,
+      "totalMeetings": 405
+    }
+  ],
+  "page": 1
+}

@@ -6,6 +6,7 @@ import {StatisticsFeature} from '../models/statistics-feature';
 import {Store} from '@ngrx/store';
 import {loadOrganizersStatistics} from '../actions/organizers-statistics.actions';
 import {organizersStatisticsSelector} from '../statistics.selectors';
+import {IntervalEnum} from '../../services/models/interval.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +16,8 @@ export class OrganizersStatisticsFacadeService {
   constructor(private store: Store<StatisticsFeature>) {
   }
 
-  requestOrganizersStatistics(): void {
-    this.store.dispatch(loadOrganizersStatistics());
+  requestOrganizersStatistics(interval: IntervalEnum): void {
+    this.store.dispatch(loadOrganizersStatistics({interval}));
   }
 
   organizersStatistics(): Observable<OrganizersStatisticsSm> {

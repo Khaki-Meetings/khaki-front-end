@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {OrganizersStatisticsSm} from '../../state/models/organizers-statistics-sm';
 import {OrganizersStatisticsFacadeService} from '../../state/facades/organizers-statistics-facade.service';
 import {HistorianService, Logging} from '@natr/historian';
-import {tap} from 'rxjs/operators';
 
 @Logging
 @Component({
@@ -26,6 +25,5 @@ export class OrganizersTableComponent implements OnInit {
         this.logger.debug('onInit', organizersStatistics);
         this.organizersStatistics = organizersStatistics;
       });
-    this.organizersStatisticsService.requestOrganizersStatistics();
   }
 }

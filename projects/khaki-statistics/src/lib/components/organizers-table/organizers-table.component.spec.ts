@@ -59,12 +59,6 @@ describe('OrganizersTableComponent', () => {
     }
   );
 
-  it(
-    'should call requestTrailingStatistics once',
-    () => {
-      expect(mockOrganizersStatisticsService.requestOrganizersStatistics).toHaveBeenCalledTimes(1);
-    }
-  );
 
   it(
     'should set twelveMonthTrailingStatistics to data from service observable',

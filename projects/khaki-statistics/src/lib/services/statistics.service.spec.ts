@@ -39,7 +39,7 @@ describe('StatisticsService', () => {
           }
         );
 
-      const req = httpMock.expectOne('/assets/organizersTableData.json');
+      const req = httpMock.expectOne('/assets/organizersTableWeekData.json');
       expect(req.request.method).toEqual('GET');
       req.flush(organizersStatisticsDto);
 

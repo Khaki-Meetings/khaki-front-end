@@ -57,13 +57,6 @@ describe('PerDepartmentGraphComponent', () => {
   );
 
   it(
-    'should call \'requestPerDepartmentStatistics\' once',
-    () => {
-      expect(mockPerDepartmentStatisticsService.requestPerDepartmentStatistics).toHaveBeenCalledTimes(1);
-    }
-  );
-
-  it(
     'should set perDepartmentStatistics to data from service observable',
     fakeAsync(
       () => {

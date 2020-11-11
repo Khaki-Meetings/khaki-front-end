@@ -16,7 +16,7 @@ export class TimeBlockSummaryEffects {
     () => this.actions$.pipe(
       ofType(loadTimeBlockSummary),
       switchMap(
-        () => this.statisticsService.getTimeBlockSummary()
+        (action) => this.statisticsService.getTimeBlockSummary(action.interval)
           .pipe(
             map(timeBlockSummary => loadTimeBlockSummarySuccess(timeBlockSummary)),
             catchError(

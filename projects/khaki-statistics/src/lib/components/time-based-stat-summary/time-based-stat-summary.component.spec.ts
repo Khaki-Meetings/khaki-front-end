@@ -44,13 +44,6 @@ describe('TimeBasedStatSummaryComponent', () => {
   });
 
   it(
-    'should call \'requestTimeBlockSummaries\' once',
-    () => {
-      expect(mockTimeBlockSummariesService.requestTimeBlockSummary).toHaveBeenCalledTimes(1);
-    }
-  );
-
-  it(
     'should set timeBlockSummaries to data from service observable',
     fakeAsync(
       () => {

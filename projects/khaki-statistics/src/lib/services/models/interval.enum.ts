@@ -1,6 +1,6 @@
 export enum IntervalEnum {
-  Day,
-  Week,
-  Month,
-  Year
+  Day = 'Day',
+  Week = 'Week',
+  Month = 'Month',
+  Year = 'Year'
 }
