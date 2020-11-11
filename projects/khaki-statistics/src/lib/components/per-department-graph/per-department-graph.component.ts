@@ -24,11 +24,6 @@ export class PerDepartmentGraphComponent implements OnInit {
     domain: ['#3991CF', '#D6EDFE', '#70CDB8', '#98E3D1', '#ACF8E7', '#D7FFF5', '#80C1EF']
   };
 
-  // pie
-  showLabels = true;
-  explodeSlices = false;
-  doughnut = false;
-
   graphData: GraphData[] = [];
 
   constructor(private perDepartmentStatisticsFacade: PerDepartmentStatisticsFacadeService) {
