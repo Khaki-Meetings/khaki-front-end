@@ -9,6 +9,7 @@ import {ProfileNotificationsComponent} from './components/profile-notifications/
 import {ProfileLogoutComponent} from './components/profile-logout/profile-logout.component';
 import {ProfileHelpComponent} from './components/profile-help/profile-help.component';
 import {ProfileNameComponent} from './components/profile-name/profile-name.component';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import {ProfileNameComponent} from './components/profile-name/profile-name.compo
     ProfileNameComponent
   ],
   imports: [
-    KhakiProfileRoutingModule
+    KhakiProfileRoutingModule,
+    MatIconModule
   ],
   exports: [KhakiProfileComponent]
 })
