@@ -1,0 +1,19 @@
+.header-bg-container {
+    background: linear-gradient(90deg, rgba(233,246,255,1) 0%, rgba(56,169,232,1) 255%);
+    padding: 10px;
+    .header-bg {
+        width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+        line-height: 1em;
+        font-size: 3em;
+        display: flex;
+        align-items: center;
+        gap: 0.5em;
+        mat-icon {
+            font-size: 2em;
+            width: 1em;
+            height: 1em;
+        }
+    }
+}

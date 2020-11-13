@@ -1,0 +1,23 @@
+div {
+    font-size: 2em;
+    line-height: 1em;
+    display: flex;
+    gap: 0.5em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    align-items: center;
+    width: 100%;
+    span.grow {
+        flex-grow: 1;
+        margin-left: 1em;
+    }
+    a {
+        float: right;
+    }
+}
+.text-align-right {
+    text-align: right;
+}
+.gray {
+    color: gray;
+}

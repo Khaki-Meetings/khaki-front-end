@@ -1,0 +1,10 @@
+.main-container {
+    display: flex;
+    padding: 30px;
+    div {
+        width: 50%;
+    }
+    div.menu {
+        min-width: 485px;
+    }
+}

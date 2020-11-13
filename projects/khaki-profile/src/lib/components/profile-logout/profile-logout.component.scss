@@ -1,0 +1,22 @@
+.bold {
+    font-weight: bold;
+}
+
+div {
+    font-size: 2em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+    transform: translateY(-50%);
+    top: 50%;
+    position: relative;
+    button {
+        outline: none;
+        border: none;
+        color: white;
+        padding: 10px;
+        min-width: 100px;
+        background: rgba(51, 153, 221);        
+    }
+}
