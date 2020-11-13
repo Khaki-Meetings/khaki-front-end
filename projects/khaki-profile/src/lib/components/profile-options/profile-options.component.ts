@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'lib-profile-options',
@@ -7,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileOptionsComponent implements OnInit {
 
-  constructor() { }
+  menunow = "";
+
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  onMenu(e, menuname): void {
+    if(this.menunow == menuname) {
+      this.menunow = "";
+      this.router.navigateByUrl("profile");
+      e.preventDefault();
+    } else {
+      this.menunow = menuname;
+    }
   }
 
 }

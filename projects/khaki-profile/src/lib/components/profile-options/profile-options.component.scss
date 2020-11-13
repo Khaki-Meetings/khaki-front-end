@@ -3,8 +3,8 @@ div {
     line-height: 1em;
     display: flex;
     gap: 0.5em;
-    margin-top: 1em;
-    margin-bottom: 1em;
+    margin-top: 2.5em;
+    margin-bottom: 2.5em;
     align-items: center;
     width: 100%;
     span.grow {
@@ -20,4 +20,20 @@ div {
 }
 .gray {
     color: gray;
+}
+span.selected {
+    color: rgba(51, 153, 221);
+}
+
+mat-icon.selected {
+    transform: rotate(180deg);
+}
+mat-icon.selected::before {
+    content: '';
+    width: 100%;
+    height: 100%;
+    background: lightgray;
+    border-radius: 50%;
+    position: absolute;
+    z-index: -1;
 }

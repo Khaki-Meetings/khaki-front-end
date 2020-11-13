@@ -1,27 +1,25 @@
 <div>
-  <span>Name</span>
+  <span [ngClass]="{'selected': menunow == 'name'}">Name</span>
   <span class="grow text-align-right gray">John Johnson</span>
-  <a routerLink="name">
-  <mat-icon>keyboard_arrow_right</mat-icon>
-  </a>
+  <a routerLink="name" (click)="onMenu($event, 'name')"><mat-icon [ngClass]="{'selected': menunow == 'name'}">keyboard_arrow_right</mat-icon></a>
 </div>
 <div>
-  <span>Email</span>
+  <span [ngClass]="{'selected': menunow == 'email'}">Email</span>
   <span class="grow text-align-right gray">JJ@coolthingsco.com</span>
-  <a routerLink="email"><mat-icon>keyboard_arrow_right</mat-icon></a>
+  <a routerLink="email" (click)="onMenu($event, 'email')"><mat-icon [ngClass]="{'selected': menunow == 'email'}">keyboard_arrow_right</mat-icon></a>
 </div>
 <div>
   <mat-icon>notifications</mat-icon>
-  <span class="grow">Notifications</span>
-  <a routerLink="notifications"><mat-icon>keyboard_arrow_right</mat-icon></a>
+  <span class="grow" [ngClass]="{'selected': menunow == 'notifications'}">Notifications</span>
+  <a routerLink="notifications" (click)="onMenu($event, 'notifications')"><mat-icon [ngClass]="{'selected': menunow == 'notifications'}">keyboard_arrow_right</mat-icon></a>
 </div>
 <div>
   <mat-icon>help_outline</mat-icon>
-  <span class="grow">Help</span>
-  <a routerLink="help"><mat-icon>keyboard_arrow_right</mat-icon></a>
+  <span class="grow" [ngClass]="{'selected': menunow == 'help'}">Help</span>
+  <a routerLink="help" (click)="onMenu($event, 'help')"><mat-icon [ngClass]="{'selected': menunow == 'help'}">keyboard_arrow_right</mat-icon></a>
 </div>
 <div>
   <mat-icon>supervisor_account</mat-icon>
-  <span class="grow">Logout</span>
-  <a routerLink="logout"><mat-icon>keyboard_arrow_right</mat-icon></a>
+  <span class="grow" [ngClass]="{'selected': menunow == 'logout'}">Logout</span>
+  <a routerLink="logout" (click)="onMenu($event, 'logout')"><mat-icon [ngClass]="{'selected': menunow == 'logout'}">keyboard_arrow_right</mat-icon></a>
 </div>
