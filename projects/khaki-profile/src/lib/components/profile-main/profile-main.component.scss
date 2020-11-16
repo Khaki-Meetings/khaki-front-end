@@ -1,10 +1,41 @@
-.main-container {
-    display: flex;
-    padding: 30px;
-    div {
-        width: 50%;
+// Tablets and small desktops
+$screen-lg-min: 1105px;
+
+ // Large devices
+ @mixin lg {
+    @media (min-width: #{$screen-lg-min}) {
+        @content;
     }
-    div.menu {
-        min-width: 485px;
+ } 
+
+.main-container {
+
+    @include lg {
+        display: flex;
+    }
+    
+    padding: 30px;
+
+    div {        
+        width: 100%;
+
+        @include lg {
+            width: 50%;
+        }
+    }
+
+    ::ng-deep div.hide {
+        display: none;
+    }
+    @include lg {
+        div.content {
+            ::ng-deep div.center {        
+                transform: translateY(-50%);
+                top: 50%;
+            }
+        }
+        ::ng-deep div.hide {
+            display: flex;
+        }
     }
 }
