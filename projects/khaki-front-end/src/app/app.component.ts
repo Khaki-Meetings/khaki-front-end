@@ -7,4 +7,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'khaki-front-end';
+  show = false;
+  toggleDrawerShow(): void {
+    this.show = !this.show;
+  }
+  onNavigateBtn(): void {
+    this.show = false;
+  }
 }

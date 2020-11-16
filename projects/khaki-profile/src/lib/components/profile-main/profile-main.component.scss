@@ -1,12 +1,10 @@
-// Tablets and small desktops
 $screen-lg-min: 1105px;
 
- // Large devices
- @mixin lg {
+@mixin lg {
     @media (min-width: #{$screen-lg-min}) {
         @content;
     }
- } 
+}
 
 .main-container {
 
