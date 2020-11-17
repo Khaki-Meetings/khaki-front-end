@@ -40,12 +40,13 @@ html, body { height: 100%;
 
 body { margin: 0; font-family: Avenir, "Helvetica Neue", sans-serif; }
 
-
-.mat-drawer {
-  min-width: 200px;
-}
-
 a.active-link {
   background: #4AABE2;
   border-radius: 6px;
+}
+
+@media screen and (min-width: 401px) {
+  .mat-drawer {
+    min-width: 200px;
+  }
 }

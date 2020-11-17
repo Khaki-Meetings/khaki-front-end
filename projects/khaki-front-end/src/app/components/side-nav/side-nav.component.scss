@@ -1,5 +1,5 @@
 .side-nav-background {
-  background: #1A202C;
+  background-color: #1A202C;
   height: 100%;
   color: #F7FAFC;
 }
@@ -10,12 +10,20 @@
   color: gray;
 }
 
-.menu-items a .label {
-  line-height: 30px;
-  text-align: center;
-  margin-left: 10px;
-  display: inline-block;
-  color: #F7FAFC;
+@media screen and (min-width: 401px) {
+  .menu-items a .label {
+    line-height: 30px;
+    text-align: center;
+    margin-left: 10px;
+    display: inline-block;
+    color: #F7FAFC;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .menu-items a .label {
+    display: none;
+  }
 }
 
 .menu-items a {
@@ -37,10 +45,18 @@
   width: auto;
 }
 
-.logo-container .label {
-  line-height: 40px;
-  text-align: center;
-  margin-left: 10px;
+@media screen and (min-width: 401px) {
+  .logo-container .label {
+    line-height: 40px;
+    text-align: center;
+    margin-left: 10px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .logo-container .label {
+    display: none;
+  }
 }
 
 .spacer {
