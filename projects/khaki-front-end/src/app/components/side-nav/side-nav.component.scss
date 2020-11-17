@@ -1,41 +1,62 @@
 .side-nav-background {
-  background-image: linear-gradient(180deg, #D6EEFF, #3C9ADB);
+  background: #1A202C;
   height: 100%;
+  color: #F7FAFC;
 }
 
 .menu-items {
   display: flex;
   flex-direction: column;
-  align-items: center;
   color: gray;
+}
+
+.menu-items a .label {
+  line-height: 30px;
+  text-align: center;
+  margin-left: 10px;
+  display: inline-block;
+  color: #F7FAFC;
+}
+
+.menu-items a {
+  display: flex;
+  text-decoration: none;
+  color: #F7FAFC;
+  padding: 8px 10px 8px 10px;
 }
 
 .logo-container {
   display: flex;
-  justify-content: center;
+  padding: 26px;
 }
 
 .logo {
-  max-height: 100px;
-  max-width: 100px;
+  max-height: 40px;
+  max-width: 40px;
   height: auto;
   width: auto;
 }
 
+.logo-container .label {
+  line-height: 40px;
+  text-align: center;
+  margin-left: 10px;
+}
+
 .spacer {
-  padding: 50px;
+  padding: 5px;
 }
 
 .profile-icon {
-  font-size: 80px;
-  padding-right: 55px;
+  font-size: 30px;
+  padding-right: 7px;
 }
 
 .non-profile-icons {
-  font-size: 40px;
-  padding-right: 15px;
+  font-size: 30px;
+  padding-right: 7px;
 }
 
 .icon-spacing {
-  padding: 15px;
+  padding: 0px 15px 0px 15px;
 }
