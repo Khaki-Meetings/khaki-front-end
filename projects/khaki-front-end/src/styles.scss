@@ -40,11 +40,7 @@ html, body { height: 100%;
 
 body { margin: 0; font-family: Avenir, "Helvetica Neue", sans-serif; }
 
-a.active-link {
-  background: #4AABE2;
-  border-radius: 6px;
-}
-
+// Set the minimum width for the nav bar
 @media screen and (min-width: 401px) {
   .mat-drawer {
     min-width: 200px;

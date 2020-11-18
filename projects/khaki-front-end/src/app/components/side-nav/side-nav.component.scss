@@ -4,11 +4,45 @@
   color: #F7FAFC;
 }
 
+// Logo styling
+
+.logo-container {
+  display: flex;
+  padding: 26px;
+}
+
+.logo {
+  max-height: 40px;
+  max-width: 40px;
+  height: auto;
+  width: auto;
+}
+
+// Display logo label for screens > 400px
+
+@media screen and (min-width: 401px) {
+  .logo-container .label {
+    line-height: 40px;
+    text-align: center;
+    margin-left: 10px;
+  }
+}
+
+// Hide logo label for screens <= 400px
+
+@media screen and (max-width: 400px) {
+  .logo-container .label {
+    display: none;
+  }
+}
+
 .menu-items {
   display: flex;
   flex-direction: column;
   color: gray;
 }
+
+// Display labels for screens > 400px
 
 @media screen and (min-width: 401px) {
   .menu-items a .label {
@@ -19,6 +53,8 @@
     color: #F7FAFC;
   }
 }
+
+// Hide labels for screens <= 400px
 
 @media screen and (max-width: 400px) {
   .menu-items a .label {
@@ -33,30 +69,9 @@
   padding: 8px 10px 8px 10px;
 }
 
-.logo-container {
-  display: flex;
-  padding: 26px;
-}
-
-.logo {
-  max-height: 40px;
-  max-width: 40px;
-  height: auto;
-  width: auto;
-}
-
-@media screen and (min-width: 401px) {
-  .logo-container .label {
-    line-height: 40px;
-    text-align: center;
-    margin-left: 10px;
-  }
-}
-
-@media screen and (max-width: 400px) {
-  .logo-container .label {
-    display: none;
-  }
+.menu-items a.active-link {
+  background: #4AABE2;
+  border-radius: 6px;
 }
 
 .spacer {
