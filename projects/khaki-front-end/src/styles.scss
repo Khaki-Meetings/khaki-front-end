@@ -46,3 +46,40 @@ body { margin: 0; font-family: Avenir, "Helvetica Neue", sans-serif; }
     min-width: 200px;
   }
 }
+
+// Time Interval wrapper
+
+.lib-time-interval-form-wrapper {
+  width: 100%;
+}
+
+// Time Interval dropdown
+
+.lib-time-interval-form-wrapper h3 {
+  width: 75px;
+  float: right;
+  padding-right: 10px;
+  margin-right: 10px;
+  font-weight: normal;
+}
+
+.lib-time-interval-form-wrapper .mat-select {
+    background-color: white;
+    border: 1px solid #dbdee2;
+    border-radius: 3px;
+    padding-left: 5px;
+}
+
+.mat-option {
+  line-height: 36px !important;
+  height: 36px !important;
+}
+
+// Page Caption
+
+.lib-time-interval-form-wrapper .title {
+  font-weight: bold;
+  font-size: larger;
+  line-height: 28px;
+  margin-left: 10px;
+}
