@@ -1,41 +1,93 @@
 .side-nav-background {
-  background-image: linear-gradient(180deg, #D6EEFF, #3C9ADB);
+  background-color: #1A202C;
   height: 100%;
+  color: #F7FAFC;
+}
+
+// Logo styling
+
+.logo-container {
+  display: flex;
+  padding: 26px;
+}
+
+.logo {
+  max-height: 40px;
+  max-width: 40px;
+  height: auto;
+  width: auto;
+}
+
+// Display logo label for screens > 400px
+
+@media screen and (min-width: 401px) {
+  .logo-container .label {
+    line-height: 40px;
+    text-align: center;
+    margin-left: 10px;
+  }
+}
+
+// Hide logo label for screens <= 400px
+
+@media screen and (max-width: 400px) {
+  .logo-container .label {
+    display: none;
+  }
 }
 
 .menu-items {
   display: flex;
   flex-direction: column;
-  align-items: center;
   color: gray;
 }
 
-.logo-container {
-  display: flex;
-  justify-content: center;
+// Display labels for screens > 400px
+
+@media screen and (min-width: 401px) {
+  .menu-items a .label {
+    line-height: 30px;
+    text-align: center;
+    margin-left: 10px;
+    display: inline-block;
+    color: #F7FAFC;
+  }
 }
 
-.logo {
-  max-height: 100px;
-  max-width: 100px;
-  height: auto;
-  width: auto;
+// Hide labels for screens <= 400px
+
+@media screen and (max-width: 400px) {
+  .menu-items a .label {
+    display: none;
+  }
+}
+
+.menu-items a {
+  display: flex;
+  text-decoration: none;
+  color: #F7FAFC;
+  padding: 8px 10px 8px 10px;
+}
+
+.menu-items a.active-link {
+  background: #4AABE2;
+  border-radius: 6px;
 }
 
 .spacer {
-  padding: 50px;
+  padding: 5px;
 }
 
 .profile-icon {
-  font-size: 80px;
-  padding-right: 55px;
+  font-size: 30px;
+  padding-right: 7px;
 }
 
 .non-profile-icons {
-  font-size: 40px;
-  padding-right: 15px;
+  font-size: 30px;
+  padding-right: 7px;
 }
 
 .icon-spacing {
-  padding: 15px;
+  padding: 0px 15px 0px 15px;
 }

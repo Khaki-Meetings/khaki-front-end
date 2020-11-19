@@ -3,7 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'home',
     loadChildren: () => import('khaki-statistics').then(m => m.KhakiStatisticsModule)
   },
   {
@@ -17,7 +17,12 @@ const routes: Routes = [
   {
     path: 'info',
     loadChildren: () => import('khaki-info').then(m => m.KhakiInfoModule)
-  }
+  },
+  {
+   path: '',
+   redirectTo: 'home',
+   pathMatch: 'full'
+ }
 ];
 
 @NgModule({
