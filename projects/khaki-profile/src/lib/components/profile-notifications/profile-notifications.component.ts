@@ -9,7 +9,16 @@ export class ProfileNotificationsComponent implements OnInit {
 
   constructor() { }
 
+  checkedon = true;
   ngOnInit(): void {
+  }
+
+  checkon(): void {
+    this.checkedon = true;
+  }
+
+  checkoff(): void {
+    this.checkedon = false;
   }
 
 }

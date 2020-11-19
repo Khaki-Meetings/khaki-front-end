@@ -1,0 +1,83 @@
+$screen-lg-min: 1105px;
+
+@mixin lg {
+    @media (min-width: #{$screen-lg-min}) {
+        @content;
+    }
+}
+
+.fixed-header {
+    background: linear-gradient(0deg, #D6EEFF, #3C9ADB);
+    font-size: 2.5em;
+    padding: 0.5em;
+    display: flex;
+    align-items: center;
+
+    mat-icon {
+        font-size: 1.5em;
+    }
+
+    img.logo {
+        max-height: 60px;
+        max-width: 60px;
+        height: auto;
+        width: auto; 
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    @include lg {
+        display: none;
+    }
+}
+
+mat-drawer {
+    display: none;
+    @include lg {
+        display: block;
+    }
+}
+
+.menucontainer {
+    background: #d6eeff;
+    margin: 0.5em;
+    padding: 0.5em 0 0.5em 0;
+    width: fit-content;
+    position: absolute;
+    z-index: 2;
+    top: 3em;
+    left: 0;
+    td {
+        padding: 0.5em;
+        a {
+            text-decoration: none;
+            font-size: 1em;
+            color: #404040;
+
+            mat-icon {
+                font-size: 1em;
+                width: 1em;
+                height: 1em;
+                margin-right: 0.3em;
+            }
+            
+            .profile-icon {
+                width: 1em;
+                height: 1em;
+                font-size: 2em;
+                border-radius: 50%;
+            }
+
+            span {
+                font-size: 0.5em;
+            }
+        }
+    }
+    td:nth-child(1) {
+        text-align: center;
+    }
+    .stats-icon {
+        background: white;
+        border-radius: 50%;
+    }
+}
