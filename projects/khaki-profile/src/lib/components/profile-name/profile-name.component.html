@@ -1,2 +1,15 @@
-
-<div></div>
+<div class="center">
+    <span>Name</span>
+    <span class="bold">John Johnson</span>
+    <div *ngIf="editmode" class="edit">
+        <span>First name</span>
+        <input type="text" name="firstname" placeholder="John" />
+    </div>
+    <div *ngIf="editmode" class="edit">
+        <span>Last name</span>
+        <input type="text" name="lastname" placeholder="Johnson" />
+    </div>
+    <button *ngIf="!editmode" (click)="onChange()">Change</button>
+    <button *ngIf="editmode" class="save" (click)="onSave()">Save</button>
+    <button *ngIf="editmode" (click)="onCancel()">Cancel</button>
+</div>

@@ -1,25 +1,25 @@
-<p>
-  <a routerLink=".">profile-options works!</a>
-</p>
-<div>
-  Name
-  <a routerLink="name">
-  <mat-icon>keyboard_arrow_right</mat-icon>
-  </a>
+<div [ngClass]="{'hide': menunow != 'name' && menunow != ''}">
+  <span [ngClass]="{'selected': menunow == 'name'}">Name</span>
+  <span class="grow text-align-right gray">John Johnson</span>
+  <a routerLink="name" (click)="onMenu($event, 'name')"><mat-icon [ngClass]="{'arrow': true, 'selected': menunow == 'name'}">keyboard_arrow_right</mat-icon></a>
 </div>
-<div>
-  Email
-  <a routerLink="email"><mat-icon>keyboard_arrow_right</mat-icon></a>
+<div [ngClass]="{'hide': menunow != 'email' && menunow != ''}">
+  <span [ngClass]="{'selected': menunow == 'email'}">Email</span>
+  <span class="grow text-align-right gray">JJ@coolthingsco.com</span>
+  <a routerLink="email" (click)="onMenu($event, 'email')"><mat-icon [ngClass]="{'arrow': true, 'selected': menunow == 'email'}">keyboard_arrow_right</mat-icon></a>
 </div>
-<div>
-  Notifications
-  <a routerLink="notifications"><mat-icon>keyboard_arrow_right</mat-icon></a>
+<div [ngClass]="{'hide': menunow != 'notifications' && menunow != ''}">
+  <mat-icon>notifications</mat-icon>
+  <span class="grow" [ngClass]="{'selected': menunow == 'notifications'}">Notifications</span>
+  <a routerLink="notifications" (click)="onMenu($event, 'notifications')"><mat-icon [ngClass]="{'arrow': true, 'selected': menunow == 'notifications'}">keyboard_arrow_right</mat-icon></a>
 </div>
-<div>
-  Help
-  <a routerLink="help"><mat-icon>keyboard_arrow_right</mat-icon></a>
+<div [ngClass]="{'hide': menunow != 'help' && menunow != ''}">
+  <mat-icon>help_outline</mat-icon>
+  <span class="grow" [ngClass]="{'selected': menunow == 'help'}">Help</span>
+  <a routerLink="help" (click)="onMenu($event, 'help')"><mat-icon [ngClass]="{'arrow': true, 'selected': menunow == 'help'}">keyboard_arrow_right</mat-icon></a>
 </div>
-<div>
-  Logout
-  <a routerLink="logout"><mat-icon>keyboard_arrow_right</mat-icon></a>
+<div [ngClass]="{'hide': menunow != 'logout' && menunow != ''}">
+  <mat-icon>supervisor_account</mat-icon>
+  <span class="grow" [ngClass]="{'selected': menunow == 'logout'}">Logout</span>
+  <a routerLink="logout" (click)="onMenu($event, 'logout')"><mat-icon [ngClass]="{'arrow': true, 'selected': menunow == 'logout'}">keyboard_arrow_right</mat-icon></a>
 </div>

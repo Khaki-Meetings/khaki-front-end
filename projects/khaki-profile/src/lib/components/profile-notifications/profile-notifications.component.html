@@ -1,1 +1,7 @@
-<p>profile-notifications works!</p>
+<div class="center">
+    <span>Notifications</span>
+    <span class="switcher">
+        <span class="bold clickable switcher-item" (click)="checkon()">On <mat-icon [ngClass]="{'checkedon': checkedon}">check_circle_outline</mat-icon></span>
+        <span class="bold clickable switcher-item" (click)="checkoff()">Off <mat-icon [ngClass]="{'checkedon': !checkedon}">check_circle_outline</mat-icon></span>
+    </span>
+</div>

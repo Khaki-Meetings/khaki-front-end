@@ -1,5 +1,63 @@
+<div class="fixed-header">
+  <a href="javascript:" (click)="toggleDrawerShow()">
+    <mat-icon>menu</mat-icon>
+  </a>
+  <img class="logo" src="/assets/logo.png" />
+  <table class="menucontainer" *ngIf="show">
+    <tr class="icon-spacing">
+      <td>
+        <a (click)="onNavigateBtn()" routerLink="profile">
+          <img src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200" class="profile-icon" />
+        </a>
+      </td>
+      <td>
+        <a (click)="onNavigateBtn()" routerLink="profile">
+          <span>Profile</span>
+        </a>
+      </td>
+    </tr>
+    <tr class="icon-spacing">
+      <td>
+        <a (click)="onNavigateBtn()" routerLink="">
+          <mat-icon class="non-profile-icons stats-icon">bar_chart</mat-icon>
+        </a>
+      </td>
+      <td>
+        <a (click)="onNavigateBtn()" routerLink="">
+          <span>Stats</span>        
+        </a>
+      </td>
+    </tr>
+    <tr class="icon-spacing">
+      <td>
+        <a (click)="onNavigateBtn()" routerLink="settings">
+          <mat-icon class="non-profile-icons">settings</mat-icon>
+        </a>
+      </td>
+      <td>
+        <a (click)="onNavigateBtn()" routerLink="settings">
+          <span>Settings</span>        
+        </a>
+      </td>
+    </tr>
+    <tr class="icon-spacing">
+      <td>
+        <a (click)="onNavigateBtn()" routerLink="info">
+          <mat-icon class="non-profile-icons">info</mat-icon>
+        </a>
+      </td>
+      <td>
+        <a (click)="onNavigateBtn()" routerLink="info">
+          <span>About</span>        
+        </a>
+      </td>
+    </tr>
+  </table>
+</div>
+
+
 <mat-drawer-container class="example-container">
-  <mat-drawer mode="side" opened style="min-height: 100vh">
+  <mat-drawer #drawer mode="side" opened style="min-height: 100vh">
     <app-side-nav></app-side-nav>
   </mat-drawer>
   <mat-drawer-content style="min-height: 100vh">
