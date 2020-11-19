@@ -9,7 +9,19 @@ export class ProfileNameComponent implements OnInit {
 
   constructor() { }
 
+  editmode = false;
   ngOnInit(): void {
   }
 
+  onChange(): void {
+    this.editmode = true;
+  }
+
+  onSave(): void {
+    this.editmode = false;
+  }
+
+  onCancel(): void {
+    this.editmode = false;
+  }
 }
