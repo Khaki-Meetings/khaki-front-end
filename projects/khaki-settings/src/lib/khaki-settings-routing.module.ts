@@ -4,6 +4,7 @@ import {KhakiSettingsComponent} from './khaki-settings.component';
 import {SettingsNameComponent} from './components/settings-name/settings-name.component';
 import {SettingsEmployeesComponent} from './components/settings-employees/settings-employees.component';
 import {SettingsEmployeeComponent} from './components/settings-employee/settings-employee.component';
+import {SettingsDepartmentComponent} from './components/settings-department/settings-department.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
       {
         path: 'employee',
         component: SettingsEmployeeComponent
+      },
+      {
+        path: 'department',
+        component: SettingsDepartmentComponent
       },
     ]
   }
