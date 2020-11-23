@@ -1,0 +1,38 @@
+.bold {
+    font-weight: bold;
+}
+
+div {
+    font-size: 2em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+    position: relative;
+    button {
+        outline: none;
+        border: none;
+        color: white;
+        padding: 10px;
+        min-width: 100px;
+        background: rgba(51, 153, 221);        
+    }
+    button.save {
+        background: rgba(204, 238, 255);
+    }
+
+    div.edit {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        font-size: 0.5em;
+
+        input {
+            padding: 5px;
+            background-color: lightgray;
+            border: none;
+
+            outline: none;
+        }
+    }
+}

@@ -1,0 +1,76 @@
+.bold {
+    font-weight: bold;
+}
+
+div.container {
+    font-size: 2em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+    position: relative;
+
+    >div {
+        width: 100%;
+        div {
+            line-height: 1.5em;
+            display: inline-block;
+        }
+        div:nth-child(1) {
+            margin-right: 3em;
+        }
+        select {
+            width: 5em;
+            font-size: 1em;
+            line-height: 1em;
+            border: none;
+            outline: none;
+            background: transparent;
+            color: inherit;
+        }
+    }
+    
+    table {
+        font-size: 1em;
+        td {
+            padding: 0.25em;
+            line-height: 1.2em;
+        
+            img {
+                width: 2em;
+                height: 2em;
+                border-radius: 1em;
+            }
+        }
+
+        tr {
+            cursor: pointer;
+        }
+    }
+    
+    .text-department {
+        color: darkgray;
+    }
+    mat-icon.arrow {
+        display: inline-block;
+        font-size: 2em;
+        width: 1em;
+        height: 1em;
+    }
+    mat-icon.up {
+        transform: rotate(270deg);
+    }
+    mat-icon.down {
+        transform: rotate(90deg);
+    }
+    mat-icon.disable {
+        color: darkgray;
+    }
+
+    div.arrows {
+        width: fit-content;
+        height: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}

@@ -1,0 +1,40 @@
+$screen-lg-min: 1105px;
+
+@mixin lg {
+    @media (min-width: #{$screen-lg-min}) {
+        @content;
+    }
+}
+
+.main-container {
+
+    @include lg {
+        display: flex;
+    }
+    
+    padding: 30px;
+
+    div {        
+        width: 100%;
+
+        @include lg {
+            width: fit-content;
+            margin-right: 1em;
+        }
+    }
+
+    ::ng-deep div.hide {
+        display: none;
+    }
+    @include lg {
+        div.content {
+            ::ng-deep div.center {        
+                transform: translateY(-50%);
+                top: 50%;
+            }
+        }
+        ::ng-deep div.hide {
+            display: flex;
+        }
+    }
+}
