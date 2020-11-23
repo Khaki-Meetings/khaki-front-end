@@ -11,4 +11,8 @@ export class SettingsEmployeeComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  goBack(): void {
+    this.router.navigateByUrl("settings/employees");
+  }
 }

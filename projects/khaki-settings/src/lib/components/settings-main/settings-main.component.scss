@@ -18,7 +18,7 @@ $screen-lg-min: 1105px;
         width: 100%;
 
         @include lg {
-            width: fit-content;
+            width: 100%;
             margin-right: 1em;
         }
     }
@@ -29,8 +29,8 @@ $screen-lg-min: 1105px;
     @include lg {
         div.content {
             ::ng-deep div.center {        
-                transform: translateY(-50%);
-                top: 50%;
+                margin-left: auto;
+                margin-right: auto;
             }
         }
         ::ng-deep div.hide {

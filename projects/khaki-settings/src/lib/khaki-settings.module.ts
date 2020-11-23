@@ -6,6 +6,7 @@ import {SettingsMainComponent} from './components/settings-main/settings-main.co
 import {SettingsOptionsComponent} from './components/settings-options/settings-options.component'
 import {SettingsNameComponent} from './components/settings-name/settings-name.component'
 import {SettingsEmployeesComponent} from './components/settings-employees/settings-employees.component'
+import {SettingsEmployeeComponent} from './components/settings-employee/settings-employee.component'
 import {MatIconModule} from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 
@@ -18,7 +19,8 @@ import { CommonModule } from '@angular/common';
     SettingsMainComponent,
     SettingsOptionsComponent,
     SettingsNameComponent,
-    SettingsEmployeesComponent
+    SettingsEmployeesComponent,
+    SettingsEmployeeComponent
   ],
   imports: [
     KhakiSettingsRoutingModule,
