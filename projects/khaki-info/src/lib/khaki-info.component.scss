@@ -40,9 +40,26 @@ $screen-lg-min: 1105px;
                 font-size: 1.5em;
                 line-height: 1.2em;
             }
-            img {
-                max-width: 100%;
-            }
         }
+    }
+    img.coverimg {
+        max-width: 100%;
+        min-width: 100%;
+        @include lg {
+            min-width: auto;
+        }
+    }
+}
+
+.hidden-lg {
+    @include lg {
+        display: none;
+    }
+}
+
+.show-lg {
+    display: none;
+    @include lg {
+        display: inherit;
     }
 }
