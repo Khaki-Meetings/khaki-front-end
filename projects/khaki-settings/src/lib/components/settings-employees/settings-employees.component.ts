@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Router } from '@angular/router';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+export interface DialogData {
+  data: string;
+}
 
 @Component({
   selector: 'lib-settings-employees',
@@ -73,7 +77,7 @@ export class SettingsEmployeesComponent implements OnInit {
   pos = 0
   maxshow = 6
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, public dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
@@ -86,8 +90,16 @@ export class SettingsEmployeesComponent implements OnInit {
     this.router.navigateByUrl("settings/employee");
   }
 
-  addEmployee() {
+  addEmployee(): void {
+    const dialogRef = this.dialog.open(AddEmployeeDialog, {
+      width: 'fit-content',
+      data: {data: "sample data"}
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      //this.animal = result;
+    });
   }
 
   moveUp() { 
@@ -111,4 +123,37 @@ export class SettingsEmployeesComponent implements OnInit {
   isFirst() {
     return this.pos == 0;
   }
+}
+
+@Component({
+  selector: 'add-employee-dialog',
+  templateUrl: 'add-employee-dialog.html',
+  styleUrls: ['./add-employee-dialog.scss']
+})
+export class AddEmployeeDialog {
+
+  constructor(
+    public dialogRef: MatDialogRef<AddEmployeeDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+
+  onNextClick(): void {
+    this.show_error = true;
+  }
+
+  onUploadClick(): void {
+    this.dialogRef.close();
+  }
+
+  onAdd(): void {
+    this.show_error = false;
+    this.file_selected = true;
+  }
+
+  onRemove(): void {
+    this.file_selected = false;
+  }
+
+  show_error = false;
+  file_selected = false;
+
 }
