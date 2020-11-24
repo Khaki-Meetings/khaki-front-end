@@ -11,7 +11,7 @@
                 <option>AssistantDirector</option>
             </select>
         </div>
-        <div class=""><mat-icon>add_circle_outline</mat-icon> Add list of employees</div>
+        <div class="add_emp" (click)="addEmployee()"><mat-icon>add_circle_outline</mat-icon> Add list of employees</div>
     </div>
     <table>
         <tr *ngFor="let employee of getEmployees()" (click)="editEmployee(employee)">
@@ -21,7 +21,7 @@
         </tr>        
     </table>
     <div class="arrows">
-        <mat-icon class="down arrow">keyboard_arrow_right</mat-icon>
-        <mat-icon class="up disable arrow">keyboard_arrow_right</mat-icon>
+        <mat-icon [ngClass]="{'disable': isLast()}" class="down arrow" (click)="moveDown()">keyboard_arrow_right</mat-icon>
+        <mat-icon [ngClass]="{'disable': isFirst()}" class="up arrow" (click)="moveUp()">keyboard_arrow_right</mat-icon>
     </div>
 </div>

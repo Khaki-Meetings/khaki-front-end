@@ -85,4 +85,30 @@ export class SettingsEmployeesComponent implements OnInit {
   editEmployee(employee) {
     this.router.navigateByUrl("settings/employee");
   }
+
+  addEmployee() {
+
+  }
+
+  moveUp() { 
+    let newpos = this.pos - 1;    
+    if(newpos>=0) {
+      this.pos = newpos;
+    }
+  }
+
+  moveDown() {   
+    let newpos = this.pos + 1;    
+    if(newpos + this.maxshow <= this.employees.length) {
+      this.pos = newpos;
+    }
+  }
+
+  isLast() {    
+    return this.pos + this.maxshow >= this.employees.length;
+  }
+
+  isFirst() {
+    return this.pos == 0;
+  }
 }

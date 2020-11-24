@@ -29,8 +29,8 @@ $screen-lg-min: 1105px;
     @include lg {
         div.content {
             ::ng-deep div.center {        
-                margin-left: auto;
-                margin-right: auto;
+                transform: translateY(-50%);
+                top: 50%;
             }
         }
         ::ng-deep div.hide {

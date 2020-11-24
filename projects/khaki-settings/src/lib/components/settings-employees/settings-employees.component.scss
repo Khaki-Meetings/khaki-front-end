@@ -6,7 +6,6 @@ div.container {
     font-size: 2em;
     display: flex;
     flex-direction: column;
-    align-items: center;
     gap: 1em;
     position: relative;
 
@@ -56,6 +55,7 @@ div.container {
         font-size: 2em;
         width: 1em;
         height: 1em;
+        cursor: pointer;
     }
     mat-icon.up {
         transform: rotate(270deg);
@@ -72,5 +72,9 @@ div.container {
         height: fit-content;
         margin-left: auto;
         margin-right: auto;
+    }
+
+    .add_emp {
+        cursor: pointer;
     }
 }
