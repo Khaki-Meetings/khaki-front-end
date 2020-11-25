@@ -1,0 +1,65 @@
+$screen-lg-min: 1105px;
+
+@mixin lg {
+    @media (min-width: #{$screen-lg-min}) {
+        @content;
+    }
+}
+
+.info-container {
+    padding: 30px;
+    font-size: 1.2em;
+    .logo-container {
+        display: flex;
+        line-height: 1em;
+        align-items: center;
+        font-size: 2em;
+
+        .logo {
+            max-height: 40px;
+            max-width: 40px;
+            height: auto;
+            width: auto;
+            margin-right: 0.3em;
+        }
+    }
+
+    .paragraph-container {
+        display: block;
+        @include lg {
+            display: flex;
+            gap: 1.5em;
+        }
+        .paragraph {  
+            display: inline-block;
+            max-width: 100%;
+            @include lg {
+                max-width: 50%;
+            }
+            .title {
+                font-size: 1.5em;
+                line-height: 1.2em;
+            }
+        }
+    }
+    img.coverimg {
+        max-width: 100%;
+        min-width: 100%;
+        @include lg {
+            min-width: auto;
+        }
+    }
+}
+
+.hidden-lg {
+    @include lg {
+        display: none;
+    }
+}
+
+.show-lg {
+    display: none;
+    @include lg {
+        display: inherit;
+    }
+}
