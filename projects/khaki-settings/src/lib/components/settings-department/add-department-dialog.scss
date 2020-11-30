@@ -1,0 +1,35 @@
+div.container {
+    font-size: 2em;
+    padding: 2em 3em 2em 3em;
+    
+    div.btn-container {
+        margin-top: 2em;
+        margin-left: auto;
+        margin-right: auto;
+        width: fit-content;
+        button {
+            outline: none;
+            border: none;
+            color: white;
+            padding: 10px;
+            min-width: 100px;
+            background: rgba(51, 153, 221);        
+        }
+        button.light {
+            background: rgba(204, 238, 255);
+            color: black;
+        }
+        
+        button.close {
+            margin-left: 3em;
+        }
+    }
+    .btn {
+        cursor: pointer;
+    }
+    div.error {
+        color: red;
+        font-size: 0.7em;
+        line-height: 2em;
+    }
+}

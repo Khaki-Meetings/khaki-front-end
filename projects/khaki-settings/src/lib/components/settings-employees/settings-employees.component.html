@@ -1,0 +1,27 @@
+<div class="center container">
+    <div>
+        <div>Department: 
+            <select>
+                <option>all</option>
+                <option>Development</option>
+                <option>Agent</option>
+                <option>Representative</option>
+                <option>Designer</option>
+                <option>Accountant</option>
+                <option>AssistantDirector</option>
+            </select>
+        </div>
+        <div class="add_emp" (click)="addEmployee()"><mat-icon>add_circle_outline</mat-icon> Add list of employees</div>
+    </div>
+    <table>
+        <tr *ngFor="let employee of getEmployees()" (click)="editEmployee(employee)">
+            <td><img src="{{employee.avatar}}" /></td>
+            <td>{{employee.name}}</td>
+            <td><span>{{employee.subject}}</span>&nbsp;<span class='text-department'>{{employee.department}}</span></td>
+        </tr>        
+    </table>
+    <div class="arrows">
+        <mat-icon [ngClass]="{'disable': isLast()}" class="down arrow" (click)="moveDown()">keyboard_arrow_right</mat-icon>
+        <mat-icon [ngClass]="{'disable': isFirst()}" class="up arrow" (click)="moveUp()">keyboard_arrow_right</mat-icon>
+    </div> 
+</div>

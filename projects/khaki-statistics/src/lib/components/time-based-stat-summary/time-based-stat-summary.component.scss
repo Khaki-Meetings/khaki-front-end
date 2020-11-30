@@ -63,12 +63,39 @@
 //
 //  }
 
-.container{
-height: 165px;
-  background: #D6EEFF;
-  padding: 10px;
-}
 .flex-container{
   display: flex;
   justify-content: space-around;
+  clear: both;
+}
+
+.time-based-stat-summary {
+  border: 1px solid #dbdee2;
+  background-color: white;
+  padding: 10px 10px 25px 10px;
+  border-radius: 8px;
+  flex: 1 1 0px;
+  margin: 0px 10px;
+}
+
+.time-based-stat-summary .value {
+  font-size: x-large;
+  padding-top: 5px;
+}
+
+.time-based-stat-summary .label {
+  font-size: small;
+  white-space: pre;
+}
+
+.container{
+  padding: 10px;
+}
+
+@media screen and (max-width: 950px) {
+  .flex-container { flex-wrap: wrap;  }
+  .time-based-stat-summary {
+    flex-basis: 40%;
+    margin-bottom: 10px;
+  }
 }
