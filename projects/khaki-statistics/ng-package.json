@@ -10,7 +10,8 @@
       "@ngrx/effects": "ngrxEffects",
       "morphism": "morphism",
       "@swimlane/ngx-charts": "swimlaneNgxCharts",
-      "@natr/historian": "natrHistorian"
+      "@natr/historian": "natrHistorian",
+      "d3": "d3"
     }
   }
 }

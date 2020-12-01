@@ -5,6 +5,8 @@ import {PerDepartmentGraphComponent} from './components/per-department-graph/per
 import {OrganizersTableComponent} from './components/organizers-table/organizers-table.component';
 import {TwelveMonthTrailingGraphComponent} from './components/twelve-month-trailing-graph/twelve-month-trailing-graph.component';
 import {TimeBasedStatSummaryComponent} from './components/time-based-stat-summary/time-based-stat-summary.component';
+import {NgxChartsLegendCustomComponent} from './components/ngx-charts-legend-custom/ngx-charts-legend-custom.component';
+import { LegendEntryCustomComponent } from './components/legend-entry-custom/legend-entry-custom.component';
 import {StoreModule} from '@ngrx/store';
 import * as fromKhakiStatistics from './state';
 import {EffectsModule} from '@ngrx/effects';
@@ -34,7 +36,9 @@ import { CurrentTimeIntervalEffects } from './state/effects/current-time-interva
     OrganizersTableComponent,
     TwelveMonthTrailingGraphComponent,
     TimeBasedStatSummaryComponent,
-    TimeIntervalFormComponent
+    TimeIntervalFormComponent,
+    NgxChartsLegendCustomComponent,
+    LegendEntryCustomComponent
   ],
   imports: [
     ReactiveFormsModule,
