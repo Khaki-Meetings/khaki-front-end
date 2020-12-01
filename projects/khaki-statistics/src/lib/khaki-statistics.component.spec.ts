@@ -9,6 +9,7 @@ import {PerDepartmentGraphComponent} from './components/per-department-graph/per
 import {OrganizersTableComponent} from './components/organizers-table/organizers-table.component';
 import {TwelveMonthTrailingGraphComponent} from './components/twelve-month-trailing-graph/twelve-month-trailing-graph.component';
 import {TimeBasedStatSummaryComponent} from './components/time-based-stat-summary/time-based-stat-summary.component';
+import {NgxChartsLegendCustomComponent} from './components/ngx-charts-legend-custom/ngx-charts-legend-custom.component';
 
 describe('KhakiStatisticsComponent', () => {
   let component: KhakiStatisticsComponent;

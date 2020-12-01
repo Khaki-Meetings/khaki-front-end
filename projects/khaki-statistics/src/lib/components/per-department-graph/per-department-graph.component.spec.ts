@@ -1,6 +1,7 @@
 import {ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
 
 import {PerDepartmentGraphComponent} from './per-department-graph.component';
+import {NgxChartsLegendCustomComponent} from '../ngx-charts-legend-custom/ngx-charts-legend-custom.component';
 import {PerDepartmentStatisticsFacadeService} from '../../state/facades/per-department-statistics-facade.service';
 import {BrowserModule, By} from '@angular/platform-browser';
 import {NgxChartsModule, PieChartComponent} from '@swimlane/ngx-charts';
