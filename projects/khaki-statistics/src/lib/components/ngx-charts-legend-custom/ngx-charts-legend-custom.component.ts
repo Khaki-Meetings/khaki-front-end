@@ -4,29 +4,8 @@ import * as d3 from 'd3';
 
 @Component({
   selector: 'ngx-charts-legend-custom',
-  template: `
-      <div [style.width.px]="width">
-      <header class="legend-title" *ngIf="title?.length > 0">
-        <span class="legend-title-text">{{ title }}</span>
-      </header>
-      <div class="legend-wrap">
-        <table class="legend-labels" [class.horizontal-legend]="horizontal" [style.max-height.px]="height - 45">
-          <tr ngx-charts-legend-entry-custom *ngFor="let entry of legendEntries; trackBy: trackBy" class="legend-label"
-              [label]="entry.label"
-              [dataExt]="entry.dataExt"
-              [formattedLabel]="entry.formattedLabel"
-              [color]="entry.color"
-              [isActive]="isActive(entry)"
-              (select)="labelClick.emit($event)"
-              (activate)="activate($event)"
-              (deactivate)="deactivate($event)"
-              (mouseenter)="mouseenter(entry)"
-              (mouseleave)="mouseleave(entry)">
-          </tr>
-        </table>
-      </div>
-    </div>`,
-    styleUrls: ['./ngx-charts-legend-custom.component.css']
+  templateUrl: './ngx-charts-legend-custom.component.html',
+  styleUrls: ['./ngx-charts-legend-custom.component.css']
 })
 
 export class NgxChartsLegendCustomComponent extends LegendComponent {

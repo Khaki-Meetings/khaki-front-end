@@ -3,6 +3,7 @@ import {PerDepartmentStatisticsSm} from '../../state/models/per-department-stati
 import {PerDepartmentStatisticsFacadeService} from '../../state/facades/per-department-statistics-facade.service';
 import {ColorHelper} from '@swimlane/ngx-charts';
 import {NgxChartsLegendCustomComponent} from '../ngx-charts-legend-custom/ngx-charts-legend-custom.component'
+
 interface GraphData {
   name: string;
   value: number;
@@ -13,6 +14,7 @@ interface GraphData {
   templateUrl: './per-department-graph.component.html',
   styleUrls: ['./per-department-graph.component.scss']
 })
+
 export class PerDepartmentGraphComponent {
   perDepartmentStatistics: PerDepartmentStatisticsSm;
 
@@ -23,6 +25,7 @@ export class PerDepartmentGraphComponent {
   gradient: boolean = true;
   showLabels: boolean = false;
   isDoughnut: boolean = true;
+  tooltipDisabled: boolean = true;
 
   colorScheme = {
     domain: ['#3182CE', '#48BB78', '#9F7AEA', '#ED64A6', '#667EEA', '#478aef', '#47ef88', '#b647ef', '#ef47ba', '#e3b755']
