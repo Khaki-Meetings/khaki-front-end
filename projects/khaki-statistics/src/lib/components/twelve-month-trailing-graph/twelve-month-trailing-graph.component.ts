@@ -26,11 +26,10 @@ export class TwelveMonthTrailingGraphComponent implements OnInit {
   showXAxisLabel = true;
   xAxisLabel = 'Month';
   showYAxisLabel = true;
-  yAxisLabel = 'Costs';
+  yAxisLabel = 'Cost';
 
   colorScheme = {
-    domain: ['#CEEDE6', '#ADF8E6', '#BFDDF3', '#D6EEFF']
-
+    domain: ['#3182CE']
   };
 
   constructor(private trailingStatisticsFacade: TrailingStatisticsFacadeService) {
@@ -56,5 +55,15 @@ export class TwelveMonthTrailingGraphComponent implements OnInit {
     );
 
     this.logger.debug('graphData', this.graphData);
+  }
+
+  public formatCurrency(value) {
+    var formatter = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0
+    });
+    return formatter.format(value);
   }
 }

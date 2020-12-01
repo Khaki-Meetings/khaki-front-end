@@ -9,6 +9,11 @@
   [showYAxisLabel]="showYAxisLabel"
   [xAxisLabel]="xAxisLabel"
   [yAxisLabel]="yAxisLabel"
->
+  [yAxisTickFormatting]="formatCurrency">
+  <ng-template #tooltipTemplate let-model="model">
+    <div class="ngx-charts-tooltip-content-container">
+      <div class="modelName">{{model.name}}</div>
+      <div class="modelValue">{{formatCurrency(model.value)}}</div>
+    </div>
+  </ng-template>
 </ngx-charts-bar-vertical>
-
