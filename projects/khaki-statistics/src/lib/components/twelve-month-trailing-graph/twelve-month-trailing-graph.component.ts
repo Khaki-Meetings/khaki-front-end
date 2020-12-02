@@ -26,7 +26,7 @@ export class TwelveMonthTrailingGraphComponent implements OnInit {
   showXAxisLabel = true;
   xAxisLabel = 'Month';
   showYAxisLabel = true;
-  yAxisLabel = 'Cost';
+  yAxisLabel = 'Hours';
 
   colorScheme = {
     domain: ['#3182CE']
@@ -55,15 +55,5 @@ export class TwelveMonthTrailingGraphComponent implements OnInit {
     );
 
     this.logger.debug('graphData', this.graphData);
-  }
-
-  public formatCurrency(value) {
-    var formatter = new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0
-    });
-    return formatter.format(value);
   }
 }
