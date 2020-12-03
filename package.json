@@ -18,7 +18,8 @@
     "build-settings": "ng build khaki-settings",
     "build-info-with-watch": "ng build khaki-info --watch",
     "build-info": "ng build khaki-info",
-    "heroku-postbuild": "ng build khaki-statistics && ng build khaki-profile && ng build khaki-settings && ng build khaki-info && ng build --prod"
+    "build-modules": "ng build khaki-statistics && ng build khaki-profile && ng build khaki-settings && ng build khaki-info",
+    "heroku-postbuild": "yarn run build-modules && ng build --prod"
   },
   "private": true,
   "dependencies": {
@@ -32,6 +33,7 @@
     "@angular/platform-browser": "~10.1.6",
     "@angular/platform-browser-dynamic": "~10.1.6",
     "@angular/router": "~10.1.6",
+    "@auth0/auth0-angular": "^1.2.0",
     "@fortawesome/angular-fontawesome": "0.7.x",
     "@fortawesome/fontawesome-svg-core": "^1.2.32",
     "@fortawesome/free-solid-svg-icons": "^5.15.1",
