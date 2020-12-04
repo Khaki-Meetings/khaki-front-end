@@ -1,27 +1,30 @@
 <div class="padding">
 
-  <div>
+  <div class="khaki-clear-container">
+    <div class="lib-time-interval-form-wrapper">
+      <span class="title">
+        Dashboard
+      </span>
+      <h3>
+        <lib-time-interval-form></lib-time-interval-form>
+      </h3>
+    </div>
+  </div>
+
+  <div class="khaki-clear-container">
     <lib-time-based-stat-summary></lib-time-based-stat-summary>
   </div>
 
-  <div class="space-between white-container">
-
-    <div class="meeting-time-wrapper">
-      <lib-organizers-table></lib-organizers-table>
-    </div>
-    <div>
-      <div class="white-container center">
-        <h3>Meeting time by department</h3>
-      </div>
-
-      <lib-per-department-graph></lib-per-department-graph>
-
-    </div>
+  <div class="khaki-container">
+    <lib-organizers-table></lib-organizers-table>
   </div>
-  <div class="white-container center"><h3>Meeting costs this year</h3>
 
+  <div class="khaki-container">
+    <lib-per-department-graph></lib-per-department-graph>
   </div>
-  <div class="white-container around-twelve center">
+
+  <div class="khaki-container">
     <lib-twelve-month-trailing-graph></lib-twelve-month-trailing-graph>
   </div>
+
 </div>

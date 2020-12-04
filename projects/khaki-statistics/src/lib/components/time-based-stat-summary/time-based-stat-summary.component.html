@@ -1,26 +1,18 @@
-<div class="container">
-  <div class="lib-time-interval-form-wrapper">
-    <span class="title">
-      Dashboard
-    </span>
-    <h3>
-      <lib-time-interval-form></lib-time-interval-form>
-    </h3>
-  </div>
+<div>
   <div class="flex-container">
-    <div class="time-based-stat-summary">
+    <div class="khaki-container time-based-stat-summary">
       <div class="label">Hours in Meetings</div>
       <div class="value">{{timeBlockSummary?.totalTime}}</div>
     </div>
-    <div class="time-based-stat-summary">
+    <div class="khaki-container time-based-stat-summary">
       <div class="label">Cost of Meetings</div>
       <div class="value">{{timeBlockSummary?.totalCost | currency}}</div>
     </div>
-    <div class="time-based-stat-summary">
+    <div class="khaki-container time-based-stat-summary">
       <div class="label">Average Meeting Cost</div>
       <div class="value">{{timeBlockSummary?.averageCost | currency}}</div>
     </div>
-    <div class="time-based-stat-summary">
+    <div class="khaki-container time-based-stat-summary">
       <div class="label">Number of Meetings</div>
       <div class="value">{{timeBlockSummary?.totalMeetings}}</div>
     </div>
