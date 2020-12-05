@@ -1,9 +1,9 @@
-import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
+import {Inject, Injectable} from '@angular/core';
+import {Observable, of, throwError} from 'rxjs';
 import {TimeBlockSummarySm} from '../state/models/time-block-summary-sm';
 import {HttpClient} from '@angular/common/http';
 import {TimeBlockSummaryResponseDto} from './models/time-block-summary-response-dto';
-import {map, tap} from 'rxjs/operators';
+import {catchError, map, tap} from 'rxjs/operators';
 import {HistorianService, Logging} from '@natr/historian';
 import {OrganizersStatisticsSm} from '../state/models/organizers-statistics-sm';
 import {createSchema, morphism, StrictSchema} from 'morphism';
@@ -13,6 +13,16 @@ import {DepartmentStatisticsResponseDto} from './models/department-statistics-re
 import {TrailingStatisticsResponseDto} from './models/trailing-statistics-response-dto';
 import {TrailingStatisticsSm} from '../state/models/trailing-statistics-sm';
 import {IntervalEnum} from './models/interval.enum';
+import * as momentJs from 'moment';
+import StartOf = momentJs.unitOfTime.StartOf;
+import Moment = momentJs.Moment;
+
+const moment = momentJs;
+
+interface TimeBlockRange {
+  start: Moment;
+  end: Moment;
+}
 
 @Logging
 @Injectable({
@@ -22,7 +32,7 @@ export class StatisticsService {
   logger: HistorianService;
   private readonly organizersStatisticsSchema: StrictSchema<OrganizersStatisticsSm, OrganizersStatisticsDto>;
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient, @Inject('environment') private environment) {
     this.organizersStatisticsSchema = createSchema<OrganizersStatisticsSm, OrganizersStatisticsDto>(
       {
         organizersStatistics: 'organizersStatistics',
@@ -31,15 +41,60 @@ export class StatisticsService {
     );
   }
 
+  private getStartEnd(interval: IntervalEnum): TimeBlockRange {
+    const now = moment();
+    let timeBlock: StartOf;
+    switch (interval) {
+      case IntervalEnum.Day:
+        timeBlock = 'day';
+        break;
+      case IntervalEnum.Week:
+        timeBlock = 'week';
+        break;
+      case IntervalEnum.Month:
+        timeBlock = 'month';
+        break;
+      case IntervalEnum.Year:
+        timeBlock = 'year';
+        break;
+    }
+
+    this.logger.debug('now is', now);
+    this.logger.debug('interval is', interval);
+
+    return {
+      start: now.clone().utc().startOf(timeBlock),
+      end: now.clone().utc().endOf(timeBlock)
+    };
+  }
+
   getOrganizersStatistics(interval: IntervalEnum): Observable<OrganizersStatisticsSm> {
-    const url = `/assets/organizersTable${interval}Data.json`;
+    let url = `/assets/organizersTable${interval}Data.json`;
+    this.logger.debug('environment is', this.environment);
+
+    if (!this.environment.uiOnly) {
+      const startEnd = this.getStartEnd(interval);
+      this.logger.debug('startEnd is', startEnd);
+      const formattedStart = startEnd.start.utc().format();
+      const formattedEnd = startEnd.end.utc().format();
+      url = `${this.environment.khakiBff}/statistics/organizers/${formattedStart}/${formattedEnd}`;
+    }
+
+    this.logger.debug('url is', url);
     return this.httpClient
       .get(url)
       .pipe(
+        catchError(
+          error => {
+            this.logger.error('Failed to get organizers statistics', error);
+            return throwError('Failed to get organizers statistics');
+          }
+        ),
         map(
           (data: OrganizersStatisticsDto) => morphism(this.organizersStatisticsSchema, data)
-        ),
-      );
+        )
+      )
+      ;
   }
 
   getTrailingStatistics(): Observable<TrailingStatisticsSm> {
@@ -77,5 +132,4 @@ export class StatisticsService {
         )
       );
   }
-
 }

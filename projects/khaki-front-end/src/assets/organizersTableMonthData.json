@@ -2,41 +2,41 @@
 {
   "organizersStatistics": [
     {
-      "organizer": {
-        "name": "bob"
-      },
+      "organizerFirstName": "Bob",
+      "organizerLastName": "Jones",
+      "organizerEmail": "bob@bob.com",
       "totalCost": 2800,
       "totalHours": 100,
       "totalMeetings": 405
     },
     {
-      "organizer": {
-        "name": "fred"
-      },
+      "organizerFirstName": "Fred",
+      "organizerLastName": "Smith",
+      "organizerEmail": "fred@bob.com",
       "totalCost": 5500,
       "totalHours": 40,
       "totalMeetings": 405
     },
     {
-      "organizer": {
-        "name": "steve"
-      },
+      "organizerFirstName": "Betty",
+      "organizerLastName": "Jones",
+      "organizerEmail": "betty@bob.com",
       "totalCost": 2388,
       "totalHours": 40,
       "totalMeetings": 405
     },
     {
-      "organizer": {
-        "name": "ted"
-      },
+      "organizerFirstName": "Steve",
+      "organizerLastName": "Jones",
+      "organizerEmail": "steve@bob.com",
       "totalCost": 2339,
       "totalHours": 40,
       "totalMeetings": 405
     },
     {
-      "organizer": {
-        "name": "frank"
-      },
+      "organizerFirstName": "Teddy",
+      "organizerLastName": "Jones",
+      "organizerEmail": "ted@bob.com",
       "totalCost": 1239,
       "totalHours": 40,
       "totalMeetings": 405

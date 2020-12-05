@@ -1,22 +1,40 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
+import {AuthGuard} from '@auth0/auth0-angular';
+import {MainComponent} from './components/main/main.component';
 
 const routes: Routes = [
   {
     path: 'home',
-    loadChildren: () => import('khaki-statistics').then(m => m.KhakiStatisticsModule)
+    component: MainComponent
+  },
+  {
+    path: 'stats',
+    loadChildren: () => import('khaki-statistics').then(m => m.KhakiStatisticsModule),
+    canActivate: [
+      AuthGuard
+    ]
   },
   {
     path: 'profile',
-    loadChildren: () => import('khaki-profile').then(m => m.KhakiProfileModule)
+    loadChildren: () => import('khaki-profile').then(m => m.KhakiProfileModule),
+    canActivate: [
+      AuthGuard
+    ]
   },
   {
     path: 'settings',
-    loadChildren: () => import('khaki-settings').then(m => m.KhakiSettingsModule)
+    loadChildren: () => import('khaki-settings').then(m => m.KhakiSettingsModule),
+    canActivate: [
+      AuthGuard
+    ]
   },
   {
     path: 'info',
-    loadChildren: () => import('khaki-info').then(m => m.KhakiInfoModule)
+    loadChildren: () => import('khaki-info').then(m => m.KhakiInfoModule),
+    canActivate: [
+      AuthGuard
+    ]
   },
   {
    path: '',

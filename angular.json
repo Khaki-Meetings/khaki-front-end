@@ -34,6 +34,22 @@
             "scripts": []
           },
           "configurations": {
+            "localApi": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/khaki-front-end/src/environments/environment.ts",
+                  "with": "projects/khaki-front-end/src/environments/environment.local-api.ts"
+                }
+              ]
+            },
+            "staging": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/khaki-front-end/src/environments/environment.ts",
+                  "with": "projects/khaki-front-end/src/environments/environment.staging.ts"
+                }
+              ]
+            },
             "production": {
               "fileReplacements": [
                 {
@@ -70,6 +86,9 @@
             "browserTarget": "khaki-front-end:build"
           },
           "configurations": {
+            "localApi": {
+              "browserTarget": "khaki-front-end:build:localApi"
+            },
             "production": {
               "browserTarget": "khaki-front-end:build:production"
             }
