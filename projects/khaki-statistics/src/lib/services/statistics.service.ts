@@ -70,21 +70,24 @@ export class StatisticsService {
     };
   }
 
-  getOrganizersStatistics(interval: IntervalEnum): Observable<OrganizersStatisticsSm> {
-    let url = `/assets/organizersTable${interval}Data.json`;
-    this.logger.debug('environment is', this.environment);
-
+  private getStartEndUrl(interval: IntervalEnum, statName: string): string {
+    let url = `/assets/${statName}${interval}Data.json`;
     if (!this.environment.uiOnly) {
       const startEnd = this.getStartEnd(interval);
       this.logger.debug('startEnd is', startEnd);
       const formattedStart = startEnd.start.utc().format();
       const formattedEnd = startEnd.end.utc().format();
-      url = `${this.environment.khakiBff}/statistics/organizers/${formattedStart}/${formattedEnd}`;
+      url = `${this.environment.khakiBff}/statistics/${statName}/${formattedStart}/${formattedEnd}`;
     }
 
     this.logger.debug('url is', url);
+
+    return url;
+  }
+
+  getOrganizersStatistics(interval: IntervalEnum): Observable<OrganizersStatisticsSm> {
     return this.httpClient
-      .get(url)
+      .get(this.getStartEndUrl(interval, 'organizers'))
       .pipe(
         catchError(
           error => {
@@ -121,19 +124,8 @@ export class StatisticsService {
 
 
   getDepartmentStatistics(interval: IntervalEnum): Observable<DepartmentsStatisticsSm> {
-    let url = `/assets/perDepartment${interval}Data.json`;
-
-    if (!this.environment.uiOnly) {
-      const startEnd = this.getStartEnd(interval);
-      this.logger.debug('startEnd is', startEnd);
-      const formattedStart = startEnd.start.utc().format();
-      const formattedEnd = startEnd.end.utc().format();
-      url = `${this.environment.khakiBff}/statistics/department/${formattedStart}/${formattedEnd}`;
-    }
-
-    this.logger.debug('url is', url);
     return this.httpClient
-      .get(url)
+      .get(this.getStartEndUrl(interval, 'department'))
       .pipe(
         tap(data => this.logger.debug('raw department data from server', data)),
         map((data: DepartmentsStatisticsResponseDto) => data as DepartmentsStatisticsSm),
@@ -141,10 +133,8 @@ export class StatisticsService {
   }
 
   getTimeBlockSummary(interval: IntervalEnum): Observable<TimeBlockSummarySm> {
-    const url = `/assets/timeBlockSummary${interval}Data.json`;
-    this.logger.debug('url', url);
     return this.httpClient
-      .get(url)
+      .get(this.getStartEndUrl(interval, 'summary'))
       .pipe(
         tap(ret => this.logger.debug('timeBlockSummary data', ret)),
         map(
