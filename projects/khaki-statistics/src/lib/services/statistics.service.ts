@@ -1,5 +1,5 @@
 import {Inject, Injectable} from '@angular/core';
-import {Observable, of, throwError} from 'rxjs';
+import {Observable, throwError} from 'rxjs';
 import {TimeBlockSummarySm} from '../state/models/time-block-summary-sm';
 import {HttpClient} from '@angular/common/http';
 import {TimeBlockSummaryResponseDto} from './models/time-block-summary-response-dto';
@@ -97,8 +97,17 @@ export class StatisticsService {
       ;
   }
 
-  getTrailingStatistics(): Observable<TrailingStatisticsSm> {
-    const url = '/assets/twelveMonthTrailingData.json';
+  getTrailingStatistics(interval: IntervalEnum): Observable<TrailingStatisticsSm> {
+    let url = '/assets/twelveMonthTrailingData.json';
+
+    if (!this.environment.uiOnly) {
+      const count = 12;
+      const startEnd = this.getStartEnd(interval);
+      this.logger.debug('start is', startEnd.start);
+      const formattedStart = startEnd.start.utc().format();
+      url = `${this.environment.khakiBff}/statistics/trailing/${formattedStart}/${interval}/${count}`;
+    }
+
     return this.httpClient
       .get(url)
       .pipe(

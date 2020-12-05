@@ -1,26 +1,32 @@
-<div style="display: flex; align-items: center;">
-
-<ngx-charts-legend-custom
-  [data]="legendData"
-  [dataExt]="graphData"
-  [colors]="colors"
-  class="chart-legend"
-  (labelActivate)="legendLabelActivate($event, chartData)"
-  (labelDeactivate)="legendLabelDeactivate($event)">
-</ngx-charts-legend-custom>
-
-<ngx-charts-pie-chart
-  [view]="view"
-  [scheme]="colorScheme"
-  [results]="graphData"
-  [gradient]="gradient"
-  [legend]="showLegend"
-  [labels]="showLabels"
-  [doughnut]="isDoughnut"
-  [tooltipDisabled]="tooltipDisabled"
-  (select)="onActivate($event)"
-  (activate)="onActivate($event)"
-  (deactivate)="onDeactivate($event)">
-</ngx-charts-pie-chart>
-
+<div>
+  <div class="component-header">
+    <h3 class="component-caption">Meeting Time by Department</h3>
+  </div>
+  <div class="component-content center">
+    <div class="legend">
+      <ngx-charts-legend-custom
+        [data]="legendData"
+        [dataExt]="graphData"
+        [colors]="colors"
+        class="chart-legend"
+        (labelActivate)="legendLabelActivate($event, chartData)"
+        (labelDeactivate)="legendLabelDeactivate($event)">
+      </ngx-charts-legend-custom>
+    </div>
+    <div class="graph">
+      <ngx-charts-pie-chart
+        [view]="view"
+        [scheme]="colorScheme"
+        [results]="graphData"
+        [gradient]="gradient"
+        [legend]="showLegend"
+        [labels]="showLabels"
+        [doughnut]="isDoughnut"
+        [tooltipDisabled]="tooltipDisabled"
+        (select)="onActivate($event)"
+        (activate)="onActivate($event)"
+        (deactivate)="onDeactivate($event)">
+      </ngx-charts-pie-chart>
+    </div>
+  </div>
 </div>

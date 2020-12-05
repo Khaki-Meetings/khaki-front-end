@@ -88,6 +88,50 @@ body { margin: 0; font-family: Avenir, "Helvetica Neue", sans-serif; }
     font-size: larger;
 }
 
-.meeting-time-wrapper {
-    width: 90%;
+// Component defaults
+
+.khaki-container {
+  border: 1px solid #dbdee2;
+  background-color: white;
+  padding: 10px 10px 25px 10px;
+  border-radius: 8px;
+  flex: 1 1 0px;
+  margin: 10px 10px;
+}
+
+.khaki-clear-container {
+  padding: 0px;
+  flex: 1 1 0px;
+  margin: 10px 10px;
+}
+
+.component-header {
+  padding: 10px;
+}
+
+.component-caption {
+
+}
+
+h3.component-caption {
+
+}
+
+.component-content {
+  overflow: auto;
+}
+
+.flex-container {
+    display: flex;
+}
+
+.flex-child {
+    flex: 1;
+    border: 2px solid yellow;
+}
+
+div.center {
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
 }
