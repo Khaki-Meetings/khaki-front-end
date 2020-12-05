@@ -16,7 +16,7 @@ export class TrailingStatisticsFacadeService {
   }
 
   requestTrailingStatistics(timeBlock: IntervalEnum, count: number): void {
-    this.store.dispatch(loadTrailingStatistics());
+    this.store.dispatch(loadTrailingStatistics({interval: timeBlock}));
   }
 
   trailingStatistics(): Observable<TrailingStatisticsSm> {

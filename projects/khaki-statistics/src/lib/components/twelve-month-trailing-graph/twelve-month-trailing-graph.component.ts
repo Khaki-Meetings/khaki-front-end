@@ -49,7 +49,7 @@ export class TwelveMonthTrailingGraphComponent implements OnInit {
       timeBlockSummary => {
         return {
           name: monthName.shift(),
-          value: timeBlockSummary.totalCost
+          value: timeBlockSummary.totalHours
         };
       }
     );
