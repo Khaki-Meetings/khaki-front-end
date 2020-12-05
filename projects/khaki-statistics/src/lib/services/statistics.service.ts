@@ -14,8 +14,10 @@ import {TrailingStatisticsResponseDto} from './models/trailing-statistics-respon
 import {TrailingStatisticsSm} from '../state/models/trailing-statistics-sm';
 import {IntervalEnum} from './models/interval.enum';
 import * as momentJs from 'moment';
+import {DepartmentsStatisticsResponseDto} from './models/departments-statistics-response-dto';
 import StartOf = momentJs.unitOfTime.StartOf;
 import Moment = momentJs.Moment;
+import {DepartmentsStatisticsSm} from '../state/models/departments-statistics-sm';
 
 const moment = momentJs;
 
@@ -118,14 +120,23 @@ export class StatisticsService {
   }
 
 
-  getDepartmentStatistics(interval: IntervalEnum): Observable<DepartmentStatisticsSm[]> {
-    const url = `/assets/perDepartment${interval}Data.json`;
+  getDepartmentStatistics(interval: IntervalEnum): Observable<DepartmentsStatisticsSm> {
+    let url = `/assets/perDepartment${interval}Data.json`;
+
+    if (!this.environment.uiOnly) {
+      const startEnd = this.getStartEnd(interval);
+      this.logger.debug('startEnd is', startEnd);
+      const formattedStart = startEnd.start.utc().format();
+      const formattedEnd = startEnd.end.utc().format();
+      url = `${this.environment.khakiBff}/statistics/department/${formattedStart}/${formattedEnd}`;
+    }
+
+    this.logger.debug('url is', url);
     return this.httpClient
       .get(url)
       .pipe(
-        map(
-          (data: DepartmentStatisticsResponseDto[]) => data as DepartmentStatisticsSm[]
-        ),
+        tap(data => this.logger.debug('raw department data from server', data)),
+        map((data: DepartmentsStatisticsResponseDto) => data as DepartmentsStatisticsSm),
       );
   }
 
