@@ -1,7 +1,7 @@
-import {PerDepartmentStatisticsSm} from '../../state/models/per-department-statistics-sm';
+import {DepartmentsStatisticsSm} from '../../state/models/departments-statistics-sm';
 
-export const testPerDepartmentStatistics: PerDepartmentStatisticsSm = {
-  departmentStatistics: [
+export const testPerDepartmentStatistics: DepartmentsStatisticsSm = {
+  departmentsStatistics: [
     {
       department: 'bob',
       totalCost: 21.12,

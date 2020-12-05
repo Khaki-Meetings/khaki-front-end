@@ -11,7 +11,8 @@
       "morphism": "morphism",
       "@swimlane/ngx-charts": "swimlaneNgxCharts",
       "@natr/historian": "natrHistorian",
-      "d3": "d3"
+      "d3": "d3",
+      "moment": "momentJs"
     }
   }
 }

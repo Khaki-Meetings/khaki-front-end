@@ -1,31 +1,35 @@
 import {Component, OnInit, ChangeDetectorRef, HostListener} from '@angular/core';
-import {PerDepartmentStatisticsSm} from '../../state/models/per-department-statistics-sm';
+import {DepartmentsStatisticsSm} from '../../state/models/departments-statistics-sm';
 import {PerDepartmentStatisticsFacadeService} from '../../state/facades/per-department-statistics-facade.service';
 import {ColorHelper} from '@swimlane/ngx-charts';
-import {NgxChartsLegendCustomComponent} from '../ngx-charts-legend-custom/ngx-charts-legend-custom.component'
+import {NgxChartsLegendCustomComponent} from '../ngx-charts-legend-custom/ngx-charts-legend-custom.component';
+import {HistorianService, Logging} from '@natr/historian';
 
 interface GraphData {
   name: string;
   value: number;
 }
 
+@Logging
 @Component({
   selector: 'lib-per-department-graph',
   templateUrl: './per-department-graph.component.html',
   styleUrls: ['./per-department-graph.component.scss']
 })
 
-export class PerDepartmentGraphComponent {
-  perDepartmentStatistics: PerDepartmentStatisticsSm;
+export class PerDepartmentGraphComponent implements OnInit {
+  private logger: HistorianService;
+
+  perDepartmentStatistics: DepartmentsStatisticsSm;
 
   view: any[] = [175, 175];
 
   // options
   showLegend = false;
-  gradient: boolean = true;
-  showLabels: boolean = false;
-  isDoughnut: boolean = true;
-  tooltipDisabled: boolean = true;
+  gradient = true;
+  showLabels = false;
+  isDoughnut = true;
+  tooltipDisabled = true;
 
   colorScheme = {
     domain: ['#3182CE', '#48BB78', '#9F7AEA', '#ED64A6', '#667EEA', '#478aef', '#47ef88', '#b647ef', '#ef47ba', '#e3b755']
@@ -45,32 +49,37 @@ export class PerDepartmentGraphComponent {
       .perDepartmentStatistics()
       .subscribe(
         (data) => {
+          this.logger.debug('data from state', data);
           this.perDepartmentStatistics = data;
           this.createGraphData();
 
           this.view = this.calculatePieDimensions();
           this.drawDefaultDonutLabel();
 
-          for (let d in this.graphData) {
-            let name = this.graphData[d].name;
-            let val = this.graphData[d].value;
-            let newDataPoint = {
-              'name': name,
-              'value': val,
-              'extra': {
-                'displayName': name,
-                'displayValue': val
-              }
+          this.logger.debug('graph data', this.graphData);
+          this.graphData.forEach(
+            departmentData => {
+              const newDataPoint = {
+                name: departmentData.name,
+                value: departmentData.value,
+                extra: {
+                  displayName: departmentData.name,
+                  displayValue: departmentData.value
+                }
+              };
+              this.chartData.push(newDataPoint);
             }
-            this.chartData.push(newDataPoint);
-          }
-          this.legendData = this.chartData.map(d => d['extra']['displayName']);
+          );
+
+          this.logger.debug('chart data', this.chartData);
+
+          this.legendData = this.chartData.map(d => d.extra.displayName);
           this.colors = new ColorHelper(this.colorScheme, 'ordinal', this.legendData, null);
         });
   }
 
   private createGraphData(): void {
-    this.graphData = this.perDepartmentStatistics.departmentStatistics.map(
+    this.graphData = this.perDepartmentStatistics.departmentsStatistics.map(
       el => {
         return {
           name: el.department,
@@ -81,9 +90,9 @@ export class PerDepartmentGraphComponent {
   }
 
   public legendLabelActivate(event: any, item: any): void {
-    var dataElement = this.chartData.find(x => x.extra.displayName == event.name);
+    const dataElement = this.chartData.find(x => x.extra.displayName == event.name);
 
-    var d = {
+    const d = {
       entries: [{
         name: dataElement.name,
         value: dataElement.value,
@@ -103,9 +112,9 @@ export class PerDepartmentGraphComponent {
   }
 
   onActivate(data): void {
-    var displayValue = "";
-    if (data.value.value != 0) {
-      displayValue = Math.floor(data.value.value / 60) + " hrs";
+    let displayValue = '';
+    if (data.value.value !== 0) {
+      displayValue = Math.floor(data.value.value / 60) + ' hrs';
     }
     document.getElementById('center-text-label').innerHTML = data.value.name;
     document.getElementById('center-text-value').innerHTML = displayValue;
@@ -115,24 +124,24 @@ export class PerDepartmentGraphComponent {
     this.drawDefaultDonutLabel();
   }
 
-  public drawDefaultDonutLabel() {
+  public drawDefaultDonutLabel(): void {
     if (document.getElementById('center-text-label') != null) {
-      var val = 0;
-      for (let x in this.graphData) {
+      let val = 0;
+      for (const x in this.graphData) {
         val = val + this.graphData[x].value;
       }
-      var displayValue = Math.floor(val / 60) + " hrs";
+      const displayValue = Math.floor(val / 60) + ' hrs';
       document.getElementById('center-text-value').innerHTML = displayValue;
-      document.getElementById('center-text-label').innerHTML = "in meetings";
+      document.getElementById('center-text-label').innerHTML = 'in meetings';
     }
   }
 
   @HostListener('window:pieChartReady', ['$event.detail'])
-  pieChartReady() {
+  pieChartReady(): void {
     this.drawDefaultDonutLabel();
   }
 
-  private calculatePieDimensions() {
+  private calculatePieDimensions(): number[] {
     if (this.graphData === null || this.graphData.length < 4) {
       return [175, 175];
     }

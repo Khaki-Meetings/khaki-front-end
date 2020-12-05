@@ -14,8 +14,10 @@ import {TrailingStatisticsResponseDto} from './models/trailing-statistics-respon
 import {TrailingStatisticsSm} from '../state/models/trailing-statistics-sm';
 import {IntervalEnum} from './models/interval.enum';
 import * as momentJs from 'moment';
+import {DepartmentsStatisticsResponseDto} from './models/departments-statistics-response-dto';
 import StartOf = momentJs.unitOfTime.StartOf;
 import Moment = momentJs.Moment;
+import {DepartmentsStatisticsSm} from '../state/models/departments-statistics-sm';
 
 const moment = momentJs;
 
@@ -68,21 +70,24 @@ export class StatisticsService {
     };
   }
 
-  getOrganizersStatistics(interval: IntervalEnum): Observable<OrganizersStatisticsSm> {
-    let url = `/assets/organizersTable${interval}Data.json`;
-    this.logger.debug('environment is', this.environment);
-
+  private getStartEndUrl(interval: IntervalEnum, statName: string): string {
+    let url = `/assets/${statName}${interval}Data.json`;
     if (!this.environment.uiOnly) {
       const startEnd = this.getStartEnd(interval);
       this.logger.debug('startEnd is', startEnd);
       const formattedStart = startEnd.start.utc().format();
       const formattedEnd = startEnd.end.utc().format();
-      url = `${this.environment.khakiBff}/statistics/organizers/${formattedStart}/${formattedEnd}`;
+      url = `${this.environment.khakiBff}/statistics/${statName}/${formattedStart}/${formattedEnd}`;
     }
 
     this.logger.debug('url is', url);
+
+    return url;
+  }
+
+  getOrganizersStatistics(interval: IntervalEnum): Observable<OrganizersStatisticsSm> {
     return this.httpClient
-      .get(url)
+      .get(this.getStartEndUrl(interval, 'organizers'))
       .pipe(
         catchError(
           error => {
@@ -118,22 +123,18 @@ export class StatisticsService {
   }
 
 
-  getDepartmentStatistics(interval: IntervalEnum): Observable<DepartmentStatisticsSm[]> {
-    const url = `/assets/perDepartment${interval}Data.json`;
+  getDepartmentStatistics(interval: IntervalEnum): Observable<DepartmentsStatisticsSm> {
     return this.httpClient
-      .get(url)
+      .get(this.getStartEndUrl(interval, 'department'))
       .pipe(
-        map(
-          (data: DepartmentStatisticsResponseDto[]) => data as DepartmentStatisticsSm[]
-        ),
+        tap(data => this.logger.debug('raw department data from server', data)),
+        map((data: DepartmentsStatisticsResponseDto) => data as DepartmentsStatisticsSm),
       );
   }
 
   getTimeBlockSummary(interval: IntervalEnum): Observable<TimeBlockSummarySm> {
-    const url = `/assets/timeBlockSummary${interval}Data.json`;
-    this.logger.debug('url', url);
     return this.httpClient
-      .get(url)
+      .get(this.getStartEndUrl(interval, 'summary'))
       .pipe(
         tap(ret => this.logger.debug('timeBlockSummary data', ret)),
         map(

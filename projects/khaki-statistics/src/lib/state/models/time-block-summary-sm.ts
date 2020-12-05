@@ -6,6 +6,6 @@ export interface TimeBlockSummarySm {
   totalHours?: number;
   totalCost?: number;
   averageCost?: number;
-  totalMeetings?: number;
+  meetingCount?: number;
   error?: ErrorSm;
 }
