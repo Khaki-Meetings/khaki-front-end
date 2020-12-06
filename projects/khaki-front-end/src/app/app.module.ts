@@ -4,7 +4,7 @@ import {NgModule} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {StoreModule} from '@ngrx/store';
-import {metaReducers, reducers} from './reducers';
+import {metaReducers, reducers} from './state/reducers';
 import {EffectsModule} from '@ngrx/effects';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {SideNavComponent} from './components/side-nav/side-nav.component';
@@ -15,6 +15,7 @@ import {AuthHttpInterceptor, AuthModule} from '@auth0/auth0-angular';
 import {MainComponent} from './components/main/main.component';
 import {environment} from '../environments/environment';
 import {UserMetadataComponent} from './components/user-metadata/user-metadata.component';
+import {TenantInterceptor} from './interceptors/tenant.interceptor';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import {UserMetadataComponent} from './components/user-metadata/user-metadata.co
   ],
   providers: [
     {provide: 'environment', useValue: environment},
-    {provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: AuthHttpInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: TenantInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })
