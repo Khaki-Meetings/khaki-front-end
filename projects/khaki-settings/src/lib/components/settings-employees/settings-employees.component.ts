@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { EmployeesFacadeService } from '../../state/facades/employees-facade.service';
 export interface DialogData {
   data: string;
 }
@@ -12,74 +13,21 @@ export interface DialogData {
 })
 export class SettingsEmployeesComponent implements OnInit {
 
-  employees = [
-    {
-      avatar: 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200',
-      name: 'Ralph Anderson',
-      subject: 'IT',
-      department: 'Development'
-    },
-    {
-      avatar: 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200',
-      name: 'Kyle Derwin',
-      subject: 'Customer support',
-      department: 'Agent'
-    },
-    {
-      avatar: 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200',
-      name: 'Lucas Bradley',
-      subject: 'Sales',
-      department: 'Representative'
-    },
-    {
-      avatar: 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200',
-      name: 'Mindy Orwell',
-      subject: 'IT',
-      department: 'Development'
-    },
-    {
-      avatar: 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200',
-      name: 'Charles Radcliffe',
-      subject: 'IT',
-      department: 'Designer'
-    },
-    {
-      avatar: 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200',
-      name: 'Dave Schloff',
-      subject: 'Human resources',
-      department: 'Assistant Director'
-    },
-    {
-      avatar: 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200',
-      name: 'Tina Young',
-      subject: 'Finace',
-      department: 'Accountant'
-    },
-    {
-      avatar: 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200',
-      name: 'Ralph Anderson',
-      subject: 'IT',
-      department: 'Development'
-    },
-    {
-      avatar: 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200',
-      name: 'Ralph Anderson',
-      subject: 'IT',
-      department: 'Development'
-    },
-    {
-      avatar: 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200',
-      name: 'Ralph Anderson',
-      subject: 'IT',
-      department: 'Development'
-    }
-  ]
+  employees = [];
+
   pos = 0
   maxshow = 6
 
-  constructor(private router: Router, public dialog: MatDialog) { }
+  constructor(private router: Router, public dialog: MatDialog, private facadeServuce: EmployeesFacadeService) { }
 
   ngOnInit(): void {
+    this.facadeServuce.requestEmployees();
+    this.facadeServuce.employees()
+      // .pipe(tap(data => this.logger.debug('subscription', data)))
+      .subscribe(userProfile => {
+        //this.logger.debug('onInit', userProfile);
+        this.employees = userProfile.employees;
+      });
   }
 
   getEmployees() {

@@ -1,6 +1,12 @@
+import { EmployeesResponseDto } from '../../services/models/employeesResponseDto';
 import { userProfileFeatureKey } from '../reducers/user-profile.reducer';
-import { UserProfileSm } from './user-profile-sm';
+import { employeesFeatureKey } from '../reducers/employees.reducer';
+import { UserProfileResponseDto } from '../../services/models/userProfileResponseDto';
+import { departmentsFeatureKey } from '../reducers/departments.reducer';
+import { DepartmentsResponseDto } from '../../services/models/departmentsResponseDto';
 
 export interface ProfileFeature {
-  [userProfileFeatureKey]: UserProfileSm;
+  [userProfileFeatureKey]: UserProfileResponseDto;
+  [employeesFeatureKey]: EmployeesResponseDto;
+  [departmentsFeatureKey]: DepartmentsResponseDto;
 }

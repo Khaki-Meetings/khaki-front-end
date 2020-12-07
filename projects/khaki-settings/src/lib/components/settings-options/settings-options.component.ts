@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserProfileResponseDto } from '../../services/models/userProfileResponseDto';
 import { UserProfileFacadeService } from '../../state/facades/user-profile-facade.service';
-import { UserProfileSm } from '../../state/models/user-profile-sm';
 
 @Component({
   selector: 'lib-settings-options',
@@ -11,7 +11,7 @@ import { UserProfileSm } from '../../state/models/user-profile-sm';
 export class SettingsOptionsComponent implements OnInit {
 
   menunow = "";
-  userProfile: UserProfileSm = {};
+  userProfile: UserProfileResponseDto = {};
 
   constructor(private router: Router, private userProfileService: UserProfileFacadeService) { }
 

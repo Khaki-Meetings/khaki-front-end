@@ -6,4 +6,7 @@ export interface UserProfileResponseDto {
   notifications?: string;  
   companyname?: string;
 }
-  
+
+export interface SaveUserProfileSuccessSmResponseDto {
+  success?: string;
+}

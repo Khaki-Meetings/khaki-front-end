@@ -3,7 +3,7 @@
     <span class="bold">{{userProfile.companyname}}</span>
     <div *ngIf="editmode" class="edit">
         <span>Company name</span>
-        <input type="text" name="name" placeholder="Cool Things Co." />
+        <input type="text" name="name" placeholder="Cool Things Co." [(ngModel)]="companyname" />
     </div>
     <button *ngIf="!editmode" (click)="onChange()">Change</button>
     <button *ngIf="editmode" class="save" (click)="onSave()">Save</button>

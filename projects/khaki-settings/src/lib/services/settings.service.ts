@@ -5,7 +5,8 @@ import {map, tap} from 'rxjs/operators';
 import {HistorianService, Logging} from '@natr/historian';
 import {createSchema, morphism, StrictSchema} from 'morphism';
 import {UserProfileResponseDto} from './models/userProfileResponseDto'
-import { UserProfileSm } from '../state/models/user-profile-sm';
+import { EmployeesResponseDto } from './models/employeesResponseDto';
+import { DepartmentsResponseDto } from './models/departmentsResponseDto';
 
 @Logging
 @Injectable({
@@ -16,25 +17,38 @@ export class SettingsService {
 
   constructor(private httpClient: HttpClient) { }
   
-  getUserProfile(): Observable<UserProfileSm> {
+  getUserProfile(): Observable<UserProfileResponseDto> {
     const url = '/assets/userProfileData.json';
     return this.httpClient
       .get(url)
       .pipe(
         map(
-          (data: UserProfileResponseDto) => data as UserProfileSm
+          (data: UserProfileResponseDto) => data as UserProfileResponseDto
         ),
       );
   }
 
-  setUserProfile(data: UserProfileSm): Observable<UserProfileSm> {
+  setUserProfile(data: UserProfileResponseDto): Observable<UserProfileResponseDto> {
     const url = '/assets/userProfileData.json';
     return this.httpClient
-      .post(url, data)
+      //.post(url, data) //TODO move to post when backend ready
+      .get(url)
       .pipe(
         map(
-          (data: UserProfileResponseDto) => data as UserProfileSm
+          (data: UserProfileResponseDto) => data as UserProfileResponseDto
         ),
       );
+  }
+
+  getEmployees(): Observable<EmployeesResponseDto> {
+    const url = '/assets/employeesData.json';
+    return this.httpClient
+      .get<EmployeesResponseDto>(url);
+  }
+
+  getDepartments(): Observable<DepartmentsResponseDto> {
+    const url = '/assets/departmentsData.json';
+    return this.httpClient
+      .get<DepartmentsResponseDto>(url);
   }
 }

@@ -18,6 +18,8 @@ import {StoreModule} from '@ngrx/store';
 import * as fromKhakiSettings from './state';
 import {EffectsModule} from '@ngrx/effects';
 import { SettingsEffects } from './state/effects/user-profile.effects';
+import { EmployeesEffects } from './state/effects/employees.effects';
+import { DepartmentsEffects } from './state/effects/departments.effects';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,9 @@ import { SettingsEffects } from './state/effects/user-profile.effects';
     ),
     EffectsModule.forFeature(
       [
-        SettingsEffects
+        SettingsEffects,
+        EmployeesEffects,
+        DepartmentsEffects
       ]
     ),
   ],

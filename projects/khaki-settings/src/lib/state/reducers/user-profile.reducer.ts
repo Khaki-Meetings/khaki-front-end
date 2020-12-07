@@ -1,10 +1,10 @@
 import {createReducer, on} from '@ngrx/store';
 import {loadUserProfile, loadUserProfileSuccess} from '../actions/user-profile.actions';
-import {UserProfileSm} from '../models/user-profile-sm';
+import {UserProfileResponseDto} from '../../services/models/userProfileResponseDto';
 
 export const userProfileFeatureKey = 'userProfile';
 
-export const initialState: UserProfileSm = {
+export const initialState: UserProfileResponseDto = {
   firstname: 'firstname',
   lastname: 'lastname',
   notifications: 'on',
@@ -14,13 +14,13 @@ export const initialState: UserProfileSm = {
 
 export const userProfileReducer = createReducer(
   initialState,
-  on(loadUserProfile, (state: UserProfileSm, action) => state),
+  on(loadUserProfile, (state: UserProfileResponseDto, action) => state),
   on(
     loadUserProfileSuccess,
-    (state: UserProfileSm, action) => {
+    (state: UserProfileResponseDto, action) => {
       const {type, ...newState} = {...state, ...action};
       return newState;
     }
-  ),
+  )
 );
 

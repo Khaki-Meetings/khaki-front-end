@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { DepartmentsFacadeService } from '../../state/facades/departments-facade.service';
 export interface DialogData {
   data: string;
 }
@@ -12,54 +13,19 @@ export interface DialogData {
 })
 export class SettingsDepartmentComponent implements OnInit {
 
-  departments = [
-    {
-      name: 'Customer Service',
-    },
-    {
-      name: 'Finance / Accounting Department',
-    },
-    {
-      name: 'Human Resources / Personnel Department / Staff Department',
-    },
-    {
-      name: 'I.T. (Information Technology)',
-    },
-    {
-      name: 'Logistics',
-    },
-    {
-      name: 'Maintenance',
-    },
-    {
-      name: 'Marketing',
-    },
-    {
-      name: 'Public Relations Team / Public Relations Department',
-    },
-    {
-      name: 'Production Department / Manufacturing Department',
-    },
-    {
-      name: 'Research and Development / Engineering Department',
-    },
-    {
-      name: 'Sales',
-    },
-    {
-      name: 'Shipping Department / Dispatch Department',
-    },
-    {
-      name: 'Technical Support Team',
-    }
-  ]
+  departments = []
 
   pos = 0
   maxshow = 9
 
-  constructor(private router: Router, public dialog: MatDialog) { }
+  constructor(private router: Router, public dialog: MatDialog, private departmentsFacadeService: DepartmentsFacadeService) { }
 
   ngOnInit(): void {
+    this.departmentsFacadeService.requestDepartments();
+    this.departmentsFacadeService.departments()
+      .subscribe(data => {
+        this.departments = data.departments;
+      });
   }
 
   getDepartments() {

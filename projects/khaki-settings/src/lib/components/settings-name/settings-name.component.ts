@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {UserProfileFacadeService} from '../../state/facades/user-profile-facade.service';
-import { UserProfileSm } from '../../state/models/user-profile-sm';
 import {HistorianService, Logging} from '@natr/historian';
+import { UserProfileResponseDto } from '../../services/models/userProfileResponseDto';
 
 @Logging
 @Component({
@@ -11,11 +11,13 @@ import {HistorianService, Logging} from '@natr/historian';
 })
 export class SettingsNameComponent implements OnInit {
   private logger: HistorianService;
-  userProfile: UserProfileSm = {};
+  userProfile: UserProfileResponseDto = {};
 
   constructor(private userProfileService: UserProfileFacadeService) { }
 
   editmode = false;
+  companyname = "";
+
   ngOnInit(): void {
     this.userProfileService.userProfile()
       // .pipe(tap(data => this.logger.debug('subscription', data)))
@@ -31,6 +33,10 @@ export class SettingsNameComponent implements OnInit {
 
   onSave(): void {
     this.editmode = false;
+    this.userProfileService.setUserProfile({companyname: this.companyname})
+    .subscribe(result => {
+      this.logger.debug('onSave', this.companyname);
+    });
   }
 
   onCancel(): void {

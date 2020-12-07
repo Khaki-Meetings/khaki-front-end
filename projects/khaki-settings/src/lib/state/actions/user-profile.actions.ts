@@ -1,12 +1,12 @@
 import {createAction, props} from '@ngrx/store';
-import {UserProfileSm} from '../models/user-profile-sm';
+import { UserProfileResponseDto } from '../../services/models/userProfileResponseDto';
 
 export const loadUserProfile = createAction(
   '[UserProfile] Load UserProfile',
-  props<UserProfileSm>()
+  props<UserProfileResponseDto>()
 );
 
 export const loadUserProfileSuccess = createAction(
   '[UserProfile] Load UserProfileSuccess',
-  props<UserProfileSm>()
+  props<UserProfileResponseDto>()
 );
