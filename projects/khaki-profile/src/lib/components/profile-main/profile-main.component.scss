@@ -11,10 +11,10 @@ $screen-lg-min: 1105px;
     @include lg {
         display: flex;
     }
-    
+
     padding: 30px;
 
-    div {        
+    div {
         width: 100%;
 
         @include lg {
@@ -27,13 +27,13 @@ $screen-lg-min: 1105px;
     }
     @include lg {
         div.content {
-            ::ng-deep div.center {        
+            ::ng-deep div.center {
                 transform: translateY(-50%);
                 top: 50%;
             }
         }
         ::ng-deep div.hide {
-            display: flex;
+            display: block;
         }
     }
 }

@@ -1,7 +1,4 @@
 div {
-    font-size: 2em;
-    line-height: 1em;
-    display: flex;
     gap: 0.5em;
     margin-top: 2.5em;
     margin-bottom: 2.5em;
@@ -42,7 +39,6 @@ mat-icon.arrow.selected {
     transform: rotate(180deg);
     animation-name: arrowselected;
     animation-duration: 0.5s;
-
 }
 mat-icon.arrow.selected::before {
     content: '';

@@ -1,7 +1,12 @@
 <div [ngClass]="{'hide': menunow != 'name' && menunow != ''}">
-  <span [ngClass]="{'selected': menunow == 'name'}">Company name</span>
-  <span class="grow text-align-right gray">Cool Things Co.</span>
-  <a routerLink="name" (click)="onMenu($event, 'name')"><mat-icon [ngClass]="{'arrow': true, 'selected': menunow == 'name'}">keyboard_arrow_right</mat-icon></a>
+  <div class="label">
+    <span [ngClass]="{'selected': menunow == 'name'}">Company name</span>
+  </div>
+  <div>
+    <span [ngClass]="{'selected': menunow == 'name'}"></span>
+    <span class="gray">Cool Things Co.</span>
+    <a routerLink="name" (click)="onMenu($event, 'name')"><mat-icon [ngClass]="{'arrow': true, 'selected': menunow == 'name'}">keyboard_arrow_right</mat-icon></a>
+  </div>
 </div>
 <div [ngClass]="{'hide': menunow != 'department' && menunow != ''}">
   <span [ngClass]="{'selected': menunow == 'employees'}">Employees</span>

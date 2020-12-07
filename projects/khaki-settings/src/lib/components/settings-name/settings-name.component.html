@@ -1,8 +1,7 @@
 <div class="center">
     <span>Company name</span>
-    <span class="bold">Cool Things Co.</span>
+    <span>Cool Things Co.</span>
     <div *ngIf="editmode" class="edit">
-        <span>Company name</span>
         <input type="text" name="name" placeholder="Cool Things Co." />
     </div>
     <button *ngIf="!editmode" (click)="onChange()">Change</button>
