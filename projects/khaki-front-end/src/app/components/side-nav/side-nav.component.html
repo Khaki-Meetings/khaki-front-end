@@ -7,10 +7,6 @@
   </div>
   <div class="spacer"></div>
 
-  <div *ngIf="(authService.isAuthenticated$ | async) === false">
-    <button (click)="authService.loginWithPopup()">Login</button>
-  </div>
-
   <div *ngIf="authService.isAuthenticated$ | async">
     <div class="menu-items">
       <div class="icon-spacing">
@@ -37,8 +33,19 @@
           <div class="label">Info</div>
         </a>
       </div>
-      <div class="icon-spacing">
-        <button (click)="authService.logout()">Logout</button>
+
+    </div>
+
+  </div>
+
+  <div *ngIf="authService.isAuthenticated$ | async">
+    <div class="logout">
+      <div class="icon-spacing container">
+        <a (click)="authService.logout()">
+          <span>Logout</span>
+        </a>
       </div>
     </div>
   </div>
+
+</div>
