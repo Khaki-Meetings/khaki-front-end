@@ -1,0 +1,43 @@
+{
+  "departments" : [
+    {
+      "name": "Customer Service"
+    },
+    {
+      "name": "Finance / Accounting Department"
+    },
+    {
+      "name": "Human Resources / Personnel Department / Staff Department"
+    },
+    {
+      "name": "I.T. (Information Technology)"
+    },
+    {
+      "name": "Logistics"
+    },
+    {
+      "name": "Maintenance"
+    },
+    {
+      "name": "Marketing"
+    },
+    {
+      "name": "Public Relations Team / Public Relations Department"
+    },
+    {
+      "name": "Production Department / Manufacturing Department"
+    },
+    {
+      "name": "Research and Development / Engineering Department"
+    },
+    {
+      "name": "Sales"
+    },
+    {
+      "name": "Shipping Department / Dispatch Department"
+    },
+    {
+      "name": "Technical Support Team"
+    }
+  ]
+}

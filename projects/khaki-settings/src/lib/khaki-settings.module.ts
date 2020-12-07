@@ -14,6 +14,12 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import {StoreModule} from '@ngrx/store';
+import * as fromKhakiSettings from './state';
+import {EffectsModule} from '@ngrx/effects';
+import { SettingsEffects } from './state/effects/user-profile.effects';
+import { EmployeesEffects } from './state/effects/employees.effects';
+import { DepartmentsEffects } from './state/effects/departments.effects';
 
 @NgModule({
   declarations: [
@@ -35,7 +41,21 @@ import { FormsModule } from '@angular/forms';
     MatDialogModule,
     MatFormFieldModule,
     FormsModule,
-    MatInputModule
+    MatInputModule,
+    StoreModule.forFeature(
+      fromKhakiSettings.khakiProfileFeatureKey,
+      fromKhakiSettings.reducers,
+      {
+        metaReducers: fromKhakiSettings.metaReducers
+      }
+    ),
+    EffectsModule.forFeature(
+      [
+        SettingsEffects,
+        EmployeesEffects,
+        DepartmentsEffects
+      ]
+    ),
   ],
   exports: [
     KhakiSettingsComponent
