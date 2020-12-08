@@ -5,8 +5,8 @@ import {UserProfileResponseDto} from '../../services/models/userProfileResponseD
 export const userProfileFeatureKey = 'userProfile';
 
 export const initialState: UserProfileResponseDto = {
-  firstname: 'firstname',
-  lastname: 'lastname',
+  firstName: 'firstname',
+  lastName: 'lastname',
   notifications: 'on',
   email: 'email@abc.com'
 };

@@ -4,7 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {map, tap} from 'rxjs/operators';
 import {HistorianService, Logging} from '@natr/historian';
 import {createSchema, morphism, StrictSchema} from 'morphism';
-import {UserProfileResponseDto} from './models/userProfileResponseDto'
+import {UserProfileResponseDto} from './models/userProfileResponseDto';
 import { EmployeesResponseDto } from './models/employeesResponseDto';
 import { DepartmentsResponseDto } from './models/departmentsResponseDto';
 
@@ -16,7 +16,7 @@ export class SettingsService {
   logger: HistorianService;
 
   constructor(private httpClient: HttpClient) { }
-  
+
   getUserProfile(): Observable<UserProfileResponseDto> {
     const url = '/assets/userProfileData.json';
     return this.httpClient
@@ -28,10 +28,10 @@ export class SettingsService {
       );
   }
 
-  setUserProfile(data: UserProfileResponseDto): Observable<UserProfileResponseDto> {
+  setUserProfile(postdata: UserProfileResponseDto): Observable<UserProfileResponseDto> {
     const url = '/assets/userProfileData.json';
     return this.httpClient
-      //.post(url, data) //TODO move to post when backend ready
+      // .post(url, postdata) //TODO move to post when backend ready
       .get(url)
       .pipe(
         map(

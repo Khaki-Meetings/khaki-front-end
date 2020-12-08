@@ -16,13 +16,13 @@ export class SettingsNameComponent implements OnInit {
   constructor(private userProfileService: UserProfileFacadeService) { }
 
   editmode = false;
-  companyname = "";
+  companyname = '';
 
   ngOnInit(): void {
     this.userProfileService.userProfile()
       // .pipe(tap(data => this.logger.debug('subscription', data)))
       .subscribe(userProfile => {
-        //this.logger.debug('onInit', userProfile);
+        // this.logger.debug('onInit', userProfile);
         this.userProfile = userProfile;
       });
   }
@@ -33,7 +33,7 @@ export class SettingsNameComponent implements OnInit {
 
   onSave(): void {
     this.editmode = false;
-    this.userProfileService.setUserProfile({companyname: this.companyname})
+    this.userProfileService.setUserProfile({companyName: this.companyname})
     .subscribe(result => {
       this.logger.debug('onSave', this.companyname);
     });

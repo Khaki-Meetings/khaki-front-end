@@ -1,24 +1,27 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { LegendEntryComponent } from '@swimlane/ngx-charts';
+import {Component, OnInit, Input} from '@angular/core';
+import {LegendEntryComponent} from '@swimlane/ngx-charts';
 
 @Component({
+  // tslint:disable-next-line:component-selector
   selector: '[ngx-charts-legend-entry-custom]',
   template: `
-    <td class="legend-label-color" [style.background-color]="color" (click)="toggle.emit(formattedLabel)"> </td>
+    <td class="legend-label-color" [style.background-color]="color" (click)="toggle.emit(formattedLabel)"></td>
     <td class="legend-label-text">
       {{ trimmedLabel }}
     </td>
     <td class="legend-label-text legend-value-text">
       {{ displayValue }}
     </td>`,
-    styleUrls: ['./legend-entry-custom.component.css']
+  styleUrls: ['./legend-entry-custom.component.css']
 })
 
-export class LegendEntryCustomComponent extends LegendEntryComponent {
+export class LegendEntryCustomComponent extends LegendEntryComponent implements OnInit{
 
   @Input() dataExt: any;
 
-  constructor() { super() }
+  constructor() {
+    super();
+  }
 
   ngOnInit(): void {
   }
@@ -28,11 +31,11 @@ export class LegendEntryCustomComponent extends LegendEntryComponent {
   }
 
   get displayValue(): string {
-    var displayValue = "";
-    if (this.dataExt.value != 0) {
-      displayValue = Math.floor(this.dataExt.value / 60) + " hrs";
+    let displayValue = '';
+    if (this.dataExt.value !== 0) {
+      displayValue = Math.floor(this.dataExt.value / 60) + ' hrs';
     }
     return displayValue || '(empty)';
   }
-  
+
 }

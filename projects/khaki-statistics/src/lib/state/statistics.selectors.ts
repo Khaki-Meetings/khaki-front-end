@@ -26,4 +26,3 @@ export const currentTimeIntervalSelector = createSelector(
   featureSelector,
   (state: StatisticsFeature) => state[currentTimeIntervalFeatureKey]
 );
-

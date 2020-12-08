@@ -10,7 +10,7 @@ import { UserProfileFacadeService } from '../../state/facades/user-profile-facad
 })
 export class SettingsOptionsComponent implements OnInit {
 
-  menunow = "";
+  menunow = '';
   userProfile: UserProfileResponseDto = {};
 
   constructor(private router: Router, private userProfileService: UserProfileFacadeService) { }
@@ -19,15 +19,15 @@ export class SettingsOptionsComponent implements OnInit {
     this.userProfileService.userProfile()
       // .pipe(tap(data => this.logger.debug('subscription', data)))
       .subscribe(userProfile => {
-        //this.logger.debug('onInit', userProfile);
+        // this.logger.debug('onInit', userProfile);
         this.userProfile = userProfile;
       });
   }
 
   onMenu(e, menuname): void {
-    if(this.menunow == menuname) {
-      this.menunow = "";
-      this.router.navigateByUrl("settings");
+    if (this.menunow === menuname) {
+      this.menunow = '';
+      this.router.navigateByUrl('settings');
       e.preventDefault();
     } else {
       this.menunow = menuname;

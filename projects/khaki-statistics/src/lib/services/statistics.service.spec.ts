@@ -19,7 +19,7 @@ describe('StatisticsService', () => {
       }
     );
     service = TestBed.inject(StatisticsService);
-    httpMock = TestBed.get(HttpTestingController);
+    httpMock = TestBed.inject(HttpTestingController);
     mockHttpClient = TestBed.inject(HttpClient);
   });
 

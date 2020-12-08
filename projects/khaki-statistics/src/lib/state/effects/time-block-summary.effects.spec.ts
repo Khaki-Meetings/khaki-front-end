@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { TimeBlockSummaryEffects } from './time-block-summary.effects';
 
 describe('TimeBlockSummariesEffects', () => {
+  // tslint:disable-next-line:prefer-const
   let actions$: Observable<any>;
   let effects: TimeBlockSummaryEffects;
 
