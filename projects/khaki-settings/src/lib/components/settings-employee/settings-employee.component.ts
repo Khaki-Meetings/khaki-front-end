@@ -13,6 +13,6 @@ export class SettingsEmployeeComponent implements OnInit {
   }
 
   goBack(): void {
-    this.router.navigateByUrl("settings/employees");
+    this.router.navigateByUrl('settings/employees');
   }
 }

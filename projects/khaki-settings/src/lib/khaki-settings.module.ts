@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { KhakiSettingsComponent } from './khaki-settings.component';
 import {KhakiSettingsRoutingModule} from './khaki-settings-routing.module';
-import {SettingsHeaderComponent} from './components/settings-header/settings-header.component'
-import {SettingsMainComponent} from './components/settings-main/settings-main.component'
-import {SettingsOptionsComponent} from './components/settings-options/settings-options.component'
-import {SettingsNameComponent} from './components/settings-name/settings-name.component'
-import {SettingsEmployeesComponent, AddEmployeeDialog} from './components/settings-employees/settings-employees.component'
-import {SettingsEmployeeComponent} from './components/settings-employee/settings-employee.component'
-import {SettingsDepartmentComponent, AddDepartmentDialog} from './components/settings-department/settings-department.component'
+import {SettingsHeaderComponent} from './components/settings-header/settings-header.component';
+import {SettingsMainComponent} from './components/settings-main/settings-main.component';
+import {SettingsOptionsComponent} from './components/settings-options/settings-options.component';
+import {SettingsNameComponent} from './components/settings-name/settings-name.component';
+import {SettingsEmployeesComponent, AddEmployeeDialogComponent} from './components/settings-employees/settings-employees.component';
+import {SettingsEmployeeComponent} from './components/settings-employee/settings-employee.component';
+import {SettingsDepartmentComponent, AddDepartmentDialogComponent} from './components/settings-department/settings-department.component';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -31,8 +31,8 @@ import { DepartmentsEffects } from './state/effects/departments.effects';
     SettingsEmployeesComponent,
     SettingsEmployeeComponent,
     SettingsDepartmentComponent,
-    AddEmployeeDialog,
-    AddDepartmentDialog
+    AddEmployeeDialogComponent,
+    AddDepartmentDialogComponent
   ],
   imports: [
     KhakiSettingsRoutingModule,

@@ -1,10 +1,10 @@
 
 export interface UserProfileResponseDto {
-  firstname?: string;
-  lastname?: string;
+  firstName?: string;
+  lastName?: string;
   email?: string;
-  notifications?: string;  
-  companyname?: string;
+  notifications?: string;
+  companyName?: string;
 }
 
 export interface SaveUserProfileSuccessSmResponseDto {
