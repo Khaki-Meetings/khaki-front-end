@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {AuthService} from '@auth0/auth0-angular';
 
 @Component({
   selector: 'lib-profile-options',
@@ -8,20 +9,31 @@ import { Router } from '@angular/router';
 })
 export class ProfileOptionsComponent implements OnInit {
 
-  menunow = '';
+  menuNow = '';
+  displayName: string;
+  email: string;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, public authService: AuthService) {
+  }
 
   ngOnInit(): void {
+    this.authService
+      .user$
+      .subscribe(
+        user => {
+          this.displayName = user.name;
+          this.email = user.email;
+        }
+      );
   }
 
   onMenu(e, menuname): void {
-    if (this.menunow === menuname) {
-      this.menunow = '';
+    if (this.menuNow === menuname) {
+      this.menuNow = '';
       this.router.navigateByUrl('profile');
       e.preventDefault();
     } else {
-      this.menunow = menuname;
+      this.menuNow = menuname;
     }
   }
 

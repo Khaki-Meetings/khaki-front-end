@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {AuthService} from '@auth0/auth0-angular';
 
 @Component({
   selector: 'lib-profile-name',
@@ -6,22 +7,33 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./profile-name.component.scss']
 })
 export class ProfileNameComponent implements OnInit {
+  editMode = false;
 
-  constructor() { }
+  firstName: string;
+  lastName: string;
+  displayName: string;
 
-  editmode = false;
+  constructor(public authService: AuthService) {
+  }
+
   ngOnInit(): void {
+    this.authService.user$
+      .subscribe(user => {
+        this.firstName = user.firstName;
+        this.lastName = user.lastName;
+        this.displayName = user.name;
+      });
   }
 
   onChange(): void {
-    this.editmode = true;
+    this.editMode = true;
   }
 
   onSave(): void {
-    this.editmode = false;
+    this.editMode = false;
   }
 
   onCancel(): void {
-    this.editmode = false;
+    this.editMode = false;
   }
 }

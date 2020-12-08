@@ -1,25 +1,25 @@
-<div [ngClass]="{'hide': menunow != 'name' && menunow != ''}">
-  <span [ngClass]="{'selected': menunow == 'name'}">Name</span>
-  <span class="grow text-align-right gray">John Johnson</span>
-  <a routerLink="name" (click)="onMenu($event, 'name')"><mat-icon [ngClass]="{'arrow': true, 'selected': menunow == 'name'}">keyboard_arrow_right</mat-icon></a>
+<div [ngClass]="{'hide': menuNow != 'name' && menuNow != ''}">
+  <span [ngClass]="{'selected': menuNow == 'name'}">Name</span>
+  <span class="grow text-align-right gray">{{displayName}}</span>
+  <a routerLink="name" (click)="onMenu($event, 'name')"><mat-icon [ngClass]="{'arrow': true, 'selected': menuNow == 'name'}">keyboard_arrow_right</mat-icon></a>
 </div>
-<div [ngClass]="{'hide': menunow != 'email' && menunow != ''}">
-  <span [ngClass]="{'selected': menunow == 'email'}">Email</span>
-  <span class="grow text-align-right gray">JJ@coolthingsco.com</span>
-  <a routerLink="email" (click)="onMenu($event, 'email')"><mat-icon [ngClass]="{'arrow': true, 'selected': menunow == 'email'}">keyboard_arrow_right</mat-icon></a>
+<div [ngClass]="{'hide': menuNow != 'email' && menuNow != ''}">
+  <span [ngClass]="{'selected': menuNow == 'email'}">Email</span>
+  <span class="grow text-align-right gray">{{email}}</span>
+  <a routerLink="email" (click)="onMenu($event, 'email')"><mat-icon [ngClass]="{'arrow': true, 'selected': menuNow == 'email'}">keyboard_arrow_right</mat-icon></a>
 </div>
-<div [ngClass]="{'hide': menunow != 'notifications' && menunow != ''}">
+<div [ngClass]="{'hide': menuNow != 'notifications' && menuNow != ''}">
   <mat-icon>notifications</mat-icon>
-  <span class="grow" [ngClass]="{'selected': menunow == 'notifications'}">Notifications</span>
-  <a routerLink="notifications" (click)="onMenu($event, 'notifications')"><mat-icon [ngClass]="{'arrow': true, 'selected': menunow == 'notifications'}">keyboard_arrow_right</mat-icon></a>
+  <span class="grow" [ngClass]="{'selected': menuNow == 'notifications'}">Notifications</span>
+  <a routerLink="notifications" (click)="onMenu($event, 'notifications')"><mat-icon [ngClass]="{'arrow': true, 'selected': menuNow == 'notifications'}">keyboard_arrow_right</mat-icon></a>
 </div>
-<div [ngClass]="{'hide': menunow != 'help' && menunow != ''}">
+<div [ngClass]="{'hide': menuNow != 'help' && menuNow != ''}">
   <mat-icon>help_outline</mat-icon>
-  <span class="grow" [ngClass]="{'selected': menunow == 'help'}">Help</span>
-  <a routerLink="help" (click)="onMenu($event, 'help')"><mat-icon [ngClass]="{'arrow': true, 'selected': menunow == 'help'}">keyboard_arrow_right</mat-icon></a>
+  <span class="grow" [ngClass]="{'selected': menuNow == 'help'}">Help</span>
+  <a routerLink="help" (click)="onMenu($event, 'help')"><mat-icon [ngClass]="{'arrow': true, 'selected': menuNow == 'help'}">keyboard_arrow_right</mat-icon></a>
 </div>
-<div [ngClass]="{'hide': menunow != 'logout' && menunow != ''}">
+<div [ngClass]="{'hide': menuNow != 'logout' && menuNow != ''}">
   <mat-icon>supervisor_account</mat-icon>
-  <span class="grow" [ngClass]="{'selected': menunow == 'logout'}">Logout</span>
-  <a routerLink="logout" (click)="onMenu($event, 'logout')"><mat-icon [ngClass]="{'arrow': true, 'selected': menunow == 'logout'}">keyboard_arrow_right</mat-icon></a>
+  <span class="grow" [ngClass]="{'selected': menuNow == 'logout'}">Logout</span>
+  <a routerLink="logout" (click)="onMenu($event, 'logout')"><mat-icon [ngClass]="{'arrow': true, 'selected': menuNow == 'logout'}">keyboard_arrow_right</mat-icon></a>
 </div>
