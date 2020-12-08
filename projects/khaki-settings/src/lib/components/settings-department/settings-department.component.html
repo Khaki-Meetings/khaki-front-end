@@ -1,14 +1,17 @@
 <div class="center container">
     <div>
-        <div class="add_emp" (click)="addDepartment()"><mat-icon>add_circle_outline</mat-icon> Add list of departments</div>
+        <div class="add_emp" (click)="addDepartment()">
+          <mat-icon>add_circle_outline</mat-icon>
+          <span class="caption">Add list of departments</span>
+        </div>
     </div>
     <table>
         <tr *ngFor="let department of getDepartments()">
             <td>{{department.name}}</td>
-        </tr>        
+        </tr>
     </table>
     <div class="arrows">
         <mat-icon [ngClass]="{'disable': isLast()}" class="down arrow" (click)="moveDown()">keyboard_arrow_right</mat-icon>
         <mat-icon [ngClass]="{'disable': isFirst()}" class="up arrow" (click)="moveUp()">keyboard_arrow_right</mat-icon>
-    </div> 
+    </div>
 </div>

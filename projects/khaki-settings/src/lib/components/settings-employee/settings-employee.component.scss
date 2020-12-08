@@ -1,19 +1,15 @@
 div.container {
     position: relative;
     img {
-        width: 1em;
-        height: 1em;
+        width: 60px;
+        height: 60px;
+        border-radius: 15px;
+
         font-size: 5em;
-        border-radius: 0.5em;
         margin-left: auto;
         margin-right: auto;
         display: block;
         margin-bottom: 0.3em;
-    }
-
-    div {
-        font-size: 1.2em;
-        font-weight: 500;
     }
 
     div.lh2 {
@@ -39,21 +35,18 @@ div.container {
         color: black;
     }
 
-    .name {
-        font-size: 2em;
-    }
-
     .back {
-        position: absolute;
         left: 0;
         top: 0;
         cursor: pointer;
     }
 
     .remove {
-        position: absolute;
-        right: 0;
-        top: 0;
+        float: right;
         cursor: pointer;
+    }
+
+    .center {
+      text-align: center;
     }
 }
