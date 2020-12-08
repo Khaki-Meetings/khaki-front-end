@@ -105,6 +105,12 @@ body { margin: 0; font-family: Avenir, "Helvetica Neue", sans-serif; }
   margin: 10px 10px;
 }
 
+div.center {
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+}
+
 .component-header {
   padding: 10px;
 }
@@ -128,10 +134,4 @@ h3.component-caption {
 .flex-child {
     flex: 1;
     border: 2px solid yellow;
-}
-
-div.center {
-    margin-left: auto;
-    margin-right: auto;
-    width: fit-content;
 }
