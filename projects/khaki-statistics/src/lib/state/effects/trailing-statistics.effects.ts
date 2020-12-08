@@ -14,7 +14,7 @@ export class TrailingStatisticsEffects {
     () => this.actions$.pipe(
       ofType(loadTrailingStatistics),
       switchMap(
-        () => this.statisticsService.getTrailingStatistics()
+        (action) => this.statisticsService.getTrailingStatistics(action.interval)
           .pipe(
             map(trailingStatistics => loadTrailingStatisticsSuccess(trailingStatistics)),
             catchError(

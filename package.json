@@ -4,7 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "node server.js",
-    "serve": "ng serve",
+    "serve-ui-only": "ng serve",
+    "serve-local-api": "ng serve -c localApi",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -18,7 +19,8 @@
     "build-settings": "ng build khaki-settings",
     "build-info-with-watch": "ng build khaki-info --watch",
     "build-info": "ng build khaki-info",
-    "heroku-postbuild": "ng build khaki-statistics && ng build khaki-profile && ng build khaki-settings && ng build khaki-info && ng build --prod"
+    "build-modules": "ng build khaki-statistics && ng build khaki-profile && ng build khaki-settings && ng build khaki-info",
+    "heroku-postbuild": "yarn run build-modules && ng build --prod"
   },
   "private": true,
   "dependencies": {
@@ -32,6 +34,7 @@
     "@angular/platform-browser": "~10.1.6",
     "@angular/platform-browser-dynamic": "~10.1.6",
     "@angular/router": "~10.1.6",
+    "@auth0/auth0-angular": "^1.2.0",
     "@fortawesome/angular-fontawesome": "0.7.x",
     "@fortawesome/fontawesome-svg-core": "^1.2.32",
     "@fortawesome/free-solid-svg-icons": "^5.15.1",
@@ -40,9 +43,11 @@
     "@ngrx/schematics": "^10.0.1",
     "@ngrx/store": "^10.0.1",
     "@swimlane/ngx-charts": "^16.0.0",
+    "d3": "^6.2.0",
     "express": "^4.17.1",
+    "moment": "^2.29.1",
     "morphism": "^1.12.3",
-    "rxjs": "~6.6.0",
+    "rxjs": "^6.6.3",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
   },

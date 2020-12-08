@@ -5,17 +5,41 @@ table {
 }
 .table-border {
   border-bottom-style: none;
-
 }
-.making-even{
-  padding: 30px;
-}
-.mat-table{
+.mat-table {
   background: none;
+  width: 90%;
+  margin: auto;  
 }
 .header-font {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   font-size: 14px;
-  color: black;
+  color: #4A5568;
+}
+
+tr.mat-header-row {
+  height: auto;
+}
+
+th.mat-header-cell {
+  text-align: left;
+  border-bottom: 1px solid #E2E8F0;
+  padding-bottom: 8px;
+}
+th.mat-header-cell.col-right {
+  text-align: right;
+}
+th.mat-header-cell:first-of-type, td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type {
+  padding-left: 0px;
+}
+
+td.mat-cell.col-right {
+  text-align: right;
+}
+td.row-caption {
+  font-weight: bold;
+}
+td.mat-cell, .mat-footer-cell {
+  font-size: larger;
 }

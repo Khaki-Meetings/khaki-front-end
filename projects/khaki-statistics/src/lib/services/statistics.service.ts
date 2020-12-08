@@ -1,9 +1,9 @@
-import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
+import {Inject, Injectable} from '@angular/core';
+import {Observable, throwError} from 'rxjs';
 import {TimeBlockSummarySm} from '../state/models/time-block-summary-sm';
 import {HttpClient} from '@angular/common/http';
 import {TimeBlockSummaryResponseDto} from './models/time-block-summary-response-dto';
-import {map, tap} from 'rxjs/operators';
+import {catchError, map, tap} from 'rxjs/operators';
 import {HistorianService, Logging} from '@natr/historian';
 import {OrganizersStatisticsSm} from '../state/models/organizers-statistics-sm';
 import {createSchema, morphism, StrictSchema} from 'morphism';
@@ -13,6 +13,18 @@ import {DepartmentStatisticsResponseDto} from './models/department-statistics-re
 import {TrailingStatisticsResponseDto} from './models/trailing-statistics-response-dto';
 import {TrailingStatisticsSm} from '../state/models/trailing-statistics-sm';
 import {IntervalEnum} from './models/interval.enum';
+import * as momentJs from 'moment';
+import {DepartmentsStatisticsResponseDto} from './models/departments-statistics-response-dto';
+import StartOf = momentJs.unitOfTime.StartOf;
+import Moment = momentJs.Moment;
+import {DepartmentsStatisticsSm} from '../state/models/departments-statistics-sm';
+
+const moment = momentJs;
+
+interface TimeBlockRange {
+  start: Moment;
+  end: Moment;
+}
 
 @Logging
 @Injectable({
@@ -22,7 +34,7 @@ export class StatisticsService {
   logger: HistorianService;
   private readonly organizersStatisticsSchema: StrictSchema<OrganizersStatisticsSm, OrganizersStatisticsDto>;
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient, @Inject('environment') private environment) {
     this.organizersStatisticsSchema = createSchema<OrganizersStatisticsSm, OrganizersStatisticsDto>(
       {
         organizersStatistics: 'organizersStatistics',
@@ -31,19 +43,76 @@ export class StatisticsService {
     );
   }
 
-  getOrganizersStatistics(interval: IntervalEnum): Observable<OrganizersStatisticsSm> {
-    const url = `/assets/organizersTable${interval}Data.json`;
-    return this.httpClient
-      .get(url)
-      .pipe(
-        map(
-          (data: OrganizersStatisticsDto) => morphism(this.organizersStatisticsSchema, data)
-        ),
-      );
+  private getStartEnd(interval: IntervalEnum): TimeBlockRange {
+    const now = moment();
+    let timeBlock: StartOf;
+    switch (interval) {
+      case IntervalEnum.Day:
+        timeBlock = 'day';
+        break;
+      case IntervalEnum.Week:
+        timeBlock = 'week';
+        break;
+      case IntervalEnum.Month:
+        timeBlock = 'month';
+        break;
+      case IntervalEnum.Year:
+        timeBlock = 'year';
+        break;
+    }
+
+    this.logger.debug('now is', now);
+    this.logger.debug('interval is', interval);
+
+    return {
+      start: now.clone().utc().startOf(timeBlock),
+      end: now.clone().utc().endOf(timeBlock)
+    };
   }
 
-  getTrailingStatistics(): Observable<TrailingStatisticsSm> {
-    const url = '/assets/twelveMonthTrailingData.json';
+  private getStartEndUrl(interval: IntervalEnum, statName: string): string {
+    let url = `/assets/${statName}${interval}Data.json`;
+    if (!this.environment.uiOnly) {
+      const startEnd = this.getStartEnd(interval);
+      this.logger.debug('startEnd is', startEnd);
+      const formattedStart = startEnd.start.utc().format();
+      const formattedEnd = startEnd.end.utc().format();
+      url = `${this.environment.khakiBff}/statistics/${statName}/${formattedStart}/${formattedEnd}`;
+    }
+
+    this.logger.debug('url is', url);
+
+    return url;
+  }
+
+  getOrganizersStatistics(interval: IntervalEnum): Observable<OrganizersStatisticsSm> {
+    return this.httpClient
+      .get(this.getStartEndUrl(interval, 'organizers'))
+      .pipe(
+        catchError(
+          error => {
+            this.logger.error('Failed to get organizers statistics', error);
+            return throwError('Failed to get organizers statistics');
+          }
+        ),
+        map(
+          (data: OrganizersStatisticsDto) => morphism(this.organizersStatisticsSchema, data)
+        )
+      )
+      ;
+  }
+
+  getTrailingStatistics(interval: IntervalEnum): Observable<TrailingStatisticsSm> {
+    let url = '/assets/twelveMonthTrailingData.json';
+
+    if (!this.environment.uiOnly) {
+      const count = 12;
+      const startEnd = this.getStartEnd(interval);
+      this.logger.debug('start is', startEnd.start);
+      const formattedStart = startEnd.start.utc().format();
+      url = `${this.environment.khakiBff}/statistics/trailing/${formattedStart}/${interval}/${count}`;
+    }
+
     return this.httpClient
       .get(url)
       .pipe(
@@ -54,22 +123,18 @@ export class StatisticsService {
   }
 
 
-  getDepartmentStatistics(interval: IntervalEnum): Observable<DepartmentStatisticsSm[]> {
-    const url = `/assets/perDepartment${interval}Data.json`;
+  getDepartmentStatistics(interval: IntervalEnum): Observable<DepartmentsStatisticsSm> {
     return this.httpClient
-      .get(url)
+      .get(this.getStartEndUrl(interval, 'department'))
       .pipe(
-        map(
-          (data: DepartmentStatisticsResponseDto[]) => data as DepartmentStatisticsSm[]
-        ),
+        tap(data => this.logger.debug('raw department data from server', data)),
+        map((data: DepartmentsStatisticsResponseDto) => data as DepartmentsStatisticsSm),
       );
   }
 
   getTimeBlockSummary(interval: IntervalEnum): Observable<TimeBlockSummarySm> {
-    const url = `/assets/timeBlockSummary${interval}Data.json`;
-    this.logger.debug('url', url);
     return this.httpClient
-      .get(url)
+      .get(this.getStartEndUrl(interval, 'summary'))
       .pipe(
         tap(ret => this.logger.debug('timeBlockSummary data', ret)),
         map(
@@ -77,5 +142,4 @@ export class StatisticsService {
         )
       );
   }
-
 }

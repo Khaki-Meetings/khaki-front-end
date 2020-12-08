@@ -26,11 +26,10 @@ export class TwelveMonthTrailingGraphComponent implements OnInit {
   showXAxisLabel = true;
   xAxisLabel = 'Month';
   showYAxisLabel = true;
-  yAxisLabel = 'Costs';
+  yAxisLabel = 'Hours';
 
   colorScheme = {
-    domain: ['#CEEDE6', '#ADF8E6', '#BFDDF3', '#D6EEFF']
-
+    domain: ['#3182CE']
   };
 
   constructor(private trailingStatisticsFacade: TrailingStatisticsFacadeService) {
@@ -50,7 +49,7 @@ export class TwelveMonthTrailingGraphComponent implements OnInit {
       timeBlockSummary => {
         return {
           name: monthName.shift(),
-          value: timeBlockSummary.totalCost
+          value: timeBlockSummary.totalHours
         };
       }
     );

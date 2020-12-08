@@ -2,41 +2,36 @@
 {
   "organizersStatistics": [
     {
-      "organizer": {
-        "name": "bob"
-      },
+      "organizerFirstName": "Bob",
+      "organizerLastName": "Jones",
       "totalCost": 1,
       "totalHours": 5,
       "totalMeetings": 21
     },
     {
-      "organizer": {
-        "name": "fred"
-      },
+      "organizerFirstName": "Fred",
+      "organizerLastName": "Smith",
       "totalCost": 1,
       "totalHours": 5,
       "totalMeetings": 21
     },
     {
-      "organizer": {
-        "name": "steve"
-      },
+      "organizerFirstName": "Steve",
+      "organizerLastName": "Jones",
       "totalCost": 1,
       "totalHours": 5,
       "totalMeetings": 21
     },
     {
-      "organizer": {
-        "name": "ted"
-      },
+      "organizerFirstName": "Teddy",
+      "organizerLastName": "Jones",
       "totalCost": 1,
       "totalHours": 5,
       "totalMeetings": 21
     },
     {
-      "organizer": {
-        "name": "frank"
-      },
+      "organizerFirstName": "John",
+      "organizerLastName": "Jones",
       "totalCost": 1,
       "totalHours": 5,
       "totalMeetings": 21

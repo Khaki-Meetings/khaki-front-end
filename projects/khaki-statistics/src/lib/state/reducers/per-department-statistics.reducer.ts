@@ -1,12 +1,15 @@
 import {createReducer, on} from '@ngrx/store';
-import {PerDepartmentStatisticsSm} from '../models/per-department-statistics-sm';
+import {DepartmentsStatisticsSm} from '../models/departments-statistics-sm';
 import {loadPerDepartmentStatisticsSuccess} from '../actions/per-department-statistics.actions';
+import {HistorianService, LogLevel} from '@natr/historian';
 
 
 export const perDepartmentStatisticsFeatureKey = 'perDepartmentStatistics';
 
-export const initialState: PerDepartmentStatisticsSm = {
-  departmentStatistics: [],
+const logger = new HistorianService(LogLevel.ALL, perDepartmentStatisticsFeatureKey);
+
+export const initialState: DepartmentsStatisticsSm = {
+  departmentsStatistics: [],
   errors: []
 };
 
@@ -16,7 +19,9 @@ export const perDepartmentStatisticsReducer = createReducer(
   on(
     loadPerDepartmentStatisticsSuccess,
     (state, action) => {
+      logger.debug('department success', state, action);
       const {type, ...newState} = {...state, ...action};
+      logger.debug('department success, new state', newState);
       return newState;
     }
   )
