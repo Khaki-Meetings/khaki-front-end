@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 })
 export class ProfileOptionsComponent implements OnInit {
 
-  menunow = "";
+  menunow = '';
 
   constructor(private router: Router) { }
 
@@ -16,9 +16,9 @@ export class ProfileOptionsComponent implements OnInit {
   }
 
   onMenu(e, menuname): void {
-    if(this.menunow == menuname) {
-      this.menunow = "";
-      this.router.navigateByUrl("profile");
+    if (this.menunow === menuname) {
+      this.menunow = '';
+      this.router.navigateByUrl('profile');
       e.preventDefault();
     } else {
       this.menunow = menuname;

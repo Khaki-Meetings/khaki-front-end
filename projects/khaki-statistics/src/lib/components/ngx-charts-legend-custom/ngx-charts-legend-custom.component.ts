@@ -1,51 +1,53 @@
-import { Component, OnInit, ChangeDetectorRef, Input } from '@angular/core';
-import { LegendComponent, formatLabel } from '@swimlane/ngx-charts';
+import {AfterViewInit, ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
+import {formatLabel, LegendComponent} from '@swimlane/ngx-charts';
 import * as d3 from 'd3';
 
 @Component({
+  // tslint:disable-next-line:component-selector
   selector: 'ngx-charts-legend-custom',
   templateUrl: './ngx-charts-legend-custom.component.html',
   styleUrls: ['./ngx-charts-legend-custom.component.css']
 })
 
-export class NgxChartsLegendCustomComponent extends LegendComponent {
+export class NgxChartsLegendCustomComponent extends LegendComponent implements AfterViewInit, OnInit {
 
   @Input() dataExt: any;
 
-  constructor(cd: ChangeDetectorRef) { super(cd); }
-
-  ngOnInit(): void {
-
+  constructor(cd: ChangeDetectorRef) {
+    super(cd);
   }
 
-  ngAfterViewInit() {
+  ngOnInit(): void {
+  }
 
-    d3.select('g.pie-chart.chart').append("text")
-      .attr("text-anchor", "middle")
+  ngAfterViewInit(): void {
+
+    d3.select('g.pie-chart.chart').append('text')
+      .attr('text-anchor', 'middle')
       .attr('font-size', '16px')
-      .attr("font-weight", "bold")
-      .attr("font-family", "sans-serif")
+      .attr('font-weight', 'bold')
+      .attr('font-family', 'sans-serif')
       .attr('y', 5)
       .attr('id', 'center-text-value')
       .text('');
 
-    d3.select('g.pie-chart.chart').append("text")
-      .attr("text-anchor", "middle")
+    d3.select('g.pie-chart.chart').append('text')
+      .attr('text-anchor', 'middle')
       .attr('font-size', '10px')
-      .attr("font-family", "sans-serif")
+      .attr('font-family', 'sans-serif')
       .attr('y', 18)
       .attr('id', 'center-text-label')
       .text('');
 
-    var event = new CustomEvent('pieChartReady', {})
-      window.dispatchEvent(event);
+    const event = new CustomEvent('pieChartReady', {});
+    window.dispatchEvent(event);
 
   }
 
   getLegendEntries(): any[] {
     const items = [];
     for (const label of this.data) {
-      const dataExt = this.dataExt.find(x => x.name == label);
+      const dataExt = this.dataExt.find(x => x.name === label);
       const formattedLabel = formatLabel(label);
       const idx = items.findIndex(i => {
         return i.label === formattedLabel;
@@ -63,31 +65,31 @@ export class NgxChartsLegendCustomComponent extends LegendComponent {
     return items;
   }
 
-  getMatchingArcPath(fillColor) {
-    var arcElement = document.querySelectorAll('[ng-reflect-fill="' + fillColor + '"]');
-    var matchingArcPath = arcElement[0].querySelector('.arc');
+  getMatchingArcPath(fillColor): Element {
+    const arcElement = document.querySelectorAll('[ng-reflect-fill="' + fillColor + '"]');
+    const matchingArcPath = arcElement[0].querySelector('.arc');
     return matchingArcPath;
   }
 
-  mouseenter(data) {
-    var event = new MouseEvent('mouseenter', {
-      'view': window,
-      'bubbles': true,
-      'cancelable': true
+  mouseenter(data): void {
+    const event = new MouseEvent('mouseenter', {
+      view: window,
+      bubbles: true,
+      cancelable: true
     });
 
-    var arcPath = this.getMatchingArcPath(data.color);
+    const arcPath = this.getMatchingArcPath(data.color);
     arcPath.dispatchEvent(event);
   }
 
-  mouseleave(data) {
-    var event = new MouseEvent('mouseleave', {
-      'view': window,
-      'bubbles': true,
-      'cancelable': true
+  mouseleave(data): void {
+    const event = new MouseEvent('mouseleave', {
+      view: window,
+      bubbles: true,
+      cancelable: true
     });
 
-    var arcPath = this.getMatchingArcPath(data.color);
+    const arcPath = this.getMatchingArcPath(data.color);
     arcPath.dispatchEvent(event);
   }
 }

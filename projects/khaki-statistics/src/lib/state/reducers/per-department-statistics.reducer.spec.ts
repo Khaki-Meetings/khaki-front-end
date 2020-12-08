@@ -4,7 +4,7 @@ import {
   loadPerDepartmentStatistics,
   loadPerDepartmentStatisticsSuccess
 } from '../actions/per-department-statistics.actions';
-import {PerDepartmentStatisticsSm} from '../models/per-department-statistics-sm';
+import {DepartmentsStatisticsSm} from '../models/departments-statistics-sm';
 import {DepartmentStatisticsSm} from '../models/department-statistics-sm';
 
 describe('PerDepartmentStatistics Reducer', () => {
@@ -20,8 +20,8 @@ describe('PerDepartmentStatistics Reducer', () => {
 
   describe(`${loadPerDepartmentStatisticsSuccess.type}`, () => {
     it('should return the previous state', () => {
-      const perDepartmentStatistics: PerDepartmentStatisticsSm = {
-        departmentStatistics: [
+      const perDepartmentStatistics: DepartmentsStatisticsSm = {
+        departmentsStatistics: [
           {
             department: 'Finance',
             totalHours: 1000,
@@ -44,7 +44,7 @@ describe('PerDepartmentStatistics Reducer', () => {
         errors: [
           {message: 'you done fuckeled', name: '1d10t'}
         ]
-      } as PerDepartmentStatisticsSm;
+      } as DepartmentsStatisticsSm;
       const action = loadPerDepartmentStatisticsSuccess(perDepartmentStatistics);
 
       const result = perDepartmentStatisticsReducer(initialState, action);

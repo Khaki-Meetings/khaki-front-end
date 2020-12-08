@@ -5,6 +5,7 @@ import {HttpClientTestingModule, HttpTestingController} from '@angular/common/ht
 import {HttpClient} from '@angular/common/http';
 import {OrganizersStatisticsSm} from '../state/models/organizers-statistics-sm';
 import {OrganizersStatisticsDto} from './models/organizers-statistics-dto';
+import {IntervalEnum} from './models/interval.enum';
 
 describe('StatisticsService', () => {
   let service: StatisticsService;
@@ -18,7 +19,7 @@ describe('StatisticsService', () => {
       }
     );
     service = TestBed.inject(StatisticsService);
-    httpMock = TestBed.get(HttpTestingController);
+    httpMock = TestBed.inject(HttpTestingController);
     mockHttpClient = TestBed.inject(HttpClient);
   });
 
@@ -32,14 +33,14 @@ describe('StatisticsService', () => {
       const organizersStatisticsSm: OrganizersStatisticsSm = {organizersStatistics: [], page: 5};
       const organizersStatisticsDto: OrganizersStatisticsDto = {organizersStatistics: [], page: 5};
 
-      service.getOrganizersStatistics()
+      service.getOrganizersStatistics(IntervalEnum.Week)
         .subscribe(
           organizersStatistics => {
             expect(organizersStatistics).toEqual(organizersStatisticsSm);
           }
         );
 
-      const req = httpMock.expectOne('/assets/organizersTableWeekData.json');
+      const req = httpMock.expectOne('/assets/organizersWeekData.json');
       expect(req.request.method).toEqual('GET');
       req.flush(organizersStatisticsDto);
 

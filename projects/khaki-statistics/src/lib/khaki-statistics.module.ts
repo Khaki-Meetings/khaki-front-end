@@ -6,7 +6,7 @@ import {OrganizersTableComponent} from './components/organizers-table/organizers
 import {TwelveMonthTrailingGraphComponent} from './components/twelve-month-trailing-graph/twelve-month-trailing-graph.component';
 import {TimeBasedStatSummaryComponent} from './components/time-based-stat-summary/time-based-stat-summary.component';
 import {NgxChartsLegendCustomComponent} from './components/ngx-charts-legend-custom/ngx-charts-legend-custom.component';
-import { LegendEntryCustomComponent } from './components/legend-entry-custom/legend-entry-custom.component';
+import {LegendEntryCustomComponent} from './components/legend-entry-custom/legend-entry-custom.component';
 import {StoreModule} from '@ngrx/store';
 import * as fromKhakiStatistics from './state';
 import {EffectsModule} from '@ngrx/effects';
@@ -22,11 +22,12 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatButtonModule} from '@angular/material/button';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {MatSelectModule} from '@angular/material/select';
 import {ReactiveFormsModule} from '@angular/forms';
-import { TimeIntervalFormComponent } from './components/time-interval-form/time-interval-form.component';
-import { CurrentTimeIntervalEffects } from './state/effects/current-time-interval.effects';
+import {TimeIntervalFormComponent} from './components/time-interval-form/time-interval-form.component';
+import {CurrentTimeIntervalEffects} from './state/effects/current-time-interval.effects';
+import {AuthHttpInterceptor} from '@auth0/auth0-angular';
 
 
 @NgModule({
@@ -44,7 +45,6 @@ import { CurrentTimeIntervalEffects } from './state/effects/current-time-interva
     ReactiveFormsModule,
     KhakiStatisticsRoutingModule,
     CommonModule,
-    HttpClientModule,
     StoreModule.forFeature(
       fromKhakiStatistics.khakiStatisticsFeatureKey,
       fromKhakiStatistics.reducers,
@@ -69,7 +69,9 @@ import { CurrentTimeIntervalEffects } from './state/effects/current-time-interva
     NgxChartsModule,
     MatSelectModule
   ],
-  exports: [KhakiStatisticsComponent]
+  exports: [KhakiStatisticsComponent],
+  providers: [
+  ]
 })
 export class KhakiStatisticsModule {
 }

@@ -8,7 +8,7 @@ import {NgxChartsModule, PieChartComponent} from '@swimlane/ngx-charts';
 import {Observable, of} from 'rxjs';
 import {testPerDepartmentStatistics} from './test-data.spec';
 import {delay} from 'rxjs/operators';
-import {PerDepartmentStatisticsSm} from '../../state/models/per-department-statistics-sm';
+import {DepartmentsStatisticsSm} from '../../state/models/departments-statistics-sm';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 
 describe('PerDepartmentGraphComponent', () => {
@@ -20,7 +20,7 @@ describe('PerDepartmentGraphComponent', () => {
     mockPerDepartmentStatisticsService = {
       requestPerDepartmentStatistics: () => {
       },
-      perDepartmentStatistics(): Observable<PerDepartmentStatisticsSm> {
+      perDepartmentStatistics(): Observable<DepartmentsStatisticsSm> {
         return of(testPerDepartmentStatistics).pipe(delay(100));
         // return of(testPerDepartmentStatistics);
       }

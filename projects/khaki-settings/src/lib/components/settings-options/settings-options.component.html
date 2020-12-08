@@ -1,20 +1,23 @@
 <div [ngClass]="{'hide': menunow != 'name' && menunow != ''}">
   <div class="label">
     <span [ngClass]="{'selected': menunow == 'name'}">Company name</span>
-  </div>
-  <div>
-    <span [ngClass]="{'selected': menunow == 'name'}"></span>
-    <span class="gray">Cool Things Co.</span>
-    <a routerLink="name" (click)="onMenu($event, 'name')"><mat-icon [ngClass]="{'arrow': true, 'selected': menunow == 'name'}">keyboard_arrow_right</mat-icon></a>
+    <span class="grow text-align-right gray">{{userProfile.companyName}}</span>
+    <a routerLink="name" (click)="onMenu($event, 'name')">
+      <mat-icon [ngClass]="{'arrow': true, 'selected': menunow == 'name'}">keyboard_arrow_right</mat-icon>
+    </a>
   </div>
 </div>
-<div [ngClass]="{'hide': menunow != 'department' && menunow != ''}">
-  <span [ngClass]="{'selected': menunow == 'employees'}">Employees</span>
-  <span class="grow text-align-right gray"></span>
-  <a routerLink="employees" (click)="onMenu($event, 'employees')"><mat-icon [ngClass]="{'arrow': true, 'selected': menunow == 'employees'}">keyboard_arrow_right</mat-icon></a>
+<div [ngClass]="{'hide': menunow != 'employees' && menunow != ''}">
+    <span [ngClass]="{'selected': menunow == 'employees'}">Employees</span>
+    <span class="grow text-align-right gray"></span>
+    <a routerLink="employees" (click)="onMenu($event, 'employees')">
+        <mat-icon [ngClass]="{'arrow': true, 'selected': menunow == 'employees'}">keyboard_arrow_right</mat-icon>
+    </a>
 </div>
 <div [ngClass]="{'hide': menunow != 'department' && menunow != ''}">
   <span [ngClass]="{'selected': menunow == 'department'}">Departments</span>
   <span class="grow text-align-right gray"></span>
-  <a routerLink="department" (click)="onMenu($event, 'department')"><mat-icon [ngClass]="{'arrow': true, 'selected': menunow == 'department'}">keyboard_arrow_right</mat-icon></a>
+  <a routerLink="department" (click)="onMenu($event, 'department')">
+    <mat-icon [ngClass]="{'arrow': true, 'selected': menunow == 'department'}">keyboard_arrow_right</mat-icon>
+  </a>
 </div>

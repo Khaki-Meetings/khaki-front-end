@@ -1,6 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { EmployeesFacadeService } from '../../state/facades/employees-facade.service';
+import { EmployeeDto } from '../../services/models/employeesResponseDto';
 export interface DialogData {
   data: string;
 }
@@ -12,132 +14,82 @@ export interface DialogData {
 })
 export class SettingsEmployeesComponent implements OnInit {
 
-  employees = [
-    {
-      avatar: 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200',
-      name: 'Ralph Anderson',
-      subject: 'IT',
-      department: 'Development'
-    },
-    {
-      avatar: 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200',
-      name: 'Kyle Derwin',
-      subject: 'Customer support',
-      department: 'Agent'
-    },
-    {
-      avatar: 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200',
-      name: 'Lucas Bradley',
-      subject: 'Sales',
-      department: 'Representative'
-    },
-    {
-      avatar: 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200',
-      name: 'Mindy Orwell',
-      subject: 'IT',
-      department: 'Development'
-    },
-    {
-      avatar: 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200',
-      name: 'Charles Radcliffe',
-      subject: 'IT',
-      department: 'Designer'
-    },
-    {
-      avatar: 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200',
-      name: 'Dave Schloff',
-      subject: 'Human resources',
-      department: 'Assistant Director'
-    },
-    {
-      avatar: 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200',
-      name: 'Tina Young',
-      subject: 'Finace',
-      department: 'Accountant'
-    },
-    {
-      avatar: 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200',
-      name: 'Ralph Anderson',
-      subject: 'IT',
-      department: 'Development'
-    },
-    {
-      avatar: 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200',
-      name: 'Ralph Anderson',
-      subject: 'IT',
-      department: 'Development'
-    },
-    {
-      avatar: 'https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200',
-      name: 'Ralph Anderson',
-      subject: 'IT',
-      department: 'Development'
-    }
-  ]
-  pos = 0
-  maxshow = 6
+  employees: EmployeeDto[] = [];
 
-  constructor(private router: Router, public dialog: MatDialog) { }
+  pos = 0;
+  maxshow = 6;
+
+  constructor(private router: Router, public dialog: MatDialog, private facadeServuce: EmployeesFacadeService) { }
 
   ngOnInit(): void {
+    this.facadeServuce.requestEmployees();
+    this.facadeServuce.employees()
+      // .pipe(tap(data => this.logger.debug('subscription', data)))
+      .subscribe(userProfile => {
+        // this.logger.debug('onInit', userProfile);
+        this.employees = userProfile.employees as EmployeeDto[];
+      });
   }
 
-  getEmployees() {
+  getEmployees(): EmployeeDto[] {
     return this.employees.slice(this.pos, this.pos + this.maxshow);
   }
 
-  editEmployee(employee) {
-    this.router.navigateByUrl("settings/employee");
+  editEmployee(employee): void {
+    this.router.navigateByUrl('settings/employee');
   }
 
   addEmployee(): void {
-    const dialogRef = this.dialog.open(AddEmployeeDialog, {
+    const dialogRef = this.dialog.open(AddEmployeeDialogComponent, {
       width: 'fit-content',
-      data: {data: "sample data"}
+      data: {data: 'sample data'}
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      //this.animal = result;
+      // this.animal = result;
     });
   }
 
-  moveUp() { 
-    let newpos = this.pos - 1;    
-    if(newpos>=0) {
+  moveUp(): void {
+    const newpos = this.pos - 1;
+    if (newpos >= 0) {
       this.pos = newpos;
     }
   }
 
-  moveDown() {   
-    let newpos = this.pos + 1;    
-    if(newpos + this.maxshow <= this.employees.length) {
+  moveDown(): void {
+    const newpos = this.pos + 1;
+    if (newpos + this.maxshow <= this.employees.length) {
       this.pos = newpos;
     }
   }
 
-  isLast() {    
+  isLast(): boolean {
     return this.pos + this.maxshow >= this.employees.length;
   }
 
-  isFirst() {
-    return this.pos == 0;
+  isFirst(): boolean {
+    return this.pos === 0;
   }
 }
 
 @Component({
-  selector: 'add-employee-dialog',
+  selector: 'lib-add-employee-dialog',
   templateUrl: 'add-employee-dialog.html',
   styleUrls: ['./add-employee-dialog.scss']
 })
-export class AddEmployeeDialog {
+export class AddEmployeeDialogComponent {
 
   constructor(
-    public dialogRef: MatDialogRef<AddEmployeeDialog>,
+    public dialogRef: MatDialogRef<AddEmployeeDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 
+  showError = false;
+  fileSelected = false;
+
   onNextClick(): void {
-    this.show_error = true;
+    this.showError = true;
   }
 
   onUploadClick(): void {
@@ -145,15 +97,12 @@ export class AddEmployeeDialog {
   }
 
   onAdd(): void {
-    this.show_error = false;
-    this.file_selected = true;
+    this.showError = false;
+    this.fileSelected = true;
   }
 
   onRemove(): void {
-    this.file_selected = false;
+    this.fileSelected = false;
   }
-
-  show_error = false;
-  file_selected = false;
 
 }

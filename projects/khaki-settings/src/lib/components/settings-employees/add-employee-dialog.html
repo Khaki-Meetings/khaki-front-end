@@ -1,13 +1,15 @@
 <div class="container">
-    <div class="add_file" *ngIf="!file_selected">
+    <div class="add_file" *ngIf="!fileSelected">
       <mat-icon class="btn" (click)="onAdd()">add_circle_outline</mat-icon>
       <span class="caption">Add list of employees</span>
     </div>
-    <div class="remove_file" *ngIf="file_selected"><mat-icon class="btn" (click)="onRemove()">close</mat-icon> <mat-icon>insert_drive_file</mat-icon> departmentlist2020.jpg</div>
-    <div class="error" *ngIf="show_error">Please upload employee file</div>
+    <div class="remove_file" *ngIf="fileSelected">
+      <mat-icon class="btn" (click)="onRemove()">close</mat-icon>
+      <mat-icon>insert_drive_file</mat-icon> departmentlist2020.jpg</div>
+    <div class="error" *ngIf="showError">Please upload employee file</div>
     <div class="btn-container" mat-dialog-actions>
-    <button class="light btn" mat-button *ngIf="!file_selected" (click)="onNextClick()" cdkFocusInitial>Next</button>
-    <button class="light btn" mat-button *ngIf="file_selected" (click)="onUploadClick()">Upload</button>
-    <button class="close btn" mat-button [mat-dialog-close]="data.data">Cancel</button>
+        <button class="light btn" mat-button *ngIf="!fileSelected" (click)="onNextClick()" cdkFocusInitial>Next</button>
+        <button class="light btn" mat-button *ngIf="fileSelected" (click)="onUploadClick()">Upload</button>
+        <button class="close btn" mat-button [mat-dialog-close]="data.data">Cancel</button>
     </div>
 </div>

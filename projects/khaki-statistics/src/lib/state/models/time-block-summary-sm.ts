@@ -3,9 +3,9 @@ import {ErrorSm} from './errorSm';
 
 export interface TimeBlockSummarySm {
   timeBlock?: IntervalEnum;
-  totalTime?: number;
+  totalHours?: number;
   totalCost?: number;
   averageCost?: number;
-  totalMeetings?: number;
+  meetingCount?: number;
   error?: ErrorSm;
 }

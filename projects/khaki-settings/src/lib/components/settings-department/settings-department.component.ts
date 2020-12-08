@@ -1,6 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { DepartmentsFacadeService } from '../../state/facades/departments-facade.service';
+import { DepartmentDto } from '../../services/models/departmentsResponseDto';
 export interface DialogData {
   data: string;
 }
@@ -12,108 +14,76 @@ export interface DialogData {
 })
 export class SettingsDepartmentComponent implements OnInit {
 
-  departments = [
-    {
-      name: 'Customer Service',
-    },
-    {
-      name: 'Finance / Accounting Department',
-    },
-    {
-      name: 'Human Resources / Personnel Department / Staff Department',
-    },
-    {
-      name: 'I.T. (Information Technology)',
-    },
-    {
-      name: 'Logistics',
-    },
-    {
-      name: 'Maintenance',
-    },
-    {
-      name: 'Marketing',
-    },
-    {
-      name: 'Public Relations Team / Public Relations Department',
-    },
-    {
-      name: 'Production Department / Manufacturing Department',
-    },
-    {
-      name: 'Research and Development / Engineering Department',
-    },
-    {
-      name: 'Sales',
-    },
-    {
-      name: 'Shipping Department / Dispatch Department',
-    },
-    {
-      name: 'Technical Support Team',
-    }
-  ]
+  departments: DepartmentDto[] = [];
 
-  pos = 0
-  maxshow = 9
+  pos = 0;
+  maxshow = 9;
 
-  constructor(private router: Router, public dialog: MatDialog) { }
+  constructor(private router: Router, public dialog: MatDialog, private departmentsFacadeService: DepartmentsFacadeService) { }
 
   ngOnInit(): void {
+    this.departmentsFacadeService.requestDepartments();
+    this.departmentsFacadeService.departments()
+      .subscribe(data => {
+        this.departments = data.departments as DepartmentDto[];
+      });
   }
 
-  getDepartments() {
+  getDepartments(): DepartmentDto[] {
     return this.departments.slice(this.pos, this.pos + this.maxshow);
   }
 
   addDepartment(): void {
-    const dialogRef = this.dialog.open(AddDepartmentDialog, {
+    const dialogRef = this.dialog.open(AddDepartmentDialogComponent, {
       width: 'fit-content',
-      data: {data: "sample data"}
+      data: {data: 'sample data'}
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      //this.animal = result;
+      // this.animal = result;
     });
   }
 
-  moveUp() { 
-    let newpos = this.pos - 1;    
-    if(newpos>=0) {
+  moveUp(): void {
+    const newpos = this.pos - 1;
+    if (newpos >= 0) {
       this.pos = newpos;
     }
   }
 
-  moveDown() {   
-    let newpos = this.pos + 1;    
-    if(newpos + this.maxshow <= this.departments.length) {
+  moveDown(): void {
+    const newpos = this.pos + 1;
+    if (newpos + this.maxshow <= this.departments.length) {
       this.pos = newpos;
     }
   }
 
-  isLast() {    
+  isLast(): boolean {
     return this.pos + this.maxshow >= this.departments.length;
   }
 
-  isFirst() {
-    return this.pos == 0;
+  isFirst(): boolean {
+    return this.pos === 0;
   }
 }
 
 @Component({
-  selector: 'add-department-dialog',
+  selector: 'lib-add-department-dialog',
   templateUrl: 'add-department-dialog.html',
   styleUrls: ['./add-department-dialog.scss']
 })
-export class AddDepartmentDialog {
+export class AddDepartmentDialogComponent {
 
   constructor(
-    public dialogRef: MatDialogRef<AddDepartmentDialog>,
+    public dialogRef: MatDialogRef<AddDepartmentDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 
+  showError = false;
+  fileSelected = false;
+
   onNextClick(): void {
-    this.show_error = true;
+    this.showError = true;
   }
 
   onUploadClick(): void {
@@ -121,15 +91,12 @@ export class AddDepartmentDialog {
   }
 
   onAdd(): void {
-    this.show_error = false;
-    this.file_selected = true;
+    this.showError = false;
+    this.fileSelected = true;
   }
 
   onRemove(): void {
-    this.file_selected = false;
+    this.fileSelected = false;
   }
-
-  show_error = false;
-  file_selected = false;
 
 }

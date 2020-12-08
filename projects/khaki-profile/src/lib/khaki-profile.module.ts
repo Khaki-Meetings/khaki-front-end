@@ -10,7 +10,7 @@ import {ProfileLogoutComponent} from './components/profile-logout/profile-logout
 import {ProfileHelpComponent} from './components/profile-help/profile-help.component';
 import {ProfileNameComponent} from './components/profile-name/profile-name.component';
 import {MatIconModule} from '@angular/material/icon';
-import { CommonModule } from '@angular/common';
+import {CommonModule} from '@angular/common';
 
 @NgModule({
   declarations: [
