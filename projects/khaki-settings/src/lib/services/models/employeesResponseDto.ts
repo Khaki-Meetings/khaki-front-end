@@ -1,10 +1,12 @@
 export interface EmployeeDto {
-    avatar?: string;
-    name?: string;
-    subject?: string;
-    department?: string;
+  avatar?: string;
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  department?: string;
+  notify?: boolean;
 }
 
 export interface EmployeesResponseDto {
-    employees: EmployeeDto[];
+  employees: EmployeeDto[];
 }

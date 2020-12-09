@@ -1,6 +1,6 @@
 <div class="center">
     <span>Name</span>
-    <span>John Johnson</span>
+    <span>{{displayName}}</span>
     <div *ngIf="editMode" class="edit">
         <span>First name</span>
         <input type="text" name="firstname" placeholder="John" />
@@ -9,7 +9,7 @@
         <span>Last name</span>
         <input type="text" name="lastname" placeholder="Johnson" />
     </div>
-    <button *ngIf="!editMode" (click)="onChange()">Change</button>
-    <button *ngIf="editMode" class="save" (click)="onSave()">Save</button>
-    <button *ngIf="editMode" (click)="onCancel()">Cancel</button>
+<!--    <button *ngIf="!editMode" (click)="onChange()">Change</button>-->
+<!--    <button *ngIf="editMode" class="save" (click)="onSave()">Save</button>-->
+<!--    <button *ngIf="editMode" (click)="onCancel()">Cancel</button>-->
 </div>

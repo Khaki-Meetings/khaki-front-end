@@ -3,7 +3,7 @@
     <span [ngClass]="{'selected': menuNow == 'name'}">Name</span>
   </div>
   <div>
-    <span class="gray">John Johnson</span>
+    <span class="gray">{{displayName}}</span>
     <a routerLink="name" (click)="onMenu($event, 'name')">
       <mat-icon [ngClass]="{'arrow': true, 'selected': menuNow == 'name'}">keyboard_arrow_right</mat-icon>
     </a>
@@ -14,7 +14,7 @@
     <span [ngClass]="{'selected': menuNow == 'email'}">Email</span>
   </div>
   <div>
-    <span class="gray">JJ@coolthingsco.com</span>
+    <span class="gray">{{email}}</span>
     <a routerLink="email" (click)="onMenu($event, 'email')"><mat-icon [ngClass]="{'arrow': true, 'selected': menuNow == 'email'}">keyboard_arrow_right</mat-icon></a>
   </div>
 </div>

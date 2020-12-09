@@ -2,63 +2,59 @@
   "employees" : [
     {
       "avatar": "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200",
-      "name": "Ralph Andersen",
-      "subject": "IT",
-      "department": "Development"
+      "firstName": "Ralph",
+      "lastName": "Andersen",
+      "department": "Development",
+      "notify": true,
+      "email": "ralph@bob.com"
     },
     {
       "avatar": "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200",
-      "name": "Kyle Derwin",
-      "subject": "Customer support",
-      "department": "Agent"
+      "firstName": "Kyle",
+      "lastName": "Derwin",
+      "department": "Agent",
+      "notify": true,
+      "email": "kyle@bob.com"
     },
     {
       "avatar": "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200",
-      "name": "Lucas Bradley",
-      "subject": "Sales",
-      "department": "Representative"
+      "firstName": "Lucas",
+      "lastName": "Bradley",
+      "department": "Representative",
+      "notify": true,
+      "email": "lucas@bob.com"
     },
     {
       "avatar": "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200",
-      "name": "Mindy Orwell",
-      "subject": "IT",
-      "department": "Development"
+      "firstName": "Mindy",
+      "lastName": "Orwell",
+      "department": "Development",
+      "notify": true,
+      "email": "mindy@bob.com"
     },
     {
       "avatar": "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200",
-      "name": "Charles Radcliffe",
-      "subject": "IT",
-      "department": "Designer"
+      "firstName": "Charles",
+      "lastName": "Radcliffe",
+      "department": "Designer",
+      "notify": true,
+      "email": "charles@bob.com"
     },
     {
       "avatar": "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200",
-      "name": "Dave Schloff",
-      "subject": "Human resources",
-      "department": "Assistant Director"
+      "firstName": "Dave",
+      "lastName": "Schloff",
+      "department": "Assistant Director",
+      "notify": true,
+      "email": "dave@bob.com"
     },
     {
       "avatar": "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200",
-      "name": "Tina Young",
-      "subject": "Finace",
-      "department": "Accountant"
-    },
-    {
-      "avatar": "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200",
-      "name": "Ralph Anderson",
-      "subject": "IT",
-      "department": "Development"
-    },
-    {
-      "avatar": "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200",
-      "name": "Ralph Anderson",
-      "subject": "IT",
-      "department": "Development"
-    },
-    {
-      "avatar": "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200",
-      "name": "Ralph Anderson",
-      "subject": "IT",
-      "department": "Development"
+      "firstName": "Tina",
+      "lastName": "Young",
+      "department": "Accountant",
+      "notify": true,
+      "email": "tina@bob.com"
     }
   ]
 }

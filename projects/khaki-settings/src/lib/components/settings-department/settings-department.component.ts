@@ -1,8 +1,9 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { Router } from '@angular/router';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { DepartmentsFacadeService } from '../../state/facades/departments-facade.service';
-import { DepartmentDto } from '../../services/models/departmentsResponseDto';
+import {Component, Inject, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {DepartmentsFacadeService} from '../../state/facades/departments-facade.service';
+import {DepartmentDto} from '../../services/models/departmentsResponseDto';
+
 export interface DialogData {
   data: string;
 }
@@ -17,9 +18,10 @@ export class SettingsDepartmentComponent implements OnInit {
   departments: DepartmentDto[] = [];
 
   pos = 0;
-  maxshow = 9;
+  maxShow = 9;
 
-  constructor(private router: Router, public dialog: MatDialog, private departmentsFacadeService: DepartmentsFacadeService) { }
+  constructor(private router: Router, public dialog: MatDialog, private departmentsFacadeService: DepartmentsFacadeService) {
+  }
 
   ngOnInit(): void {
     this.departmentsFacadeService.requestDepartments();
@@ -30,7 +32,7 @@ export class SettingsDepartmentComponent implements OnInit {
   }
 
   getDepartments(): DepartmentDto[] {
-    return this.departments.slice(this.pos, this.pos + this.maxshow);
+    return this.departments.slice(this.pos, this.pos + this.maxShow);
   }
 
   addDepartment(): void {
@@ -54,13 +56,13 @@ export class SettingsDepartmentComponent implements OnInit {
 
   moveDown(): void {
     const newpos = this.pos + 1;
-    if (newpos + this.maxshow <= this.departments.length) {
+    if (newpos + this.maxShow <= this.departments.length) {
       this.pos = newpos;
     }
   }
 
   isLast(): boolean {
-    return this.pos + this.maxshow >= this.departments.length;
+    return this.pos + this.maxShow >= this.departments.length;
   }
 
   isFirst(): boolean {
@@ -77,7 +79,8 @@ export class AddDepartmentDialogComponent {
 
   constructor(
     public dialogRef: MatDialogRef<AddDepartmentDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {
+  }
 
   showError = false;
   fileSelected = false;
