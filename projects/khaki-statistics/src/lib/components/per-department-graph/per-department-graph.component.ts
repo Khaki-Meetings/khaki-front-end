@@ -57,6 +57,7 @@ export class PerDepartmentGraphComponent implements OnInit {
           this.drawDefaultDonutLabel();
 
           this.logger.debug('graph data', this.graphData);
+          this.chartData = [];
           this.graphData.forEach(
             departmentData => {
               const newDataPoint = {
@@ -114,7 +115,7 @@ export class PerDepartmentGraphComponent implements OnInit {
   onActivate(data): void {
     let displayValue = '';
     if (data.value.value !== 0) {
-      displayValue = Math.floor(data.value.value / 60) + ' hrs';
+      displayValue = Math.trunc(data.value.value) + ' hrs';
     }
     document.getElementById('center-text-label').innerHTML = data.value.name;
     document.getElementById('center-text-value').innerHTML = displayValue;
@@ -133,7 +134,7 @@ export class PerDepartmentGraphComponent implements OnInit {
           val = val + this.graphData[x].value;
         }
       }
-      const displayValue = Math.floor(val / 60) + ' hrs';
+      const displayValue = Math.trunc(val) + ' hrs';
       document.getElementById('center-text-value').innerHTML = displayValue;
       document.getElementById('center-text-label').innerHTML = 'in meetings';
     }

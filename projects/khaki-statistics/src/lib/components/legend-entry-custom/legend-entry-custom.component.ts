@@ -33,7 +33,7 @@ export class LegendEntryCustomComponent extends LegendEntryComponent implements 
   get displayValue(): string {
     let displayValue = '';
     if (this.dataExt.value !== 0) {
-      displayValue = Math.floor(this.dataExt.value / 60) + ' hrs';
+      displayValue = Math.trunc(this.dataExt.value) + ' hrs';
     }
     return displayValue || '(empty)';
   }
