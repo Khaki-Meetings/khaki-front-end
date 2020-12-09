@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UserProfileResponseDto } from '../../services/models/userProfileResponseDto';
+import { UserProfileFacadeService } from '../../state/facades/user-profile-facade.service';
 
 @Component({
   selector: 'lib-profile-main',
@@ -6,10 +8,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./profile-main.component.scss']
 })
 export class ProfileMainComponent implements OnInit {
-
-  constructor() { }
+  
+  constructor(private userProfileFacadeService: UserProfileFacadeService) { }
 
   ngOnInit(): void {
+    this.userProfileFacadeService.requestUserProfile();
   }
 
 }

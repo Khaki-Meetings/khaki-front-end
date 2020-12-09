@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UserProfileResponseDto } from '../../services/models/userProfileResponseDto';
+import { UserProfileFacadeService } from '../../state/facades/user-profile-facade.service';
 
 @Component({
   selector: 'lib-profile-email',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileEmailComponent implements OnInit {
 
-  constructor() { }
+  userProfile: UserProfileResponseDto = {};
+  constructor(private userProfileFacadeService: UserProfileFacadeService) { }
 
   ngOnInit(): void {
+    this.userProfileFacadeService.userProfile()
+      .subscribe(data => {
+        this.userProfile = data as UserProfileResponseDto;
+      });
   }
 
 }

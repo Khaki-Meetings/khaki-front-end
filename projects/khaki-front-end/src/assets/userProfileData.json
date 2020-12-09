@@ -1,8 +1,7 @@
 {
-    "firstname": "Teddy",
-    "lastname": "Bear",
+    "firstName": "Teddy",
+    "lastName": "Bear",
     "notifications": "on",
     "email": "teddybear@gmail.com",
-    "companyname": "Cool Things Co."
+    "companyName": "Cool Things Co."
 }
-  

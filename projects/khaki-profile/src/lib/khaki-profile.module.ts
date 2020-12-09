@@ -11,6 +11,10 @@ import {ProfileHelpComponent} from './components/profile-help/profile-help.compo
 import {ProfileNameComponent} from './components/profile-name/profile-name.component';
 import {MatIconModule} from '@angular/material/icon';
 import {CommonModule} from '@angular/common';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import * as fromKhakiProfile from './state';
+import { ProfileEffects } from './state/effects/user-profile.effects';
 
 @NgModule({
   declarations: [
@@ -27,7 +31,19 @@ import {CommonModule} from '@angular/common';
   imports: [
     KhakiProfileRoutingModule,
     MatIconModule,
-    CommonModule
+    CommonModule,
+    StoreModule.forFeature(
+      fromKhakiProfile.khakiProfileFeatureKey,
+      fromKhakiProfile.reducers,
+      {
+        metaReducers: fromKhakiProfile.metaReducers
+      }
+    ),
+    EffectsModule.forFeature(
+      [
+        ProfileEffects,
+      ]
+    ),
   ],
   exports: [KhakiProfileComponent]
 })
