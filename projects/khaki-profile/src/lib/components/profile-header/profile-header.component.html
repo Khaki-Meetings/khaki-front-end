@@ -1,10 +1,11 @@
-<div class="header-bg-container">
-  <div class="header-bg">
-    <img src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"/>
-    <span>John Johnson
-      <div>
-        User: {{authService.user$|async|json}}
-      </div>
-        </span>
+<div class="main-container header-bg-container">
+  <div class="label">
+    <span>Profile photo</span>
   </div>
+  <div class="header-bg">
+      <img src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200" />
+  </div>
+  <div>
+    User: {{authService.user$|async|json}}
+  </div>  
 </div>

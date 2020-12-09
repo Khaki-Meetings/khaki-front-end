@@ -91,3 +91,27 @@
 .icon-spacing {
   padding: 0px 15px 0px 15px;
 }
+
+.logout {
+  position: fixed;
+  bottom: 20px;
+  
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    color: gray; margin: 0 auto;
+    align-items: center;
+  }
+  a {
+    background: #4AABE2;
+    border-radius: 6px;
+    display: flex;
+    text-decoration: none;
+    color: #F7FAFC;
+    padding: 8px 10px 8px 10px;
+  }
+  span {
+    text-align: center;
+    flex: auto;
+  }
+}

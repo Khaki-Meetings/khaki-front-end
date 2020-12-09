@@ -1,7 +1,6 @@
 div.container {
-    font-size: 2em;
     padding: 2em 3em 2em 3em;
-    
+
     div.btn-container {
         margin-top: 2em;
         margin-left: auto;
@@ -13,13 +12,13 @@ div.container {
             color: white;
             padding: 10px;
             min-width: 100px;
-            background: rgba(51, 153, 221);        
+            background: rgba(51, 153, 221);
         }
         button.light {
             background: rgba(204, 238, 255);
             color: black;
         }
-        
+
         button.close {
             margin-left: 3em;
         }
@@ -31,5 +30,16 @@ div.container {
         color: red;
         font-size: 0.7em;
         line-height: 2em;
+    }
+
+    .add_file {
+      line-height: 1.5em;
+      cursor: pointer;
+      align-items: center;
+      display: flex;
+
+      .caption {
+        padding-left: 5px;
+      }
     }
 }

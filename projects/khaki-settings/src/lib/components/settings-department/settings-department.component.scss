@@ -3,39 +3,26 @@
 }
 
 div.container {
-    font-size: 2em;
     display: flex;
     flex-direction: column;
     gap: 1em;
     position: relative;
 
-    >div {
-        width: 100%;
-        div {
-            line-height: 1.5em;
-            display: inline-block;
-            float: right;
-        }
-    }
-    
     table {
         font-size: 1em;
         td {
             padding: 0.25em;
             line-height: 1.2em;
-        
-            img {
-                width: 2em;
-                height: 2em;
-                border-radius: 1em;
-            }
+            border: 1px solid #DBDEDA;
+            border-radius: 5px;
+            padding-bottom: 5px;
         }
 
         tr {
             cursor: pointer;
         }
     }
-    
+
     .text-department {
         color: darkgray;
     }
@@ -63,9 +50,6 @@ div.container {
         margin-right: auto;
     }
 
-    .add_emp {
-        cursor: pointer;
-    }
     div.dialog {
         position: fixed;
         transform: translate(-50%, -50%);
@@ -81,10 +65,25 @@ div.container {
             color: white;
             padding: 10px;
             min-width: 100px;
-            background: rgba(51, 153, 221);        
+            background: rgba(51, 153, 221);
         }
         button.save {
             background: rgba(204, 238, 255);
         }
     }
+
+    width: 100%;
+
+    .add_emp {
+      line-height: 1.5em;
+      float: right;
+      cursor: pointer;
+      align-items: center;
+      display: flex;
+
+      .caption {
+        padding-left: 5px;
+      }
+    }
+
 }

@@ -1,2 +1,32 @@
-<p>Welcome!</p>
-<app-metadata></app-metadata>
+<div class="flex-container">
+  <div class="flex-child">
+    <div class="login-container">
+      <div *ngIf="(authService.isAuthenticated$ | async) === false">
+        <div>
+          <h3>Welcome,</h3>
+        </div>
+        <div>
+          <h3>please sign in.</h3>
+        </div>
+        <div class="auth0-container"
+          (click)="authService.loginWithPopup()">
+          <a class="button"
+            data-provider="google-oauth2" type="button">
+            <div class="icon"></div>
+            <div class="text">Sign in with Google</div>
+          </a>
+        </div>
+      </div>
+      <div *ngIf="(authService.isAuthenticated$ | async)">
+        <div>
+          <h3>Welcome to Khaki.</h3>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="flex-child">
+    <div>
+      <img src="/assets/laptop-working.png" />
+    </div>
+  </div>
+</div>

@@ -90,7 +90,7 @@ export class PerDepartmentGraphComponent implements OnInit {
   }
 
   public legendLabelActivate(event: any, item: any): void {
-    const dataElement = this.chartData.find(x => x.extra.displayName == event.name);
+    const dataElement = this.chartData.find(x => x.extra.displayName === event.name);
 
     const d = {
       entries: [{
@@ -127,8 +127,11 @@ export class PerDepartmentGraphComponent implements OnInit {
   public drawDefaultDonutLabel(): void {
     if (document.getElementById('center-text-label') != null) {
       let val = 0;
+
       for (const x in this.graphData) {
-        val = val + this.graphData[x].value;
+        if (x) {
+          val = val + this.graphData[x].value;
+        }
       }
       const displayValue = Math.floor(val / 60) + ' hrs';
       document.getElementById('center-text-value').innerHTML = displayValue;
