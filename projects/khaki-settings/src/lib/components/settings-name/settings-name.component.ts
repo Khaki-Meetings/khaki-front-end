@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UserProfileFacadeService} from '../../state/facades/user-profile-facade.service';
 import {HistorianService, Logging} from '@natr/historian';
-import { UserProfileResponseDto } from '../../services/models/userProfileResponseDto';
+import {UserProfileResponseDto} from '../../services/models/userProfileResponseDto';
+import {SettingsService} from '../../services/settings.service';
 
 @Logging
 @Component({
@@ -13,33 +14,36 @@ export class SettingsNameComponent implements OnInit {
   private logger: HistorianService;
   userProfile: UserProfileResponseDto = {};
 
-  constructor(private userProfileService: UserProfileFacadeService) { }
+  constructor(private userProfileService: UserProfileFacadeService, private settingService: SettingsService) {
+  }
 
-  editmode = false;
-  companyname = '';
+  editMode = false;
+  companyName = '';
 
   ngOnInit(): void {
+    this.settingService
+      .getCompany()
+      .subscribe(organization => this.companyName = organization.name);
+
     this.userProfileService.userProfile()
-      // .pipe(tap(data => this.logger.debug('subscription', data)))
       .subscribe(userProfile => {
-        // this.logger.debug('onInit', userProfile);
         this.userProfile = userProfile;
       });
   }
 
   onChange(): void {
-    this.editmode = true;
+    this.editMode = true;
   }
 
   onSave(): void {
-    this.editmode = false;
-    this.userProfileService.setUserProfile({companyName: this.companyname})
-    .subscribe(result => {
-      this.logger.debug('onSave', this.companyname);
-    });
+    this.editMode = false;
+    this.userProfileService.setUserProfile({companyName: this.companyName})
+      .subscribe(result => {
+        this.logger.debug('onSave', this.companyName);
+      });
   }
 
   onCancel(): void {
-    this.editmode = false;
+    this.editMode = false;
   }
 }

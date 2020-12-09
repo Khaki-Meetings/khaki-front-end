@@ -1,8 +1,10 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { Router } from '@angular/router';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { EmployeesFacadeService } from '../../state/facades/employees-facade.service';
-import { EmployeeDto } from '../../services/models/employeesResponseDto';
+import {AfterViewInit, Component, ElementRef, Inject, OnInit, ViewChild} from '@angular/core';
+import {Router} from '@angular/router';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {EmployeesFacadeService} from '../../state/facades/employees-facade.service';
+import {EmployeeDto} from '../../services/models/employeesResponseDto';
+import {HistorianService, Logging} from '@natr/historian';
+
 export interface DialogData {
   data: string;
 }
@@ -17,13 +19,14 @@ export class SettingsEmployeesComponent implements OnInit {
   employees: EmployeeDto[] = [];
 
   pos = 0;
-  maxshow = 6;
+  maxShow = 6;
 
-  constructor(private router: Router, public dialog: MatDialog, private facadeServuce: EmployeesFacadeService) { }
+  constructor(private router: Router, public dialog: MatDialog, private facadeService: EmployeesFacadeService) {
+  }
 
   ngOnInit(): void {
-    this.facadeServuce.requestEmployees();
-    this.facadeServuce.employees()
+    this.facadeService.requestEmployees();
+    this.facadeService.employees()
       // .pipe(tap(data => this.logger.debug('subscription', data)))
       .subscribe(userProfile => {
         // this.logger.debug('onInit', userProfile);
@@ -32,7 +35,7 @@ export class SettingsEmployeesComponent implements OnInit {
   }
 
   getEmployees(): EmployeeDto[] {
-    return this.employees.slice(this.pos, this.pos + this.maxshow);
+    return this.employees.slice(this.pos, this.pos + this.maxShow);
   }
 
   editEmployee(employee): void {
@@ -60,13 +63,13 @@ export class SettingsEmployeesComponent implements OnInit {
 
   moveDown(): void {
     const newpos = this.pos + 1;
-    if (newpos + this.maxshow <= this.employees.length) {
+    if (newpos + this.maxShow <= this.employees.length) {
       this.pos = newpos;
     }
   }
 
   isLast(): boolean {
-    return this.pos + this.maxshow >= this.employees.length;
+    return this.pos + this.maxShow >= this.employees.length;
   }
 
   isFirst(): boolean {
@@ -74,19 +77,26 @@ export class SettingsEmployeesComponent implements OnInit {
   }
 }
 
+@Logging
 @Component({
   selector: 'lib-add-employee-dialog',
   templateUrl: 'add-employee-dialog.html',
   styleUrls: ['./add-employee-dialog.scss']
 })
 export class AddEmployeeDialogComponent {
+  @ViewChild('fileInput', {static: false}) fileInput: ElementRef;
+  showError = false;
+  fileSelected = false;
+
+  fileName: string;
+  file: File;
+
+  private logger: HistorianService;
 
   constructor(
     public dialogRef: MatDialogRef<AddEmployeeDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
-
-  showError = false;
-  fileSelected = false;
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {
+  }
 
   onNextClick(): void {
     this.showError = true;
@@ -96,13 +106,22 @@ export class AddEmployeeDialogComponent {
     this.dialogRef.close();
   }
 
-  onAdd(): void {
-    this.showError = false;
-    this.fileSelected = true;
+  onAdd(event): void {
+    this.logger.debug('fileInput changed', event);
+    if (event.target.files.length > 0) {
+      this.file = event.target.files[0];
+      this.fileName = this.file.name;
+      this.logger.debug('file', this.file);
+      this.showError = false;
+      this.fileSelected = true;
+    }
   }
 
   onRemove(): void {
+    this.fileName = '';
+    this.file = null;
     this.fileSelected = false;
   }
+
 
 }

@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { UserProfileResponseDto } from '../../services/models/userProfileResponseDto';
-import { UserProfileFacadeService } from '../../state/facades/user-profile-facade.service';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {AuthService} from '@auth0/auth0-angular';
 
 @Component({
   selector: 'lib-profile-options',
@@ -10,25 +9,31 @@ import { UserProfileFacadeService } from '../../state/facades/user-profile-facad
 })
 export class ProfileOptionsComponent implements OnInit {
 
-  menunow = '';
-  userProfile: UserProfileResponseDto;
+  menuNow = '';
+  displayName: string;
+  email: string;
 
-  constructor(private router: Router, private userProfileFacadeService: UserProfileFacadeService) { }
+  constructor(private router: Router, public authService: AuthService) {
+  }
 
   ngOnInit(): void {
-    this.userProfileFacadeService.userProfile()
-      .subscribe(data => {
-        this.userProfile = data as UserProfileResponseDto;
-      });
+    this.authService
+      .user$
+      .subscribe(
+        user => {
+          this.displayName = user.name;
+          this.email = user.email;
+        }
+      );
   }
 
   onMenu(e, menuname): void {
-    if (this.menunow === menuname) {
-      this.menunow = '';
+    if (this.menuNow === menuname) {
+      this.menuNow = '';
       this.router.navigateByUrl('profile');
       e.preventDefault();
     } else {
-      this.menunow = menuname;
+      this.menuNow = menuname;
     }
   }
 

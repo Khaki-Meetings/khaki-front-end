@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { UserProfileResponseDto } from '../../services/models/userProfileResponseDto';
-import { UserProfileFacadeService } from '../../state/facades/user-profile-facade.service';
+import {Component, OnInit} from '@angular/core';
+import {AuthService} from '@auth0/auth0-angular';
 
 @Component({
   selector: 'lib-profile-name',
@@ -8,27 +7,33 @@ import { UserProfileFacadeService } from '../../state/facades/user-profile-facad
   styleUrls: ['./profile-name.component.scss']
 })
 export class ProfileNameComponent implements OnInit {
+  editMode = false;
 
-  userProfile: UserProfileResponseDto = {};
-  constructor(private userProfileFacadeService: UserProfileFacadeService) { }
+  firstName: string;
+  lastName: string;
+  displayName: string;
 
-  editmode = false;
+  constructor(public authService: AuthService) {
+  }
+
   ngOnInit(): void {
-    this.userProfileFacadeService.userProfile()
-      .subscribe(data => {
-        this.userProfile = data as UserProfileResponseDto;
+    this.authService.user$
+      .subscribe(user => {
+        this.firstName = user.firstName;
+        this.lastName = user.lastName;
+        this.displayName = user.name;
       });
   }
 
   onChange(): void {
-    this.editmode = true;
+    this.editMode = true;
   }
 
   onSave(): void {
-    this.editmode = false;
+    this.editMode = false;
   }
 
   onCancel(): void {
-    this.editmode = false;
+    this.editMode = false;
   }
 }

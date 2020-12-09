@@ -5,29 +5,29 @@
         <span class="caption">Add list of employees</span>
       </div>
   </div>
-  
-    <div>
-        <div>Department:
-            <select>
-                <option>all</option>
-                <option>Development</option>
-                <option>Agent</option>
-                <option>Representative</option>
-                <option>Designer</option>
-                <option>Accountant</option>
-                <option>AssistantDirector</option>
-            </select>
-        </div>
-    </div>
+
+<!--    <div>-->
+<!--        <div>Department:-->
+<!--            <select>-->
+<!--                <option>all</option>-->
+<!--                <option>Development</option>-->
+<!--                <option>Agent</option>-->
+<!--                <option>Representative</option>-->
+<!--                <option>Designer</option>-->
+<!--                <option>Accountant</option>-->
+<!--                <option>AssistantDirector</option>-->
+<!--            </select>-->
+<!--        </div>-->
+<!--    </div>-->
 
     <table>
         <tr *ngFor="let employee of getEmployees()" (click)="editEmployee(employee)">
             <td>
               <div class="employee-table-emp">
-                <div><img src="{{employee.avatar}}" /></div>
+                <div><img *ngIf="employee.avatar" [src]="employee.avatar" /></div>
                 <div class="employee-info">
-                  <div><span class="name">{{employee.name}}</span></div>
-                  <div><span class="text-detail">{{employee.subject}}</span></div>
+                  <div><span class="name">{{employee.firstName}} {{employee.lastName}}</span></div>
+                  <div><span class="text-detail">{{employee.email}}</span></div>
                   <div><span class='text-detail'>{{employee.department}}</span></div>
                 </div>
               </div>
