@@ -8,16 +8,14 @@ import {HistorianService, Logging} from '@natr/historian';
 import {OrganizersStatisticsSm} from '../state/models/organizers-statistics-sm';
 import {createSchema, morphism, StrictSchema} from 'morphism';
 import {OrganizersStatisticsDto} from './models/organizers-statistics-dto';
-import {DepartmentStatisticsSm} from '../state/models/department-statistics-sm';
-import {DepartmentStatisticsResponseDto} from './models/department-statistics-response-dto';
 import {TrailingStatisticsResponseDto} from './models/trailing-statistics-response-dto';
 import {TrailingStatisticsSm} from '../state/models/trailing-statistics-sm';
 import {IntervalEnum} from './models/interval.enum';
 import * as momentJs from 'moment';
 import {DepartmentsStatisticsResponseDto} from './models/departments-statistics-response-dto';
+import {DepartmentsStatisticsSm} from '../state/models/departments-statistics-sm';
 import StartOf = momentJs.unitOfTime.StartOf;
 import Moment = momentJs.Moment;
-import {DepartmentsStatisticsSm} from '../state/models/departments-statistics-sm';
 
 const moment = momentJs;
 
@@ -72,7 +70,7 @@ export class StatisticsService {
 
   private getStartEndUrl(interval: IntervalEnum, statName: string): string {
     let url = `/assets/${statName}${interval}Data.json`;
-    if (!this.environment.uiOnly) {
+    if (this.environment.khakiBff) {
       const startEnd = this.getStartEnd(interval);
       this.logger.debug('startEnd is', startEnd);
       const formattedStart = startEnd.start.utc().format();
@@ -105,7 +103,7 @@ export class StatisticsService {
   getTrailingStatistics(interval: IntervalEnum): Observable<TrailingStatisticsSm> {
     let url = '/assets/twelveMonthTrailingData.json';
 
-    if (!this.environment.uiOnly) {
+    if (this.environment.khakiBff) {
       const count = 12;
       const startEnd = this.getStartEnd(interval);
       this.logger.debug('start is', startEnd.start);

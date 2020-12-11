@@ -21,7 +21,7 @@ export class SettingsService {
 
   getCompany(): Observable<OrganizationResponseDto> {
     let url = '/assets/organizationData.json';
-    if (!this.environment.uiOnly) {
+    if (this.environment.khakiBff) {
       url = `${this.environment.khakiBff}/organizations`;
     }
     return this.httpClient.get(url)
@@ -56,7 +56,7 @@ export class SettingsService {
 
   getEmployees(): Observable<EmployeesResponseDto> {
     let url = '/assets/employeesData.json';
-    if (!this.environment.uiOnly) {
+    if (this.environment.khakiBff) {
       url = `${this.environment.khakiBff}/employees`;
     }
     return this.httpClient.get<EmployeesResponseDto>(url).pipe(tap(data => this.logger.debug('employee list', data)));
@@ -64,7 +64,7 @@ export class SettingsService {
 
   getDepartments(): Observable<DepartmentsResponseDto> {
     let url = '/assets/departmentsData.json';
-    if (!this.environment.uiOnly) {
+    if (this.environment.khakiBff) {
       url = `${this.environment.khakiBff}/departments`;
     }
     return this.httpClient
