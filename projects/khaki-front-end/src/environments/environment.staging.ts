@@ -1,5 +1,6 @@
 import {defaultEnvironment} from './environment-base';
 
 export const environment = {
-  ...defaultEnvironment
+  ...defaultEnvironment,
+  khakiBff: 'https://khaki-api-staging.herokuapp.com'
 };

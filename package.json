@@ -20,7 +20,7 @@
     "build-info-with-watch": "ng build khaki-info --watch",
     "build-info": "ng build khaki-info",
     "build-modules": "ng build khaki-statistics && ng build khaki-profile && ng build khaki-settings && ng build khaki-info",
-    "heroku-postbuild": "yarn run build-modules && ng build --prod"
+    "heroku-postbuild": "yarn run build-modules && ng build -c ${KHAKI_ENV_CONFIG}"
   },
   "private": true,
   "dependencies": {

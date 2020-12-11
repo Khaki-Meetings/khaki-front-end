@@ -2,7 +2,7 @@ import {IntervalEnum} from './interval.enum';
 
 export interface TimeBlockSummaryResponseDto {
   interval: IntervalEnum;
-  totalTime: number;
+  totalHours: number;
   totalMeetings: number;
   totalCost: number;
   averageCost: number;

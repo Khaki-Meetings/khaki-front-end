@@ -139,10 +139,9 @@ export class StatisticsService {
         tap(ret => this.logger.debug('timeBlockSummary data', ret)),
         map(
           (timeBlockSummary: TimeBlockSummaryResponseDto) => {
-            timeBlockSummary as TimeBlockSummarySm;
             timeBlockSummary.averageManHours = 0;
-            if (timeBlockSummary.meetingCount != 0) {
-              timeBlockSummary.averageManHours = timeBlockSummary["totalHours"] / timeBlockSummary.meetingCount;
+            if (timeBlockSummary.meetingCount !== 0) {
+              timeBlockSummary.averageManHours = timeBlockSummary.totalHours / timeBlockSummary.meetingCount;
             }
             return timeBlockSummary;
           }
