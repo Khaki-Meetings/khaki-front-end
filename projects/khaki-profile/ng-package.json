@@ -4,7 +4,10 @@
   "lib": {
     "entryFile": "src/public-api.ts",
     "umdModuleIds": {
-      "@auth0/auth0-angular": "auth0-angular"
+      "@auth0/auth0-angular": "auth0-angular",
+      "@ngrx/store": "ngrx-store",
+      "@ngrx/effects": "ngrx-effects",
+      "@natr/historian": "natr-historian"
     }
   }
 }
