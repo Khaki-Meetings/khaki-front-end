@@ -16,6 +16,9 @@ import {MainComponent} from './components/main/main.component';
 import {environment} from '../environments/environment';
 import {UserMetadataComponent} from './components/user-metadata/user-metadata.component';
 import {TenantInterceptor} from './interceptors/tenant.interceptor';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
+import {MatInputModule} from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -62,7 +65,10 @@ import {TenantInterceptor} from './interceptors/tenant.interceptor';
     ),
     BrowserAnimationsModule,
     MatSidenavModule,
-    MatIconModule
+    MatIconModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule
   ],
   providers: [
     {provide: 'environment', useValue: environment},

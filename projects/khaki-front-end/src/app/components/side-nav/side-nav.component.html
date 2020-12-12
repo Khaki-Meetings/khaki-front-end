@@ -7,7 +7,7 @@
   </div>
   <div class="spacer"></div>
 
-  <div *ngIf="authService.isAuthenticated$ | async">
+  <div *ngIf="isAuthed">
     <div class="menu-items">
       <div class="icon-spacing">
         <a routerLink="stats" routerLinkActive="active-link">
@@ -38,14 +38,22 @@
 
   </div>
 
-  <div *ngIf="authService.isAuthenticated$ | async">
+  <div *ngIf="isAuthed">
     <div class="logout">
       <div class="icon-spacing container">
-        <a (click)="authService.logout()">
+        <a (click)="logout()">
           <span>Logout</span>
         </a>
       </div>
     </div>
+  </div>
+
+  <div *ngIf="hasMultiTenant">
+      <div class="icon-spacing container">
+        <mat-select style="width: 90px; background-color: white" [value]="defaultTenant" (selectionChange)="onTenantChange($event)">
+          <mat-option *ngFor="let item of tenantMap | keyvalue" [value]="item.key">{{item.key}}</mat-option>
+        </mat-select>
+      </div>
   </div>
 
 </div>
