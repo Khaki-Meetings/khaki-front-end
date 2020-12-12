@@ -6,13 +6,16 @@ import {
   HttpInterceptor
 } from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {TenantKeyFacadeService} from '../state/facades/tenant-key-facade.service';
+import {TenantFacadeService} from '../state/facades/tenant-facade.service';
 import {concatMap} from 'rxjs/operators';
+import {HistorianService, Logging} from '@natr/historian';
 
+@Logging
 @Injectable()
 export class TenantInterceptor implements HttpInterceptor {
+  private logger: HistorianService;
 
-  constructor(private tenantKeyFacade: TenantKeyFacadeService) {
+  constructor(private tenantKeyFacade: TenantFacadeService) {
   }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
@@ -21,6 +24,7 @@ export class TenantInterceptor implements HttpInterceptor {
       .pipe(
         concatMap(
           tenantKey => {
+            this.logger.debug('tenantKey', tenantKey);
             tenantKey = tenantKey || '';
             request = request.clone(
               {

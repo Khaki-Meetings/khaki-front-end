@@ -1,19 +1,19 @@
-import {
-  ActionReducer,
-  ActionReducerMap, createAction,
-  createFeatureSelector, createReducer,
-  createSelector,
-  MetaReducer, on, props
-} from '@ngrx/store';
-import { environment } from '../../../environments/environment';
+import {ActionReducerMap, createAction, createReducer, MetaReducer, on, props} from '@ngrx/store';
+import {environment} from '../../../environments/environment';
 
 export interface KhakiState {
   tenantKey: string;
+  tenantMap: Map<string, string>;
 }
 
 export const setTenantKeyAction = createAction(
   '[Tenant Key] Set Tenant Key',
-  props<{tenantKey: string}>()
+  props<{ tenantKey: string }>()
+);
+
+export const setTenantMapAction = createAction(
+  '[Tenant Key] Set Tenant Map',
+  props<{ tenantMap: Map<string, string> }>()
 );
 
 const tenantKeyReducer = createReducer(
@@ -26,9 +26,20 @@ const tenantKeyReducer = createReducer(
   )
 );
 
-export const reducers: ActionReducerMap<KhakiState> = {
-  tenantKey: tenantKeyReducer
-};
+const tenantMapReducer = createReducer(
+  new Map<string, string>(),
+  on(
+    setTenantMapAction,
+    (state, action) => {
+      console.log('tenantMapReducer action is', action);
+      return action.tenantMap;
+    }
+  )
+);
 
+export const reducers: ActionReducerMap<KhakiState> = {
+  tenantKey: tenantKeyReducer,
+  tenantMap: tenantMapReducer
+};
 
 export const metaReducers: MetaReducer<KhakiState>[] = !environment.production ? [] : [];
