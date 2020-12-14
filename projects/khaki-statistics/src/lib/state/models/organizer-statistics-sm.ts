@@ -3,6 +3,6 @@ export interface OrganizerStatisticsSm {
   organizerFirstName: string;
   organizerLastName: string;
   totalMeetings: number;
-  totalHours: number;
+  totalSeconds: number;
   totalCost: number;
 }

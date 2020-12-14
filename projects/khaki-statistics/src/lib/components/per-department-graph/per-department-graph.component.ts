@@ -84,7 +84,7 @@ export class PerDepartmentGraphComponent implements OnInit {
       el => {
         return {
           name: el.department,
-          value: el.totalHours
+          value: el.totalSeconds
         };
       }
     );

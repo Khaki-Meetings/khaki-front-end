@@ -3,6 +3,6 @@ import {OrganizerDto} from './organizer-dto';
 export interface OrganizerStatisticsDto {
   organizer: OrganizerDto;
   totalMeetings: number;
-  totalHours: number;
+  totalSeconds: number;
   totalCost: number;
 }

@@ -42,7 +42,7 @@ describe('PerDepartmentStatisticsFacadeService', () => {
           departmentsStatistics: [
             {
               totalCost: 1,
-              totalHours: 1,
+              totalSeconds: 1,
               averageCost: 1,
               department: 'finance'
             },

@@ -6,7 +6,7 @@
       "organizerLastName": "Jones",
       "organizerEmail": "bob@bob.com",
       "totalCost": 2800,
-      "totalHours": 100,
+      "totalSeconds": 100,
       "totalMeetings": 405
     },
     {
@@ -14,7 +14,7 @@
       "organizerLastName": "Smith",
       "organizerEmail": "fred@bob.com",
       "totalCost": 5500,
-      "totalHours": 40,
+      "totalSeconds": 40,
       "totalMeetings": 405
     },
     {
@@ -22,7 +22,7 @@
       "organizerLastName": "Jones",
       "organizerEmail": "betty@bob.com",
       "totalCost": 2388,
-      "totalHours": 40,
+      "totalSeconds": 40,
       "totalMeetings": 405
     },
     {
@@ -30,7 +30,7 @@
       "organizerLastName": "Jones",
       "organizerEmail": "steve@bob.com",
       "totalCost": 2339,
-      "totalHours": 40,
+      "totalSeconds": 40,
       "totalMeetings": 405
     },
     {
@@ -38,7 +38,7 @@
       "organizerLastName": "Jones",
       "organizerEmail": "ted@bob.com",
       "totalCost": 1239,
-      "totalHours": 40,
+      "totalSeconds": 40,
       "totalMeetings": 405
     }
   ],

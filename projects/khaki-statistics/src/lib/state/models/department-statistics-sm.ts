@@ -2,7 +2,7 @@ import {DepartmentSm} from './departmentSm';
 
 export interface DepartmentStatisticsSm {
   department: string;
-  totalHours?: number;
+  totalSeconds?: number;
   totalCost?: number;
   averageCost?: number;
 }
