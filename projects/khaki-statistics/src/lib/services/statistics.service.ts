@@ -137,10 +137,15 @@ export class StatisticsService {
         tap(ret => this.logger.debug('timeBlockSummary data', ret)),
         map(
           (timeBlockSummary: TimeBlockSummaryResponseDto) => {
+            this.logger.debug('GETTING TIME BLOCK INFO');
             timeBlockSummary.averageManHours = 0;
-            if (timeBlockSummary.meetingCount !== 0) {
+            if (timeBlockSummary.totalHours != 0 && timeBlockSummary.meetingCount !== 0) {
               timeBlockSummary.averageManHours = timeBlockSummary.totalHours / timeBlockSummary.meetingCount;
             }
+//            console.log("TOTAL HOURS:" + timeBlockSummary.totalHours.toString());
+//            this.logger.debug(timeBlockSummary.meetingCount.toString());
+//            this.logger.debug(timeBlockSummary.averageManHours.toString());
+            this.logger.debug(timeBlockSummary);
             return timeBlockSummary;
           }
         )
