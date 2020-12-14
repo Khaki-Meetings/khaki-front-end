@@ -2,10 +2,11 @@ import { createAction, props } from '@ngrx/store';
 import {TrailingStatisticsSm} from '../models/trailing-statistics-sm';
 import {ErrorSm} from '../models/errorSm';
 import {IntervalEnum} from '../../services/models/interval.enum';
+import {SetCurrentTimeIntervalActionProp} from './current-time-interval.actions';
 
 export const loadTrailingStatistics = createAction(
   '[TrailingStatistics] Load TrailingStatistics',
-  props<{interval: IntervalEnum}>()
+  props<SetCurrentTimeIntervalActionProp>()
 );
 
 export const loadTrailingStatisticsSuccess = createAction(
