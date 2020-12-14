@@ -34,10 +34,3 @@
         <mat-icon [ngClass]="{'arrow': true, 'selected': menuNow == 'help'}">keyboard_arrow_right</mat-icon>
     </a>
 </div>
-<div [ngClass]="{'hide': menuNow != 'logout' && menuNow != ''}">
-    <mat-icon>supervisor_account</mat-icon>
-    <span class="grow" [ngClass]="{'selected': menuNow == 'logout'}">Logout</span>
-    <a routerLink="logout" (click)="onMenu($event, 'logout')">
-        <mat-icon [ngClass]="{'arrow': true, 'selected': menuNow == 'logout'}">keyboard_arrow_right</mat-icon>
-    </a>
-</div>
