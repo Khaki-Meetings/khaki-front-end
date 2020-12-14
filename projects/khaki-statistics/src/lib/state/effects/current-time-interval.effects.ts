@@ -7,6 +7,7 @@ import {Store} from '@ngrx/store';
 import {loadOrganizersStatistics} from '../actions/organizers-statistics.actions';
 import {loadTimeBlockSummary} from '../actions/time-block-summaries.actions';
 import {loadPerDepartmentStatistics} from '../actions/per-department-statistics.actions';
+import {loadTrailingStatistics} from '../actions/trailing-statistics.actions';
 
 
 @Injectable()
@@ -20,6 +21,7 @@ export class CurrentTimeIntervalEffects {
           this.store.dispatch(loadOrganizersStatistics(action));
           this.store.dispatch(loadTimeBlockSummary(action));
           this.store.dispatch(loadPerDepartmentStatistics(action));
+          this.store.dispatch(loadTrailingStatistics(action));
         }
       )
     ),
