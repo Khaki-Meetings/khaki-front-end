@@ -12,7 +12,7 @@ import {HistorianService, Logging} from '@natr/historian';
 export class OrganizersTableComponent implements OnInit {
   private logger: HistorianService;
   organizersStatistics: OrganizersStatisticsSm;
-  displayedColumns: string[] = ['name', 'meeting', 'hours', 'costs'];
+  displayedColumns: string[] = ['name', 'meeting', 'hours'];
 
 
   constructor(private organizersStatisticsService: OrganizersStatisticsFacadeService) {
