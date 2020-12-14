@@ -8,7 +8,7 @@
       <div class="label">Average Staff Hours per Meeting</div>
       <div class="value">
         <span *ngIf="timeBlockSummary && timeBlockSummary.averageManHours; else elseBlock">
-          {{timeBlockSummary?.averageManHours?.toFixed(1)}
+          {{timeBlockSummary?.averageManHours?.toFixed(1)}}
         </span>
         <ng-template #elseBlock>N/A</ng-template>
       </div>
