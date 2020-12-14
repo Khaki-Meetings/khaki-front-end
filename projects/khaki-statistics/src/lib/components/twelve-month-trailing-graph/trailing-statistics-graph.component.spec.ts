@@ -1,6 +1,6 @@
 import {ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
 
-import {TwelveMonthTrailingGraphComponent} from './twelve-month-trailing-graph.component';
+import {TrailingStatisticsGraphComponent} from './trailing-statistics-graph.component';
 import {TrailingStatisticsFacadeService} from '../../state/facades/trailing-statistics-facade.service';
 import {By} from '@angular/platform-browser';
 import {BarVerticalComponent, NgxChartsModule} from '@swimlane/ngx-charts';
@@ -10,8 +10,8 @@ import {testTwelveMonthTrailingData} from './test-data.spec';
 import {delay} from 'rxjs/operators';
 
 describe('TwelveMonthTrailingGraphComponent', () => {
-  let component: TwelveMonthTrailingGraphComponent;
-  let fixture: ComponentFixture<TwelveMonthTrailingGraphComponent>;
+  let component: TrailingStatisticsGraphComponent;
+  let fixture: ComponentFixture<TrailingStatisticsGraphComponent>;
   let mockTrailingStatisticsService: Partial<TrailingStatisticsFacadeService>;
 
   beforeEach(async () => {
@@ -25,7 +25,7 @@ describe('TwelveMonthTrailingGraphComponent', () => {
       );
 
     await TestBed.configureTestingModule({
-      declarations: [TwelveMonthTrailingGraphComponent],
+      declarations: [TrailingStatisticsGraphComponent],
       imports: [NgxChartsModule],
       providers: [
         {provide: TrailingStatisticsFacadeService, useValue: mockTrailingStatisticsService}
@@ -35,7 +35,7 @@ describe('TwelveMonthTrailingGraphComponent', () => {
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TwelveMonthTrailingGraphComponent);
+    fixture = TestBed.createComponent(TrailingStatisticsGraphComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

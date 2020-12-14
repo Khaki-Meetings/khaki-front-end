@@ -3,7 +3,7 @@ import {KhakiStatisticsComponent} from './khaki-statistics.component';
 import {KhakiStatisticsRoutingModule} from './khaki-statistics-routing.module';
 import {PerDepartmentGraphComponent} from './components/per-department-graph/per-department-graph.component';
 import {OrganizersTableComponent} from './components/organizers-table/organizers-table.component';
-import {TwelveMonthTrailingGraphComponent} from './components/twelve-month-trailing-graph/twelve-month-trailing-graph.component';
+import {TrailingStatisticsGraphComponent} from './components/twelve-month-trailing-graph/trailing-statistics-graph.component';
 import {TimeBasedStatSummaryComponent} from './components/time-based-stat-summary/time-based-stat-summary.component';
 import {NgxChartsLegendCustomComponent} from './components/ngx-charts-legend-custom/ngx-charts-legend-custom.component';
 import {LegendEntryCustomComponent} from './components/legend-entry-custom/legend-entry-custom.component';
@@ -35,7 +35,7 @@ import {AuthHttpInterceptor} from '@auth0/auth0-angular';
     KhakiStatisticsComponent,
     PerDepartmentGraphComponent,
     OrganizersTableComponent,
-    TwelveMonthTrailingGraphComponent,
+    TrailingStatisticsGraphComponent,
     TimeBasedStatSummaryComponent,
     TimeIntervalFormComponent,
     NgxChartsLegendCustomComponent,

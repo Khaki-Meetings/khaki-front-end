@@ -101,7 +101,7 @@ export class StatisticsService {
   }
 
   getTrailingStatistics(interval: IntervalEnum): Observable<TrailingStatisticsSm> {
-    let url = '/assets/twelveMonthTrailingData.json';
+    let url = `/assets/twelve${interval}TrailingData.json`;
 
     if (this.environment.khakiBff) {
       const count = 12;
