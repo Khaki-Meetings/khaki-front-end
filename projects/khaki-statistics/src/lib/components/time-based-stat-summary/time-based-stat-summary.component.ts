@@ -21,12 +21,28 @@ export class TimeBasedStatSummaryComponent implements OnInit {
 
   ngOnInit(): void {
     this.timeBlockData();
-
   }
 
   private timeBlockData(): void {
     this.sinceTimeBlockSummariesFacade.timeBlockSummary()
       .pipe(tap(data => this.logger.debug('data', data)))
-      .subscribe(timeBlockSummary => this.timeBlockSummary = timeBlockSummary);
+      .subscribe(timeBlockSummary => this.timeBlockSummary = this.formatData(timeBlockSummary));
+  }
+
+  private formatData(timeBlockSummary: TimeBlockSummarySm): TimeBlockSummarySm {
+    var timeBlockSummarySm: TimeBlockSummarySm = {
+      timeBlock: timeBlockSummary.timeBlock,
+      totalSeconds: timeBlockSummary.totalSeconds,
+      totalCost: timeBlockSummary.totalCost,
+      averageCost: timeBlockSummary.averageCost,
+      meetingCount: timeBlockSummary.meetingCount,
+      error: timeBlockSummary.error,
+      averageStaffSeconds: timeBlockSummary.averageStaffSeconds,
+      formattedTotalSeconds: Math.trunc(timeBlockSummary.totalSeconds / 60 / 60) + ' hrs, '
+        + Math.trunc(timeBlockSummary.totalSeconds / 60 % 60) + ' min',
+      formattedAverageStaffSeconds: Math.trunc(timeBlockSummary.averageStaffSeconds / 60 / 60) + ' hrs, '
+        + Math.trunc(timeBlockSummary.averageStaffSeconds / 60 % 60) + ' min',
+    };
+    return timeBlockSummarySm;
   }
 }

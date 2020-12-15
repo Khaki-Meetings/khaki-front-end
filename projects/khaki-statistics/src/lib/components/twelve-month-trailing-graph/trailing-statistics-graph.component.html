@@ -18,7 +18,7 @@
         <ng-template #tooltipTemplate let-model="model">
           <div class="ngx-charts-tooltip-content-container">
             <div class="modelName">{{model.name}}</div>
-            <div class="modelValue">{{model.value}} hours</div>
+            <div class="modelValue">{{model.extra.customLabel}}</div>
           </div>
         </ng-template>
       </ngx-charts-bar-vertical>

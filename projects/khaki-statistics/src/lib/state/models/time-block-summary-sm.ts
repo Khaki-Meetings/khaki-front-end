@@ -8,5 +8,7 @@ export interface TimeBlockSummarySm {
   averageCost?: number;
   meetingCount?: number;
   error?: ErrorSm;
-  averageManHours?: number;
+  averageStaffSeconds?: number;
+  formattedTotalSeconds?: string;
+  formattedAverageStaffSeconds?: string;
 }
