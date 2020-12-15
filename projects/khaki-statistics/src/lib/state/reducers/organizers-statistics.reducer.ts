@@ -18,8 +18,21 @@ export const organizersStatisticsReducer = createReducer(
     loadOrganizersStatisticsSuccess,
     (state: OrganizersStatisticsSm, action) => {
       const {type, ...newState} = {...state, ...action};
+      newState.organizersStatistics = newState.organizersStatistics.map(
+        organizersStatistic => {
+          return {
+            organizerFirstName: organizersStatistic.organizerFirstName,
+            organizerLastName: organizersStatistic.organizerLastName,
+            totalCost: organizersStatistic.totalCost,
+            totalMeetings: organizersStatistic.totalMeetings,
+            totalSeconds: organizersStatistic.totalSeconds,
+            formattedTime: Math.trunc(organizersStatistic.totalSeconds / 60 / 60) + ' hrs, '
+              + Math.trunc(organizersStatistic.totalSeconds / 60 % 60) + ' min',
+            organizerEmail: organizersStatistic.organizerEmail
+          };
+        }
+      );
       return newState;
     }
   ),
 );
-

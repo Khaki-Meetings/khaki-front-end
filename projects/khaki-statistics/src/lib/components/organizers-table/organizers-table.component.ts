@@ -24,29 +24,8 @@ export class OrganizersTableComponent implements OnInit {
       // .pipe(tap(data => this.logger.debug('subscription', data)))
       .subscribe(organizersStatistics => {
         this.logger.debug('onInit', organizersStatistics);
-        this.organizersStatistics = this.createTableData(organizersStatistics);
+        this.organizersStatistics = organizersStatistics;
       });
   }
-
-  private createTableData(organizerStatistics: OrganizersStatisticsSm): OrganizersStatisticsSm {
-    var organizersStatisticsSm: OrganizersStatisticsSm = {
-      page: organizerStatistics.page,
-      organizersStatistics: organizerStatistics.organizersStatistics.map(
-        organizersStatistic => {
-          return {
-            organizerFirstName: organizersStatistic.organizerFirstName,
-            organizerLastName: organizersStatistic.organizerLastName,
-            totalCost: organizersStatistic.totalCost,
-            totalMeetings: organizersStatistic.totalMeetings,
-            totalSeconds: organizersStatistic.totalSeconds,
-            formattedTime: Math.trunc(organizersStatistic.totalSeconds / 60 / 60) + ' hrs, '
-              + Math.trunc(organizersStatistic.totalSeconds / 60 % 60) + ' min',
-            organizerEmail: organizersStatistic.organizerEmail
-          };
-        }
-      ),
-      errors: organizerStatistics.errors
-    };
-    return organizersStatisticsSm;
-  }
+  
 }
