@@ -139,7 +139,7 @@ export class StatisticsService {
           (timeBlockSummary: TimeBlockSummaryResponseDto) => {
             timeBlockSummary.averageManHours = 0;
             if (timeBlockSummary.meetingCount && timeBlockSummary.meetingCount !== 0) {
-              timeBlockSummary.averageManHours = timeBlockSummary.totalHours / timeBlockSummary.meetingCount;
+              timeBlockSummary.averageManHours = (timeBlockSummary.totalSeconds / 3600) / timeBlockSummary.meetingCount;
             }
             return timeBlockSummary;
           }

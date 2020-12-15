@@ -11,7 +11,7 @@ export const initialState: TimeBlockSummarySm = {
   averageCost: 0,
   timeBlock: IntervalEnum.Year,
   totalCost: 0,
-  totalHours: 0
+  totalSeconds: 0
 };
 
 

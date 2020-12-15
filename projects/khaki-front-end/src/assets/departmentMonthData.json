@@ -2,31 +2,31 @@
   "departmentsStatistics": [
     {
       "department": "HR",
-      "totalHours": 1500
+      "totalSeconds": 1500000
     },
     {
       "department": "Sales",
-      "totalHours": 1130
+      "totalSeconds": 1130000
     },
     {
       "department": "Support",
-      "totalHours": 2100
+      "totalSeconds": 2100000
     },
     {
       "department": "IT",
-      "totalHours": 900
+      "totalSeconds": 900000
     },
     {
       "department": "Finance",
-      "totalHours": 900
+      "totalSeconds": 900000
     },
     {
       "department": "Manufacturing",
-      "totalHours": 1090
+      "totalSeconds": 1090000
     },
     {
       "department": "Design",
-      "totalHours": 1270
+      "totalSeconds": 1270000
     }
   ]
 }

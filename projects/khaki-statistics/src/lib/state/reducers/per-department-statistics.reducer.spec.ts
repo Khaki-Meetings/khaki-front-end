@@ -24,7 +24,7 @@ describe('PerDepartmentStatistics Reducer', () => {
         departmentsStatistics: [
           {
             department: 'Finance',
-            totalHours: 1000,
+            totalSeconds: 1000,
             averageCost: 10993.00,
             totalCost: 1000323.43
           }

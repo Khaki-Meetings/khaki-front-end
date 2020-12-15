@@ -2,51 +2,51 @@
   "timeBlockSummaries": [
     {
       "interval": 2,
-      "totalHours": 2100
+      "totalSeconds": 2100000
     },
     {
       "interval": 2,
-      "totalHours": 1700
+      "totalSeconds": 1700000
     },
     {
       "interval": 2,
-      "totalHours": 1300
+      "totalSeconds": 1300000
     },
     {
       "interval": 2,
-      "totalHours": 1400
+      "totalSeconds": 1400000
     },
     {
       "interval": 2,
-      "totalHours": 1200
+      "totalSeconds": 1200000
     },
     {
       "interval": 2,
-      "totalHours": 1900
+      "totalSeconds": 1900000
     },
     {
       "interval": 2,
-      "totalHours": 1700
+      "totalSeconds": 1700000
     },
     {
       "interval": 2,
-      "totalHours": 1700
+      "totalSeconds": 1700000
     },
     {
       "interval": 2,
-      "totalHours": 1300
+      "totalSeconds": 1300000
     },
     {
       "interval": 2,
-      "totalHours": 2000
+      "totalSeconds": 2000000
     },
     {
       "interval": 2,
-      "totalHours": 1500
+      "totalSeconds": 1500000
     },
     {
       "interval": 2,
-      "totalHours": 1200
+      "totalSeconds": 1200000
     }
   ]
 }
