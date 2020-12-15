@@ -7,5 +7,5 @@ export interface TimeBlockSummaryResponseDto {
   totalCost: number;
   averageCost: number;
   meetingCount: number;
-  averageManHours: number;
+  averageStaffSeconds: number;
 }

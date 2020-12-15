@@ -66,7 +66,11 @@ export class TrailingStatisticsGraphComponent implements OnInit {
       timeBlockSummary => {
         return {
           name: timeBlocks.shift(),
-          value: timeBlockSummary.totalSeconds / 3600
+          value: timeBlockSummary.totalSeconds / 3600,
+          extra: {
+            customLabel: Math.trunc(timeBlockSummary.totalSeconds / 60 / 60) + ' hrs, '
+              + Math.trunc(timeBlockSummary.totalSeconds / 60 % 60) + ' min'
+          }
         };
       }
     );
