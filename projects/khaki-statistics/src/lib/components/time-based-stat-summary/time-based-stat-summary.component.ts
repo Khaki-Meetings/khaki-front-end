@@ -21,7 +21,6 @@ export class TimeBasedStatSummaryComponent implements OnInit {
 
   ngOnInit(): void {
     this.timeBlockData();
-
   }
 
   private timeBlockData(): void {

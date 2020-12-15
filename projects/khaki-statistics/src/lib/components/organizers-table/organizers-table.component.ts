@@ -9,6 +9,7 @@ import {HistorianService, Logging} from '@natr/historian';
   templateUrl: './organizers-table.component.html',
   styleUrls: ['./organizers-table.component.scss']
 })
+
 export class OrganizersTableComponent implements OnInit {
   private logger: HistorianService;
   organizersStatistics: OrganizersStatisticsSm;
@@ -26,4 +27,5 @@ export class OrganizersTableComponent implements OnInit {
         this.organizersStatistics = organizersStatistics;
       });
   }
+  
 }
