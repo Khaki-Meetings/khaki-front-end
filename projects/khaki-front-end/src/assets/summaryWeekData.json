@@ -1,6 +1,6 @@
 {
   "interval": 1,
-  "totalHours": 192,
+  "totalSeconds": 192000,
   "totalCost": 3412,
   "totalMeetings": 22,
   "averageCost": 23,

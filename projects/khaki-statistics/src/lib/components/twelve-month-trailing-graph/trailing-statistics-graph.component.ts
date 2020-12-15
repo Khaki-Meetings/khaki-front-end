@@ -3,9 +3,11 @@ import {TrailingStatisticsFacadeService} from '../../state/facades/trailing-stat
 import {TrailingStatisticsSm} from '../../state/models/trailing-statistics-sm';
 import {IntervalEnum} from '../../services/models/interval.enum';
 import {HistorianService, Logging} from '@natr/historian';
-import * as momentJs from 'moment';
+import * as moment from 'moment';
 import {CurrentTimeIntervalFacadeService} from '../../state/facades/current-time-interval-facade.service';
 import {switchMap, tap} from 'rxjs/operators';
+
+const momentJs = moment;
 
 @Logging
 @Component({
@@ -64,7 +66,7 @@ export class TrailingStatisticsGraphComponent implements OnInit {
       timeBlockSummary => {
         return {
           name: timeBlocks.shift(),
-          value: timeBlockSummary.totalHours
+          value: timeBlockSummary.totalSeconds / 3600
         };
       }
     );

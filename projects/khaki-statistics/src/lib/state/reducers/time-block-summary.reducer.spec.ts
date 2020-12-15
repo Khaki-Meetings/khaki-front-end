@@ -21,7 +21,7 @@ describe('TimeBlockSummaries Reducer', () => {
 
   describe(`${loadTimeBlockSummarySuccess.type}`, () => {
     it('should return the new state', () => {
-      const timeBlockSummary: TimeBlockSummarySm = {averageCost: 0, timeBlock: IntervalEnum.Day, totalHours: 0, totalCost: 100};
+      const timeBlockSummary: TimeBlockSummarySm = {averageCost: 0, timeBlock: IntervalEnum.Day, totalSeconds: 0, totalCost: 100};
       const action = loadTimeBlockSummarySuccess(timeBlockSummary);
 
       const result = timeBlockSummaryReducer(initialState, action);
