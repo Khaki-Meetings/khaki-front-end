@@ -66,7 +66,7 @@ export class TrailingStatisticsGraphComponent implements OnInit {
       timeBlockSummary => {
         return {
           name: timeBlocks.shift(),
-          value: timeBlockSummary.totalSeconds
+          value: timeBlockSummary.totalSeconds / 3600
         };
       }
     );

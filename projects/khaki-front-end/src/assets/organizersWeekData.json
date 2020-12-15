@@ -5,35 +5,35 @@
       "organizerFirstName": "Bob",
       "organizerLastName": "Jones",
       "totalCost": 1,
-      "totalSeconds": 5,
+      "totalSeconds": 5000,
       "totalMeetings": 21
     },
     {
       "organizerFirstName": "Fred",
       "organizerLastName": "Smith",
       "totalCost": 1,
-      "totalSeconds": 5,
+      "totalSeconds": 5000,
       "totalMeetings": 21
     },
     {
       "organizerFirstName": "Steve",
       "organizerLastName": "Jones",
       "totalCost": 1,
-      "totalSeconds": 5,
+      "totalSeconds": 5000,
       "totalMeetings": 21
     },
     {
       "organizerFirstName": "Teddy",
       "organizerLastName": "Jones",
       "totalCost": 1,
-      "totalSeconds": 5,
+      "totalSeconds": 5000,
       "totalMeetings": 21
     },
     {
       "organizerFirstName": "John",
       "organizerLastName": "Jones",
       "totalCost": 1,
-      "totalSeconds": 5,
+      "totalSeconds": 5000,
       "totalMeetings": 21
     }
   ],

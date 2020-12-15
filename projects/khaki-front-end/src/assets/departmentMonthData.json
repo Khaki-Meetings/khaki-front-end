@@ -2,31 +2,31 @@
   "departmentsStatistics": [
     {
       "department": "HR",
-      "totalSeconds": 1500
+      "totalSeconds": 1500000
     },
     {
       "department": "Sales",
-      "totalSeconds": 1130
+      "totalSeconds": 1130000
     },
     {
       "department": "Support",
-      "totalSeconds": 2100
+      "totalSeconds": 2100000
     },
     {
       "department": "IT",
-      "totalSeconds": 900
+      "totalSeconds": 900000
     },
     {
       "department": "Finance",
-      "totalSeconds": 900
+      "totalSeconds": 900000
     },
     {
       "department": "Manufacturing",
-      "totalSeconds": 1090
+      "totalSeconds": 1090000
     },
     {
       "department": "Design",
-      "totalSeconds": 1270
+      "totalSeconds": 1270000
     }
   ]
 }

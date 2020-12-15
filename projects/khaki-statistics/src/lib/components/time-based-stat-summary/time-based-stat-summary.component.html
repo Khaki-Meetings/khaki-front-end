@@ -2,7 +2,7 @@
   <div class="flex-container">
     <div class="khaki-container time-based-stat-summary">
       <div class="label">Hours in Meetings</div>
-      <div class="value">{{timeBlockSummary?.totalSeconds}}</div>
+      <div class="value">{{(timeBlockSummary?.totalSeconds / 3600) | number: '1.1-1'}}</div>
     </div>
     <div class="khaki-container time-based-stat-summary">
       <div class="label">Average Staff Hours per Meeting</div>
