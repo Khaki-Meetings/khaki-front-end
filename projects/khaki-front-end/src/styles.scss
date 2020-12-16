@@ -113,10 +113,11 @@ div.center {
 
 .component-header {
   padding: 10px;
+  overflow: visible;
 }
 
 .component-caption {
-
+  float: left;
 }
 
 h3.component-caption {
@@ -125,6 +126,7 @@ h3.component-caption {
 
 .component-content {
   overflow: auto;
+  width: 100%;
 }
 
 .flex-container {
@@ -134,4 +136,30 @@ h3.component-caption {
 .flex-child {
     flex: 1;
     border: 2px solid yellow;
+}
+
+
+.help-wrapper {
+  position: relative;
+  display: inline-block;
+  mat-icon {
+    font-size: 16px;
+    color: #b7babd;
+  }
+}
+
+.help-content {
+  visibility: hidden;
+  border-radius: 6px;
+  top: 20px;
+  right: 0;
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+
+  border: 1px solid #dbdee2;
+  background-color: #1a202c;
+  padding: 8px;
+  color: #F7FAFC;
+  width: 240px;
 }

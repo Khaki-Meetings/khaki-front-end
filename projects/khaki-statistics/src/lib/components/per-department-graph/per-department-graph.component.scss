@@ -6,3 +6,7 @@
   display: inline-block;
   vertical-align: middle;
 }
+
+#meeting-time-by-dept-help:hover #meeting-time-by-dept-help-content {
+  visibility: visible;
+}

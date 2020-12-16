@@ -15,7 +15,7 @@ import {OrganizersStatisticsEffects} from './state/effects/organizers-statistics
 import {TrailingStatisticsEffects} from './state/effects/trailing-statistics.effects';
 import {PerDepartmentStatisticsEffects} from './state/effects/per-department-statistics.effects';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-
+import {MatIconModule} from '@angular/material/icon';
 import {MatTableModule} from '@angular/material/table';
 import {CommonModule} from '@angular/common';
 import {MatCheckboxModule} from '@angular/material/checkbox';
@@ -67,7 +67,8 @@ import {AuthHttpInterceptor} from '@auth0/auth0-angular';
     MatCheckboxModule,
     MatButtonModule,
     NgxChartsModule,
-    MatSelectModule
+    MatSelectModule,
+    MatIconModule
   ],
   exports: [KhakiStatisticsComponent],
   providers: [

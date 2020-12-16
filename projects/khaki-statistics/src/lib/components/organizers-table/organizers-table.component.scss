@@ -9,7 +9,7 @@ table {
 .mat-table {
   background: none;
   width: 90%;
-  margin: auto;  
+  margin: auto;
 }
 .header-font {
   margin: 0;
@@ -42,4 +42,8 @@ td.row-caption {
 }
 td.mat-cell, .mat-footer-cell {
   font-size: larger;
+}
+
+#meeting-breakdown-help:hover #meeting-breakdown-help-content {
+  visibility: visible;
 }
