@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
-import {KhakiState, setTenantKeyAction} from '../reducers';
+import {KhakiState, setTenantKeyAction, setTenantMapAction} from '../reducers';
 import {Store} from '@ngrx/store';
 import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class TenantKeyFacadeService {
+export class TenantFacadeService {
 
   constructor(private store: Store<KhakiState>) {
   }
@@ -17,5 +17,13 @@ export class TenantKeyFacadeService {
 
   public setTenantKey(tenantKey: string): void {
     this.store.dispatch(setTenantKeyAction({tenantKey}));
+  }
+
+  public tenantMap(): Observable<Map<string, string>> {
+    return this.store.select(store => store.tenantMap);
+  }
+
+  public setTenantMap(tenantMap: Map<string, string>): void {
+    this.store.dispatch(setTenantMapAction({tenantMap}));
   }
 }

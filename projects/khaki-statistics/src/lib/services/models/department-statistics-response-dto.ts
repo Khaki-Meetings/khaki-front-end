@@ -1,7 +1,7 @@
 export interface DepartmentStatisticsResponseDto {
   department: string;
   meetingCount: number;
-  totalHours: number;
+  totalSeconds: number;
   totalCost: number;
   averageCost: number;
 }

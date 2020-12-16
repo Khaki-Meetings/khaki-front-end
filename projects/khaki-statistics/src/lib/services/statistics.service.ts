@@ -101,7 +101,7 @@ export class StatisticsService {
   }
 
   getTrailingStatistics(interval: IntervalEnum): Observable<TrailingStatisticsSm> {
-    let url = '/assets/twelveMonthTrailingData.json';
+    let url = `/assets/twelve${interval}TrailingData.json`;
 
     if (this.environment.khakiBff) {
       const count = 12;
@@ -137,9 +137,9 @@ export class StatisticsService {
         tap(ret => this.logger.debug('timeBlockSummary data', ret)),
         map(
           (timeBlockSummary: TimeBlockSummaryResponseDto) => {
-            timeBlockSummary.averageManHours = 0;
-            if (timeBlockSummary.meetingCount !== 0) {
-              timeBlockSummary.averageManHours = timeBlockSummary.totalHours / timeBlockSummary.meetingCount;
+            timeBlockSummary.averageStaffSeconds = 0;
+            if (timeBlockSummary.meetingCount && timeBlockSummary.meetingCount !== 0) {
+              timeBlockSummary.averageStaffSeconds = timeBlockSummary.totalSeconds / timeBlockSummary.meetingCount;
             }
             return timeBlockSummary;
           }

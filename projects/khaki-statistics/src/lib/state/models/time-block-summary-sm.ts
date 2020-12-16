@@ -3,10 +3,12 @@ import {ErrorSm} from './errorSm';
 
 export interface TimeBlockSummarySm {
   timeBlock?: IntervalEnum;
-  totalHours?: number;
+  totalSeconds?: number;
   totalCost?: number;
   averageCost?: number;
   meetingCount?: number;
   error?: ErrorSm;
-  averageManHours?: number;
+  averageStaffSeconds?: number;
+  formattedTotalSeconds?: string;
+  formattedAverageStaffSeconds?: string;
 }

@@ -5,50 +5,50 @@
   <img class="logo" src="/assets/logo.png" />
   <table class="menucontainer" *ngIf="show">
     <tr class="icon-spacing">
-      <td>
-        <a (click)="onNavigateBtn()" routerLink="profile">
-          <img src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200" class="profile-icon" />
+      <td class="iconcontainer">
+        <a (click)="onNavigateBtn()" routerLink="stats">
+          <mat-icon class="non-profile-icons stats-icon">bar_chart</mat-icon>
         </a>
       </td>
-      <td>
+      <td class="textcontainer">
+        <a (click)="onNavigateBtn()" routerLink="stats">
+          <span>Dashboard</span>
+        </a>
+      </td>
+    </tr>
+    <tr class="icon-spacing">
+      <td class="iconcontainer">
+        <a (click)="onNavigateBtn()" routerLink="profile">
+          <mat-icon class="profile-icon">account_circle</mat-icon>
+        </a>
+      </td>
+      <td class="textcontainer">
         <a (click)="onNavigateBtn()" routerLink="profile">
           <span>Profile</span>
         </a>
       </td>
     </tr>
     <tr class="icon-spacing">
-      <td>
-        <a (click)="onNavigateBtn()" routerLink="">
-          <mat-icon class="non-profile-icons stats-icon">bar_chart</mat-icon>
-        </a>
-      </td>
-      <td>
-        <a (click)="onNavigateBtn()" routerLink="">
-          <span>Stats</span>        
-        </a>
-      </td>
-    </tr>
-    <tr class="icon-spacing">
-      <td>
+      <td class="iconcontainer">
         <a (click)="onNavigateBtn()" routerLink="settings">
           <mat-icon class="non-profile-icons">settings</mat-icon>
         </a>
       </td>
-      <td>
+      <td class="textcontainer">
         <a (click)="onNavigateBtn()" routerLink="settings">
-          <span>Settings</span>        
+          <span>Settings</span>
         </a>
       </td>
     </tr>
     <tr class="icon-spacing">
-      <td>
+      <td class="iconcontainer">
         <a (click)="onNavigateBtn()" routerLink="info">
           <mat-icon class="non-profile-icons">info</mat-icon>
         </a>
       </td>
-      <td>
+      <td class="textcontainer">
         <a (click)="onNavigateBtn()" routerLink="info">
-          <span>About</span>        
+          <span>Info</span>
         </a>
       </td>
     </tr>
@@ -64,5 +64,3 @@
     <router-outlet></router-outlet>
   </mat-drawer-content>
 </mat-drawer-container>
-
-

@@ -1,7 +1,7 @@
 {
   "interval": 2,
-  "totalTime": 1920,
-  "totalCost": 34120,
+  "totalSeconds": 2200000,
+  "totalCost": 40000,
   "totalMeetings": 220,
   "averageCost": 230,
   "meetingCount": 330

@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { TenantKeyFacadeService } from './tenant-key-facade.service';
+import { TenantFacadeService } from './tenant-facade.service';
 
 describe('TenantKeyFacadeService', () => {
-  let service: TenantKeyFacadeService;
+  let service: TenantFacadeService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(TenantKeyFacadeService);
+    service = TestBed.inject(TenantFacadeService);
   });
 
   it('should be created', () => {

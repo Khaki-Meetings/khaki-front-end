@@ -5,7 +5,7 @@ export const testPerDepartmentStatistics: DepartmentsStatisticsSm = {
     {
       department: 'bob',
       totalCost: 21.12,
-      totalHours: 2112,
+      totalSeconds: 2112,
       averageCost: 2112
     }
   ]

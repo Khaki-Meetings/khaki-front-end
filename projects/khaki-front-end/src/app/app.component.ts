@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '@auth0/auth0-angular';
 import {HistorianService, Logging} from '@natr/historian';
-import {TenantKeyFacadeService} from './state/facades/tenant-key-facade.service';
+import {TenantFacadeService} from './state/facades/tenant-facade.service';
 
 @Logging
 @Component({
@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
 
   private logger: HistorianService;
 
-  constructor(private authService: AuthService, private tenantKeyFacade: TenantKeyFacadeService) {
+  constructor(private authService: AuthService, private tenantFacade: TenantFacadeService) {
   }
 
   toggleDrawerShow(): void {
@@ -33,21 +33,23 @@ export class AppComponent implements OnInit {
           this.logger.debug('claims', claims);
           const tenantIds: object = claims['https://getkhaki.com/tenantIds'];
           if (typeof tenantIds === 'object') {
+            this.logger.debug('tenantId', tenantIds);
             const keys = Object.keys(tenantIds);
             if (keys.length > 0) {
               this.logger.debug('tenantIds keys', keys);
-              this.tenantKeyFacade.setTenantKey(keys[0]);
+              // this.tenantFacade.setTenantKey(keys[0]);
+              const map = new Map<string, string>(Object.entries(tenantIds));
+              this.tenantFacade.setTenantMap(map);
             }
           }
-          // if (tenantIds.size > 0) {
-          // }
         }
       );
-    this.authService.user$
+    this.authService.getAccessTokenSilently()
       .subscribe(
-        user => {
-          this.logger.debug('authed user', user);
-        }
+        accessToken => this.logger.debug('secret thing', accessToken)
       );
+    this.authService.user$.subscribe(user => {
+      this.logger.debug('authed user', user);
+    });
   }
 }

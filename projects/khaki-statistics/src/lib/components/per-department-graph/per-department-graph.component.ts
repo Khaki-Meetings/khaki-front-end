@@ -84,7 +84,7 @@ export class PerDepartmentGraphComponent implements OnInit {
       el => {
         return {
           name: el.department,
-          value: el.totalHours
+          value: el.totalSeconds
         };
       }
     );
@@ -96,12 +96,12 @@ export class PerDepartmentGraphComponent implements OnInit {
     const d = {
       entries: [{
         name: dataElement.name,
-        value: dataElement.value,
+        value: Math.trunc(dataElement.value / 60 / 60) + ' hrs, ' + Math.trunc(dataElement.value / 60 % 60) + ' min',
         label: dataElement.name
       }],
       value: {
         name: dataElement.name,
-        value: dataElement.value,
+        value: Math.trunc(dataElement.value / 60 / 60) + ' hrs, ' + Math.trunc(dataElement.value / 60 % 60) + ' min',
         label: dataElement.name
       }
     };
@@ -115,7 +115,7 @@ export class PerDepartmentGraphComponent implements OnInit {
   onActivate(data): void {
     let displayValue = '';
     if (data.value.value !== 0) {
-      displayValue = Math.trunc(data.value.value) + ' hrs';
+      displayValue = Math.trunc(data.value.value / 60 / 60) + ' hrs, ' + Math.trunc(data.value.value / 60 % 60) + ' min';
     }
     document.getElementById('center-text-label').innerHTML = data.value.name;
     document.getElementById('center-text-value').innerHTML = displayValue;
@@ -134,7 +134,7 @@ export class PerDepartmentGraphComponent implements OnInit {
           val = val + this.graphData[x].value;
         }
       }
-      const displayValue = Math.trunc(val) + ' hrs';
+      const displayValue = Math.trunc(val / 60 / 60) + ' hrs, ' + Math.trunc(val / 60 % 60) + ' min';
       document.getElementById('center-text-value').innerHTML = displayValue;
       document.getElementById('center-text-label').innerHTML = 'in meetings';
     }

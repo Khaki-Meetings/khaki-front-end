@@ -1,0 +1,52 @@
+{
+  "timeBlockSummaries": [
+    {
+      "interval": 1,
+      "totalSeconds": 170000
+    },
+    {
+      "interval": 1,
+      "totalSeconds": 120000
+    },
+    {
+      "interval": 1,
+      "totalSeconds": 140000
+    },
+    {
+      "interval": 1,
+      "totalSeconds": 120000
+    },
+    {
+      "interval": 1,
+      "totalSeconds": 100000
+    },
+    {
+      "interval": 1,
+      "totalSeconds": 190000
+    },
+    {
+      "interval": 1,
+      "totalSeconds": 130000
+    },
+    {
+      "interval": 1,
+      "totalSeconds": 180000
+    },
+    {
+      "interval": 1,
+      "totalSeconds": 110000
+    },
+    {
+      "interval": 1,
+      "totalSeconds": 200000
+    },
+    {
+      "interval": 1,
+      "totalSeconds": 120000
+    },
+    {
+      "interval": 1,
+      "totalSeconds": 110000
+    }
+  ]
+}
