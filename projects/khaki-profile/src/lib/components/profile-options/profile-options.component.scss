@@ -1,7 +1,6 @@
 div {
     gap: 0.5em;
-    margin-top: 2.5em;
-    margin-bottom: 2.5em;
+    margin-bottom: 1em;
     align-items: center;
     width: 100%;
     span.grow {
@@ -48,4 +47,12 @@ mat-icon.arrow.selected::before {
     border-radius: 50%;
     position: absolute;
     z-index: -1;
+}
+
+.profileField {
+  padding-top: 1em;
+  .label {
+    font-weight: bold;
+    font-size: larger;  
+  }
 }

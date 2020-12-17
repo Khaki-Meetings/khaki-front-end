@@ -1,23 +1,41 @@
-.header-bg-container {
-    .header-bg {
-        width: fit-content;
-        line-height: 1em;
-        font-size: 3em;
-        display: flex;
-        gap: 0.5em;
-        img {
-            width: 120px;
-            height: 120px;
-            border-radius: 30px;
-        }
+div {
+    gap: 0.5em;
+    margin-bottom: 1em;
+    align-items: center;
+    width: 100%;
+    span.grow {
+        flex-grow: 1;
+        margin-left: 1em;
+    }
+    a {
+        float: right;
+    }
+}
+
+.header-bg {
+    width: fit-content;
+    line-height: 1em;
+    display: flex;
+    gap: 0.5em;
+    img {
+        width: 120px;
+        height: 120px;
+        border-radius: 30px;
     }
 }
 
 .label {
-  margin-bottom: 2.5em;
-  margin-top: 2.5em;
+  margin-bottom: 1em;
 }
 
 .main-container {
   padding: 30px;
+}
+
+.profileField {
+  padding-top: 1em;
+  .label {
+    font-weight: bold;
+    font-size: larger;
+  }
 }
