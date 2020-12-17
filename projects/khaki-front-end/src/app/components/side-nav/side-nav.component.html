@@ -28,10 +28,16 @@
         </a>
       </div>
       <div class="icon-spacing">
-        <a routerLink="info" routerLinkActive="active-link">
-          <mat-icon class="non-profile-icons">info</mat-icon>
-          <div class="label">Info</div>
+        <a (click)="openHelpDialog()">
+          <mat-icon class="non-profile-icons">help_outline</mat-icon>
+          <div class="label">Help</div>
         </a>
+      </div>
+
+      <div *ngIf="hasMultiTenant" class="icon-spacing multi-tenant-selector">
+        <mat-select [value]="defaultTenant" (selectionChange)="onTenantChange($event)">
+          <mat-option *ngFor="let item of tenantMap | keyvalue" [value]="item.key">{{item.key}}</mat-option>
+        </mat-select>
       </div>
 
     </div>
@@ -46,14 +52,6 @@
         </a>
       </div>
     </div>
-  </div>
-
-  <div *ngIf="hasMultiTenant">
-      <div class="icon-spacing container">
-        <mat-select style="width: 90px; background-color: white" [value]="defaultTenant" (selectionChange)="onTenantChange($event)">
-          <mat-option *ngFor="let item of tenantMap | keyvalue" [value]="item.key">{{item.key}}</mat-option>
-        </mat-select>
-      </div>
   </div>
 
 </div>

@@ -52,4 +52,12 @@ export class AppComponent implements OnInit {
       this.logger.debug('authed user', user);
     });
   }
+
+  openHelpDialog() : void {
+    document.getElementById("helpModal").style.display = "block";
+  }
+
+  closeHelpDialog() : void {
+    document.getElementById("helpModal").style.display = "none";
+  }
 }

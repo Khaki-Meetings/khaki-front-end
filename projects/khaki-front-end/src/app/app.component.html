@@ -42,13 +42,13 @@
     </tr>
     <tr class="icon-spacing">
       <td class="iconcontainer">
-        <a (click)="onNavigateBtn()" routerLink="info">
-          <mat-icon class="non-profile-icons">info</mat-icon>
+        <a (click)="openHelpDialog()">
+          <mat-icon class="non-profile-icons">help_outline</mat-icon>
         </a>
       </td>
       <td class="textcontainer">
-        <a (click)="onNavigateBtn()" routerLink="info">
-          <span>Info</span>
+        <a (click)="openHelpDialog()">
+          <span>Help</span>
         </a>
       </td>
     </tr>
@@ -64,3 +64,22 @@
     <router-outlet></router-outlet>
   </mat-drawer-content>
 </mat-drawer-container>
+
+
+<div id="helpModal" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <h2 mat-dialog-title>Help</h2>
+    <mat-dialog-content>
+      <div>
+        <span>Need some assistance with Khaki? Please email us at</span>
+      </div>
+      <div class="email-address">
+        support@getkhaki.com
+      </div>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+      <button mat-button (click)="closeHelpDialog()">Close</button>
+    </mat-dialog-actions>
+  </div>
+</div>
