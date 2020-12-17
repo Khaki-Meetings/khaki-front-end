@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {AuthService} from '@auth0/auth0-angular';
 import {TenantFacadeService} from '../../state/facades/tenant-facade.service';
 import {tap} from 'rxjs/operators';
 import {HistorianService, Logging} from '@natr/historian';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @Logging
 @Component({
@@ -47,4 +48,13 @@ export class SideNavComponent implements OnInit {
       this.tenantMap = tenantMap;
     }
   }
+
+  openHelpDialog() : void {
+    document.getElementById("helpModal").style.display = "block";
+  }
+
+  closeHelpDialog() : void {
+    document.getElementById("helpModal").style.display = "none";
+  }
+
 }
