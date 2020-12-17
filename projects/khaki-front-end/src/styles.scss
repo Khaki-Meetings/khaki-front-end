@@ -114,14 +114,14 @@ div.center {
 .component-header {
   padding: 10px;
   overflow: visible;
-}
 
-.component-caption {
-  float: left;
-}
+  .component-caption {
+    float: left;
+  }
 
-h3.component-caption {
-
+  .component-help {
+    float: right;
+  }
 }
 
 .component-content {
@@ -162,4 +162,10 @@ h3.component-caption {
   padding: 8px;
   color: #F7FAFC;
   width: 240px;
+}
+
+.multi-tenant-selector {
+  .mat-select-value-text {
+    padding-left: 5px;
+  }
 }
