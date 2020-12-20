@@ -1,9 +1,9 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {AuthService} from '@auth0/auth0-angular';
 import {TenantFacadeService} from '../../state/facades/tenant-facade.service';
 import {tap} from 'rxjs/operators';
 import {HistorianService, Logging} from '@natr/historian';
-import {MatDialogModule} from '@angular/material/dialog';
+import {DOCUMENT} from '@angular/common';
 
 @Logging
 @Component({
@@ -19,7 +19,7 @@ export class SideNavComponent implements OnInit {
 
   tenantMap: Map<string, string> = new Map<string, string>();
 
-  constructor(private authService: AuthService, private tenantFacade: TenantFacadeService) {
+  constructor(private authService: AuthService, private tenantFacade: TenantFacadeService, @Inject(DOCUMENT) private document: Document) {
   }
 
   ngOnInit(): void {
@@ -28,7 +28,8 @@ export class SideNavComponent implements OnInit {
   }
 
   logout(): void {
-    this.authService.logout();
+    const returnTo = `${this.document.location.origin}`;
+    this.authService.logout({returnTo});
   }
 
   onTenantChange(event): void {
@@ -49,12 +50,12 @@ export class SideNavComponent implements OnInit {
     }
   }
 
-  openHelpDialog() : void {
-    document.getElementById("helpModal").style.display = "block";
+  openHelpDialog(): void {
+    document.getElementById('helpModal').style.display = 'block';
   }
 
-  closeHelpDialog() : void {
-    document.getElementById("helpModal").style.display = "none";
+  closeHelpDialog(): void {
+    document.getElementById('helpModal').style.display = 'none';
   }
 
 }
