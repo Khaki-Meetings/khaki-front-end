@@ -3,7 +3,7 @@ export interface UserProfileResponseDto {
   firstName?: string;
   lastName?: string;
   email?: string;
-  notifications?: string;
+  notify?: boolean;
   companyName?: string;
 }
 

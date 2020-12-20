@@ -7,7 +7,7 @@ export const userProfileFeatureKey = 'userProfile';
 export const initialState: UserProfileResponseDto = {
   firstName: 'firstname',
   lastName: 'lastname',
-  notifications: 'on',
+  notify: false,
   email: 'email@abc.com'
 };
 
