@@ -1,10 +1,10 @@
 <div class="center container">
-  <div>
-      <div class="add_emp" (click)="addEmployee()">
-        <mat-icon>add_circle_outline</mat-icon>
-        <span class="caption">Add list of employees</span>
-      </div>
-  </div>
+<!--  <div>-->
+<!--      <div class="add_emp" (click)="addEmployee()">-->
+<!--        <mat-icon>add_circle_outline</mat-icon>-->
+<!--        <span class="caption">Add list of employees</span>-->
+<!--      </div>-->
+<!--  </div>-->
 
 <!--    <div>-->
 <!--        <div>Department:-->
@@ -21,7 +21,7 @@
 <!--    </div>-->
 
     <table>
-        <tr *ngFor="let employee of getEmployees()" (click)="editEmployee(employee)">
+        <tr *ngFor="let employee of getEmployees()" >
             <td>
               <div class="employee-table-emp">
                 <div><img *ngIf="employee.avatar" [src]="employee.avatar" /></div>
