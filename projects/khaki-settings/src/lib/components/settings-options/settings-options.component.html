@@ -1,6 +1,6 @@
 <div [ngClass]="{'hide': menuNow != 'name' && menuNow != ''}">
   <div class="label">
-    <span [ngClass]="{'selected': menuNow == 'name'}">Company name and stuff</span>
+    <span [ngClass]="{'selected': menuNow == 'name'}">Company name</span>
     <span class="grow text-align-right gray">{{userProfile.companyName}}</span>
     <a routerLink="name" (click)="onMenu($event, 'name')">
       <mat-icon [ngClass]="{'arrow': true, 'selected': menuNow == 'name'}">keyboard_arrow_right</mat-icon>
