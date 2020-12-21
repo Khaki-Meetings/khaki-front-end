@@ -1,23 +1,23 @@
-<div [ngClass]="{'hide': menunow != 'name' && menunow != ''}">
+<div [ngClass]="{'hide': menuNow != 'name' && menuNow != ''}">
   <div class="label">
-    <span [ngClass]="{'selected': menunow == 'name'}">Company name</span>
+    <span [ngClass]="{'selected': menuNow == 'name'}">Company name</span>
     <span class="grow text-align-right gray">{{userProfile.companyName}}</span>
     <a routerLink="name" (click)="onMenu($event, 'name')">
-      <mat-icon [ngClass]="{'arrow': true, 'selected': menunow == 'name'}">keyboard_arrow_right</mat-icon>
+      <mat-icon [ngClass]="{'arrow': true, 'selected': menuNow == 'name'}">keyboard_arrow_right</mat-icon>
     </a>
   </div>
 </div>
-<div [ngClass]="{'hide': menunow != 'employees' && menunow != ''}">
-    <span [ngClass]="{'selected': menunow == 'employees'}">Employees</span>
+<div [ngClass]="{'hide': menuNow != 'employees' && menuNow != ''}">
+    <span [ngClass]="{'selected': menuNow == 'employees'}">Employees</span>
     <span class="grow text-align-right gray"></span>
     <a routerLink="employees" (click)="onMenu($event, 'employees')">
-        <mat-icon [ngClass]="{'arrow': true, 'selected': menunow == 'employees'}">keyboard_arrow_right</mat-icon>
+        <mat-icon [ngClass]="{'arrow': true, 'selected': menuNow == 'employees'}">keyboard_arrow_right</mat-icon>
     </a>
 </div>
-<div [ngClass]="{'hide': menunow != 'department' && menunow != ''}">
-  <span [ngClass]="{'selected': menunow == 'department'}">Departments</span>
+<div [ngClass]="{'hide': menuNow != 'department' && menuNow != ''}">
+  <span [ngClass]="{'selected': menuNow == 'department'}">Departments</span>
   <span class="grow text-align-right gray"></span>
   <a routerLink="department" (click)="onMenu($event, 'department')">
-    <mat-icon [ngClass]="{'arrow': true, 'selected': menunow == 'department'}">keyboard_arrow_right</mat-icon>
+    <mat-icon [ngClass]="{'arrow': true, 'selected': menuNow == 'department'}">keyboard_arrow_right</mat-icon>
   </a>
 </div>

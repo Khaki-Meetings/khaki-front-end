@@ -32,7 +32,10 @@ export class SettingsService {
   }
 
   getUserProfile(): Observable<UserProfileResponseDto> {
-    const url = '/assets/userProfileData.json';
+    let url = '/assets/userProfileData.json';
+    if (this.environment.khakiBff) {
+      url = `${this.environment.khakiBff}/employees/userProfile`;
+    }
     return this.httpClient
       .get(url)
       .pipe(
