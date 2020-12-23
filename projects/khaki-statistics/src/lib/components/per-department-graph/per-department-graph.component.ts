@@ -147,9 +147,9 @@ export class PerDepartmentGraphComponent implements OnInit {
 
   private calculatePieDimensions(): number[] {
     if (this.graphData === null || this.graphData.length < 4) {
-      return [175, 175];
+      return [200, 200];
     }
-    const dimensionSize = this.graphData.length * 40;
+    const dimensionSize = this.graphData.length * 25;
     return [dimensionSize, dimensionSize];
   }
 }
