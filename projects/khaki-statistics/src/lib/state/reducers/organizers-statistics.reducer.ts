@@ -6,7 +6,7 @@ import {OrganizersStatisticsSm} from '../models/organizers-statistics-sm';
 export const organizersStatisticsFeatureKey = 'organizersStatistics';
 
 export const initialState: OrganizersStatisticsSm = {
-  errors: [], organizersStatistics: [], page: 0
+  errors: [], content: [], number: 0
 
 };
 
@@ -18,7 +18,7 @@ export const organizersStatisticsReducer = createReducer(
     loadOrganizersStatisticsSuccess,
     (state: OrganizersStatisticsSm, action) => {
       const {type, ...newState} = {...state, ...action};
-      newState.organizersStatistics = newState.organizersStatistics.map(
+      newState.content = newState.content.map(
         organizersStatistic => {
           return {
             organizerFirstName: organizersStatistic.organizerFirstName,

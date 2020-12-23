@@ -28,6 +28,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {TimeIntervalFormComponent} from './components/time-interval-form/time-interval-form.component';
 import {CurrentTimeIntervalEffects} from './state/effects/current-time-interval.effects';
 import {AuthHttpInterceptor} from '@auth0/auth0-angular';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 
 @NgModule({
@@ -41,35 +42,36 @@ import {AuthHttpInterceptor} from '@auth0/auth0-angular';
     NgxChartsLegendCustomComponent,
     LegendEntryCustomComponent
   ],
-  imports: [
-    ReactiveFormsModule,
-    KhakiStatisticsRoutingModule,
-    CommonModule,
-    StoreModule.forFeature(
-      fromKhakiStatistics.khakiStatisticsFeatureKey,
-      fromKhakiStatistics.reducers,
-      {
-        metaReducers: fromKhakiStatistics.metaReducers
-      }
-    ),
-    EffectsModule.forFeature(
-      [
-        TimeBlockSummaryEffects,
-        OrganizersStatisticsEffects,
-        TrailingStatisticsEffects,
-        PerDepartmentStatisticsEffects,
-        CurrentTimeIntervalEffects
-      ]
-    ),
-    MatProgressSpinnerModule,
-    FontAwesomeModule,
-    MatTableModule,
-    MatCheckboxModule,
-    MatButtonModule,
-    NgxChartsModule,
-    MatSelectModule,
-    MatIconModule
-  ],
+    imports: [
+        ReactiveFormsModule,
+        KhakiStatisticsRoutingModule,
+        CommonModule,
+        StoreModule.forFeature(
+            fromKhakiStatistics.khakiStatisticsFeatureKey,
+            fromKhakiStatistics.reducers,
+            {
+                metaReducers: fromKhakiStatistics.metaReducers
+            }
+        ),
+        EffectsModule.forFeature(
+            [
+                TimeBlockSummaryEffects,
+                OrganizersStatisticsEffects,
+                TrailingStatisticsEffects,
+                PerDepartmentStatisticsEffects,
+                CurrentTimeIntervalEffects
+            ]
+        ),
+        MatProgressSpinnerModule,
+        FontAwesomeModule,
+        MatTableModule,
+        MatCheckboxModule,
+        MatButtonModule,
+        NgxChartsModule,
+        MatSelectModule,
+        MatIconModule,
+        MatPaginatorModule
+    ],
   exports: [KhakiStatisticsComponent],
   providers: [
   ]

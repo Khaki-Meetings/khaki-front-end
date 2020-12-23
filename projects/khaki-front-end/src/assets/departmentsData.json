@@ -1,5 +1,5 @@
 {
-  "departments" : [
+  "content" : [
     {
       "name": "Customer Services"
     },
@@ -39,5 +39,30 @@
     {
       "name": "Technical Support Team"
     }
-  ]
+  ],
+  "pageable": {
+    "sort": {
+      "sorted": false,
+      "unsorted": true,
+      "empty": true
+    },
+    "offset": 2,
+    "pageNumber": 2,
+    "pageSize": 1,
+    "paged": true,
+    "unpaged": false
+  },
+  "totalPages": 5,
+  "totalElements": 5,
+  "last": false,
+  "size": 1,
+  "number": 2,
+  "sort": {
+    "sorted": false,
+    "unsorted": true,
+    "empty": true
+  },
+  "numberOfElements": 1,
+  "first": false,
+  "empty": false
 }
