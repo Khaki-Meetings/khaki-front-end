@@ -1,7 +1,7 @@
 import {createReducer, on} from '@ngrx/store';
 import {loadOrganizersStatistics, loadOrganizersStatisticsSuccess} from '../actions/organizers-statistics.actions';
 import {OrganizersStatisticsSm} from '../models/organizers-statistics-sm';
-
+import {Utilities} from '../../services/utilities';
 
 export const organizersStatisticsFeatureKey = 'organizersStatistics';
 
@@ -26,8 +26,7 @@ export const organizersStatisticsReducer = createReducer(
             totalCost: organizersStatistic.totalCost,
             totalMeetings: organizersStatistic.totalMeetings,
             totalSeconds: organizersStatistic.totalSeconds,
-            formattedTime: Math.trunc(organizersStatistic.totalSeconds / 60 / 60) + ' hrs, '
-              + Math.trunc(organizersStatistic.totalSeconds / 60 % 60) + ' min',
+            formattedTime: Utilities.formatHrsMins(organizersStatistic.totalSeconds),
             organizerEmail: organizersStatistic.organizerEmail
           };
         }

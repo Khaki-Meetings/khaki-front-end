@@ -1,5 +1,6 @@
 import {Component, OnInit, Input} from '@angular/core';
 import {LegendEntryComponent} from '@swimlane/ngx-charts';
+import {Utilities} from '../../services/utilities';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -33,7 +34,7 @@ export class LegendEntryCustomComponent extends LegendEntryComponent implements 
   get displayValue(): string {
     let displayValue = '';
     if (this.dataExt.value !== 0) {
-      displayValue = Math.trunc(this.dataExt.value / 60 / 60) + ' hrs, ' + Math.trunc(this.dataExt.value / 60 % 60) + ' min'
+      displayValue = Utilities.formatHrsMins(this.dataExt.value)
     }
     return displayValue || '(empty)';
   }

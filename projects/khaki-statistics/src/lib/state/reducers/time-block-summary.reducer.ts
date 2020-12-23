@@ -3,7 +3,7 @@ import {TimeBlockSummarySm} from '../models/time-block-summary-sm';
 import {IntervalEnum} from '../../services/models/interval.enum';
 import {loadTimeBlockSummaryFailure, loadTimeBlockSummarySuccess} from '../actions/time-block-summaries.actions';
 import {ErrorSm} from '../models/errorSm';
-
+import {Utilities} from '../../services/utilities';
 
 export const timeBlockSummariesFeatureKey = 'timeBlockSummaries';
 
@@ -21,10 +21,8 @@ export const timeBlockSummaryReducer = createReducer(
     loadTimeBlockSummarySuccess,
     (state: TimeBlockSummarySm, action: Action | TimeBlockSummarySm) => {
       const {type, ...newState} = {...state, ...action};
-      newState.formattedTotalSeconds = Math.trunc(newState.totalSeconds / 60 / 60) + ' hrs, '
-              + Math.trunc(newState.totalSeconds / 60 % 60) + ' min';
-      newState.formattedAverageStaffSeconds = Math.trunc(newState.averageStaffSeconds / 60 / 60) + ' hrs, '
-              + Math.trunc(newState.averageStaffSeconds / 60 % 60) + ' min';
+      newState.formattedTotalSeconds = Utilities.formatHrsMins(newState.totalSeconds);
+      newState.formattedAverageStaffSeconds = Utilities.formatHrsMins(newState.averageStaffSeconds);
       return newState;
     }
   ),
