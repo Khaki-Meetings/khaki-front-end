@@ -6,6 +6,7 @@ import {HistorianService, Logging} from '@natr/historian';
 import * as moment from 'moment';
 import {CurrentTimeIntervalFacadeService} from '../../state/facades/current-time-interval-facade.service';
 import {switchMap, tap} from 'rxjs/operators';
+import {Utilities} from '../../services/utilities';
 
 const momentJs = moment;
 
@@ -68,8 +69,7 @@ export class TrailingStatisticsGraphComponent implements OnInit {
           name: timeBlocks.shift(),
           value: timeBlockSummary.totalSeconds / 3600,
           extra: {
-            customLabel: Math.trunc(timeBlockSummary.totalSeconds / 60 / 60) + ' hrs, '
-              + Math.trunc(timeBlockSummary.totalSeconds / 60 % 60) + ' min'
+            customLabel: Utilities.formatHrsMins(timeBlockSummary.totalSeconds)
           }
         };
       }

@@ -24,6 +24,17 @@ export class NgxChartsLegendCustomComponent extends LegendComponent implements A
 
     d3.select('g.pie-chart.chart').append('text')
       .attr('text-anchor', 'middle')
+      .attr('stroke', 'white')
+      .attr('stroke-width', '0.2em')
+      .attr('font-size', '16px')
+      .attr('font-weight', 'bold')
+      .attr('font-family', 'sans-serif')
+      .attr('y', 5)
+      .attr('id', 'center-text-value-bg')
+      .text('');
+
+    d3.select('g.pie-chart.chart').append('text')
+      .attr('text-anchor', 'middle')
       .attr('font-size', '16px')
       .attr('font-weight', 'bold')
       .attr('font-family', 'sans-serif')
