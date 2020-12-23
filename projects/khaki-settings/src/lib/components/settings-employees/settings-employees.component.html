@@ -1,4 +1,4 @@
-<div class="center container">
+<div class="container">
 <!--  <div>-->
 <!--      <div class="add_emp" (click)="addEmployee()">-->
 <!--        <mat-icon>add_circle_outline</mat-icon>-->
@@ -28,9 +28,11 @@
                 <div class="employee-info">
                   <div><span class="name">{{employee.firstName}} {{employee.lastName}}</span></div>
                   <div><span class="text-detail">{{employee.email}}</span></div>
-                  <div><span class='text-detail'>{{employee.department}}</span></div>
                 </div>
               </div>
+            </td>
+            <td>
+              <div><span class='text-detail'>{{employee.department}}</span></div>
             </td>
         </tr>
     </table>
