@@ -4,6 +4,7 @@ import {PerDepartmentStatisticsFacadeService} from '../../state/facades/per-depa
 import {ColorHelper} from '@swimlane/ngx-charts';
 import {NgxChartsLegendCustomComponent} from '../ngx-charts-legend-custom/ngx-charts-legend-custom.component';
 import {HistorianService, Logging} from '@natr/historian';
+import {Utilities} from '../../services/utilities';
 
 interface GraphData {
   name: string;
@@ -96,12 +97,12 @@ export class PerDepartmentGraphComponent implements OnInit {
     const d = {
       entries: [{
         name: dataElement.name,
-        value: Math.trunc(dataElement.value / 60 / 60) + ' hrs, ' + Math.trunc(dataElement.value / 60 % 60) + ' min',
+        value: Utilities.formatHrsMins(dataElement.value),
         label: dataElement.name
       }],
       value: {
         name: dataElement.name,
-        value: Math.trunc(dataElement.value / 60 / 60) + ' hrs, ' + Math.trunc(dataElement.value / 60 % 60) + ' min',
+        value: Utilities.formatHrsMins(dataElement.value),
         label: dataElement.name
       }
     };
@@ -115,9 +116,10 @@ export class PerDepartmentGraphComponent implements OnInit {
   onActivate(data): void {
     let displayValue = '';
     if (data.value.value !== 0) {
-      displayValue = Math.trunc(data.value.value / 60 / 60) + ' hrs, ' + Math.trunc(data.value.value / 60 % 60) + ' min';
+      displayValue = Utilities.formatHrsMins(data.value.value)
     }
     document.getElementById('center-text-label').innerHTML = data.value.name;
+    document.getElementById('center-text-value-bg').innerHTML = displayValue;
     document.getElementById('center-text-value').innerHTML = displayValue;
   }
 
@@ -134,7 +136,8 @@ export class PerDepartmentGraphComponent implements OnInit {
           val = val + this.graphData[x].value;
         }
       }
-      const displayValue = Math.trunc(val / 60 / 60) + ' hrs, ' + Math.trunc(val / 60 % 60) + ' min';
+      const displayValue = Utilities.formatHrsMins(val);
+      document.getElementById('center-text-value-bg').innerHTML = displayValue;
       document.getElementById('center-text-value').innerHTML = displayValue;
       document.getElementById('center-text-label').innerHTML = 'in meetings';
     }
@@ -147,9 +150,9 @@ export class PerDepartmentGraphComponent implements OnInit {
 
   private calculatePieDimensions(): number[] {
     if (this.graphData === null || this.graphData.length < 4) {
-      return [175, 175];
+      return [200, 200];
     }
-    const dimensionSize = this.graphData.length * 40;
+    const dimensionSize = this.graphData.length * 25;
     return [dimensionSize, dimensionSize];
   }
 }
