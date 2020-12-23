@@ -6,8 +6,6 @@ import {TimeBlockSummaryResponseDto} from './models/time-block-summary-response-
 import {catchError, map, tap} from 'rxjs/operators';
 import {HistorianService, Logging} from '@natr/historian';
 import {OrganizersStatisticsSm} from '../state/models/organizers-statistics-sm';
-import {createSchema, morphism, StrictSchema} from 'morphism';
-import {OrganizersStatisticsDto} from './models/organizers-statistics-dto';
 import {TrailingStatisticsResponseDto} from './models/trailing-statistics-response-dto';
 import {TrailingStatisticsSm} from '../state/models/trailing-statistics-sm';
 import {IntervalEnum} from './models/interval.enum';
@@ -30,15 +28,8 @@ interface TimeBlockRange {
 })
 export class StatisticsService {
   logger: HistorianService;
-  private readonly organizersStatisticsSchema: StrictSchema<OrganizersStatisticsSm, OrganizersStatisticsDto>;
 
   constructor(private httpClient: HttpClient, @Inject('environment') private environment) {
-    this.organizersStatisticsSchema = createSchema<OrganizersStatisticsSm, OrganizersStatisticsDto>(
-      {
-        organizersStatistics: 'organizersStatistics',
-        page: 'page'
-      }
-    );
   }
 
   private getStartEnd(interval: IntervalEnum): TimeBlockRange {
@@ -83,21 +74,20 @@ export class StatisticsService {
     return url;
   }
 
-  getOrganizersStatistics(interval: IntervalEnum): Observable<OrganizersStatisticsSm> {
+  getOrganizersStatistics(interval: IntervalEnum, count: number = 5, page: number = 0): Observable<OrganizersStatisticsSm> {
+    this.logger.debug('called ');
     return this.httpClient
-      .get(this.getStartEndUrl(interval, 'organizers'))
+      .get(this.getStartEndUrl(interval, 'organizers') + `?count=${count}&page=${page}`)
       .pipe(
+        tap(data => this.logger.debug('organizers statistics response', data)),
         catchError(
           error => {
             this.logger.error('Failed to get organizers statistics', error);
             return throwError('Failed to get organizers statistics');
           }
         ),
-        map(
-          (data: OrganizersStatisticsDto) => morphism(this.organizersStatisticsSchema, data)
-        )
-      )
-      ;
+        map(data => data as OrganizersStatisticsSm)
+      );
   }
 
   getTrailingStatistics(interval: IntervalEnum): Observable<TrailingStatisticsSm> {

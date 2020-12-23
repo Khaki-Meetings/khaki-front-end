@@ -1,5 +1,5 @@
 {
-  "employees" : [
+  "content" : [
     {
       "avatar": "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200",
       "firstName": "Ralph",
@@ -56,5 +56,30 @@
       "notify": true,
       "email": "tina@bob.com"
     }
-  ]
+  ],
+  "pageable": {
+    "sort": {
+      "sorted": false,
+      "unsorted": true,
+      "empty": true
+    },
+    "offset": 2,
+    "pageNumber": 2,
+    "pageSize": 1,
+    "paged": true,
+    "unpaged": false
+  },
+  "totalPages": 5,
+  "totalElements": 5,
+  "last": false,
+  "size": 1,
+  "number": 2,
+  "sort": {
+    "sorted": false,
+    "unsorted": true,
+    "empty": true
+  },
+  "numberOfElements": 1,
+  "first": false,
+  "empty": false
 }
