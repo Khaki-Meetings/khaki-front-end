@@ -16,7 +16,7 @@
 }
 
 h3 {
-  font-size: xxx-large;
+  font-size: -webkit-xxx-large;
   font-weight: bold;
   padding: 10px;
 }
@@ -24,6 +24,9 @@ h3 {
 .login-container {
   padding-top: 100px;
   padding-left: 50px;
+  h3 {
+    line-height: initial;
+  }
 }
 
 .auth0-container {
