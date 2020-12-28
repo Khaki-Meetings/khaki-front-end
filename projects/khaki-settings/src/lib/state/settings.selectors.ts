@@ -25,5 +25,3 @@ export const departmentsSelector = createSelector(
   featureSelector,
   (state: ProfileFeature) => state[departmentsFeatureKey]
 );
-
-
