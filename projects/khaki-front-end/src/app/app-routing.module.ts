@@ -16,6 +16,13 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'meetings',
+    loadChildren: () => import('khaki-meetings').then(m => m.KhakiMeetingsModule),
+    canActivate: [
+      AuthGuard
+    ]
+  },
+  {
     path: 'profile',
     loadChildren: () => import('khaki-profile').then(m => m.KhakiProfileModule),
     canActivate: [
