@@ -3,7 +3,6 @@ import {OrganizersStatisticsSm} from '../../state/models/organizers-statistics-s
 import {OrganizersStatisticsFacadeService} from '../../state/facades/organizers-statistics-facade.service';
 import {HistorianService, Logging} from '@natr/historian';
 import {MatPaginator, PageEvent} from '@angular/material/paginator';
-import {MatTableDataSource} from '@angular/material/table';
 import {OrganizerStatisticsSm} from '../../state/models/organizer-statistics-sm';
 import {IntervalEnum} from '../../services/models/interval.enum';
 import {CurrentTimeIntervalFacadeService} from '../../state/facades/current-time-interval-facade.service';

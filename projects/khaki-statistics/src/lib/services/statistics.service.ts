@@ -32,6 +32,7 @@ export class StatisticsService {
   constructor(private httpClient: HttpClient, @Inject('environment') private environment) {
   }
 
+  // noinspection JSMethodCanBeStatic
   private getStartEnd(interval: IntervalEnum): TimeBlockRange {
     const now = moment();
     let timeBlock: StartOf;
@@ -50,9 +51,6 @@ export class StatisticsService {
         break;
     }
 
-    this.logger.debug('now is', now);
-    this.logger.debug('interval is', interval);
-
     return {
       start: now.clone().utc().startOf(timeBlock),
       end: now.clone().utc().endOf(timeBlock)
@@ -60,14 +58,11 @@ export class StatisticsService {
   }
 
   private getStartEndUrl(interval: IntervalEnum, statName: string): string {
-    let url = `/assets/${statName}${interval}Data.json`;
-    if (this.environment.khakiBff) {
-      const startEnd = this.getStartEnd(interval);
-      this.logger.debug('startEnd is', startEnd);
-      const formattedStart = startEnd.start.utc().format();
-      const formattedEnd = startEnd.end.utc().format();
-      url = `${this.environment.khakiBff}/statistics/${statName}/${formattedStart}/${formattedEnd}`;
-    }
+    const startEnd = this.getStartEnd(interval);
+    this.logger.debug('startEnd is', startEnd);
+    const formattedStart = startEnd.start.utc().format();
+    const formattedEnd = startEnd.end.utc().format();
+    const url = `${this.environment.khakiBff}/statistics/${statName}/${formattedStart}/${formattedEnd}`;
 
     this.logger.debug('url is', url);
 
@@ -75,7 +70,6 @@ export class StatisticsService {
   }
 
   getOrganizersStatistics(interval: IntervalEnum, count: number = 5, page: number = 0): Observable<OrganizersStatisticsSm> {
-    this.logger.debug('called ');
     return this.httpClient
       .get(this.getStartEndUrl(interval, 'organizers') + `?count=${count}&page=${page}`)
       .pipe(
@@ -91,31 +85,39 @@ export class StatisticsService {
   }
 
   getTrailingStatistics(interval: IntervalEnum): Observable<TrailingStatisticsSm> {
-    let url = `/assets/twelve${interval}TrailingData.json`;
-
-    if (this.environment.khakiBff) {
-      const count = 12;
-      const startEnd = this.getStartEnd(interval);
-      this.logger.debug('start is', startEnd.start);
-      const formattedStart = startEnd.start.utc().format();
-      url = `${this.environment.khakiBff}/statistics/trailing/${formattedStart}/${interval}/${count}`;
-    }
+    const count = 12;
+    const startEnd = this.getStartEnd(interval);
+    const formattedStart = startEnd.start.utc().format();
+    const url = `${this.environment.khakiBff}/statistics/trailing/${formattedStart}/${interval}/${count}`;
+    this.logger.debug('trailing url', url);
 
     return this.httpClient
       .get(url)
       .pipe(
+        tap(data => this.logger.debug('trailing data', data)),
+        catchError(
+          error => {
+            this.logger.error('Failed to get trailing statistics', error);
+            return throwError('Failed to get trailing statistics');
+          }
+        ),
         map(
           (data: TrailingStatisticsResponseDto) => data as TrailingStatisticsSm
         ),
       );
   }
 
-
   getDepartmentStatistics(interval: IntervalEnum): Observable<DepartmentsStatisticsSm> {
     return this.httpClient
       .get(this.getStartEndUrl(interval, 'department'))
       .pipe(
         tap(data => this.logger.debug('raw department data from server', data)),
+        catchError(
+          error => {
+            this.logger.error('Failed to get department statistics', error);
+            return throwError('Failed to get department statistics');
+          }
+        ),
         map((data: DepartmentsStatisticsResponseDto) => data as DepartmentsStatisticsSm),
       );
   }
@@ -125,6 +127,12 @@ export class StatisticsService {
       .get(this.getStartEndUrl(interval, 'summary'))
       .pipe(
         tap(ret => this.logger.debug('timeBlockSummary data', ret)),
+        catchError(
+          error => {
+            this.logger.error('Failed to get time block summary', error);
+            return throwError('Failed to get time block summary');
+          }
+        ),
         map(
           (timeBlockSummary: TimeBlockSummaryResponseDto) => {
             timeBlockSummary.averageStaffSeconds = 0;

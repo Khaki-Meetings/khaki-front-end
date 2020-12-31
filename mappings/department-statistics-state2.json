@@ -1,0 +1,15 @@
+{
+  "scenarioName": "department state",
+  "requiredScenarioState": "2nd",
+  "newScenarioState": "Started",
+  "request": {
+    "method": "GET"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "bodyFileName": "departmentMonthData.json"
+  }
+}
