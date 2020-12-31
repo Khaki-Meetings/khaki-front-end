@@ -59,12 +59,12 @@ export class StatisticsService {
 
   private getStartEndUrl(interval: IntervalEnum, statName: string): string {
     const startEnd = this.getStartEnd(interval);
-    this.logger.debug('startEnd is', startEnd);
+    console.log('startEnd is', startEnd);
     const formattedStart = startEnd.start.utc().format();
     const formattedEnd = startEnd.end.utc().format();
     const url = `${this.environment.khakiBff}/statistics/${statName}/${formattedStart}/${formattedEnd}`;
 
-    this.logger.debug('url is', url);
+    console.log('url is', url);
 
     return url;
   }
@@ -73,14 +73,14 @@ export class StatisticsService {
     return this.httpClient
       .get(this.getStartEndUrl(interval, 'organizers') + `?count=${count}&page=${page}`)
       .pipe(
-        tap(data => this.logger.debug('organizers statistics response', data)),
+        tap(organizersData => console.log('Server response organizers', organizersData)),
         catchError(
           error => {
-            this.logger.error('Failed to get organizers statistics', error);
+            console.log('Failed to get organizers statistics', error);
             return throwError('Failed to get organizers statistics');
           }
         ),
-        map(data => data as OrganizersStatisticsSm)
+        map(organizersStatisticsData => organizersStatisticsData as OrganizersStatisticsSm)
       );
   }
 
@@ -89,20 +89,20 @@ export class StatisticsService {
     const startEnd = this.getStartEnd(interval);
     const formattedStart = startEnd.start.utc().format();
     const url = `${this.environment.khakiBff}/statistics/trailing/${formattedStart}/${interval}/${count}`;
-    this.logger.debug('trailing url', url);
+    console.log('trailing url', url);
 
     return this.httpClient
       .get(url)
       .pipe(
-        tap(data => this.logger.debug('trailing data', data)),
+        tap(trailingData => console.log('Server response: trailing', trailingData)),
         catchError(
           error => {
-            this.logger.error('Failed to get trailing statistics', error);
+            console.log('Server response: trailing', error);
             return throwError('Failed to get trailing statistics');
           }
         ),
         map(
-          (data: TrailingStatisticsResponseDto) => data as TrailingStatisticsSm
+          (trailingStatisticsResponseDto: TrailingStatisticsResponseDto) => trailingStatisticsResponseDto as TrailingStatisticsSm
         ),
       );
   }
@@ -111,14 +111,14 @@ export class StatisticsService {
     return this.httpClient
       .get(this.getStartEndUrl(interval, 'department'))
       .pipe(
-        tap(data => this.logger.debug('raw department data from server', data)),
+        tap(departmentData => console.log('Server response: department', departmentData)),
         catchError(
           error => {
-            this.logger.error('Failed to get department statistics', error);
+            console.log('Failed to get department statistics', error);
             return throwError('Failed to get department statistics');
           }
         ),
-        map((data: DepartmentsStatisticsResponseDto) => data as DepartmentsStatisticsSm),
+        map((departmentsStatistics: DepartmentsStatisticsResponseDto) => departmentsStatistics as DepartmentsStatisticsSm),
       );
   }
 
@@ -126,10 +126,10 @@ export class StatisticsService {
     return this.httpClient
       .get(this.getStartEndUrl(interval, 'summary'))
       .pipe(
-        tap(ret => this.logger.debug('timeBlockSummary data', ret)),
+        tap(summaryData => console.log('Server response: summary', summaryData)),
         catchError(
           error => {
-            this.logger.error('Failed to get time block summary', error);
+            console.log('Failed to get time block summary', error);
             return throwError('Failed to get time block summary');
           }
         ),

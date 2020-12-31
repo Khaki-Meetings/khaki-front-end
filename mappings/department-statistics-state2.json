@@ -3,7 +3,8 @@
   "requiredScenarioState": "2nd",
   "newScenarioState": "Started",
   "request": {
-    "method": "GET"
+    "method": "GET",
+    "urlPattern": "/statistics/department/\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(.\\d{2,5})?Z/\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(.\\d{2,5})?Z(\\\\?(.*)=(.*))?"
   },
   "response": {
     "status": 200,

@@ -3,7 +3,8 @@
   "requiredScenarioState": "2nd",
   "newScenarioState": "Started",
   "request": {
-    "method": "GET"
+    "method": "GET",
+    "urlPattern": "/statistics/trailing/\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(.\\d{2,5})?Z/(Month|Week)/\\d+"
   },
   "response": {
     "status": 200,
