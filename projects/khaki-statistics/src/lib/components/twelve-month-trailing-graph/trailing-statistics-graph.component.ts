@@ -7,6 +7,7 @@ import * as moment from 'moment';
 import {CurrentTimeIntervalFacadeService} from '../../state/facades/current-time-interval-facade.service';
 import {switchMap, tap} from 'rxjs/operators';
 import {Utilities} from '../../services/utilities';
+import {IntervalSe} from '../../state/models/interval-se';
 
 const momentJs = moment;
 
@@ -51,8 +52,8 @@ export class TrailingStatisticsGraphComponent implements OnInit {
       .currentTimeInterval()
       .pipe(
         tap(interval => this.logger.debug('current interval', interval)),
-        switchMap((interval: IntervalEnum) => {
-            this.currentInterval = interval;
+        switchMap((interval: IntervalSe) => {
+            this.currentInterval = IntervalEnum[interval];
             return this.trailingStatisticsFacade.trailingStatistics();
           }
         )

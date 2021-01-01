@@ -17,8 +17,8 @@ export class TimeBlockSummariesFacadeService {
   constructor(private store: Store<StatisticsFeature>) {
   }
 
-  requestTimeBlockSummary(interval: IntervalEnum): void {
-    this.store.dispatch(loadTimeBlockSummary({interval}));
+  requestTimeBlockSummary(): void {
+    this.store.dispatch(loadTimeBlockSummary());
   }
 
   timeBlockSummary(): Observable<TimeBlockSummarySm> {

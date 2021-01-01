@@ -87,6 +87,7 @@ export class StatisticsService {
         ),
         map(organizersStatisticsData => organizersStatisticsData as OrganizersStatisticsSm)
       );
+
   }
 
   getTrailingStatistics(interval: IntervalEnum, statisticsQueryParams: StatisticsQueryParameters): Observable<TrailingStatisticsSm> {

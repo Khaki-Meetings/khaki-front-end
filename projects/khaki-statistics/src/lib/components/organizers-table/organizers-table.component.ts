@@ -53,7 +53,7 @@ export class OrganizersTableComponent implements OnInit, AfterViewInit {
     this.currentTimeIntervalFacade
       .currentTimeInterval()
       .subscribe(
-        currentInterval => this.organizersStatisticsFacade.requestOrganizersStatistics(currentInterval, event.pageSize, event.pageIndex)
+        currentInterval => this.organizersStatisticsFacade.requestOrganizersStatistics()
       );
   }
 }
