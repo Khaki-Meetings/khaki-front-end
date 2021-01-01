@@ -53,11 +53,11 @@ export class AppComponent implements OnInit {
     });
   }
 
-  openHelpDialog() : void {
-    document.getElementById("helpModal").style.display = "block";
+  openHelpDialog(): void {
+    document.getElementById('helpModal').style.display = 'block';
   }
 
-  closeHelpDialog() : void {
-    document.getElementById("helpModal").style.display = "none";
+  closeHelpDialog(): void {
+    document.getElementById('helpModal').style.display = 'none';
   }
 }

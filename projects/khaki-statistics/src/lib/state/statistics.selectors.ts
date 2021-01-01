@@ -4,7 +4,7 @@ import {StatisticsFeature} from './models/statistics-feature';
 import {timeBlockSummariesFeatureKey} from './reducers/time-block-summary.reducer';
 import {organizersStatisticsFeatureKey} from './reducers/organizers-statistics.reducer';
 import {trailingStatisticsFeatureKey} from './reducers/trailing-statistics.reducer';
-import {currentTimeIntervalFeatureKey} from './reducers/current-time-interval.reducer';
+import {statisticsFiltersFeatureKey} from './reducers/statistics-filters.reducer';
 
 const featureSelector = createFeatureSelector(khakiStatisticsFeatureKey);
 
@@ -24,5 +24,5 @@ export const trailingStatisticsSelector = createSelector(
 
 export const currentTimeIntervalSelector = createSelector(
   featureSelector,
-  (state: StatisticsFeature) => state[currentTimeIntervalFeatureKey]
+  (state: StatisticsFeature) => state[statisticsFiltersFeatureKey].interval
 );

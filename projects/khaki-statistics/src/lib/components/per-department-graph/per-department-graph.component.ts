@@ -1,8 +1,7 @@
-import {Component, OnInit, ChangeDetectorRef, HostListener} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {DepartmentsStatisticsSm} from '../../state/models/departments-statistics-sm';
 import {PerDepartmentStatisticsFacadeService} from '../../state/facades/per-department-statistics-facade.service';
 import {ColorHelper} from '@swimlane/ngx-charts';
-import {NgxChartsLegendCustomComponent} from '../ngx-charts-legend-custom/ngx-charts-legend-custom.component';
 import {HistorianService, Logging} from '@natr/historian';
 import {Utilities} from '../../services/utilities';
 
@@ -116,7 +115,7 @@ export class PerDepartmentGraphComponent implements OnInit {
   onActivate(data): void {
     let displayValue = '';
     if (data.value.value !== 0) {
-      displayValue = Utilities.formatHrsMins(data.value.value)
+      displayValue = Utilities.formatHrsMins(data.value.value);
     }
     document.getElementById('center-text-label').innerHTML = data.value.name;
     document.getElementById('center-text-value-bg').innerHTML = displayValue;

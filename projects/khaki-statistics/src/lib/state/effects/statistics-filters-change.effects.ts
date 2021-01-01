@@ -8,20 +8,21 @@ import {loadOrganizersStatistics} from '../actions/organizers-statistics.actions
 import {loadTimeBlockSummary} from '../actions/time-block-summaries.actions';
 import {loadPerDepartmentStatistics} from '../actions/per-department-statistics.actions';
 import {loadTrailingStatistics} from '../actions/trailing-statistics.actions';
+import {setStatisticsFiltersAction} from '../actions/set-statistics-filter.actions';
 
 
 @Injectable()
-export class CurrentTimeIntervalEffects {
+export class StatisticsFiltersChangeEffects {
 
   effect$ = createEffect(
     () => this.actions$.pipe(
-      ofType(setCurrentTimeIntervalAction),
+      ofType(setCurrentTimeIntervalAction, setStatisticsFiltersAction),
       tap(
-        (action) => {
-          this.store.dispatch(loadOrganizersStatistics(action));
-          this.store.dispatch(loadTimeBlockSummary(action));
-          this.store.dispatch(loadPerDepartmentStatistics(action));
-          this.store.dispatch(loadTrailingStatistics(action));
+        () => {
+          this.store.dispatch(loadOrganizersStatistics());
+          this.store.dispatch(loadTimeBlockSummary());
+          this.store.dispatch(loadPerDepartmentStatistics());
+          this.store.dispatch(loadTrailingStatistics());
         }
       )
     ),

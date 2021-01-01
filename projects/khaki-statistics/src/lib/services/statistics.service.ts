@@ -1,7 +1,7 @@
 import {Inject, Injectable} from '@angular/core';
 import {Observable, throwError} from 'rxjs';
 import {TimeBlockSummarySm} from '../state/models/time-block-summary-sm';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {TimeBlockSummaryResponseDto} from './models/time-block-summary-response-dto';
 import {catchError, map, tap} from 'rxjs/operators';
 import {HistorianService, Logging} from '@natr/historian';
@@ -14,6 +14,7 @@ import {DepartmentsStatisticsResponseDto} from './models/departments-statistics-
 import {DepartmentsStatisticsSm} from '../state/models/departments-statistics-sm';
 import StartOf = momentJs.unitOfTime.StartOf;
 import Moment = momentJs.Moment;
+import {StatisticsQueryParameters} from './models/statistics-query-parameters';
 
 const moment = momentJs;
 
@@ -69,9 +70,13 @@ export class StatisticsService {
     return url;
   }
 
-  getOrganizersStatistics(interval: IntervalEnum, count: number = 5, page: number = 0): Observable<OrganizersStatisticsSm> {
+  getOrganizersStatistics(interval: IntervalEnum, statisticsQueryParams: StatisticsQueryParameters): Observable<OrganizersStatisticsSm> {
+    const params = new HttpParams();
+    params.set('page', statisticsQueryParams.page.toString());
+    params.set('count', statisticsQueryParams.count.toString());
+    params.set('filter', statisticsQueryParams.filter.toString());
     return this.httpClient
-      .get(this.getStartEndUrl(interval, 'organizers') + `?count=${count}&page=${page}`)
+      .get(this.getStartEndUrl(interval, 'organizers'), {params})
       .pipe(
         tap(organizersData => console.log('Server response organizers', organizersData)),
         catchError(
@@ -84,15 +89,17 @@ export class StatisticsService {
       );
   }
 
-  getTrailingStatistics(interval: IntervalEnum): Observable<TrailingStatisticsSm> {
-    const count = 12;
+  getTrailingStatistics(interval: IntervalEnum, statisticsQueryParams: StatisticsQueryParameters): Observable<TrailingStatisticsSm> {
+    const params = new HttpParams();
+    params.set('filter', statisticsQueryParams.filter.toString());
+    const intervalCount = 12;
     const startEnd = this.getStartEnd(interval);
     const formattedStart = startEnd.start.utc().format();
-    const url = `${this.environment.khakiBff}/statistics/trailing/${formattedStart}/${interval}/${count}`;
+    const url = `${this.environment.khakiBff}/statistics/trailing/${formattedStart}/${interval}/${intervalCount}`;
     console.log('trailing url', url);
 
     return this.httpClient
-      .get(url)
+      .get(url, {params})
       .pipe(
         tap(trailingData => console.log('Server response: trailing', trailingData)),
         catchError(
@@ -107,9 +114,11 @@ export class StatisticsService {
       );
   }
 
-  getDepartmentStatistics(interval: IntervalEnum): Observable<DepartmentsStatisticsSm> {
+  getDepartmentStatistics(interval: IntervalEnum, statisticsQueryParams: StatisticsQueryParameters): Observable<DepartmentsStatisticsSm> {
+    const params = new HttpParams();
+    params.set('filter', statisticsQueryParams.filter.toString());
     return this.httpClient
-      .get(this.getStartEndUrl(interval, 'department'))
+      .get(this.getStartEndUrl(interval, 'department'), {params})
       .pipe(
         tap(departmentData => console.log('Server response: department', departmentData)),
         catchError(
@@ -122,9 +131,11 @@ export class StatisticsService {
       );
   }
 
-  getTimeBlockSummary(interval: IntervalEnum): Observable<TimeBlockSummarySm> {
+  getTimeBlockSummary(interval: IntervalEnum, statisticsQueryParams: StatisticsQueryParameters): Observable<TimeBlockSummarySm> {
+    const params = new HttpParams();
+    params.set('filter', statisticsQueryParams.filter.toString());
     return this.httpClient
-      .get(this.getStartEndUrl(interval, 'summary'))
+      .get(this.getStartEndUrl(interval, 'summary'), {params})
       .pipe(
         tap(summaryData => console.log('Server response: summary', summaryData)),
         catchError(

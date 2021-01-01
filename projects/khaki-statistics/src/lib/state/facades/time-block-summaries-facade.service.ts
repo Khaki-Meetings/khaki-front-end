@@ -5,7 +5,7 @@ import {StatisticsFeature} from '../models/statistics-feature';
 import {Store} from '@ngrx/store';
 import {loadTimeBlockSummary} from '../actions/time-block-summaries.actions';
 import {timeBlockSummariesFeatureKey} from '../reducers/time-block-summary.reducer';
-import {ErrorSm} from '../models/errorSm';
+import {ErrorSm} from '../models/error-sm';
 import {timeBlockSummarySelector} from '../statistics.selectors';
 import {IntervalEnum} from '../../services/models/interval.enum';
 

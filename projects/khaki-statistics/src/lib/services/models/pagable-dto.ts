@@ -1,4 +1,4 @@
-import {ErrorSm} from '../../state/models/errorSm';
+import {ErrorSm} from '../../state/models/error-sm';
 
 export interface PageDto<T> {
   totalPages?: number;
