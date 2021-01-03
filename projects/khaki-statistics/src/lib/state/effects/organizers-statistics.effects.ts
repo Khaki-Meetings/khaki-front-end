@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
-import {loadOrganizersStatistics, loadOrganizersStatisticsSuccess} from '../actions/organizers-statistics.actions';
+import {loadOrganizersStatisticsAction, loadOrganizersStatisticsSuccessAction} from '../actions/organizers-statistics.actions';
 import {catchError, map, mergeMap, switchMap, tap} from 'rxjs/operators';
 import {StatisticsService} from '../../services/statistics.service';
 import {loadTimeBlockSummaryFailure} from '../actions/time-block-summaries.actions';
@@ -18,13 +18,14 @@ export class OrganizersStatisticsEffects {
 
   organizersStatisticsEffect$ = createEffect(
     () => this.actions$.pipe(
-      ofType(loadOrganizersStatistics),
+      ofType(loadOrganizersStatisticsAction),
       mergeMap(() => this.statisticsFiltersFacade.statisticsFilters()),
       switchMap(
         (statisticsFilters) => this.statisticsService
           .getOrganizersStatistics(IntervalEnum[statisticsFilters.interval], {...statisticsFilters})
           .pipe(
-            map(organizersStatistics => loadOrganizersStatisticsSuccess(organizersStatistics)),
+            tap(organizersStatistics => this.logger.debug('organizersStatistics', organizersStatistics)),
+            map(organizersStatistics => loadOrganizersStatisticsSuccessAction(organizersStatistics)),
             catchError(
               (error: ErrorSm) => of(loadTimeBlockSummaryFailure(error))
             )

@@ -80,10 +80,12 @@ export class StatisticsService {
     params = params.set('filter', statisticsQueryParams.filter.toString());
     this.logger.debug('organizers params', params);
     this.logger.debug('organizers params.keys', params.keys());
+    const url = this.getStartEndUrl(interval, 'organizers');
+    this.logger.debug('organizersStatistics url', url, params.toString());
     return this.httpClient
-      .get(this.getStartEndUrl(interval, 'organizers'), {params})
+      .get(url, {params})
       .pipe(
-        tap(organizersData => this.logger.debug('Server response organizers', organizersData)),
+        tap(organizersData => this.logger.debug('organizersStatistics response', organizersData)),
         catchError(
           error => {
             this.logger.debug('Failed to get organizers statistics', error);

@@ -4,7 +4,7 @@ import {OrganizersStatisticsSm} from '../models/organizers-statistics-sm';
 import {NotImplementedException} from '../../exceptions/not-implemented-exception';
 import {StatisticsFeature} from '../models/statistics-feature';
 import {Store} from '@ngrx/store';
-import {loadOrganizersStatistics} from '../actions/organizers-statistics.actions';
+import {loadOrganizersStatisticsAction} from '../actions/organizers-statistics.actions';
 import {organizersStatisticsSelector} from '../statistics.selectors';
 import {IntervalEnum} from '../../services/models/interval.enum';
 
@@ -17,7 +17,7 @@ export class OrganizersStatisticsFacadeService {
   }
 
   requestOrganizersStatistics(): void {
-    this.store.dispatch(loadOrganizersStatistics());
+    this.store.dispatch(loadOrganizersStatisticsAction());
   }
 
   organizersStatistics(): Observable<OrganizersStatisticsSm> {

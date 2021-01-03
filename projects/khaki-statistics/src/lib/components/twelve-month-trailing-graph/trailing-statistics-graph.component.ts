@@ -27,7 +27,7 @@ export class TrailingStatisticsGraphComponent implements OnInit {
 
   private logger: HistorianService;
 
-  graphData: { name: string, value: number }[] = [];
+  graphData: { name: string, value: number, extra: {customLabel: string} }[] = [];
 
   view: any[] = [700, 400];
 
@@ -51,7 +51,6 @@ export class TrailingStatisticsGraphComponent implements OnInit {
     this.currentTimeIntervalFacade
       .currentTimeInterval()
       .pipe(
-        tap(interval => this.logger.debug('current interval', interval)),
         switchMap((interval: IntervalSe) => {
             this.currentInterval = IntervalEnum[interval];
             return this.trailingStatisticsFacade.trailingStatistics();
@@ -63,10 +62,9 @@ export class TrailingStatisticsGraphComponent implements OnInit {
 
   private createGraphData(trailingStatistics: TrailingStatisticsSm): void {
     const timeBlocks = this.getIntervalLabels();
-    this.logger.debug('timeBlocks', timeBlocks);
     this.graphData = trailingStatistics.timeBlockSummaries.map(
       (timeBlockSummary, index) => {
-        const totalSeconds = (timeBlockSummary.totalSeconds && typeof timeBlockSummary.totalSeconds !== 'number')
+        const totalSeconds = (timeBlockSummary.totalSeconds && typeof timeBlockSummary.totalSeconds === 'number')
           ? timeBlockSummary.totalSeconds : 0;
         const value = totalSeconds / 3600;
         const name = timeBlocks[index];
@@ -79,8 +77,6 @@ export class TrailingStatisticsGraphComponent implements OnInit {
         };
       }
     );
-
-    this.logger.debug('graphData', this.graphData);
   }
 
   private getIntervalLabels(): string[] {
@@ -104,7 +100,6 @@ export class TrailingStatisticsGraphComponent implements OnInit {
 
     const timeBlocks: string[] = [];
     const currentMoment = momentJs().startOf(unit);
-    this.logger.debug('current format', currentMoment.format(format));
     for (let i = 0; i < 12; i++) {
       timeBlocks.push(currentMoment.format(format));
       currentMoment.subtract(1, unit);
