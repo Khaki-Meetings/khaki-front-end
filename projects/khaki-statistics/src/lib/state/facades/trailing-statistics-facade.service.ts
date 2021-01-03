@@ -15,8 +15,8 @@ export class TrailingStatisticsFacadeService {
   constructor(private store: Store<StatisticsFeature>) {
   }
 
-  requestTrailingStatistics(timeBlock: IntervalEnum, count: number): void {
-    this.store.dispatch(loadTrailingStatistics({interval: timeBlock}));
+  requestTrailingStatistics(): void {
+    this.store.dispatch(loadTrailingStatistics());
   }
 
   trailingStatistics(): Observable<TrailingStatisticsSm> {

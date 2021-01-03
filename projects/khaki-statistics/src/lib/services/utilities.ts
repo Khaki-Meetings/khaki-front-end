@@ -1,15 +1,15 @@
 export class Utilities {
   static formatHrsMins(seconds: number): string {
 
-    var hours = Math.trunc(seconds / 60 / 60);
-    var minutes = Math.trunc(seconds / 60 % 60);
+    const hours = Math.trunc(seconds / 60 / 60);
+    const minutes = Math.trunc(seconds / 60 % 60);
 
-    var hoursLabel = 'hrs';
-    if (hours == 1) {
+    let hoursLabel = 'hrs';
+    if (hours === 1) {
       hoursLabel = 'hr';
     }
 
-    var minutesLabel = 'mins';
+    const minutesLabel = 'mins';
 
     return hours + ' ' + hoursLabel + ', ' + minutes + ' ' + minutesLabel;
   }

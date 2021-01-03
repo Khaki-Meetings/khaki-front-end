@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, Inject, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Inject, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {EmployeesFacadeService} from '../../state/facades/employees-facade.service';
@@ -23,8 +23,8 @@ export class SettingsEmployeesComponent implements OnInit {
   maxShow = 6;
 
   constructor(private router: Router, public dialog: MatDialog,
-    private facadeService: EmployeesFacadeService,
-    private settingsService: SettingsService) {
+              private facadeService: EmployeesFacadeService,
+              private settingsService: SettingsService) {
   }
 
   ngOnInit(): void {
@@ -33,8 +33,8 @@ export class SettingsEmployeesComponent implements OnInit {
     this.settingsService
       .getEmployees()
       .subscribe(data => {
-        this.employees = data["content"] as EmployeeDto[];
-    });
+        this.employees = data['content'] as EmployeeDto[];
+      });
 
   }
 

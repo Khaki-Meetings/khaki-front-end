@@ -1,5 +1,5 @@
 import {TimeBlockSummarySm} from './time-block-summary-sm';
-import {ErrorSm} from './errorSm';
+import {ErrorSm} from './error-sm';
 import {IntervalEnum} from '../../services/models/interval.enum';
 
 export interface TrailingStatisticsSm {

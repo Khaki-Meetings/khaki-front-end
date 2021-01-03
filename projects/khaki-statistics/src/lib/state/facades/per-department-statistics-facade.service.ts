@@ -6,7 +6,6 @@ import {StatisticsFeature} from '../models/statistics-feature';
 import {loadPerDepartmentStatistics} from '../actions/per-department-statistics.actions';
 import {perDepartmentStatisticsSelector} from '../statistics.selectors';
 import {NotImplementedException} from '../../exceptions/not-implemented-exception';
-import {IntervalEnum} from '../../services/models/interval.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +15,8 @@ export class PerDepartmentStatisticsFacadeService {
   constructor(private store: Store<StatisticsFeature>) {
   }
 
-  requestPerDepartmentStatistics(interval: IntervalEnum): void {
-    this.store.dispatch(loadPerDepartmentStatistics({interval}));
+  requestPerDepartmentStatistics(): void {
+    this.store.dispatch(loadPerDepartmentStatistics());
   }
 
   perDepartmentStatistics(): Observable<DepartmentsStatisticsSm> {

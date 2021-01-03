@@ -2,7 +2,7 @@ import {Action, createReducer, on} from '@ngrx/store';
 import {TimeBlockSummarySm} from '../models/time-block-summary-sm';
 import {IntervalEnum} from '../../services/models/interval.enum';
 import {loadTimeBlockSummaryFailure, loadTimeBlockSummarySuccess} from '../actions/time-block-summaries.actions';
-import {ErrorSm} from '../models/errorSm';
+import {ErrorSm} from '../models/error-sm';
 import {Utilities} from '../../services/utilities';
 
 export const timeBlockSummariesFeatureKey = 'timeBlockSummaries';

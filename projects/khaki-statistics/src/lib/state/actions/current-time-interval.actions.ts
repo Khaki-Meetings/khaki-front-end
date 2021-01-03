@@ -1,10 +1,8 @@
-import { createAction, props } from '@ngrx/store';
-import {IntervalEnum} from '../../services/models/interval.enum';
+import {createAction, props} from '@ngrx/store';
+import {IntervalSe} from '../models/interval-se';
 
 export interface SetCurrentTimeIntervalActionProp {
-  interval: IntervalEnum;
-  page?: number;
-  count?: number;
+  interval: IntervalSe;
 }
 
 export const setCurrentTimeIntervalAction = createAction(

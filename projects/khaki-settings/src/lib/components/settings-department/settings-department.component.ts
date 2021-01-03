@@ -22,8 +22,8 @@ export class SettingsDepartmentComponent implements OnInit {
   maxShow = 9;
 
   constructor(private router: Router, public dialog: MatDialog,
-    private departmentsFacadeService: DepartmentsFacadeService,
-    private settingsService: SettingsService) {
+              private departmentsFacadeService: DepartmentsFacadeService,
+              private settingsService: SettingsService) {
   }
 
   ngOnInit(): void {
@@ -32,7 +32,7 @@ export class SettingsDepartmentComponent implements OnInit {
     this.settingsService
       .getDepartments()
       .subscribe(data => {
-        this.departments = data["content"] as DepartmentDto[];
+        this.departments = data['content'] as DepartmentDto[];
       });
   }
 

@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {KhakiState, setTenantKeyAction, setTenantMapAction} from '../reducers';
 import {Store} from '@ngrx/store';
 import {Observable} from 'rxjs';
+import {SideNavComponent} from '../../components/side-nav/side-nav.component';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,7 @@ export class TenantFacadeService {
   }
 
   public setTenantKey(tenantKey: string): void {
+    localStorage.setItem('tenantKey', tenantKey);
     this.store.dispatch(setTenantKeyAction({tenantKey}));
   }
 

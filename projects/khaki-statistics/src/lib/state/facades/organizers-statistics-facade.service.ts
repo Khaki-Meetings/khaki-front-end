@@ -16,8 +16,8 @@ export class OrganizersStatisticsFacadeService {
   constructor(private store: Store<StatisticsFeature>) {
   }
 
-  requestOrganizersStatistics(interval: IntervalEnum, count: number, page: number): void {
-    this.store.dispatch(loadOrganizersStatistics({interval, count, page}));
+  requestOrganizersStatistics(): void {
+    this.store.dispatch(loadOrganizersStatistics());
   }
 
   organizersStatistics(): Observable<OrganizersStatisticsSm> {

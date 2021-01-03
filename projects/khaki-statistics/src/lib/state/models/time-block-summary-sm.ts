@@ -1,5 +1,5 @@
 import {IntervalEnum} from '../../services/models/interval.enum';
-import {ErrorSm} from './errorSm';
+import {ErrorSm} from './error-sm';
 
 export interface TimeBlockSummarySm {
   timeBlock?: IntervalEnum;
