@@ -5,12 +5,11 @@ import {Observable} from 'rxjs';
 import {OrganizersStatisticsEffects} from './organizers-statistics.effects';
 import {Action} from '@ngrx/store';
 import {cold, hot} from 'jasmine-marbles';
-import {loadOrganizersStatistics} from '../actions/organizers-statistics.actions';
+import {loadOrganizersStatisticsAction} from '../actions/organizers-statistics.actions';
 import {StatisticsService} from '../../services/statistics.service';
 import {OrganizersStatisticsDto} from '../../services/models/organizers-statistics-dto';
 import {OrganizersStatisticsFacadeService} from '../facades/organizers-statistics-facade.service';
 import {OrganizersStatisticsSm} from '../models/organizers-statistics-sm';
-import {IntervalEnum} from '../../services/models/interval.enum';
 
 describe('OrganizersStatisticsEffects', () => {
   let actions$: Observable<Action>;
@@ -20,8 +19,7 @@ describe('OrganizersStatisticsEffects', () => {
   const organizersStatisticsData: OrganizersStatisticsDto = {content: [], number: 0};
 
   beforeEach(() => {
-    statisticsService = {
-    };
+    statisticsService = {};
     organizerStatisticsFacade = {
       setOrganizersStatistics(data: OrganizersStatisticsSm): void {
       }
@@ -34,7 +32,7 @@ describe('OrganizersStatisticsEffects', () => {
         cold('---a|', {a: organizersStatisticsData})
       );
 
-    actions$ = hot('--a', {a: loadOrganizersStatistics({interval: IntervalEnum.Week})});
+    actions$ = hot('--a', {a: loadOrganizersStatisticsAction()});
     TestBed.configureTestingModule({
       providers: [
         OrganizersStatisticsEffects,
@@ -54,7 +52,7 @@ describe('OrganizersStatisticsEffects', () => {
   it(
     'should um, do stuffz',
     () => {
-      const expected = hot('---a', {a: loadOrganizersStatistics({interval: IntervalEnum.Week})});
+      const expected = hot('---a', {a: loadOrganizersStatisticsAction()});
 
       expect(effects.organizersStatisticsEffect$).toBeObservable(expected);
 

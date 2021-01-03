@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {StatisticsFeature} from '../models/statistics-feature';
 import {Store} from '@ngrx/store';
-import {loadOrganizersStatistics} from '../actions/organizers-statistics.actions';
+import {loadOrganizersStatisticsAction} from '../actions/organizers-statistics.actions';
 import {loadTimeBlockSummary} from '../actions/time-block-summaries.actions';
 import {loadPerDepartmentStatistics} from '../actions/per-department-statistics.actions';
 import {loadTrailingStatistics} from '../actions/trailing-statistics.actions';
@@ -17,7 +17,7 @@ export class AllStatisticsFacadeService {
 
   requestAllStatistics(): void {
     this.logger.debug('getting all stats');
-    this.store.dispatch(loadOrganizersStatistics());
+    this.store.dispatch(loadOrganizersStatisticsAction());
     this.store.dispatch(loadTimeBlockSummary());
     this.store.dispatch(loadPerDepartmentStatistics());
     this.store.dispatch(loadTrailingStatistics());
