@@ -3,6 +3,7 @@ import {FormControl, FormGroup} from '@angular/forms';
 import {IntervalEnum} from '../../services/models/interval.enum';
 import {HistorianService, Logging} from '@natr/historian';
 import {CurrentTimeIntervalFacadeService} from '../../state/facades/current-time-interval-facade.service';
+import {IntervalSe} from '../../state/models/interval-se';
 
 @Logging
 @Component({
@@ -27,7 +28,7 @@ export class TimeIntervalFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.buildForm();
-    this.currentTimeIntervalFacade.setCurrentTimeInterval(this.defaultTimeInterval);
+    this.currentTimeIntervalFacade.setCurrentTimeInterval(IntervalSe[this.defaultTimeInterval]);
   }
 
   private buildForm(): void {

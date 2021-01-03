@@ -1,0 +1,16 @@
+{
+  "scenarioName": "summary state",
+  "requiredScenarioState": "Started",
+  "newScenarioState": "2nd",
+  "request": {
+    "method": "GET",
+    "urlPattern": "/statistics/summary/\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(.\\d{2,5})?Z/\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(.\\d{2,5})?Z(\\\\?(.*)=(.*))?"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "bodyFileName": "summaryWeekData.json"
+  }
+}

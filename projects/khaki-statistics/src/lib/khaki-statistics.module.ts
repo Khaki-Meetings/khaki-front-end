@@ -26,9 +26,10 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {MatSelectModule} from '@angular/material/select';
 import {ReactiveFormsModule} from '@angular/forms';
 import {TimeIntervalFormComponent} from './components/time-interval-form/time-interval-form.component';
-import {CurrentTimeIntervalEffects} from './state/effects/current-time-interval.effects';
+import {StatisticsFiltersChangeEffects} from './state/effects/statistics-filters-change.effects';
 import {AuthHttpInterceptor} from '@auth0/auth0-angular';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { ExternalInternalSelectorComponent } from './components/external-internal-selector/external-internal-selector.component';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     TimeBasedStatSummaryComponent,
     TimeIntervalFormComponent,
     NgxChartsLegendCustomComponent,
-    LegendEntryCustomComponent
+    LegendEntryCustomComponent,
+    ExternalInternalSelectorComponent
   ],
     imports: [
         ReactiveFormsModule,
@@ -59,7 +61,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
                 OrganizersStatisticsEffects,
                 TrailingStatisticsEffects,
                 PerDepartmentStatisticsEffects,
-                CurrentTimeIntervalEffects
+                StatisticsFiltersChangeEffects
             ]
         ),
         MatProgressSpinnerModule,

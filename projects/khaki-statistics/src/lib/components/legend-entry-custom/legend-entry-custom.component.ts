@@ -1,4 +1,4 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {LegendEntryComponent} from '@swimlane/ngx-charts';
 import {Utilities} from '../../services/utilities';
 
@@ -16,7 +16,7 @@ import {Utilities} from '../../services/utilities';
   styleUrls: ['./legend-entry-custom.component.css']
 })
 
-export class LegendEntryCustomComponent extends LegendEntryComponent implements OnInit{
+export class LegendEntryCustomComponent extends LegendEntryComponent implements OnInit {
 
   @Input() dataExt: any;
 
@@ -34,7 +34,7 @@ export class LegendEntryCustomComponent extends LegendEntryComponent implements 
   get displayValue(): string {
     let displayValue = '';
     if (this.dataExt.value !== 0) {
-      displayValue = Utilities.formatHrsMins(this.dataExt.value)
+      displayValue = Utilities.formatHrsMins(this.dataExt.value);
     }
     return displayValue || '(empty)';
   }

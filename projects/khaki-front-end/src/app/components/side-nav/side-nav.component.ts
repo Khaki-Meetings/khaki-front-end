@@ -12,6 +12,7 @@ import {DOCUMENT} from '@angular/common';
   styleUrls: ['./side-nav.component.scss']
 })
 export class SideNavComponent implements OnInit {
+  private static readonly TenantKey = 'tenantKey';
   private logger: HistorianService;
   isAuthed = false;
   hasMultiTenant = false;
@@ -40,7 +41,8 @@ export class SideNavComponent implements OnInit {
     if (tenantMap.size < 1) {
       return;
     }
-    this.defaultTenant = tenantMap.keys().next().value;
+    const storedKey = localStorage.getItem(SideNavComponent.TenantKey);
+    this.defaultTenant = storedKey ? storedKey : tenantMap.keys().next().value;
     this.tenantFacade.setTenantKey(this.defaultTenant);
 
     if (tenantMap.size > 1) {

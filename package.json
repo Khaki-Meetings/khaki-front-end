@@ -5,12 +5,15 @@
     "ng": "ng",
     "start": "node server.js",
     "serve-ui-only": "ng serve",
+    "serve-ui-with-mock": "concurrently -k -s all \"yarn:local-wiremock\" \"yarn:serve-ui-only\"",
+    "local-wiremock": "wiremock --global-response-templating --enable-stub-cors",
     "serve-local-api": "ng serve -c localApi",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "test-once": "ng test --watch=false",
+    "watch-all-modules": "concurrently -k -s all \"yarn:build-*-with-watch\"",
     "build-statistics-with-watch": "ng build khaki-statistics --watch",
     "build-statistics": "ng build khaki-statistics",
     "build-profile-with-watch": "ng build khaki-profile --watch",
@@ -59,6 +62,7 @@
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.11.1",
     "codelyzer": "^6.0.0",
+    "concurrently": "^5.3.0",
     "jasmine-core": "~3.6.0",
     "jasmine-marbles": "^0.6.0",
     "jasmine-spec-reporter": "~5.0.0",
@@ -72,6 +76,7 @@
     "protractor": "~7.0.0",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
-    "typescript": "~4.0.2"
+    "typescript": "~4.0.2",
+    "wiremock": "^2.27.2"
   }
 }
