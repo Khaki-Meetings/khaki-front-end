@@ -1,4 +1,4 @@
 export enum StatisticsFilterSe {
-  Internal,
-  External
+  Internal = 'Internal',
+  External = 'External'
 }

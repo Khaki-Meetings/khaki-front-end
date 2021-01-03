@@ -26,34 +26,29 @@ export class OrganizersTableComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
 
 
-  constructor(
-    private organizersStatisticsFacade: OrganizersStatisticsFacadeService,
-    private currentTimeIntervalFacade: CurrentTimeIntervalFacadeService
-  ) {
+  constructor(private organizersStatisticsFacade: OrganizersStatisticsFacadeService) {
   }
 
   ngOnInit(): void {
-  }
-
-  ngAfterViewInit(): void {
-    this.logger.debug('paginator is', this.paginator);
     this.organizersStatisticsFacade.organizersStatistics()
       // .pipe(tap(data => this.logger.debug('subscription', data)))
       .subscribe(organizersStatistics => {
         this.logger.debug('onInit organizersStatistics', organizersStatistics);
         this.organizersStatistics = organizersStatistics;
         this.dataSource = organizersStatistics.content;
-        this.paginator.length = organizersStatistics.totalElements;
-        this.paginator.pageSize = organizersStatistics.size;
+        if (this.paginator) {
+          this.paginator.length = organizersStatistics.totalElements;
+          this.paginator.pageSize = organizersStatistics.size;
+        }
       });
+  }
+
+  ngAfterViewInit(): void {
+    this.logger.debug('paginator is', this.paginator);
   }
 
   pageChange(event: PageEvent): void {
     this.logger.debug('page change event', event);
-    this.currentTimeIntervalFacade
-      .currentTimeInterval()
-      .subscribe(
-        currentInterval => this.organizersStatisticsFacade.requestOrganizersStatistics()
-      );
+    this.organizersStatisticsFacade.requestOrganizersStatistics();
   }
 }

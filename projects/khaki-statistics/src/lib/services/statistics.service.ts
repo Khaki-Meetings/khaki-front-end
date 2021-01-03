@@ -60,28 +60,33 @@ export class StatisticsService {
 
   private getStartEndUrl(interval: IntervalEnum, statName: string): string {
     const startEnd = this.getStartEnd(interval);
-    console.log('startEnd is', startEnd);
+    this.logger.debug('startEnd is', startEnd);
     const formattedStart = startEnd.start.utc().format();
     const formattedEnd = startEnd.end.utc().format();
     const url = `${this.environment.khakiBff}/statistics/${statName}/${formattedStart}/${formattedEnd}`;
 
-    console.log('url is', url);
+    this.logger.debug('url is', url);
 
     return url;
   }
 
   getOrganizersStatistics(interval: IntervalEnum, statisticsQueryParams: StatisticsQueryParameters): Observable<OrganizersStatisticsSm> {
-    const params = new HttpParams();
-    params.set('page', statisticsQueryParams.page.toString());
-    params.set('count', statisticsQueryParams.count.toString());
-    params.set('filter', statisticsQueryParams.filter.toString());
+    let params = new HttpParams();
+    this.logger.debug('statisticsQueryParams', statisticsQueryParams);
+    const page = statisticsQueryParams.page ? statisticsQueryParams.page.toString() : '0';
+    const count = statisticsQueryParams.count ? statisticsQueryParams.count.toString() : '5';
+    params = params.set('page', page);
+    params = params.set('count', count);
+    params = params.set('filter', statisticsQueryParams.filter.toString());
+    this.logger.debug('organizers params', params);
+    this.logger.debug('organizers params.keys', params.keys());
     return this.httpClient
       .get(this.getStartEndUrl(interval, 'organizers'), {params})
       .pipe(
-        tap(organizersData => console.log('Server response organizers', organizersData)),
+        tap(organizersData => this.logger.debug('Server response organizers', organizersData)),
         catchError(
           error => {
-            console.log('Failed to get organizers statistics', error);
+            this.logger.debug('Failed to get organizers statistics', error);
             return throwError('Failed to get organizers statistics');
           }
         ),
@@ -91,21 +96,21 @@ export class StatisticsService {
   }
 
   getTrailingStatistics(interval: IntervalEnum, statisticsQueryParams: StatisticsQueryParameters): Observable<TrailingStatisticsSm> {
-    const params = new HttpParams();
-    params.set('filter', statisticsQueryParams.filter.toString());
+    let params = new HttpParams();
+    params = params.set('filter', statisticsQueryParams.filter.toString());
     const intervalCount = 12;
     const startEnd = this.getStartEnd(interval);
     const formattedStart = startEnd.start.utc().format();
     const url = `${this.environment.khakiBff}/statistics/trailing/${formattedStart}/${interval}/${intervalCount}`;
-    console.log('trailing url', url);
+    this.logger.debug('trailing url', url);
 
     return this.httpClient
       .get(url, {params})
       .pipe(
-        tap(trailingData => console.log('Server response: trailing', trailingData)),
+        tap(trailingData => this.logger.debug('Server response: trailing', trailingData)),
         catchError(
           error => {
-            console.log('Server response: trailing', error);
+            this.logger.debug('Server response: trailing', error);
             return throwError('Failed to get trailing statistics');
           }
         ),
@@ -116,15 +121,15 @@ export class StatisticsService {
   }
 
   getDepartmentStatistics(interval: IntervalEnum, statisticsQueryParams: StatisticsQueryParameters): Observable<DepartmentsStatisticsSm> {
-    const params = new HttpParams();
-    params.set('filter', statisticsQueryParams.filter.toString());
+    let params = new HttpParams();
+    params = params.set('filter', statisticsQueryParams.filter.toString());
     return this.httpClient
       .get(this.getStartEndUrl(interval, 'department'), {params})
       .pipe(
-        tap(departmentData => console.log('Server response: department', departmentData)),
+        tap(departmentData => this.logger.debug('Server response: department', departmentData)),
         catchError(
           error => {
-            console.log('Failed to get department statistics', error);
+            this.logger.debug('Failed to get department statistics', error);
             return throwError('Failed to get department statistics');
           }
         ),
@@ -133,15 +138,15 @@ export class StatisticsService {
   }
 
   getTimeBlockSummary(interval: IntervalEnum, statisticsQueryParams: StatisticsQueryParameters): Observable<TimeBlockSummarySm> {
-    const params = new HttpParams();
-    params.set('filter', statisticsQueryParams.filter.toString());
+    let params = new HttpParams();
+    params = params.set('filter', statisticsQueryParams.filter.toString());
     return this.httpClient
       .get(this.getStartEndUrl(interval, 'summary'), {params})
       .pipe(
-        tap(summaryData => console.log('Server response: summary', summaryData)),
+        tap(summaryData => this.logger.debug('Server response: summary', summaryData)),
         catchError(
           error => {
-            console.log('Failed to get time block summary', error);
+            this.logger.debug('Failed to get time block summary', error);
             return throwError('Failed to get time block summary');
           }
         ),

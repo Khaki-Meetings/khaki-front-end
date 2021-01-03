@@ -65,10 +65,14 @@ export class TrailingStatisticsGraphComponent implements OnInit {
     const timeBlocks = this.getIntervalLabels();
     this.logger.debug('timeBlocks', timeBlocks);
     this.graphData = trailingStatistics.timeBlockSummaries.map(
-      timeBlockSummary => {
+      (timeBlockSummary, index) => {
+        const totalSeconds = (timeBlockSummary.totalSeconds && typeof timeBlockSummary.totalSeconds !== 'number')
+          ? timeBlockSummary.totalSeconds : 0;
+        const value = totalSeconds / 3600;
+        const name = timeBlocks[index];
         return {
-          name: timeBlocks.shift(),
-          value: timeBlockSummary.totalSeconds / 3600,
+          name,
+          value,
           extra: {
             customLabel: Utilities.formatHrsMins(timeBlockSummary.totalSeconds)
           }

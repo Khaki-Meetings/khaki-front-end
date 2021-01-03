@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {loadOrganizersStatistics, loadOrganizersStatisticsSuccess} from '../actions/organizers-statistics.actions';
-import {catchError, map, mergeMap, switchMap} from 'rxjs/operators';
+import {catchError, map, mergeMap, switchMap, tap} from 'rxjs/operators';
 import {StatisticsService} from '../../services/statistics.service';
 import {loadTimeBlockSummaryFailure} from '../actions/time-block-summaries.actions';
 import {ErrorSm} from '../models/error-sm';
@@ -15,13 +15,14 @@ import {IntervalEnum} from '../../services/models/interval.enum';
 export class OrganizersStatisticsEffects {
   private logger: HistorianService;
 
+
   organizersStatisticsEffect$ = createEffect(
     () => this.actions$.pipe(
       ofType(loadOrganizersStatistics),
       mergeMap(() => this.statisticsFiltersFacade.statisticsFilters()),
       switchMap(
         (statisticsFilters) => this.statisticsService
-          .getOrganizersStatistics(IntervalEnum[statisticsFilters.interval] , {...statisticsFilters})
+          .getOrganizersStatistics(IntervalEnum[statisticsFilters.interval], {...statisticsFilters})
           .pipe(
             map(organizersStatistics => loadOrganizersStatisticsSuccess(organizersStatistics)),
             catchError(

@@ -8,9 +8,15 @@ import {statisticsFiltersFeatureKey} from './reducers/statistics-filters.reducer
 
 const featureSelector = createFeatureSelector(khakiStatisticsFeatureKey);
 
-export const perDepartmentStatisticsSelector = createSelector(featureSelector, (state: StatisticsFeature) => state.perDepartmentStatistics);
+export const perDepartmentStatisticsSelector = createSelector(
+  featureSelector,
+  (state: StatisticsFeature) => state.perDepartmentStatistics
+);
 
-export const timeBlockSummarySelector = createSelector(featureSelector, (state: StatisticsFeature) => state[timeBlockSummariesFeatureKey]);
+export const timeBlockSummarySelector = createSelector(
+  featureSelector,
+  state => state[timeBlockSummariesFeatureKey]
+);
 
 export const organizersStatisticsSelector = createSelector(
   featureSelector,
@@ -25,4 +31,14 @@ export const trailingStatisticsSelector = createSelector(
 export const currentTimeIntervalSelector = createSelector(
   featureSelector,
   (state: StatisticsFeature) => state[statisticsFiltersFeatureKey].interval
+);
+
+export const statisticsFiltersSelector = createSelector(
+  featureSelector,
+  (state: StatisticsFeature) => state[statisticsFiltersFeatureKey]
+);
+
+export const statisticsFilterSelector = createSelector(
+  featureSelector,
+  (state: StatisticsFeature) => state[statisticsFiltersFeatureKey].filter
 );

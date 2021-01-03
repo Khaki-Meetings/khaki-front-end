@@ -117,9 +117,9 @@ export class PerDepartmentGraphComponent implements OnInit {
     if (data.value.value !== 0) {
       displayValue = Utilities.formatHrsMins(data.value.value);
     }
-    document.getElementById('center-text-label').innerHTML = data.value.name;
-    document.getElementById('center-text-value-bg').innerHTML = displayValue;
-    document.getElementById('center-text-value').innerHTML = displayValue;
+    // document.getElementById('center-text-label').innerHTML = data.value.name;
+    // document.getElementById('center-text-value-bg').innerHTML = displayValue;
+    // document.getElementById('center-text-value').innerHTML = displayValue;
   }
 
   onDeactivate(data): void {

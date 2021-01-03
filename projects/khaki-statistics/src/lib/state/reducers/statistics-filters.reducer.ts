@@ -3,7 +3,10 @@ import {StatisticsFilterSe} from '../models/statistics-filter-se';
 import {setStatisticsFiltersAction} from '../actions/set-statistics-filter.actions';
 import {IntervalSe} from '../models/interval-se';
 import {setCurrentTimeIntervalAction} from '../actions/current-time-interval.actions';
+import {HistorianService, LogLevel} from '@natr/historian';
+import {setStatisticsFilterAction} from '../actions/statistics-filter.actions';
 
+const logger = new HistorianService(LogLevel.DEBUG, 'StatisticsFilterReducer');
 
 export const statisticsFiltersFeatureKey = 'statisticsFilters';
 
@@ -37,6 +40,15 @@ export const setStatisticsFilterReducer = createReducer(
     setCurrentTimeIntervalAction,
     (state, action) => {
       return {...state, interval: action.interval};
+    }
+  ),
+  on(
+    setStatisticsFilterAction,
+    (state, action) => {
+      return {
+        ...state,
+        filter: action.filter
+      };
     }
   )
 );
