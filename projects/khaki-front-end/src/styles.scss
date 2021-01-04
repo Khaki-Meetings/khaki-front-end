@@ -47,6 +47,19 @@ body { margin: 0; font-family: Avenir, "Helvetica Neue", sans-serif; }
   }
 }
 
+// Page title
+
+.page-caption {
+  width: 100%;
+}
+
+.title {
+  font-weight: bold;
+  font-size: larger;
+  line-height: 28px;
+  margin-left: 10px;
+}
+
 // Component defaults
 
 .khaki-container {
