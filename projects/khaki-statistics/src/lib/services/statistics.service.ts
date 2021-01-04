@@ -53,8 +53,8 @@ export class StatisticsService {
     }
 
     return {
-      start: now.clone().utc().startOf(timeBlock),
-      end: now.clone().utc().endOf(timeBlock)
+      start: now.clone().utc().startOf('day').subtract(1, timeBlock),
+      end: now.clone().utc().startOf('day')
     };
   }
 
