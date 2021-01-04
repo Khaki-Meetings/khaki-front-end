@@ -58,6 +58,31 @@ export class StatisticsService {
     };
   }
 
+  private getCalendarStartEnd(interval: IntervalEnum): TimeBlockRange {
+    const now = moment();
+    let timeBlock: StartOf;
+    switch (interval) {
+      case IntervalEnum.Day:
+        timeBlock = 'day';
+        break;
+      case IntervalEnum.Week:
+        timeBlock = 'week';
+        break;
+      case IntervalEnum.Month:
+        timeBlock = 'month';
+        break;
+      case IntervalEnum.Year:
+        timeBlock = 'year';
+        break;
+    }
+
+    return {
+      start: now.clone().utc().startOf(timeBlock),
+     end: now.clone().utc().endOf(timeBlock)
+    };
+  }
+
+
   private getStartEndUrl(interval: IntervalEnum, statName: string): string {
     const startEnd = this.getStartEnd(interval);
     this.logger.debug('startEnd is', startEnd);
@@ -101,7 +126,7 @@ export class StatisticsService {
     let params = new HttpParams();
     params = params.set('filter', statisticsQueryParams.filter.toString());
     const intervalCount = 12;
-    const startEnd = this.getStartEnd(interval);
+    const startEnd = this.getCalendarStartEnd(interval);
     const formattedStart = startEnd.start.utc().format();
     const url = `${this.environment.khakiBff}/statistics/trailing/${formattedStart}/${interval}/${intervalCount}`;
     this.logger.debug('trailing url', url);
