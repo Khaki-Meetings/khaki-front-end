@@ -1,9 +1,10 @@
-import {AfterViewInit, Component, ElementRef, Inject, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Inject, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {EmployeesFacadeService} from '../../state/facades/employees-facade.service';
 import {EmployeeDto} from '../../services/models/employeesResponseDto';
 import {HistorianService, Logging} from '@natr/historian';
+import {SettingsService} from '../../services/settings.service';
 
 export interface DialogData {
   data: string;
@@ -21,17 +22,20 @@ export class SettingsEmployeesComponent implements OnInit {
   pos = 0;
   maxShow = 6;
 
-  constructor(private router: Router, public dialog: MatDialog, private facadeService: EmployeesFacadeService) {
+  constructor(private router: Router, public dialog: MatDialog,
+              private facadeService: EmployeesFacadeService,
+              private settingsService: SettingsService) {
   }
 
   ngOnInit(): void {
     this.facadeService.requestEmployees();
-    this.facadeService.employees()
-      // .pipe(tap(data => this.logger.debug('subscription', data)))
-      .subscribe(userProfile => {
-        // this.logger.debug('onInit', userProfile);
-        this.employees = userProfile.employees as EmployeeDto[];
+
+    this.settingsService
+      .getEmployees()
+      .subscribe(data => {
+        this.employees = data['content'] as EmployeeDto[];
       });
+
   }
 
   getEmployees(): EmployeeDto[] {

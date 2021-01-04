@@ -8,8 +8,7 @@ import {trailingStatisticsFeatureKey} from '../reducers/trailing-statistics.redu
 import {TrailingStatisticsSm} from './trailing-statistics-sm';
 import {spinnerFeatureKey} from '../reducers/spinner.reducer';
 import {SpinnerSm} from './spinner-sm';
-import {currentTimeIntervalFeatureKey} from '../reducers/current-time-interval.reducer';
-import {IntervalEnum} from '../../services/models/interval.enum';
+import {statisticsFiltersFeatureKey, StatisticsFiltersState} from '../reducers/statistics-filters.reducer';
 
 export interface StatisticsFeature {
   [organizersStatisticsFeatureKey]: OrganizersStatisticsSm;
@@ -17,5 +16,5 @@ export interface StatisticsFeature {
   [timeBlockSummariesFeatureKey]: TimeBlockSummarySm;
   [trailingStatisticsFeatureKey]: TrailingStatisticsSm;
   [spinnerFeatureKey]: SpinnerSm;
-  [currentTimeIntervalFeatureKey]: IntervalEnum;
+  [statisticsFiltersFeatureKey]: StatisticsFiltersState;
 }

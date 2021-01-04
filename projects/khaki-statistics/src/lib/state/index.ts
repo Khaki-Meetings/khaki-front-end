@@ -5,7 +5,7 @@ import {timeBlockSummariesFeatureKey, timeBlockSummaryReducer} from './reducers/
 import {trailingStatisticsFeatureKey, trailingStatisticsReducer} from './reducers/trailing-statistics.reducer';
 import {spinnerFeatureKey, spinnerReducer} from './reducers/spinner.reducer';
 import {StatisticsFeature} from './models/statistics-feature';
-import {currentTimeIntervalFeatureKey, currentTimeIntervalReducer} from './reducers/current-time-interval.reducer';
+import {setStatisticsFilterReducer, statisticsFiltersFeatureKey} from './reducers/statistics-filters.reducer';
 
 export const khakiStatisticsFeatureKey = 'khakiStatistics';
 
@@ -15,7 +15,7 @@ export const reducers: ActionReducerMap<StatisticsFeature> = {
   [timeBlockSummariesFeatureKey]: timeBlockSummaryReducer,
   [trailingStatisticsFeatureKey]: trailingStatisticsReducer,
   [spinnerFeatureKey]: spinnerReducer,
-  [currentTimeIntervalFeatureKey]: currentTimeIntervalReducer
+  [statisticsFiltersFeatureKey]: setStatisticsFilterReducer
 };
 
 

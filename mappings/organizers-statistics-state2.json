@@ -1,0 +1,16 @@
+{
+  "scenarioName": "organizers state",
+  "requiredScenarioState": "2nd",
+  "newScenarioState": "Started",
+  "request": {
+    "method": "GET",
+    "urlPattern": "/statistics/organizers/\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(.\\d{2,5})?Z/\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(.\\d{2,5})?Z(\\\\?(.*)=(.*))?"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "bodyFileName": "organizersMonthData.json"
+  }
+}

@@ -26,8 +26,10 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {MatSelectModule} from '@angular/material/select';
 import {ReactiveFormsModule} from '@angular/forms';
 import {TimeIntervalFormComponent} from './components/time-interval-form/time-interval-form.component';
-import {CurrentTimeIntervalEffects} from './state/effects/current-time-interval.effects';
+import {StatisticsFiltersChangeEffects} from './state/effects/statistics-filters-change.effects';
 import {AuthHttpInterceptor} from '@auth0/auth0-angular';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { ExternalInternalSelectorComponent } from './components/external-internal-selector/external-internal-selector.component';
 
 
 @NgModule({
@@ -39,37 +41,39 @@ import {AuthHttpInterceptor} from '@auth0/auth0-angular';
     TimeBasedStatSummaryComponent,
     TimeIntervalFormComponent,
     NgxChartsLegendCustomComponent,
-    LegendEntryCustomComponent
+    LegendEntryCustomComponent,
+    ExternalInternalSelectorComponent
   ],
-  imports: [
-    ReactiveFormsModule,
-    KhakiStatisticsRoutingModule,
-    CommonModule,
-    StoreModule.forFeature(
-      fromKhakiStatistics.khakiStatisticsFeatureKey,
-      fromKhakiStatistics.reducers,
-      {
-        metaReducers: fromKhakiStatistics.metaReducers
-      }
-    ),
-    EffectsModule.forFeature(
-      [
-        TimeBlockSummaryEffects,
-        OrganizersStatisticsEffects,
-        TrailingStatisticsEffects,
-        PerDepartmentStatisticsEffects,
-        CurrentTimeIntervalEffects
-      ]
-    ),
-    MatProgressSpinnerModule,
-    FontAwesomeModule,
-    MatTableModule,
-    MatCheckboxModule,
-    MatButtonModule,
-    NgxChartsModule,
-    MatSelectModule,
-    MatIconModule
-  ],
+    imports: [
+        ReactiveFormsModule,
+        KhakiStatisticsRoutingModule,
+        CommonModule,
+        StoreModule.forFeature(
+            fromKhakiStatistics.khakiStatisticsFeatureKey,
+            fromKhakiStatistics.reducers,
+            {
+                metaReducers: fromKhakiStatistics.metaReducers
+            }
+        ),
+        EffectsModule.forFeature(
+            [
+                TimeBlockSummaryEffects,
+                OrganizersStatisticsEffects,
+                TrailingStatisticsEffects,
+                PerDepartmentStatisticsEffects,
+                StatisticsFiltersChangeEffects
+            ]
+        ),
+        MatProgressSpinnerModule,
+        FontAwesomeModule,
+        MatTableModule,
+        MatCheckboxModule,
+        MatButtonModule,
+        NgxChartsModule,
+        MatSelectModule,
+        MatIconModule,
+        MatPaginatorModule
+    ],
   exports: [KhakiStatisticsComponent],
   providers: [
   ]

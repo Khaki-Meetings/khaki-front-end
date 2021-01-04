@@ -37,6 +37,7 @@ describe('PerDepartmentStatisticsFacadeService', () => {
     'should select per department stats',
     () => {
       const newState: StatisticsFeature = {
+        statisticsFilters: undefined,
         organizersStatistics: undefined,
         perDepartmentStatistics: {
           departmentsStatistics: [

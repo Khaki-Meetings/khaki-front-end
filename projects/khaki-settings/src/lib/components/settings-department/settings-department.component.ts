@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {DepartmentsFacadeService} from '../../state/facades/departments-facade.service';
 import {DepartmentDto} from '../../services/models/departmentsResponseDto';
+import {SettingsService} from '../../services/settings.service';
 
 export interface DialogData {
   data: string;
@@ -20,14 +21,18 @@ export class SettingsDepartmentComponent implements OnInit {
   pos = 0;
   maxShow = 9;
 
-  constructor(private router: Router, public dialog: MatDialog, private departmentsFacadeService: DepartmentsFacadeService) {
+  constructor(private router: Router, public dialog: MatDialog,
+              private departmentsFacadeService: DepartmentsFacadeService,
+              private settingsService: SettingsService) {
   }
 
   ngOnInit(): void {
     this.departmentsFacadeService.requestDepartments();
-    this.departmentsFacadeService.departments()
+
+    this.settingsService
+      .getDepartments()
       .subscribe(data => {
-        this.departments = data.departments as DepartmentDto[];
+        this.departments = data['content'] as DepartmentDto[];
       });
   }
 

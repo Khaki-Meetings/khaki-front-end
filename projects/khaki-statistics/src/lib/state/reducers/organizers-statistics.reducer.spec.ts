@@ -1,16 +1,16 @@
 import {initialState, organizersStatisticsReducer} from './organizers-statistics.reducer';
 import {trailingStatisticsReducer} from './trailing-statistics.reducer';
 import {
-  loadOrganizersStatistics,
-  loadOrganizersStatisticsFailure,
-  loadOrganizersStatisticsSuccess
+  loadOrganizersStatisticsAction,
+  loadOrganizersStatisticsFailureAction,
+  loadOrganizersStatisticsSuccessAction
 } from '../actions/organizers-statistics.actions';
 import {OrganizersStatisticsSm} from '../models/organizers-statistics-sm';
 
 describe('OrganizersStatistics Reducer', () => {
-  describe(`${loadOrganizersStatistics.type}`, () => {
+  describe(`${loadOrganizersStatisticsAction.type}`, () => {
     it('should return the previous state', () => {
-      const action = loadOrganizersStatistics();
+      const action = loadOrganizersStatisticsAction();
 
       const result = organizersStatisticsReducer(initialState, action);
 
@@ -18,12 +18,12 @@ describe('OrganizersStatistics Reducer', () => {
     });
   });
 
-  describe(`${loadOrganizersStatisticsSuccess.type}`, () => {
+  describe(`${loadOrganizersStatisticsSuccessAction.type}`, () => {
     it('should return the new state', () => {
       const organizersStatistics: OrganizersStatisticsSm = {
         errors: [{}], organizersStatistics: [], page: 1
       };
-      const action = loadOrganizersStatisticsSuccess(organizersStatistics);
+      const action = loadOrganizersStatisticsSuccessAction(organizersStatistics);
 
       const result = organizersStatisticsReducer(initialState, action);
 
@@ -31,14 +31,14 @@ describe('OrganizersStatistics Reducer', () => {
     });
   });
 
-  describe(`${loadOrganizersStatisticsFailure.type}`, () => {
+  describe(`${loadOrganizersStatisticsFailureAction.type}`, () => {
     it('should set error', () => {
       const organizersStatistics = {
         errors: [
           {message: 'you done fuckeled', name: '1d10t'}
         ]
       } as OrganizersStatisticsSm;
-      const action = loadOrganizersStatisticsFailure(organizersStatistics.errors[0]);
+      const action = loadOrganizersStatisticsFailureAction(organizersStatistics.errors[0]);
 
       const result = trailingStatisticsReducer(initialState, action);
 

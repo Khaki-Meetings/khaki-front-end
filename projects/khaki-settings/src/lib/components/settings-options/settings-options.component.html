@@ -1,23 +1,40 @@
-<div [ngClass]="{'hide': menuNow != 'name' && menuNow != ''}">
-  <div class="label">
-    <span [ngClass]="{'selected': menuNow == 'name'}">Company name</span>
-    <span class="grow text-align-right gray">{{userProfile.companyName}}</span>
-    <a routerLink="name" (click)="onMenu($event, 'name')">
-      <mat-icon [ngClass]="{'arrow': true, 'selected': menuNow == 'name'}">keyboard_arrow_right</mat-icon>
-    </a>
+<div class="optionsWrapper">
+  <div class="optionsLeftColumn">
+    <div class="khaki-container">
+      <div class="profileField">
+        <div class="label">
+          <span>Employees</span>
+        </div>
+        <div class="header-bg">
+          <lib-settings-employees></lib-settings-employees>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
-<div [ngClass]="{'hide': menuNow != 'employees' && menuNow != ''}">
-    <span [ngClass]="{'selected': menuNow == 'employees'}">Employees</span>
-    <span class="grow text-align-right gray"></span>
-    <a routerLink="employees" (click)="onMenu($event, 'employees')">
-        <mat-icon [ngClass]="{'arrow': true, 'selected': menuNow == 'employees'}">keyboard_arrow_right</mat-icon>
-    </a>
-</div>
-<div [ngClass]="{'hide': menuNow != 'department' && menuNow != ''}">
-  <span [ngClass]="{'selected': menuNow == 'department'}">Departments</span>
-  <span class="grow text-align-right gray"></span>
-  <a routerLink="department" (click)="onMenu($event, 'department')">
-    <mat-icon [ngClass]="{'arrow': true, 'selected': menuNow == 'department'}">keyboard_arrow_right</mat-icon>
-  </a>
-</div>
+
+  <div class="optionsRightColumn">
+
+    <div class="khaki-container">
+      <div class="profileField">
+        <div class="label">
+          <span>Company name</span>
+        </div>
+        <div class="header-bg">
+          <lib-settings-name></lib-settings-name>
+        </div>
+      </div>
+    </div>
+
+    <div class="khaki-container">
+      <div class="profileField">
+        <div class="label">
+          <span>Departments</span>
+        </div>
+        <div class="header-bg">
+          <lib-settings-department></lib-settings-department>
+        </div>
+      </div>
+    </div>
+
+  </div>
+<div>

@@ -1,24 +1,28 @@
 import {createReducer, on} from '@ngrx/store';
-import {loadOrganizersStatistics, loadOrganizersStatisticsSuccess} from '../actions/organizers-statistics.actions';
+import {loadOrganizersStatisticsAction, loadOrganizersStatisticsSuccessAction} from '../actions/organizers-statistics.actions';
 import {OrganizersStatisticsSm} from '../models/organizers-statistics-sm';
+import {Utilities} from '../../services/utilities';
+import {HistorianService, LogLevel} from '@natr/historian';
 
+const logger = new HistorianService(LogLevel.DEBUG, 'OrganizersStatisticsReducer');
 
 export const organizersStatisticsFeatureKey = 'organizersStatistics';
 
 export const initialState: OrganizersStatisticsSm = {
-  errors: [], organizersStatistics: [], page: 0
+  errors: [], content: [], number: 0
 
 };
 
-
 export const organizersStatisticsReducer = createReducer(
   initialState,
-  on(loadOrganizersStatistics, (state: OrganizersStatisticsSm, action) => state),
+  on(loadOrganizersStatisticsAction, (state: OrganizersStatisticsSm, action) => state),
   on(
-    loadOrganizersStatisticsSuccess,
+    loadOrganizersStatisticsSuccessAction,
     (state: OrganizersStatisticsSm, action) => {
+      logger.debug('state', state);
       const {type, ...newState} = {...state, ...action};
-      newState.organizersStatistics = newState.organizersStatistics.map(
+      logger.debug('newState, type', newState, type);
+      newState.content = newState.content.map(
         organizersStatistic => {
           return {
             organizerFirstName: organizersStatistic.organizerFirstName,
@@ -26,8 +30,7 @@ export const organizersStatisticsReducer = createReducer(
             totalCost: organizersStatistic.totalCost,
             totalMeetings: organizersStatistic.totalMeetings,
             totalSeconds: organizersStatistic.totalSeconds,
-            formattedTime: Math.trunc(organizersStatistic.totalSeconds / 60 / 60) + ' hrs, '
-              + Math.trunc(organizersStatistic.totalSeconds / 60 % 60) + ' min',
+            formattedTime: Utilities.formatHrsMins(organizersStatistic.totalSeconds),
             organizerEmail: organizersStatistic.organizerEmail
           };
         }

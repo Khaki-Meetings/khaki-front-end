@@ -5,7 +5,7 @@ import {Observable} from 'rxjs';
 import {OrganizersStatisticsEffects} from './organizers-statistics.effects';
 import {Action} from '@ngrx/store';
 import {cold, hot} from 'jasmine-marbles';
-import {loadOrganizersStatistics} from '../actions/organizers-statistics.actions';
+import {loadOrganizersStatisticsAction} from '../actions/organizers-statistics.actions';
 import {StatisticsService} from '../../services/statistics.service';
 import {OrganizersStatisticsDto} from '../../services/models/organizers-statistics-dto';
 import {OrganizersStatisticsFacadeService} from '../facades/organizers-statistics-facade.service';
@@ -16,14 +16,10 @@ describe('OrganizersStatisticsEffects', () => {
   let effects: OrganizersStatisticsEffects;
   let statisticsService: Partial<StatisticsService>;
   let organizerStatisticsFacade: Partial<OrganizersStatisticsFacadeService>;
-  const organizersStatisticsData: OrganizersStatisticsDto = {organizersStatistics: [], page: 0};
+  const organizersStatisticsData: OrganizersStatisticsDto = {content: [], number: 0};
 
   beforeEach(() => {
-    statisticsService = {
-      getOrganizersStatistics(): Observable<OrganizersStatisticsDto> {
-        return null;
-      },
-    };
+    statisticsService = {};
     organizerStatisticsFacade = {
       setOrganizersStatistics(data: OrganizersStatisticsSm): void {
       }
@@ -36,7 +32,7 @@ describe('OrganizersStatisticsEffects', () => {
         cold('---a|', {a: organizersStatisticsData})
       );
 
-    actions$ = hot('--a', {a: loadOrganizersStatistics()});
+    actions$ = hot('--a', {a: loadOrganizersStatisticsAction()});
     TestBed.configureTestingModule({
       providers: [
         OrganizersStatisticsEffects,
@@ -56,7 +52,7 @@ describe('OrganizersStatisticsEffects', () => {
   it(
     'should um, do stuffz',
     () => {
-      const expected = hot('---a', {a: loadOrganizersStatistics()});
+      const expected = hot('---a', {a: loadOrganizersStatisticsAction()});
 
       expect(effects.organizersStatisticsEffect$).toBeObservable(expected);
 
