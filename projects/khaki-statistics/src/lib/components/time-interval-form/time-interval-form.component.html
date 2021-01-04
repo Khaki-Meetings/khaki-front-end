@@ -1,5 +1,6 @@
-<form [formGroup]="form">
-  <mat-select [formControl]="timeIntervalControl">
-    <mat-option *ngFor="let item of timeIntervals" [value]="item">{{item}}</mat-option>
-  </mat-select>
-</form>
+<form [formGroup]="form"></form>
+<select [formControl]="timeIntervalControl">
+  <option *ngFor="let value of timeIntervals" [value]="value">
+    {{value}}
+  </option>
+</select>

@@ -1,6 +1,6 @@
 <form [formGroup]="form"></form>
-<mat-select [formControl]="filterControl">
-  <mat-option *ngFor="let value of values" [value]="value">
+<select [formControl]="filterControl">
+  <option *ngFor="let value of values" [value]="value">
     {{value}}
-  </mat-option>
-</mat-select>
+  </option>
+</select>
