@@ -31,6 +31,15 @@ export class TimeIntervalFormComponent implements OnInit {
     this.currentTimeIntervalFacade.setCurrentTimeInterval(IntervalSe[this.defaultTimeInterval]);
   }
 
+  setDisplayEnd(timestamp: moment.Moment): moment.Moment {
+    if (timestamp.hour() == 0
+      && timestamp.minutes() == 0
+      && timestamp.seconds() == 0) {
+        return timestamp.subtract(1,'days').endOf('day');
+    }
+    return timestamp;
+  }
+
   private buildForm(): void {
 
     let weekTimeBlockRange = this.statisticsService.getStartEnd(IntervalEnum.Week);
@@ -41,13 +50,13 @@ export class TimeIntervalFormComponent implements OnInit {
       text: "Last 7 Days ("
         + moment(weekTimeBlockRange.start).format('ddd, MMM D')
         + " - "
-        + moment(weekTimeBlockRange.end).format('ddd, MMM D') + ")" });
+        + this.setDisplayEnd(moment(weekTimeBlockRange.end)).format('ddd, MMM D') + ")" });
     this.timeIntervals.push({
       value: IntervalEnum.Month,
       text: "Last Month ("
         + moment(monthTimeBlockRange.start).format('ddd, MMM D')
         + " - "
-        + moment(monthTimeBlockRange.end).format('ddd, MMM D') + ")" });
+        + this.setDisplayEnd(moment(monthTimeBlockRange.end)).format('ddd, MMM D') + ")" });
 
     this.timeIntervalControl = new FormControl();
     this.form = new FormGroup({
