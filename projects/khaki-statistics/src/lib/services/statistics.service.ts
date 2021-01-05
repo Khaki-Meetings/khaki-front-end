@@ -117,7 +117,13 @@ export class StatisticsService {
             return throwError('Failed to get organizers statistics');
           }
         ),
-        map(organizersStatisticsData => organizersStatisticsData as OrganizersStatisticsSm)
+        map ((organizersStatisticsData: OrganizersStatisticsSm) => {
+          let y : OrganizersStatisticsSm;
+          y = organizersStatisticsData as OrganizersStatisticsSm;
+          y.interval = interval;
+          y.statisticsQueryParams = statisticsQueryParams;
+          return y;
+        })
       );
 
   }

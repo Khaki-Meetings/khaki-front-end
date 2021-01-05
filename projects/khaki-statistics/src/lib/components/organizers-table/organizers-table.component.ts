@@ -21,7 +21,7 @@ export class OrganizersTableComponent implements OnInit, AfterViewInit {
 
   dataSource: OrganizerStatisticsSm[] = [];
 
-  currentTimeInterval: IntervalEnum;
+  interval?: IntervalEnum;
 
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
 
@@ -36,6 +36,7 @@ export class OrganizersTableComponent implements OnInit, AfterViewInit {
         this.logger.debug('onInit organizersStatistics', organizersStatistics);
         this.organizersStatistics = organizersStatistics;
         this.dataSource = organizersStatistics.content;
+        this.interval = organizersStatistics.interval;
         if (this.paginator) {
           this.paginator.length = organizersStatistics.totalElements;
           this.paginator.pageSize = organizersStatistics.size;
