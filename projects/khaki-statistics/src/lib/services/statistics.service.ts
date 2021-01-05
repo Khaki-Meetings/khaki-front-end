@@ -34,7 +34,7 @@ export class StatisticsService {
   }
 
   // noinspection JSMethodCanBeStatic
-  private getStartEnd(interval: IntervalEnum): TimeBlockRange {
+  public getStartEnd(interval: IntervalEnum): TimeBlockRange {
     const now = moment();
     let timeBlock: StartOf;
     switch (interval) {
@@ -78,7 +78,7 @@ export class StatisticsService {
 
     return {
       start: now.clone().utc().startOf(timeBlock),
-     end: now.clone().utc().endOf(timeBlock)
+      end: now.clone().utc().endOf(timeBlock)
     };
   }
 

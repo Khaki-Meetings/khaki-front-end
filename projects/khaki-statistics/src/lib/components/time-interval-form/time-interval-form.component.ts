@@ -4,6 +4,8 @@ import {IntervalEnum} from '../../services/models/interval.enum';
 import {HistorianService, Logging} from '@natr/historian';
 import {CurrentTimeIntervalFacadeService} from '../../state/facades/current-time-interval-facade.service';
 import {IntervalSe} from '../../state/models/interval-se';
+import {StatisticsService} from '../../services/statistics.service';
+import * as moment from 'moment';
 
 @Logging
 @Component({
@@ -13,17 +15,14 @@ import {IntervalSe} from '../../state/models/interval-se';
 })
 export class TimeIntervalFormComponent implements OnInit {
   logger: HistorianService;
-  timeIntervals = [
-    IntervalEnum.Week,
-    IntervalEnum.Month
-  ];
-
+  timeIntervals = [];
   form: FormGroup;
   timeIntervalControl: FormControl;
 
   private defaultTimeInterval = IntervalEnum.Week;
 
-  constructor(private currentTimeIntervalFacade: CurrentTimeIntervalFacadeService) {
+  constructor(private currentTimeIntervalFacade: CurrentTimeIntervalFacadeService,
+    private statisticsService: StatisticsService) {
   }
 
   ngOnInit(): void {
@@ -32,6 +31,23 @@ export class TimeIntervalFormComponent implements OnInit {
   }
 
   private buildForm(): void {
+
+    let weekTimeBlockRange = this.statisticsService.getStartEnd(IntervalEnum.Week);
+    let monthTimeBlockRange = this.statisticsService.getStartEnd(IntervalEnum.Month);
+
+    this.timeIntervals.push({
+      value: IntervalEnum.Week,
+      text: "Last 7 Days ("
+        + moment(weekTimeBlockRange.start).format('ddd, MMM D')
+        + " - "
+        + moment(weekTimeBlockRange.end).format('ddd, MMM D') + ")" });
+    this.timeIntervals.push({
+      value: IntervalEnum.Month,
+      text: "Last Month ("
+        + moment(monthTimeBlockRange.start).format('ddd, MMM D')
+        + " - "
+        + moment(monthTimeBlockRange.end).format('ddd, MMM D') + ")" });
+
     this.timeIntervalControl = new FormControl();
     this.form = new FormGroup({
       timeInterval: this.timeIntervalControl
@@ -41,4 +57,5 @@ export class TimeIntervalFormComponent implements OnInit {
 
     this.timeIntervalControl.valueChanges.subscribe(newValue => this.currentTimeIntervalFacade.setCurrentTimeInterval(newValue));
   }
+
 }
