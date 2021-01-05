@@ -4,7 +4,6 @@ import {IntervalEnum} from '../../services/models/interval.enum';
 import {HistorianService, Logging} from '@natr/historian';
 import {CurrentTimeIntervalFacadeService} from '../../state/facades/current-time-interval-facade.service';
 import {IntervalSe} from '../../state/models/interval-se';
-import {StatisticsService} from '../../services/statistics.service';
 import * as moment_ from 'moment';
 const moment = moment_;
 
@@ -22,8 +21,7 @@ export class TimeIntervalFormComponent implements OnInit {
 
   private defaultTimeInterval = IntervalEnum.Week;
 
-  constructor(private currentTimeIntervalFacade: CurrentTimeIntervalFacadeService,
-    private statisticsService: StatisticsService) {
+  constructor(private currentTimeIntervalFacade: CurrentTimeIntervalFacadeService) {
   }
 
   ngOnInit(): void {
@@ -42,8 +40,8 @@ export class TimeIntervalFormComponent implements OnInit {
 
   private buildForm(): void {
 
-    let weekTimeBlockRange = this.statisticsService.getStartEnd(IntervalEnum.Week);
-    let monthTimeBlockRange = this.statisticsService.getStartEnd(IntervalEnum.Month);
+    let weekTimeBlockRange = Utilities.getStartEnd(IntervalEnum.Week);
+    let monthTimeBlockRange = Utilities.getStartEnd(IntervalEnum.Month);
 
     this.timeIntervals.push({
       value: IntervalEnum.Week,

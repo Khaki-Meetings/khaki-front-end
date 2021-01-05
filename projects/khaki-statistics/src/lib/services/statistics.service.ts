@@ -35,51 +35,11 @@ export class StatisticsService {
 
   // noinspection JSMethodCanBeStatic
   public getStartEnd(interval: IntervalEnum): TimeBlockRange {
-    const now = moment();
-    let timeBlock: StartOf;
-    switch (interval) {
-      case IntervalEnum.Day:
-        timeBlock = 'day';
-        break;
-      case IntervalEnum.Week:
-        timeBlock = 'week';
-        break;
-      case IntervalEnum.Month:
-        timeBlock = 'month';
-        break;
-      case IntervalEnum.Year:
-        timeBlock = 'year';
-        break;
-    }
-
-    return {
-      start: now.clone().utc().startOf('day').subtract(1, timeBlock),
-      end: now.clone().utc().startOf('day')
-    };
+    return Utilities.calculateTimeBlock(interval, 1);
   }
 
   private getCalendarStartEnd(interval: IntervalEnum): TimeBlockRange {
-    const now = moment();
-    let timeBlock: StartOf;
-    switch (interval) {
-      case IntervalEnum.Day:
-        timeBlock = 'day';
-        break;
-      case IntervalEnum.Week:
-        timeBlock = 'week';
-        break;
-      case IntervalEnum.Month:
-        timeBlock = 'month';
-        break;
-      case IntervalEnum.Year:
-        timeBlock = 'year';
-        break;
-    }
-
-    return {
-      start: now.clone().utc().startOf(timeBlock),
-      end: now.clone().utc().endOf(timeBlock)
-    };
+    return Utilities.calculateTimeBlock(interval, 0);
   }
 
 
