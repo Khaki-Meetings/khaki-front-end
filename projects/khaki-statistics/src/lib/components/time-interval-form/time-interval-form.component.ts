@@ -5,7 +5,8 @@ import {HistorianService, Logging} from '@natr/historian';
 import {CurrentTimeIntervalFacadeService} from '../../state/facades/current-time-interval-facade.service';
 import {IntervalSe} from '../../state/models/interval-se';
 import {StatisticsService} from '../../services/statistics.service';
-import * as moment from 'moment';
+import * as moment_ from 'moment';
+const moment = moment_;
 
 @Logging
 @Component({
