@@ -12,11 +12,10 @@ import {IntervalEnum} from './models/interval.enum';
 import * as momentJs from 'moment';
 import {DepartmentsStatisticsResponseDto} from './models/departments-statistics-response-dto';
 import {DepartmentsStatisticsSm} from '../state/models/departments-statistics-sm';
-import StartOf = momentJs.unitOfTime.StartOf;
-import Moment = momentJs.Moment;
 import {StatisticsQueryParameters} from './models/statistics-query-parameters';
-
-const moment = momentJs;
+import {Utilities} from './utilities';
+import {IntervalSe} from '../state/models/interval-se';
+import Moment = momentJs.Moment;
 
 interface TimeBlockRange {
   start: Moment;
@@ -35,11 +34,11 @@ export class StatisticsService {
 
   // noinspection JSMethodCanBeStatic
   public getStartEnd(interval: IntervalEnum): TimeBlockRange {
-    return Utilities.calculateTimeBlock(interval, 1);
+    return Utilities.calculateTimeBlock(IntervalSe[interval], 1);
   }
 
   private getCalendarStartEnd(interval: IntervalEnum): TimeBlockRange {
-    return Utilities.calculateTimeBlock(interval, 0);
+    return Utilities.calculateTimeBlock(IntervalSe[interval], 0);
   }
 
 
