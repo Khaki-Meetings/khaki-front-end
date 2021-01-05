@@ -1,6 +1,6 @@
 <form [formGroup]="form"></form>
 <select [formControl]="timeIntervalControl">
-  <option *ngFor="let value of timeIntervals" [value]="value">
-    {{value}}
+  <option *ngFor="let obj of timeIntervals" [value]="obj.value">
+    {{obj.text}}
   </option>
 </select>
