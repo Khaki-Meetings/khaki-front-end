@@ -10,7 +10,8 @@ const logger = new HistorianService(LogLevel.ALL, perDepartmentStatisticsFeature
 
 export const initialState: DepartmentsStatisticsSm = {
   departmentsStatistics: [],
-  errors: []
+  errors: [],
+  interval: null
 };
 
 
@@ -26,4 +27,3 @@ export const perDepartmentStatisticsReducer = createReducer(
     }
   )
 );
-

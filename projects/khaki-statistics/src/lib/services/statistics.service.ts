@@ -160,7 +160,13 @@ export class StatisticsService {
             return throwError('Failed to get department statistics');
           }
         ),
-        map((departmentsStatistics: DepartmentsStatisticsResponseDto) => departmentsStatistics as DepartmentsStatisticsSm),
+        map ((departmentsStatistics: DepartmentsStatisticsResponseDto) => {
+          let y : DepartmentsStatisticsSm;
+          y = departmentsStatistics as DepartmentsStatisticsSm;
+          y.interval = interval;
+          y.statisticsQueryParams = statisticsQueryParams;
+          return y;
+        })
       );
   }
 

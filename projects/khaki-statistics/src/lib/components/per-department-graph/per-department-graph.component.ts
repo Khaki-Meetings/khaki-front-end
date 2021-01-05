@@ -4,6 +4,8 @@ import {PerDepartmentStatisticsFacadeService} from '../../state/facades/per-depa
 import {ColorHelper} from '@swimlane/ngx-charts';
 import {HistorianService, Logging} from '@natr/historian';
 import {Utilities} from '../../services/utilities';
+import {IntervalEnum} from '../../services/models/interval.enum';
+import {StatisticsQueryParameters} from '../../services/models/statistics-query-parameters';
 
 interface GraphData {
   name: string;
@@ -40,6 +42,9 @@ export class PerDepartmentGraphComponent implements OnInit {
   legendData: any[] = [];
   colors: ColorHelper = new ColorHelper('cool', 'ordinal', [], null);
 
+  interval?: IntervalEnum;
+  statisticsQueryParams?: StatisticsQueryParameters;
+
   constructor(private perDepartmentStatisticsFacade: PerDepartmentStatisticsFacadeService) {
 
   }
@@ -74,6 +79,8 @@ export class PerDepartmentGraphComponent implements OnInit {
 
           this.logger.debug('chart data', this.chartData);
 
+          this.interval = data.interval;
+          this.statisticsQueryParams = data.statisticsQueryParams;
           this.legendData = this.chartData.map(d => d.extra.displayName);
           this.colors = new ColorHelper(this.colorScheme, 'ordinal', this.legendData, null);
         });
