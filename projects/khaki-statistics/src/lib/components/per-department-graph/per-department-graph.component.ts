@@ -6,6 +6,8 @@ import {HistorianService, Logging} from '@natr/historian';
 import {Utilities} from '../../services/utilities';
 import {IntervalEnum} from '../../services/models/interval.enum';
 import {StatisticsQueryParameters} from '../../services/models/statistics-query-parameters';
+import {StatisticsFiltersFacadeService} from '../../state/facades/statistics-filters-facade.service';
+import { StatisticsFiltersState } from '../../state/reducers/statistics-filters.reducer';
 
 interface GraphData {
   name: string;
@@ -44,9 +46,11 @@ export class PerDepartmentGraphComponent implements OnInit {
 
   interval?: IntervalEnum;
   statisticsQueryParams?: StatisticsQueryParameters;
+  intervalText: string;
+  meetingTypeText: string;
 
-  constructor(private perDepartmentStatisticsFacade: PerDepartmentStatisticsFacadeService) {
-
+  constructor(private perDepartmentStatisticsFacade: PerDepartmentStatisticsFacadeService,
+    private statisticsFiltersFacadeService: StatisticsFiltersFacadeService) {
   }
 
   ngOnInit(): void {
@@ -78,12 +82,18 @@ export class PerDepartmentGraphComponent implements OnInit {
           );
 
           this.logger.debug('chart data', this.chartData);
-
-          this.interval = data.interval;
-          this.statisticsQueryParams = data.statisticsQueryParams;
           this.legendData = this.chartData.map(d => d.extra.displayName);
           this.colors = new ColorHelper(this.colorScheme, 'ordinal', this.legendData, null);
         });
+
+    this.statisticsFiltersFacadeService.statisticsFilters()
+      .subscribe((data) => {
+        let statsFilter = data as StatisticsFiltersState;
+          this.intervalText =
+            Utilities.formatIntervalTextDetail(IntervalEnum[statsFilter.interval],
+              Utilities.calculateTimeBlockEnum(IntervalEnum[statsFilter.interval], 1));
+          this.meetingTypeText = Utilities.formatMeetingTypeDetail(statsFilter.filter);
+      });
   }
 
   private createGraphData(): void {
