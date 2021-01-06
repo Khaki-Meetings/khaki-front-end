@@ -4,10 +4,15 @@
   "newScenarioState": "2nd",
   "request": {
     "method": "GET",
-    "urlPattern": "/statistics/trailing/\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(.\\d{2,5})?Z/(Month|Week)/\\d+"
+    "urlPattern": "/statistics/trailing/\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(.\\d{2,5})?Z/(Month|Week)/\\d+(\\\\?(.*)=(.*))?"
   },
   "response": {
     "status": 200,
+    "delayDistribution": {
+      "type": "lognormal",
+      "median": 500,
+      "sigma": 0.1
+    },
     "headers": {
       "Content-Type": "application/json"
     },

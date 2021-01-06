@@ -7,4 +7,5 @@ export interface TrailingStatisticsSm {
   timeBlockSummaries?: TimeBlockSummarySm[];
   count?: number;
   errors?: ErrorSm[];
+  loading?: boolean;
 }

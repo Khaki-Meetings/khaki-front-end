@@ -42,3 +42,8 @@ export const statisticsFilterSelector = createSelector(
   featureSelector,
   (state: StatisticsFeature) => state[statisticsFiltersFeatureKey].filter
 );
+
+export const trailingSStatisticsLoadingSelector = createSelector(
+  featureSelector,
+  (state: StatisticsFeature) => state[trailingStatisticsFeatureKey].loading
+);
