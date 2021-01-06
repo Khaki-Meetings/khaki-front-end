@@ -12,11 +12,10 @@ import {IntervalEnum} from './models/interval.enum';
 import * as momentJs from 'moment';
 import {DepartmentsStatisticsResponseDto} from './models/departments-statistics-response-dto';
 import {DepartmentsStatisticsSm} from '../state/models/departments-statistics-sm';
-import StartOf = momentJs.unitOfTime.StartOf;
-import Moment = momentJs.Moment;
 import {StatisticsQueryParameters} from './models/statistics-query-parameters';
-
-const moment = momentJs;
+import {Utilities} from './utilities';
+import {IntervalSe} from '../state/models/interval-se';
+import Moment = momentJs.Moment;
 
 interface TimeBlockRange {
   start: Moment;
@@ -34,52 +33,12 @@ export class StatisticsService {
   }
 
   // noinspection JSMethodCanBeStatic
-  private getStartEnd(interval: IntervalEnum): TimeBlockRange {
-    const now = moment();
-    let timeBlock: StartOf;
-    switch (interval) {
-      case IntervalEnum.Day:
-        timeBlock = 'day';
-        break;
-      case IntervalEnum.Week:
-        timeBlock = 'week';
-        break;
-      case IntervalEnum.Month:
-        timeBlock = 'month';
-        break;
-      case IntervalEnum.Year:
-        timeBlock = 'year';
-        break;
-    }
-
-    return {
-      start: now.clone().utc().startOf('day').subtract(1, timeBlock),
-      end: now.clone().utc().startOf('day')
-    };
+  public getStartEnd(interval: IntervalEnum): TimeBlockRange {
+    return Utilities.calculateTimeBlock(IntervalSe[interval], 1);
   }
 
   private getCalendarStartEnd(interval: IntervalEnum): TimeBlockRange {
-    const now = moment();
-    let timeBlock: StartOf;
-    switch (interval) {
-      case IntervalEnum.Day:
-        timeBlock = 'day';
-        break;
-      case IntervalEnum.Week:
-        timeBlock = 'week';
-        break;
-      case IntervalEnum.Month:
-        timeBlock = 'month';
-        break;
-      case IntervalEnum.Year:
-        timeBlock = 'year';
-        break;
-    }
-
-    return {
-      start: now.clone().utc().startOf(timeBlock),
-     end: now.clone().utc().endOf(timeBlock)
-    };
+    return Utilities.calculateTimeBlock(IntervalSe[interval], 0);
   }
 
 

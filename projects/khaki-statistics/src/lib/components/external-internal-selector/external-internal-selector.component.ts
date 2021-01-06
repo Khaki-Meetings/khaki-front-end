@@ -20,6 +20,9 @@ export class ExternalInternalSelectorComponent implements OnInit {
   values = Object.values(StatisticsFilterSe);
   form: FormGroup;
   filterControl: FormControl;
+  meetingTypeOptions =
+    [{ value: StatisticsFilterSe.Internal, text: "Internal Meetings Only" },
+     { value: StatisticsFilterSe.External, text: "All Meetings" }];
 
   private filterControlValueChange = (filterString) => {
     this.logger.debug('value changed', filterString);
@@ -36,4 +39,5 @@ export class ExternalInternalSelectorComponent implements OnInit {
     this.filterControl.valueChanges.subscribe(this.filterControlValueChange);
     this.statisticsFiltersFacade.currentStatisticsFilter().subscribe(filter => this.filterControl.setValue(filter));
   }
+
 }
