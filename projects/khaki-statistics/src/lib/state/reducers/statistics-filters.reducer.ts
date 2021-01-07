@@ -22,10 +22,12 @@ export interface StatisticsFiltersState {
   count?: number;
 }
 
+const initStartEnd = Utilities.calculateTimeBlock(IntervalSe.Week, 0);
+
 export const initialState: StatisticsFiltersState = {
   filter: StatisticsFilterSe.Internal,
-  start: Utilities.calculateTimeBlock(IntervalSe.Week, 0).start,
-  end: Utilities.calculateTimeBlock(IntervalSe.Week, 0).end,
+  start: initStartEnd.start,
+  end: initStartEnd.end,
   interval: IntervalSe.Week
 };
 

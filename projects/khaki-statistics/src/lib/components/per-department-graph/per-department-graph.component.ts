@@ -40,8 +40,9 @@ export class PerDepartmentGraphComponent implements OnInit {
   legendData: any[] = [];
   colors: ColorHelper = new ColorHelper('cool', 'ordinal', [], null);
 
-  constructor(private perDepartmentStatisticsFacade: PerDepartmentStatisticsFacadeService) {
+  loading = false;
 
+  constructor(private perDepartmentStatisticsFacade: PerDepartmentStatisticsFacadeService) {
   }
 
   ngOnInit(): void {
@@ -77,6 +78,7 @@ export class PerDepartmentGraphComponent implements OnInit {
           this.legendData = this.chartData.map(d => d.extra.displayName);
           this.colors = new ColorHelper(this.colorScheme, 'ordinal', this.legendData, null);
         });
+    this.perDepartmentStatisticsFacade.perDepartmentStatisticsLoading().subscribe(loading => this.loading = loading);
   }
 
   private createGraphData(): void {

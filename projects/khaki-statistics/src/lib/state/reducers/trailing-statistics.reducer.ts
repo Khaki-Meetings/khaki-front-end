@@ -1,21 +1,36 @@
 import {createReducer, on} from '@ngrx/store';
 import {TrailingStatisticsSm} from '../models/trailing-statistics-sm';
-import {loadTrailingStatisticsSuccess} from '../actions/trailing-statistics.actions';
+import {loadTrailingStatistics, loadTrailingStatisticsFailure, loadTrailingStatisticsSuccess} from '../actions/trailing-statistics.actions';
 
 export const trailingStatisticsFeatureKey = 'trailingStatistics';
 
 export const initialState: TrailingStatisticsSm = {
-  timeBlockSummaries: []
+  timeBlockSummaries: [],
+  loading: false
 };
 
 export const trailingStatisticsReducer = createReducer(
   initialState,
   on(
     loadTrailingStatisticsSuccess,
-    (state, action) => {
-      const {type, ...newState} = {...state, ...action};
-      return newState;
-    }
-  )
+    (state, action) =>
+      ({
+        ...state,
+        loading: false,
+        timeBlockSummaries: action.timeBlockSummaries,
+        timeBlock: action.timeBlock
+      })
+  ),
+  on(
+    loadTrailingStatisticsFailure,
+    (state, action) =>
+      ({
+        ...state,
+        timeBlockSummaries: [],
+        count: 0,
+        loading: false
+      })
+  ),
+  on(loadTrailingStatistics, state => ({...state, loading: true}))
 );
 

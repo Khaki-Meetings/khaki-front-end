@@ -1,7 +1,9 @@
 import {IntervalSe} from '../state/models/interval-se';
-import {Moment} from 'moment/moment';
-import * as moment from 'moment';
+import {Moment} from 'moment';
+import * as momentJs from 'moment';
 import StartOf = moment.unitOfTime.StartOf;
+
+const moment = momentJs;
 
 export class Utilities {
   static formatHrsMins(seconds: number): string {

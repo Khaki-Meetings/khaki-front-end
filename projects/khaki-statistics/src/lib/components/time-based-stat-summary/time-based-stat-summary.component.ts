@@ -15,12 +15,14 @@ export class TimeBasedStatSummaryComponent implements OnInit {
   logger: HistorianService;
   timeBlockSummary: TimeBlockSummarySm;
   error: ErrorSm;
+  loading = false;
 
   constructor(private sinceTimeBlockSummariesFacade: TimeBlockSummariesFacadeService) {
   }
 
   ngOnInit(): void {
     this.timeBlockData();
+    this.sinceTimeBlockSummariesFacade.timeBlockSummaryLoading().subscribe(loading => this.loading = loading);
   }
 
   private timeBlockData(): void {
