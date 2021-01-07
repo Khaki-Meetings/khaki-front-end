@@ -76,13 +76,7 @@ export class StatisticsService {
             return throwError('Failed to get organizers statistics');
           }
         ),
-        map ((organizersStatisticsData: OrganizersStatisticsSm) => {
-          let y : OrganizersStatisticsSm;
-          y = organizersStatisticsData as OrganizersStatisticsSm;
-          y.interval = interval;
-          y.statisticsQueryParams = statisticsQueryParams;
-          return y;
-        })
+        map(organizersStatisticsData => organizersStatisticsData as OrganizersStatisticsSm)
       );
 
   }
@@ -125,13 +119,7 @@ export class StatisticsService {
             return throwError('Failed to get department statistics');
           }
         ),
-        map ((departmentsStatistics: DepartmentsStatisticsResponseDto) => {
-          let y : DepartmentsStatisticsSm;
-          y = departmentsStatistics as DepartmentsStatisticsSm;
-          y.interval = interval;
-          y.statisticsQueryParams = statisticsQueryParams;
-          return y;
-        })
+        map((departmentsStatistics: DepartmentsStatisticsResponseDto) => departmentsStatistics as DepartmentsStatisticsSm)
       );
   }
 

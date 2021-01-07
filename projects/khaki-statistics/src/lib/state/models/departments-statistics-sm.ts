@@ -1,10 +1,6 @@
 import {DepartmentStatisticsSm} from './department-statistics-sm';
-import {IntervalEnum} from '../../services/models/interval.enum';
-import {StatisticsQueryParameters} from '../../services/models/statistics-query-parameters';
+import {BaseStatisticsStateSm} from './base-statistics-state-sm';
 
-export interface DepartmentsStatisticsSm {
+export interface DepartmentsStatisticsSm extends BaseStatisticsStateSm {
   departmentsStatistics: DepartmentStatisticsSm[];
-  errors?: Error[];
-  interval?: IntervalEnum;
-  statisticsQueryParams?: StatisticsQueryParameters;
 }

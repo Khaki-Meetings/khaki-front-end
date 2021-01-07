@@ -4,7 +4,7 @@ import {DepartmentsStatisticsSm} from '../models/departments-statistics-sm';
 import {Store} from '@ngrx/store';
 import {StatisticsFeature} from '../models/statistics-feature';
 import {loadPerDepartmentStatistics} from '../actions/per-department-statistics.actions';
-import {perDepartmentStatisticsSelector} from '../statistics.selectors';
+import {departmentsStatisticsLoadingSelector, perDepartmentStatisticsSelector} from '../statistics.selectors';
 import {NotImplementedException} from '../../exceptions/not-implemented-exception';
 
 @Injectable({
@@ -20,8 +20,11 @@ export class PerDepartmentStatisticsFacadeService {
   }
 
   perDepartmentStatistics(): Observable<DepartmentsStatisticsSm> {
-    return this.store
-      .select(perDepartmentStatisticsSelector);
+    return this.store.select(perDepartmentStatisticsSelector);
+  }
+
+  perDepartmentStatisticsLoading(): Observable<boolean> {
+    return this.store.select(departmentsStatisticsLoadingSelector);
   }
 
   perDepartmentStatisticsErrors(): Observable<Error[]> {

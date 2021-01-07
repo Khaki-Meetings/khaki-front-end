@@ -29,6 +29,8 @@ export class OrganizersTableComponent implements OnInit, AfterViewInit {
   intervalText: string;
   meetingTypeText: string;
 
+  loading = false;
+
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
 
 
@@ -43,7 +45,6 @@ export class OrganizersTableComponent implements OnInit, AfterViewInit {
         this.logger.debug('onInit organizersStatistics', organizersStatistics);
         this.organizersStatistics = organizersStatistics;
         this.dataSource = organizersStatistics.content;
-        this.interval = organizersStatistics.interval;
         if (this.paginator) {
           this.paginator.length = organizersStatistics.totalElements;
           this.paginator.pageSize = organizersStatistics.size;
@@ -54,12 +55,12 @@ export class OrganizersTableComponent implements OnInit, AfterViewInit {
         .subscribe((data) => {
           let statsFilter = data as StatisticsFiltersState;
           let timeBlockRange = { start : statsFilter.start, end : statsFilter.end };
-          console.log('START: ' + timeBlockRange.start + " END: " + timeBlockRange.end);
           this.intervalText =
-           Utilities.formatIntervalTextDetail(IntervalEnum[statsFilter.interval],
-             Utilities.calculateTimeBlockEnum(IntervalEnum[statsFilter.interval], 1));
+            Utilities.formatIntervalTextDetail(IntervalEnum[statsFilter.interval], timeBlockRange);
           this.meetingTypeText = Utilities.formatMeetingTypeDetail(statsFilter.filter);
         });
+
+        this.organizersStatisticsFacade.organizersStatisticsLoading().subscribe(loading => this.loading = loading);
   }
 
   ngAfterViewInit(): void {
