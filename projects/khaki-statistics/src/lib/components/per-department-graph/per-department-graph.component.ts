@@ -86,6 +86,7 @@ export class PerDepartmentGraphComponent implements OnInit {
           this.colors = new ColorHelper(this.colorScheme, 'ordinal', this.legendData, null);
         });
 
+/*
     this.statisticsFiltersFacadeService.statisticsFilters()
       .subscribe((data) => {
         let statsFilter = data as StatisticsFiltersState;
@@ -93,6 +94,19 @@ export class PerDepartmentGraphComponent implements OnInit {
             Utilities.formatIntervalTextDetail(IntervalEnum[statsFilter.interval],
               Utilities.calculateTimeBlockEnum(IntervalEnum[statsFilter.interval], 1));
           this.meetingTypeText = Utilities.formatMeetingTypeDetail(statsFilter.filter);
+      });
+      */
+
+    this.statisticsFiltersFacadeService.statisticsFilters()
+      .subscribe((data) => {
+        let statsFilter = data as StatisticsFiltersState;
+        let timeBlockRange = { start : statsFilter.start, end : statsFilter.end };
+        console.log('STARTX: ' + timeBlockRange.start + " END: " + timeBlockRange.end);
+        this.intervalText =
+         Utilities.formatIntervalTextDetail(IntervalEnum[statsFilter.interval],
+           timeBlockRange);
+    //       Utilities.calculateTimeBlockEnum(IntervalEnum[statsFilter.interval], 1));
+        this.meetingTypeText = Utilities.formatMeetingTypeDetail(statsFilter.filter);
       });
   }
 

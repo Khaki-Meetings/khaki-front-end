@@ -24,7 +24,7 @@ export interface StatisticsFiltersState {
 
 export const initialState: StatisticsFiltersState = {
   filter: StatisticsFilterSe.Internal,
-  start: Utilities.calculateTimeBlock(IntervalSe.Week, 0).start,
+  start: Utilities.calculateTimeBlock(IntervalSe.Week, 1).start,
   end: Utilities.calculateTimeBlock(IntervalSe.Week, 0).end,
   interval: IntervalSe.Week
 };
@@ -34,7 +34,7 @@ export const setStatisticsFilterReducer = createReducer(
   on(
     setStatisticsFiltersAction,
     (state, action) => {
-      const startEnd = Utilities.calculateTimeBlock(action.interval);
+      const startEnd = Utilities.calculateTimeBlock(action.interval, 1);
       return {
         ...state,
         filter: action.filter,
