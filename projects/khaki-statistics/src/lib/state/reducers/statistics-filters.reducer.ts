@@ -22,7 +22,7 @@ export interface StatisticsFiltersState {
   count?: number;
 }
 
-const initStartEnd = Utilities.calculateTimeBlock(IntervalSe.Week, 0);
+const initStartEnd = Utilities.calculateTimeBlock(IntervalSe.Week, 1);
 
 export const initialState: StatisticsFiltersState = {
   filter: StatisticsFilterSe.Internal,
@@ -36,7 +36,7 @@ export const setStatisticsFilterReducer = createReducer(
   on(
     setStatisticsFiltersAction,
     (state, action) => {
-      const startEnd = Utilities.calculateTimeBlock(action.interval);
+      const startEnd = Utilities.calculateTimeBlock(action.interval, 1);
       return {
         ...state,
         filter: action.filter,
@@ -51,7 +51,8 @@ export const setStatisticsFilterReducer = createReducer(
   on(
     setCurrentTimeIntervalAction,
     (state, action) => {
-      return {...state, interval: action.interval};
+      const startEnd = Utilities.calculateTimeBlock(action.interval, 1);
+      return {...state, interval: action.interval, start: startEnd.start};
     }
   ),
   on(
