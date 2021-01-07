@@ -1,5 +1,3 @@
-
-<mat-spinner *ngIf="loading"></mat-spinner>
 <div class="container">
   <div class="component-header">
     <h3 class="component-caption">Meeting Time</h3>
@@ -13,7 +11,8 @@
     </div>
   </div>
 
-  <div class="component-content flex-container">
+  <div class="component-content">
+    <mat-spinner *ngIf="loading"></mat-spinner>
     <div class="center">
       <ngx-charts-bar-vertical
         [view]="view"
@@ -36,4 +35,3 @@
     </div>
   </div>
 </div>
-
