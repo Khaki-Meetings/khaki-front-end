@@ -1,4 +1,4 @@
-import {DepartmentSm} from './departmentSm';
+import {DepartmentSm} from './department-sm';
 
 export interface DepartmentStatisticsSm {
   department: string;

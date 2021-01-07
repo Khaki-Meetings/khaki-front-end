@@ -3,25 +3,41 @@ import {loadOrganizersStatisticsAction, loadOrganizersStatisticsSuccessAction} f
 import {OrganizersStatisticsSm} from '../models/organizers-statistics-sm';
 import {Utilities} from '../../services/utilities';
 import {HistorianService, LogLevel} from '@natr/historian';
+import {loadTrailingStatisticsFailure} from '../actions/trailing-statistics.actions';
 
 const logger = new HistorianService(LogLevel.DEBUG, 'OrganizersStatisticsReducer');
 
 export const organizersStatisticsFeatureKey = 'organizersStatistics';
 
 export const initialState: OrganizersStatisticsSm = {
-  errors: [], content: [], number: 0
-
+  content: [],
+  number: 0,
+  loading: false
 };
 
 export const organizersStatisticsReducer = createReducer(
   initialState,
-  on(loadOrganizersStatisticsAction, (state: OrganizersStatisticsSm, action) => state),
+  on(
+    loadOrganizersStatisticsAction,
+    (state: OrganizersStatisticsSm, action) => {
+      const newState = {...state};
+      newState.loading = true;
+      return newState;
+    }
+  ),
+  on(
+    loadTrailingStatisticsFailure,
+    (state, action) => {
+      const newState = {...state};
+      newState.error = {...action};
+      newState.loading = false;
+      return newState;
+    }
+  ),
   on(
     loadOrganizersStatisticsSuccessAction,
     (state: OrganizersStatisticsSm, action) => {
-      logger.debug('state', state);
       const {type, ...newState} = {...state, ...action};
-      logger.debug('newState, type', newState, type);
       newState.content = newState.content.map(
         organizersStatistic => {
           return {
@@ -35,6 +51,7 @@ export const organizersStatisticsReducer = createReducer(
           };
         }
       );
+      newState.loading = false;
       return newState;
     }
   ),

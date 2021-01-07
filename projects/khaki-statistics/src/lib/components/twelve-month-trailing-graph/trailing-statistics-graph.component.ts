@@ -27,7 +27,7 @@ export class TrailingStatisticsGraphComponent implements OnInit {
 
   private logger: HistorianService;
 
-  graphData: { name: string, value: number, extra: {customLabel: string} }[] = [];
+  graphData: { name: string, value: number, extra: { customLabel: string } }[] = [];
 
   view: any[] = [700, 400];
 
@@ -46,6 +46,7 @@ export class TrailingStatisticsGraphComponent implements OnInit {
     domain: ['#3182CE']
   };
 
+  loading = false;
 
   ngOnInit(): void {
     this.currentTimeIntervalFacade
@@ -58,6 +59,8 @@ export class TrailingStatisticsGraphComponent implements OnInit {
         )
       )
       .subscribe(trailingStatistics => this.createGraphData(trailingStatistics));
+    this.trailingStatisticsFacade.trailingStatisticsLoading()
+      .subscribe(loading => this.loading = loading);
   }
 
   private createGraphData(trailingStatistics: TrailingStatisticsSm): void {

@@ -23,6 +23,8 @@ export class OrganizersTableComponent implements OnInit, AfterViewInit {
 
   currentTimeInterval: IntervalEnum;
 
+  loading = false;
+
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
 
 
@@ -41,6 +43,7 @@ export class OrganizersTableComponent implements OnInit, AfterViewInit {
           this.paginator.pageSize = organizersStatistics.size;
         }
       });
+    this.organizersStatisticsFacade.organizersStatisticsLoading().subscribe(loading => this.loading = loading);
   }
 
   ngAfterViewInit(): void {
