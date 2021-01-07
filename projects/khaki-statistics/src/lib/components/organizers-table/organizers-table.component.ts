@@ -24,8 +24,6 @@ export class OrganizersTableComponent implements OnInit, AfterViewInit {
 
   dataSource: OrganizerStatisticsSm[] = [];
 
-  interval?: IntervalEnum;
-
   intervalText: string;
   meetingTypeText: string;
 

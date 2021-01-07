@@ -5,7 +5,6 @@ import {ColorHelper} from '@swimlane/ngx-charts';
 import {HistorianService, Logging} from '@natr/historian';
 import {Utilities} from '../../services/utilities';
 import {IntervalEnum} from '../../services/models/interval.enum';
-import {StatisticsQueryParameters} from '../../services/models/statistics-query-parameters';
 import {StatisticsFiltersFacadeService} from '../../state/facades/statistics-filters-facade.service';
 import { StatisticsFiltersState } from '../../state/reducers/statistics-filters.reducer';
 
@@ -44,8 +43,6 @@ export class PerDepartmentGraphComponent implements OnInit {
   legendData: any[] = [];
   colors: ColorHelper = new ColorHelper('cool', 'ordinal', [], null);
 
-  interval?: IntervalEnum;
-  statisticsQueryParams?: StatisticsQueryParameters;
   intervalText: string;
   meetingTypeText: string;
   loading = false;
@@ -87,27 +84,16 @@ export class PerDepartmentGraphComponent implements OnInit {
           this.colors = new ColorHelper(this.colorScheme, 'ordinal', this.legendData, null);
         });
 
-        /*
-            this.statisticsFiltersFacadeService.statisticsFilters()
-              .subscribe((data) => {
-                let statsFilter = data as StatisticsFiltersState;
-                  this.intervalText =
-                    Utilities.formatIntervalTextDetail(IntervalEnum[statsFilter.interval],
-                      Utilities.calculateTimeBlockEnum(IntervalEnum[statsFilter.interval], 1));
-                  this.meetingTypeText = Utilities.formatMeetingTypeDetail(statsFilter.filter);
-              });
-              */
+        this.statisticsFiltersFacadeService.statisticsFilters()
+          .subscribe((data) => {
+            let statsFilter = data as StatisticsFiltersState;
+            let timeBlockRange = { start : statsFilter.start, end : statsFilter.end };
+            this.intervalText =
+              Utilities.formatIntervalTextDetail(IntervalEnum[statsFilter.interval], timeBlockRange);
+            this.meetingTypeText = Utilities.formatMeetingTypeDetail(statsFilter.filter);
+          });
 
-            this.statisticsFiltersFacadeService.statisticsFilters()
-              .subscribe((data) => {
-                let statsFilter = data as StatisticsFiltersState;
-                let timeBlockRange = { start : statsFilter.start, end : statsFilter.end };
-                this.intervalText =
-                  Utilities.formatIntervalTextDetail(IntervalEnum[statsFilter.interval], timeBlockRange);
-                this.meetingTypeText = Utilities.formatMeetingTypeDetail(statsFilter.filter);
-              });
-
-    this.perDepartmentStatisticsFacade.perDepartmentStatisticsLoading().subscribe(loading => this.loading = loading);
+        this.perDepartmentStatisticsFacade.perDepartmentStatisticsLoading().subscribe(loading => this.loading = loading);
   }
 
   private createGraphData(): void {
