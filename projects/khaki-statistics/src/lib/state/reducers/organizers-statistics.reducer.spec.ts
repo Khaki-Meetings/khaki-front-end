@@ -21,7 +21,6 @@ describe('OrganizersStatistics Reducer', () => {
   describe(`${loadOrganizersStatisticsSuccessAction.type}`, () => {
     it('should return the new state', () => {
       const organizersStatistics: OrganizersStatisticsSm = {
-        errors: [{}], organizersStatistics: [], page: 1
       };
       const action = loadOrganizersStatisticsSuccessAction(organizersStatistics);
 
@@ -35,10 +34,10 @@ describe('OrganizersStatistics Reducer', () => {
     it('should set error', () => {
       const organizersStatistics = {
         errors: [
-          {message: 'you done fuckeled', name: '1d10t'}
+          {message: 'you done messed up', name: '1d10t'}
         ]
       } as OrganizersStatisticsSm;
-      const action = loadOrganizersStatisticsFailureAction(organizersStatistics.errors[0]);
+      const action = loadOrganizersStatisticsFailureAction(organizersStatistics.error);
 
       const result = trailingStatisticsReducer(initialState, action);
 

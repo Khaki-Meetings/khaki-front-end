@@ -5,6 +5,7 @@ import {timeBlockSummariesFeatureKey} from './reducers/time-block-summary.reduce
 import {organizersStatisticsFeatureKey} from './reducers/organizers-statistics.reducer';
 import {trailingStatisticsFeatureKey} from './reducers/trailing-statistics.reducer';
 import {statisticsFiltersFeatureKey} from './reducers/statistics-filters.reducer';
+import {perDepartmentStatisticsFeatureKey} from './reducers/per-department-statistics.reducer';
 
 const featureSelector = createFeatureSelector(khakiStatisticsFeatureKey);
 
@@ -46,4 +47,19 @@ export const statisticsFilterSelector = createSelector(
 export const trailingSStatisticsLoadingSelector = createSelector(
   featureSelector,
   (state: StatisticsFeature) => state[trailingStatisticsFeatureKey].loading
+);
+
+export const organizersStatisticsLoadingSelector = createSelector(
+  featureSelector,
+  (state: StatisticsFeature) => state[organizersStatisticsFeatureKey].loading
+);
+
+export const departmentsStatisticsLoadingSelector = createSelector(
+  featureSelector,
+  (state: StatisticsFeature) => state[perDepartmentStatisticsFeatureKey].loading
+);
+
+export const timeBlockSummaryLoadingSelector = createSelector(
+  featureSelector,
+  (state: StatisticsFeature) => state[timeBlockSummariesFeatureKey].loading
 );

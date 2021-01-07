@@ -1,13 +1,12 @@
 import {IntervalEnum} from '../../services/models/interval.enum';
-import {ErrorSm} from './error-sm';
+import {BaseStatisticsStateSm} from './base-statistics-state-sm';
 
-export interface TimeBlockSummarySm {
+export interface TimeBlockSummarySm extends BaseStatisticsStateSm {
   timeBlock?: IntervalEnum;
   totalSeconds?: number;
   totalCost?: number;
   averageCost?: number;
   meetingCount?: number;
-  error?: ErrorSm;
   averageStaffSeconds?: number;
   formattedTotalSeconds?: string;
   formattedAverageStaffSeconds?: string;

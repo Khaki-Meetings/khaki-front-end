@@ -13,29 +13,24 @@ export const trailingStatisticsReducer = createReducer(
   initialState,
   on(
     loadTrailingStatisticsSuccess,
-    (state, action) => {
-      const {type, ...newState} = {...state, ...action};
-      newState.loading = false;
-      return newState;
-    }
+    (state, action) =>
+      ({
+        ...state,
+        loading: false,
+        timeBlockSummaries: action.timeBlockSummaries,
+        timeBlock: action.timeBlock
+      })
   ),
   on(
     loadTrailingStatisticsFailure,
-    (state, action) => {
-      const {type, ...newState} = {...state, ...action};
-      newState.timeBlockSummaries = [];
-      newState.count = 0;
-      newState.loading = false;
-      return newState;
-    }
+    (state, action) =>
+      ({
+        ...state,
+        timeBlockSummaries: [],
+        count: 0,
+        loading: false
+      })
   ),
-  on(
-    loadTrailingStatistics,
-    state => {
-      const newState = {...state};
-      newState.loading = true;
-      return newState;
-    }
-  )
+  on(loadTrailingStatistics, state => ({...state, loading: true}))
 );
 
