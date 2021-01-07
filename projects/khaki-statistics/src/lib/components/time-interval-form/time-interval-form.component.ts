@@ -4,6 +4,12 @@ import {IntervalEnum} from '../../services/models/interval.enum';
 import {HistorianService, Logging} from '@natr/historian';
 import {CurrentTimeIntervalFacadeService} from '../../state/facades/current-time-interval-facade.service';
 import {IntervalSe} from '../../state/models/interval-se';
+import * as moment_ from 'moment';
+import {Moment} from 'moment';
+import {StatisticsFiltersFacadeService} from '../../state/facades/statistics-filters-facade.service';
+import {Utilities} from '../../services/utilities';
+
+const moment = moment_;
 
 @Logging
 @Component({
@@ -13,11 +19,7 @@ import {IntervalSe} from '../../state/models/interval-se';
 })
 export class TimeIntervalFormComponent implements OnInit {
   logger: HistorianService;
-  timeIntervals = [
-    IntervalEnum.Week,
-    IntervalEnum.Month
-  ];
-
+  timeIntervals = [];
   form: FormGroup;
   timeIntervalControl: FormControl;
 
@@ -32,6 +34,21 @@ export class TimeIntervalFormComponent implements OnInit {
   }
 
   private buildForm(): void {
+
+    const weekTimeBlockRange = Utilities.calculateTimeBlock(IntervalSe.Week, 1);
+    const monthTimeBlockRange = Utilities.calculateTimeBlock(IntervalSe.Month, 1);
+
+    this.timeIntervals.push({
+      value: IntervalEnum.Week,
+      text: Utilities.formatIntervalTextDetail(IntervalEnum.Week,
+         weekTimeBlockRange )
+    });
+    this.timeIntervals.push({
+      value: IntervalEnum.Month,
+      text: Utilities.formatIntervalTextDetail(IntervalEnum.Month,
+         monthTimeBlockRange)
+    });
+
     this.timeIntervalControl = new FormControl();
     this.form = new FormGroup({
       timeInterval: this.timeIntervalControl

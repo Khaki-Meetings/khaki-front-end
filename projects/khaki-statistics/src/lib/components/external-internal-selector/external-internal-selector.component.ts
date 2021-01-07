@@ -3,6 +3,7 @@ import {StatisticsFilterSe} from '../../state/models/statistics-filter-se';
 import {StatisticsFiltersFacadeService} from '../../state/facades/statistics-filters-facade.service';
 import {FormControl, FormGroup} from '@angular/forms';
 import {HistorianService, Logging} from '@natr/historian';
+import { Utilities } from '../../services/utilities';
 
 @Logging
 @Component({
@@ -20,6 +21,12 @@ export class ExternalInternalSelectorComponent implements OnInit {
   values = Object.values(StatisticsFilterSe);
   form: FormGroup;
   filterControl: FormControl;
+  meetingTypeOptions =
+    [{ value: StatisticsFilterSe.Internal,
+       text: Utilities.formatMeetingTypeDetail(StatisticsFilterSe.Internal) },
+     { value: StatisticsFilterSe.External,
+       text: Utilities.formatMeetingTypeDetail(StatisticsFilterSe.External)
+     }];
 
   private filterControlValueChange = (filterString) => {
     this.logger.debug('value changed', filterString);
@@ -36,4 +43,5 @@ export class ExternalInternalSelectorComponent implements OnInit {
     this.filterControl.valueChanges.subscribe(this.filterControlValueChange);
     this.statisticsFiltersFacade.currentStatisticsFilter().subscribe(filter => this.filterControl.setValue(filter));
   }
+
 }

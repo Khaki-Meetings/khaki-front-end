@@ -8,6 +8,11 @@
   },
   "response": {
     "status": 200,
+    "delayDistribution": {
+      "type": "lognormal",
+      "median": 750,
+      "sigma": 0.5
+    },
     "headers": {
       "Content-Type": "application/json"
     },

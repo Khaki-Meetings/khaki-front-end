@@ -5,8 +5,7 @@ import {NotImplementedException} from '../../exceptions/not-implemented-exceptio
 import {StatisticsFeature} from '../models/statistics-feature';
 import {Store} from '@ngrx/store';
 import {loadOrganizersStatisticsAction} from '../actions/organizers-statistics.actions';
-import {organizersStatisticsSelector} from '../statistics.selectors';
-import {IntervalEnum} from '../../services/models/interval.enum';
+import {organizersStatisticsLoadingSelector, organizersStatisticsSelector} from '../statistics.selectors';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +21,10 @@ export class OrganizersStatisticsFacadeService {
 
   organizersStatistics(): Observable<OrganizersStatisticsSm> {
     return this.store.select(organizersStatisticsSelector);
+  }
+
+  organizersStatisticsLoading(): Observable<boolean> {
+    return this.store.select(organizersStatisticsLoadingSelector);
   }
 
   setOrganizersStatistics(data: OrganizersStatisticsSm): void {
