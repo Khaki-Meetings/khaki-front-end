@@ -33,33 +33,20 @@ export class TimeIntervalFormComponent implements OnInit {
     this.currentTimeIntervalFacade.setCurrentTimeInterval(IntervalSe[this.defaultTimeInterval]);
   }
 
-  setDisplayEnd(timestamp: moment.Moment): moment.Moment {
-    if (timestamp.hour() === 0
-      && timestamp.minutes() === 0
-      && timestamp.seconds() === 0) {
-      return timestamp.subtract(1, 'days').endOf('day');
-    }
-    return timestamp;
-  }
-
   private buildForm(): void {
 
-    const weekTimeBlockRange = Utilities.calculateTimeBlock(IntervalSe.Week);
-    const monthTimeBlockRange = Utilities.calculateTimeBlock(IntervalSe.Month);
+    const weekTimeBlockRange = Utilities.calculateTimeBlock(IntervalSe.Week, 1);
+    const monthTimeBlockRange = Utilities.calculateTimeBlock(IntervalSe.Month, 1);
 
     this.timeIntervals.push({
       value: IntervalEnum.Week,
-      text: 'Last 7 Days ('
-        + moment(weekTimeBlockRange.start).format('ddd, MMM D')
-        + ' - '
-        + this.setDisplayEnd(moment(weekTimeBlockRange.end)).format('ddd, MMM D') + ')'
+      text: Utilities.formatIntervalTextDetail(IntervalEnum.Week,
+         weekTimeBlockRange )
     });
     this.timeIntervals.push({
       value: IntervalEnum.Month,
-      text: 'Last Month ('
-        + moment(monthTimeBlockRange.start).format('ddd, MMM D')
-        + ' - '
-        + this.setDisplayEnd(moment(monthTimeBlockRange.end)).format('ddd, MMM D') + ')'
+      text: Utilities.formatIntervalTextDetail(IntervalEnum.Month,
+         monthTimeBlockRange)
     });
 
     this.timeIntervalControl = new FormControl();

@@ -119,7 +119,7 @@ export class StatisticsService {
             return throwError('Failed to get department statistics');
           }
         ),
-        map((departmentsStatistics: DepartmentsStatisticsResponseDto) => departmentsStatistics as DepartmentsStatisticsSm),
+        map((departmentsStatistics: DepartmentsStatisticsResponseDto) => departmentsStatistics as DepartmentsStatisticsSm)
       );
   }
 

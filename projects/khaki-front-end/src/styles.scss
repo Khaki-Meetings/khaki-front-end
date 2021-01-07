@@ -89,6 +89,7 @@ div.center {
 
   .component-caption {
     float: left;
+    padding: 0 0 20px;
   }
 
   .component-help {
@@ -140,4 +141,9 @@ div.center {
   .mat-select-value-text {
     padding-left: 5px;
   }
+}
+
+.component-title {
+    font-size: initial;
+    font-weight: 400;
 }

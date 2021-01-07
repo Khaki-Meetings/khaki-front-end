@@ -4,6 +4,9 @@ import {PerDepartmentStatisticsFacadeService} from '../../state/facades/per-depa
 import {ColorHelper} from '@swimlane/ngx-charts';
 import {HistorianService, Logging} from '@natr/historian';
 import {Utilities} from '../../services/utilities';
+import {IntervalEnum} from '../../services/models/interval.enum';
+import {StatisticsFiltersFacadeService} from '../../state/facades/statistics-filters-facade.service';
+import { StatisticsFiltersState } from '../../state/reducers/statistics-filters.reducer';
 
 interface GraphData {
   name: string;
@@ -40,9 +43,12 @@ export class PerDepartmentGraphComponent implements OnInit {
   legendData: any[] = [];
   colors: ColorHelper = new ColorHelper('cool', 'ordinal', [], null);
 
+  intervalText: string;
+  meetingTypeText: string;
   loading = false;
 
-  constructor(private perDepartmentStatisticsFacade: PerDepartmentStatisticsFacadeService) {
+  constructor(private perDepartmentStatisticsFacade: PerDepartmentStatisticsFacadeService,
+    private statisticsFiltersFacadeService: StatisticsFiltersFacadeService) {
   }
 
   ngOnInit(): void {
@@ -74,11 +80,20 @@ export class PerDepartmentGraphComponent implements OnInit {
           );
 
           this.logger.debug('chart data', this.chartData);
-
           this.legendData = this.chartData.map(d => d.extra.displayName);
           this.colors = new ColorHelper(this.colorScheme, 'ordinal', this.legendData, null);
         });
-    this.perDepartmentStatisticsFacade.perDepartmentStatisticsLoading().subscribe(loading => this.loading = loading);
+
+        this.statisticsFiltersFacadeService.statisticsFilters()
+          .subscribe((data) => {
+            let statsFilter = data as StatisticsFiltersState;
+            let timeBlockRange = { start : statsFilter.start, end : statsFilter.end };
+            this.intervalText =
+              Utilities.formatIntervalTextDetail(IntervalEnum[statsFilter.interval], timeBlockRange);
+            this.meetingTypeText = Utilities.formatMeetingTypeDetail(statsFilter.filter);
+          });
+
+        this.perDepartmentStatisticsFacade.perDepartmentStatisticsLoading().subscribe(loading => this.loading = loading);
   }
 
   private createGraphData(): void {
