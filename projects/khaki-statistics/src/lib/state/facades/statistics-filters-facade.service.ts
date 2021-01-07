@@ -6,7 +6,7 @@ import {Observable} from 'rxjs';
 import {StatisticsFiltersState} from '../reducers/statistics-filters.reducer';
 import {statisticsFilterSelector, statisticsFiltersSelector} from '../statistics.selectors';
 import {StatisticsFilterSe} from '../models/statistics-filter-se';
-import {setStatisticsFilterAction} from '../actions/statistics-filter.actions';
+import {setPageCountAction, setStatisticsFilterAction} from '../actions/statistics-filter.actions';
 import {take} from 'rxjs/operators';
 
 @Injectable({providedIn: 'root'})
@@ -32,5 +32,9 @@ export class StatisticsFiltersFacadeService {
       take(1),
       select(statisticsFilterSelector)
     );
+  }
+
+  public setPageAndCount(page: number, count: number): void {
+    this.store.dispatch(setPageCountAction({page, count}));
   }
 }
