@@ -38,7 +38,7 @@ export class StatisticsService {
   }
 
   private getCalendarStartEnd(interval: IntervalEnum): TimeBlockRange {
-    return Utilities.calculateTimeBlock(IntervalSe[interval], 0);
+    return Utilities.calculateCalendarTimeBlock(IntervalSe[interval], 0);
   }
 
 

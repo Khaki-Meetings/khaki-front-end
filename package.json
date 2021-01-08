@@ -45,6 +45,7 @@
     "@ngrx/effects": "^10.0.1",
     "@ngrx/schematics": "^10.0.1",
     "@ngrx/store": "^10.0.1",
+    "@ngrx/store-devtools": "^10.1.2",
     "@swimlane/ngx-charts": "^16.0.0",
     "d3": "^6.2.0",
     "express": "^4.17.1",

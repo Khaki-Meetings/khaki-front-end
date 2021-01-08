@@ -1,8 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
-import {setCurrentTimeIntervalAction} from '../actions/current-time-interval.actions';
-import {tap} from 'rxjs/operators';
-import {setStatisticsFiltersAction} from '../actions/set-statistics-filter.actions';
+import {map, tap} from 'rxjs/operators';
 import {AllStatisticsFacadeService} from '../facades/all-statistics-facade.service';
 import {HistorianService, Logging} from '@natr/historian';
 
@@ -13,8 +11,9 @@ export class StatisticsFiltersChangeEffects {
 
   effect$ = createEffect(
     () => this.actions$.pipe(
-      ofType(setCurrentTimeIntervalAction, setStatisticsFiltersAction),
-      tap(
+      ofType('[StatisticsFilter] Set StatisticsFilters'),
+      tap(action => this.logger.debug('action', action)),
+      map(
         () => {
           this.logger.debug('setCurrentTimeIntervalAction, setStatisticsFiltersAction');
           this.allStatisticsFacade.requestAllStatistics();

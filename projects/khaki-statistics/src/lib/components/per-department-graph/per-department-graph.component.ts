@@ -6,7 +6,7 @@ import {HistorianService, Logging} from '@natr/historian';
 import {Utilities} from '../../services/utilities';
 import {IntervalEnum} from '../../services/models/interval.enum';
 import {StatisticsFiltersFacadeService} from '../../state/facades/statistics-filters-facade.service';
-import { StatisticsFiltersState } from '../../state/reducers/statistics-filters.reducer';
+import { StatisticsFiltersSm } from '../../state/reducers/statistics-filters.reducer';
 
 interface GraphData {
   name: string;
@@ -86,7 +86,7 @@ export class PerDepartmentGraphComponent implements OnInit {
 
         this.statisticsFiltersFacadeService.statisticsFilters()
           .subscribe((data) => {
-            let statsFilter = data as StatisticsFiltersState;
+            let statsFilter = data as StatisticsFiltersSm;
             let timeBlockRange = { start : statsFilter.start, end : statsFilter.end };
             this.intervalText =
               Utilities.formatIntervalTextDetail(IntervalEnum[statsFilter.interval], timeBlockRange);
