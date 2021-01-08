@@ -42,8 +42,8 @@ export class Utilities {
     }
 
     return {
-      start: now.clone().utc().startOf('day').subtract(subtractIntervals, timeBlock),
-      end: now.clone().utc().startOf('day')
+      start: now.clone().utc().startOf(timeBlock).subtract(subtractIntervals, timeBlock),
+      end: now.clone().utc().startOf(timeBlock)
     };
   }
 
@@ -60,8 +60,8 @@ export class Utilities {
     }
 
     return {
-      start: now.clone().utc().startOf('day').subtract(subtractIntervals, timeBlock),
-      end: now.clone().utc().startOf('day')
+      start: now.clone().utc().startOf(timeBlock).subtract(subtractIntervals, timeBlock),
+      end: now.clone().utc().startOf(timeBlock)
     };
   }
 
