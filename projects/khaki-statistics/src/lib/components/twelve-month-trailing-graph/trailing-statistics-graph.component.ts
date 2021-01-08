@@ -8,6 +8,7 @@ import {CurrentTimeIntervalFacadeService} from '../../state/facades/current-time
 import {switchMap, tap} from 'rxjs/operators';
 import {Utilities} from '../../services/utilities';
 import {IntervalSe} from '../../state/models/interval-se';
+import { TimeBlockSummarySm } from '../../state/models/time-block-summary-sm';
 
 const momentJs = moment;
 
@@ -64,8 +65,15 @@ export class TrailingStatisticsGraphComponent implements OnInit {
   }
 
   private createGraphData(trailingStatistics: TrailingStatisticsSm): void {
-    const timeBlocks = this.getIntervalLabels();
-    this.graphData = trailingStatistics.timeBlockSummaries.map(
+    const timeBlocks = this.getIntervalLabels().reverse();
+
+    let reverseTrailingStatistics = {
+      timeBlock: trailingStatistics.timeBlock,
+      timeBlockSummaries: [...trailingStatistics.timeBlockSummaries].reverse(),
+      count: trailingStatistics.count
+    } as TrailingStatisticsSm;
+
+    this.graphData = reverseTrailingStatistics.timeBlockSummaries.map(
       (timeBlockSummary, index) => {
         const totalSeconds = (timeBlockSummary.totalSeconds && typeof timeBlockSummary.totalSeconds === 'number')
           ? timeBlockSummary.totalSeconds : 0;
