@@ -42,11 +42,34 @@ export class Utilities {
     }
 
     return {
+      start: now.clone().utc().startOf('day').subtract(subtractIntervals, timeBlock),
+      end: now.clone().utc().startOf('day')
+    };
+  }
+
+  static calculateCalendarTimeBlock(interval: IntervalSe, subtractIntervals: number = 0): { start: Moment, end: Moment } {
+    const now = moment();
+    let timeBlock: StartOf;
+    switch (interval) {
+      case IntervalSe.Day:
+        timeBlock = 'day';
+        break;
+      case IntervalSe.Week:
+        timeBlock = 'week';
+        break;
+      case IntervalSe.Month:
+        timeBlock = 'month';
+        break;
+      case IntervalSe.Year:
+        timeBlock = 'year';
+        break;
+    }
+
+    return {
       start: now.clone().utc().startOf(timeBlock).subtract(subtractIntervals, timeBlock),
       end: now.clone().utc().startOf(timeBlock)
     };
   }
-
   static calculateTimeBlockEnum(interval: IntervalEnum, subtractIntervals: number = 0): { start: Moment, end: Moment } {
     const now = moment();
     let timeBlock: moment.unitOfTime.DurationConstructor;
