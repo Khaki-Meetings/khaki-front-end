@@ -28,6 +28,7 @@ import {TimeIntervalFormComponent} from './components/time-interval-form/time-in
 import {StatisticsFiltersChangeEffects} from './state/effects/statistics-filters-change.effects';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {ExternalInternalSelectorComponent} from './components/external-internal-selector/external-internal-selector.component';
+import { OrganizersTablePageableEffects } from './state/organizers-table-pageable/organizers-table-pageable.effects';
 
 
 @NgModule({
@@ -59,7 +60,8 @@ import {ExternalInternalSelectorComponent} from './components/external-internal-
                 OrganizersStatisticsEffects,
                 TrailingStatisticsEffects,
                 PerDepartmentStatisticsEffects,
-                StatisticsFiltersChangeEffects
+                StatisticsFiltersChangeEffects,
+                OrganizersTablePageableEffects,
             ]
         ),
         MatProgressSpinnerModule,

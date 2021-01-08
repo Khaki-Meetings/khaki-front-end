@@ -8,7 +8,8 @@ import {trailingStatisticsFeatureKey} from '../reducers/trailing-statistics.redu
 import {TrailingStatisticsSm} from './trailing-statistics-sm';
 import {spinnerFeatureKey} from '../reducers/spinner.reducer';
 import {SpinnerSm} from './spinner-sm';
-import {statisticsFiltersFeatureKey, StatisticsFiltersState} from '../reducers/statistics-filters.reducer';
+import {statisticsFiltersFeatureKey, StatisticsFiltersSm} from '../reducers/statistics-filters.reducer';
+import {organizersTablePageableFeatureKey, OrganizersTablePageableSm} from '../organizers-table-pageable/organizers-table-pageable.reducer';
 
 export interface StatisticsFeature {
   [organizersStatisticsFeatureKey]: OrganizersStatisticsSm;
@@ -16,5 +17,6 @@ export interface StatisticsFeature {
   [timeBlockSummariesFeatureKey]: TimeBlockSummarySm;
   [trailingStatisticsFeatureKey]: TrailingStatisticsSm;
   [spinnerFeatureKey]: SpinnerSm;
-  [statisticsFiltersFeatureKey]: StatisticsFiltersState;
+  [statisticsFiltersFeatureKey]: StatisticsFiltersSm;
+  [organizersTablePageableFeatureKey]: OrganizersTablePageableSm;
 }

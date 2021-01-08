@@ -13,7 +13,7 @@ const logger = new HistorianService(LogLevel.DEBUG, 'StatisticsFilterReducer');
 
 export const statisticsFiltersFeatureKey = 'statisticsFilters';
 
-export interface StatisticsFiltersState {
+export interface StatisticsFiltersSm {
   filter: StatisticsFilterSe;
   interval: IntervalSe;
   start: Moment;
@@ -22,7 +22,7 @@ export interface StatisticsFiltersState {
 
 const initStartEnd = Utilities.calculateTimeBlock(IntervalSe.Week, 1);
 
-export const initialState: StatisticsFiltersState = {
+export const initialState: StatisticsFiltersSm = {
   filter: StatisticsFilterSe.Internal,
   start: initStartEnd.start,
   end: initStartEnd.end,

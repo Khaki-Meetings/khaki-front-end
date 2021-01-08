@@ -3,7 +3,7 @@ import {StatisticsFeature} from '../models/statistics-feature';
 import {select, Store} from '@ngrx/store';
 import {setStatisticsFiltersAction} from '../actions/set-statistics-filter.actions';
 import {Observable} from 'rxjs';
-import {StatisticsFiltersState} from '../reducers/statistics-filters.reducer';
+import {StatisticsFiltersSm} from '../reducers/statistics-filters.reducer';
 import {statisticsFilterSelector, statisticsFiltersSelector} from '../statistics.selectors';
 import {StatisticsFilterSe} from '../models/statistics-filter-se';
 import {setPageCountAction, setStatisticsFilterAction} from '../actions/statistics-filter.actions';
@@ -15,7 +15,7 @@ export class StatisticsFiltersFacadeService {
   constructor(private store: Store<StatisticsFeature>) {
   }
 
-  public setStatisticsFilters(filter: StatisticsFiltersState): void {
+  public setStatisticsFilters(filter: StatisticsFiltersSm): void {
     this.store.dispatch(setStatisticsFiltersAction(filter));
   }
 
@@ -23,7 +23,7 @@ export class StatisticsFiltersFacadeService {
     this.store.dispatch(setStatisticsFilterAction({filter}));
   }
 
-  public statisticsFilters(): Observable<StatisticsFiltersState> {
+  public statisticsFilters(): Observable<StatisticsFiltersSm> {
     return this.store.select(statisticsFiltersSelector);
   }
 

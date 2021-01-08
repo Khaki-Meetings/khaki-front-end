@@ -1,6 +1,6 @@
 import {createAction, props} from '@ngrx/store';
 import {StatisticsFilterSe} from '../models/statistics-filter-se';
-import {PageCountActionProps} from '../models/action-props/page-count-action-props';
+import {PageableActionProps} from '../models/action-props/pageable-action-props';
 
 export interface SetStatisticsFilterActionProp {
   filter: StatisticsFilterSe;
@@ -13,7 +13,7 @@ export const setStatisticsFilterAction = createAction(
 
 export const setPageCountAction = createAction(
   '[StatisticsFilter] Set Page and Count',
-  props<PageCountActionProps>()
+  props<PageableActionProps>()
 );
 
 
