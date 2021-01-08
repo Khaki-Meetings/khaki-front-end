@@ -6,10 +6,15 @@ import {trailingStatisticsFeatureKey, trailingStatisticsReducer} from './reducer
 import {spinnerFeatureKey, spinnerReducer} from './reducers/spinner.reducer';
 import {StatisticsFeature} from './models/statistics-feature';
 import {setStatisticsFilterReducer, statisticsFiltersFeatureKey} from './reducers/statistics-filters.reducer';
+import {
+  organizersTablePageableFeatureKey,
+  organizersTablePageableReducer
+} from './organizers-table-pageable/organizers-table-pageable.reducer';
 
 export const khakiStatisticsFeatureKey = 'khakiStatistics';
 
 export const reducers: ActionReducerMap<StatisticsFeature> = {
+  [organizersTablePageableFeatureKey]: organizersTablePageableReducer,
   [organizersStatisticsFeatureKey]: organizersStatisticsReducer,
   [perDepartmentStatisticsFeatureKey]: perDepartmentStatisticsReducer,
   [timeBlockSummariesFeatureKey]: timeBlockSummaryReducer,

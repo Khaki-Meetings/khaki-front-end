@@ -1,9 +1,9 @@
-<mat-spinner *ngIf="loading"></mat-spinner>
 <div>
   <div class="flex-container">
     <div class="khaki-container time-based-stat-summary">
       <div style="float:left;">
         <div class="label">Staff Hours in Meetings</div>
+        <mat-spinner *ngIf="loading"></mat-spinner>
         <div class="value">{{timeBlockSummary?.formattedTotalSeconds}}</div>
       </div>
       <div style="float:right;">
@@ -18,6 +18,7 @@
     <div class="khaki-container time-based-stat-summary">
       <div style="float:left;">
         <div class="label">Average Staff Hours per Meeting</div>
+        <mat-spinner *ngIf="loading"></mat-spinner>
         <div class="value">{{timeBlockSummary?.formattedAverageStaffSeconds}}</div>
       </div>
       <div style="float:right;">
@@ -32,6 +33,7 @@
     <div class="khaki-container time-based-stat-summary">
       <div style="float:left;">
         <div class="label">Number of Meetings</div>
+        <mat-spinner *ngIf="loading"></mat-spinner>
         <div class="value">{{timeBlockSummary?.meetingCount}}</div>
       </div>
       <div style="float:right;">

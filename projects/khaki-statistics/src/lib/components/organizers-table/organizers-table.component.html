@@ -1,4 +1,3 @@
-<mat-spinner *ngIf="loading"></mat-spinner>
 <div>
   <div class="component-header">
     <div class="component-caption">
@@ -17,6 +16,7 @@
   </div>
 
   <div class="component-content">
+    <mat-spinner *ngIf="loading"></mat-spinner>
     <table mat-table [dataSource]="dataSource">
       <ng-container matColumnDef="name" >
         <th mat-header-cell *matHeaderCellDef class="table-border header-font">Employee</th>
@@ -36,6 +36,6 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns" class="header-font"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-    <mat-paginator (page)="pageChange($event)" length="5" pageSize="5" [pageSizeOptions]="[3, 5, 8]"></mat-paginator>
+    <mat-paginator (page)="pageChange($event)" [pageSizeOptions]="[5, 10, 15]"></mat-paginator>
   </div>
 </div>

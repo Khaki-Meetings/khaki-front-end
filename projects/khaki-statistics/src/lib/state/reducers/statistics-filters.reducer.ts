@@ -4,7 +4,7 @@ import {setStatisticsFiltersAction} from '../actions/set-statistics-filter.actio
 import {IntervalSe} from '../models/interval-se';
 import {setCurrentTimeIntervalAction} from '../actions/current-time-interval.actions';
 import {HistorianService, LogLevel} from '@natr/historian';
-import {setStatisticsFilterAction} from '../actions/statistics-filter.actions';
+import {setPageCountAction, setStatisticsFilterAction} from '../actions/statistics-filter.actions';
 import {Moment} from 'moment/moment';
 import {Utilities} from '../../services/utilities';
 
@@ -13,18 +13,16 @@ const logger = new HistorianService(LogLevel.DEBUG, 'StatisticsFilterReducer');
 
 export const statisticsFiltersFeatureKey = 'statisticsFilters';
 
-export interface StatisticsFiltersState {
+export interface StatisticsFiltersSm {
   filter: StatisticsFilterSe;
   interval: IntervalSe;
   start: Moment;
   end: Moment;
-  page?: number;
-  count?: number;
 }
 
 const initStartEnd = Utilities.calculateTimeBlock(IntervalSe.Week, 1);
 
-export const initialState: StatisticsFiltersState = {
+export const initialState: StatisticsFiltersSm = {
   filter: StatisticsFilterSe.Internal,
   start: initStartEnd.start,
   end: initStartEnd.end,
@@ -63,5 +61,10 @@ export const setStatisticsFilterReducer = createReducer(
         filter: action.filter
       };
     }
+  ),
+  on(
+    setPageCountAction,
+    (state, action) =>
+      ({...state, count: action.count, page: action.page})
   )
 );
