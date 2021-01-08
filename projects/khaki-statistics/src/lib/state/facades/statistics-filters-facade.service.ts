@@ -8,9 +8,12 @@ import {statisticsFilterSelector, statisticsFiltersSelector} from '../statistics
 import {StatisticsFilterSe} from '../models/statistics-filter-se';
 import {setPageCountAction, setStatisticsFilterAction} from '../actions/statistics-filter.actions';
 import {take} from 'rxjs/operators';
+import {HistorianService, Logging} from '@natr/historian';
 
+@Logging
 @Injectable({providedIn: 'root'})
 export class StatisticsFiltersFacadeService {
+  private logger: HistorianService;
 
   constructor(private store: Store<StatisticsFeature>) {
   }
@@ -20,6 +23,7 @@ export class StatisticsFiltersFacadeService {
   }
 
   public setStatisticsFilter(filter: StatisticsFilterSe): void {
+    this.logger.debug('filter', filter);
     this.store.dispatch(setStatisticsFilterAction({filter}));
   }
 
