@@ -22,14 +22,13 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatButtonModule} from '@angular/material/button';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {MatSelectModule} from '@angular/material/select';
 import {ReactiveFormsModule} from '@angular/forms';
 import {TimeIntervalFormComponent} from './components/time-interval-form/time-interval-form.component';
 import {StatisticsFiltersChangeEffects} from './state/effects/statistics-filters-change.effects';
-import {AuthHttpInterceptor} from '@auth0/auth0-angular';
 import {MatPaginatorModule} from '@angular/material/paginator';
-import { ExternalInternalSelectorComponent } from './components/external-internal-selector/external-internal-selector.component';
+import {ExternalInternalSelectorComponent} from './components/external-internal-selector/external-internal-selector.component';
+import { OrganizersTablePageableEffects } from './state/organizers-table-pageable/organizers-table-pageable.effects';
 
 
 @NgModule({
@@ -61,7 +60,8 @@ import { ExternalInternalSelectorComponent } from './components/external-interna
                 OrganizersStatisticsEffects,
                 TrailingStatisticsEffects,
                 PerDepartmentStatisticsEffects,
-                StatisticsFiltersChangeEffects
+                StatisticsFiltersChangeEffects,
+                OrganizersTablePageableEffects,
             ]
         ),
         MatProgressSpinnerModule,
