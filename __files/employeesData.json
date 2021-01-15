@@ -5,7 +5,7 @@
       "firstName": "Camille",
       "lastName": "Noel",
       "avatarUrl": null,
-      "email": "camille.lewis@coolcompany.com",
+      "email": "camille@coolcompany.com",
       "notify": false,
       "department": "People Operations"
     },
@@ -14,7 +14,7 @@
       "firstName": "Niccole",
       "lastName": "Jones",
       "avatarUrl": null,
-      "email": "niccole.mumford@coolcompany.com",
+      "email": "niccole@coolcompany.com",
       "notify": false,
       "department": "Product"
     },
@@ -23,7 +23,7 @@
       "firstName": "Michael",
       "lastName": "Jones",
       "avatarUrl": null,
-      "email": "michael.nielsen@coolcompany.com",
+      "email": "michael@coolcompany.com",
       "notify": false,
       "department": "Product"
     },
@@ -32,7 +32,7 @@
       "firstName": "Chandler",
       "lastName": "Jones",
       "avatarUrl": null,
-      "email": "chandler.love@coolcompany.com",
+      "email": "chandler@coolcompany.com",
       "notify": false,
       "department": "Product"
     },
@@ -41,7 +41,7 @@
       "firstName": "Jason",
       "lastName": "Jones",
       "avatarUrl": null,
-      "email": "jason.schow@coolcompany.com",
+      "email": "jason@coolcompany.com",
       "notify": false,
       "department": "Product"
     },
@@ -50,7 +50,7 @@
       "firstName": "Allison",
       "lastName": "Jones",
       "avatarUrl": null,
-      "email": "allison.zubal@coolcompany.com",
+      "email": "allison@coolcompany.com",
       "notify": false,
       "department": "Product"
     },
@@ -59,7 +59,7 @@
       "firstName": "Daniel",
       "lastName": "Jones",
       "avatarUrl": null,
-      "email": "danno.ard@coolcompany.com",
+      "email": "danno@coolcompany.com",
       "notify": false,
       "department": "Product"
     },
@@ -68,7 +68,7 @@
       "firstName": "Malcolm",
       "lastName": "Johnson",
       "avatarUrl": null,
-      "email": "malcolm.felt@coolcompany.com",
+      "email": "malcolm@coolcompany.com",
       "notify": false,
       "department": "Product"
     },
@@ -77,7 +77,7 @@
       "firstName": "Jason",
       "lastName": "Johnson",
       "avatarUrl": null,
-      "email": "jason.mitchell@coolcompany.com",
+      "email": "jason@coolcompany.com",
       "notify": false,
       "department": "Product"
     },
@@ -86,7 +86,7 @@
       "firstName": "Nicholas",
       "lastName": "Johnson",
       "avatarUrl": null,
-      "email": "nick.bluth@coolcompany.com",
+      "email": "nick@coolcompany.com",
       "notify": false,
       "department": "Product"
     },
@@ -95,7 +95,7 @@
       "firstName": "Hyejeong",
       "lastName": "Johnson",
       "avatarUrl": null,
-      "email": "heather.byun@coolcompany.com",
+      "email": "heather@coolcompany.com",
       "notify": false,
       "department": "Product"
     },
@@ -104,7 +104,7 @@
       "firstName": "Bradley",
       "lastName": "Johnson",
       "avatarUrl": null,
-      "email": "brad.rigby@coolcompany.com",
+      "email": "brad@coolcompany.com",
       "notify": false,
       "department": "Product"
     },
@@ -113,7 +113,7 @@
       "firstName": "Emma",
       "lastName": "Johnson",
       "avatarUrl": null,
-      "email": "emma.xu@coolcompany.com",
+      "email": "emma@coolcompany.com",
       "notify": false,
       "department": "Product"
     },
@@ -122,7 +122,7 @@
       "firstName": "Austin",
       "lastName": "Johnson",
       "avatarUrl": null,
-      "email": "austin.young@coolcompany.com",
+      "email": "austin@coolcompany.com",
       "notify": false,
       "department": "Product"
     },
@@ -131,7 +131,7 @@
       "firstName": "Preston",
       "lastName": "Johnson",
       "avatarUrl": null,
-      "email": "preston.hunter@coolcompany.com",
+      "email": "preston@coolcompany.com",
       "notify": false,
       "department": "Product"
     },
@@ -140,7 +140,7 @@
       "firstName": "Ryan",
       "lastName": "Johnson",
       "avatarUrl": null,
-      "email": "ryan.senior@coolcompany.com",
+      "email": "ryan@coolcompany.com",
       "notify": false,
       "department": "Product"
     },
@@ -149,7 +149,7 @@
       "firstName": "Patrick",
       "lastName": "Johnson",
       "avatarUrl": null,
-      "email": "patrick.cox@coolcompany.com",
+      "email": "patrick@coolcompany.com",
       "notify": false,
       "department": "Product"
     },
@@ -158,7 +158,7 @@
       "firstName": "Brandon",
       "lastName": "Johnson",
       "avatarUrl": null,
-      "email": "brandon.woodward@coolcompany.com",
+      "email": "brandon@coolcompany.com",
       "notify": false,
       "department": "Customer Success"
     },
@@ -167,7 +167,7 @@
       "firstName": "Terrance",
       "lastName": "Smith",
       "avatarUrl": null,
-      "email": "terrance.sherrell@coolcompany.com",
+      "email": "terrance@coolcompany.com",
       "notify": false,
       "department": "Customer Success"
     },
@@ -176,7 +176,7 @@
       "firstName": "Lisa",
       "lastName": "Smith",
       "avatarUrl": null,
-      "email": "lisa.knapp@coolcompany.com",
+      "email": "lisa@coolcompany.com",
       "notify": false,
       "department": "Customer Success"
     }
