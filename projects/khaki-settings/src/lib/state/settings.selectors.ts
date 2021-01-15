@@ -1,9 +1,9 @@
 import {createFeatureSelector, createSelector} from '@ngrx/store';
 import {khakiProfileFeatureKey} from './index';
 import {ProfileFeature} from './models/profile-feature';
-import { departmentsFeatureKey } from './reducers/departments.reducer';
-import {employeesFeatureKey} from './reducers/employees.reducer';
-import { userProfileFeatureKey } from './reducers/user-profile.reducer';
+import { departmentsAttributeKey } from './reducers/departments.reducer';
+import {employeesAttributeKey} from './reducers/employees.reducer';
+import { userProfileAttributeKey } from './reducers/user-profile.reducer';
 
 const featureSelector = createFeatureSelector(khakiProfileFeatureKey);
 
@@ -13,17 +13,17 @@ const featureSelector = createFeatureSelector(khakiProfileFeatureKey);
 
 export const userProfileSelector = createSelector(
   featureSelector,
-  (state: ProfileFeature) => state[userProfileFeatureKey]
+  (state: ProfileFeature) => state[userProfileAttributeKey]
 );
 
 export const employeesSelector = createSelector(
   featureSelector,
-  (state: ProfileFeature) => state[employeesFeatureKey]
+  (state: ProfileFeature) => state[employeesAttributeKey]
 );
 
 export const departmentsSelector = createSelector(
   featureSelector,
-  (state: ProfileFeature) => state[departmentsFeatureKey]
+  (state: ProfileFeature) => state[departmentsAttributeKey]
 );
 
 

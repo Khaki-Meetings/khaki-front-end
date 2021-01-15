@@ -2,7 +2,7 @@ import {createReducer, on} from '@ngrx/store';
 import {loadUserProfile, loadUserProfileSuccess} from '../actions/user-profile.actions';
 import {UserProfileResponseDto} from '../../services/models/userProfileResponseDto';
 
-export const userProfileFeatureKey = 'userProfile';
+export const userProfileAttributeKey = 'userProfile';
 
 export const initialState: UserProfileResponseDto = {
   firstName: 'firstname',
