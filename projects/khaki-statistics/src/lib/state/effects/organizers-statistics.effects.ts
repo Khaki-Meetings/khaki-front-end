@@ -11,7 +11,7 @@ import {StatisticsFiltersFacadeService} from '../facades/statistics-filters-faca
 import {IntervalEnum} from '../../services/models/interval.enum';
 import {OrganizersTablePageableFacade} from '../organizers-table-pageable/organizers-table-pageable-facade.service';
 import {flatMap} from 'rxjs/internal/operators';
-import {StatisticsFeature} from '../models/statistics-feature';
+import {KhakiStatisticsFeatureSm} from '../models/khaki-statistics-feature-sm';
 import {Store} from '@ngrx/store';
 import {khakiStatisticsFeatureKey} from '../index';
 import {StatisticsFiltersSm} from '../reducers/statistics-filters.reducer';
