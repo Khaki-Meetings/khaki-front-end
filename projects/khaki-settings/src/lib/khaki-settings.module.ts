@@ -43,7 +43,7 @@ import { DepartmentsEffects } from './state/effects/departments.effects';
     FormsModule,
     MatInputModule,
     StoreModule.forFeature(
-      fromKhakiSettings.khakiProfileFeatureKey,
+      fromKhakiSettings.khakiSettingsFeatureKey,
       fromKhakiSettings.reducers,
       {
         metaReducers: fromKhakiSettings.metaReducers

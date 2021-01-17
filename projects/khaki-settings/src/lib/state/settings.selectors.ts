@@ -1,29 +1,25 @@
 import {createFeatureSelector, createSelector} from '@ngrx/store';
-import {khakiProfileFeatureKey} from './index';
-import {ProfileFeature} from './models/profile-feature';
-import { departmentsAttributeKey } from './reducers/departments.reducer';
+import {khakiSettingsFeatureKey} from './index';
+import {KhakiSettingsFeatureSm} from './khaki-settings-feature-sm';
+import {departmentsAttributeKey} from './reducers/departments.reducer';
 import {employeesAttributeKey} from './reducers/employees.reducer';
-import { userProfileAttributeKey } from './reducers/user-profile.reducer';
+import {userProfileAttributeKey} from './reducers/user-profile.reducer';
 
-const featureSelector = createFeatureSelector(khakiProfileFeatureKey);
-
-// export const perDepartmentStatisticsSelector = createSelector(featureSelector, (state: ProfileFeature) => state.perDepartmentStatistics);
-
-// export const timeBlockSummarySelector = createSelector(featureSelector, (state: ProfileFeature) => state[timeBlockSummariesFeatureKey]);
+export const khakiSettingsFeatureSelector = createFeatureSelector(khakiSettingsFeatureKey);
 
 export const userProfileSelector = createSelector(
-  featureSelector,
-  (state: ProfileFeature) => state[userProfileAttributeKey]
+  khakiSettingsFeatureSelector,
+  (state: KhakiSettingsFeatureSm) => state[userProfileAttributeKey]
 );
 
 export const employeesSelector = createSelector(
-  featureSelector,
-  (state: ProfileFeature) => state[employeesAttributeKey]
+  khakiSettingsFeatureSelector,
+  (state: KhakiSettingsFeatureSm) => state[employeesAttributeKey]
 );
 
 export const departmentsSelector = createSelector(
-  featureSelector,
-  (state: ProfileFeature) => state[departmentsAttributeKey]
+  khakiSettingsFeatureSelector,
+  (state: KhakiSettingsFeatureSm) => state[departmentsAttributeKey]
 );
 
 

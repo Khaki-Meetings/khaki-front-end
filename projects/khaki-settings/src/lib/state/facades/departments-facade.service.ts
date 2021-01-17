@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {NotImplementedException} from '../../exceptions/not-implemented-exception';
-import {ProfileFeature} from '../models/profile-feature';
+import {KhakiSettingsFeatureSm} from '../khaki-settings-feature-sm';
 import {Store} from '@ngrx/store';
 import {loadDepartments} from '../actions/departments.actions';
 import {departmentsSelector} from '../settings.selectors';
@@ -13,7 +13,7 @@ import { DepartmentsResponseDto } from '../../services/models/departmentsRespons
 })
 export class DepartmentsFacadeService {
 
-  constructor(private store: Store<ProfileFeature>, private service: SettingsService) {
+  constructor(private store: Store<KhakiSettingsFeatureSm>, private service: SettingsService) {
   }
 
   requestDepartments(): void {
