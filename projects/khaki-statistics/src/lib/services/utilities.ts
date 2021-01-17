@@ -3,7 +3,7 @@ import {Moment} from 'moment';
 import * as momentJs from 'moment';
 import StartOf = moment.unitOfTime.StartOf;
 import { IntervalEnum } from './models/interval.enum';
-import { StatisticsFilterSe } from '../state/models/statistics-filter-se';
+import {StatisticsScopeSe} from '../state/statistics-filters/statistics-scope-se.enum';
 
 const moment = momentJs;
 
@@ -111,8 +111,8 @@ export class Utilities {
 
   }
 
-  static formatMeetingTypeDetail(statisticsFilterSe: StatisticsFilterSe) {
-    if (statisticsFilterSe == StatisticsFilterSe.Internal) {
+  static formatMeetingTypeDetail(statisticsFilterSe: StatisticsScopeSe) {
+    if (statisticsFilterSe == StatisticsScopeSe.Internal) {
       return 'Internal Meetings Only';
     }
     return 'All Meetings';

@@ -5,11 +5,10 @@ import {HistorianService, Logging} from '@natr/historian';
 import {MatPaginator, PageEvent} from '@angular/material/paginator';
 import {OrganizerStatisticsSm} from '../../state/models/organizer-statistics-sm';
 import {IntervalEnum} from '../../services/models/interval.enum';
-import {StatisticsFiltersFacadeService} from '../../state/facades/statistics-filters-facade.service';
-import {StatisticsFiltersSm} from '../../state/reducers/statistics-filters.reducer';
-import {Utilities} from '../../services/utilities';
 import {OrganizersTablePageableFacade} from '../../state/organizers-table-pageable/organizers-table-pageable-facade.service';
 import {BaseIntervalComponent} from '../base-interval.component';
+import {StatisticsFiltersFacade} from '../../state/statistics-filters/statistics-filters-facade';
+import {StatisticsFiltersSm} from '../../state/statistics-filters/statistics-filters-sm';
 
 @Logging
 @Component({
@@ -32,7 +31,7 @@ export class OrganizersTableComponent extends BaseIntervalComponent implements O
 
   constructor(
     private organizersStatisticsFacade: OrganizersStatisticsFacadeService,
-    private statisticsFiltersFacadeService: StatisticsFiltersFacadeService,
+    private statisticsFiltersFacadeService: StatisticsFiltersFacade,
     private organizersTablePageableFacade: OrganizersTablePageableFacade
   ) {
     super();
@@ -57,7 +56,7 @@ export class OrganizersTableComponent extends BaseIntervalComponent implements O
         const timeBlockRange = {start: statsFilter.start, end: statsFilter.end};
 
         this.intervalText = this.formatIntervalTextDetail(IntervalEnum[statsFilter.interval], timeBlockRange);
-        this.meetingTypeText = this.formatMeetingTypeDetail(statsFilter.filter);
+        this.meetingTypeText = this.formatMeetingTypeDetail(statsFilter.statisticsScope);
       });
 
     this.organizersStatisticsFacade.organizersStatisticsLoading().subscribe(loading => this.loading = loading);

@@ -1,4 +1,4 @@
 export enum StatisticsScopeSe {
-  Internal,
-  External
+  Internal = 'Internal',
+  External = 'External'
 }

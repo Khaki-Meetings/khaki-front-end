@@ -61,7 +61,7 @@ export class StatisticsService {
     const count = statisticsQueryParams.count ? statisticsQueryParams.count.toString() : '5';
     params = params.set('page', page);
     params = params.set('count', count);
-    params = params.set('filter', statisticsQueryParams.filter.toString());
+    params = params.set('filter', statisticsQueryParams.statisticsScope.toString());
     this.logger.debug('organizers params', params);
     this.logger.debug('organizers params.keys', params.keys());
     const url = this.getStartEndUrl(interval, 'organizers');
@@ -83,7 +83,7 @@ export class StatisticsService {
 
   getTrailingStatistics(interval: IntervalEnum, statisticsQueryParams: StatisticsQueryParameters): Observable<TrailingStatisticsSm> {
     let params = new HttpParams();
-    params = params.set('filter', statisticsQueryParams.filter.toString());
+    params = params.set('filter', statisticsQueryParams.statisticsScope.toString());
     const intervalCount = 12;
     const startEnd = this.getCalendarStartEnd(interval);
     const formattedStart = startEnd.start.utc().format();
@@ -108,7 +108,7 @@ export class StatisticsService {
 
   getDepartmentStatistics(interval: IntervalEnum, statisticsQueryParams: StatisticsQueryParameters): Observable<DepartmentsStatisticsSm> {
     let params = new HttpParams();
-    params = params.set('filter', statisticsQueryParams.filter.toString());
+    params = params.set('filter', statisticsQueryParams.statisticsScope.toString());
     return this.httpClient
       .get(this.getStartEndUrl(interval, 'department'), {params})
       .pipe(
@@ -125,7 +125,7 @@ export class StatisticsService {
 
   getTimeBlockSummary(interval: IntervalEnum, statisticsQueryParams: StatisticsQueryParameters): Observable<TimeBlockSummarySm> {
     let params = new HttpParams();
-    params = params.set('filter', statisticsQueryParams.filter.toString());
+    params = params.set('filter', statisticsQueryParams.statisticsScope.toString());
     return this.httpClient
       .get(this.getStartEndUrl(interval, 'summary'), {params})
       .pipe(

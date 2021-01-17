@@ -5,9 +5,11 @@ import {HistorianService, Logging} from '@natr/historian';
 import {CurrentTimeIntervalFacadeService} from '../../state/facades/current-time-interval-facade.service';
 import {IntervalSe} from '../../state/models/interval-se';
 import {BaseIntervalComponent} from '../base-interval.component';
-import * as momentJs from 'moment';
+import * as moment from 'moment';
 import {Moment} from 'moment';
 import StartOf = moment.unitOfTime.StartOf;
+
+const momentJs = moment;
 
 @Logging
 @Component({
@@ -32,6 +34,7 @@ export class TimeIntervalFormComponent extends BaseIntervalComponent implements 
     this.currentTimeIntervalFacade.setCurrentTimeInterval(IntervalSe[this.defaultTimeInterval]);
   }
 
+  // noinspection JSMethodCanBeStatic
   private calculateTimeBlock(interval: IntervalSe, subtractIntervals: number = 0): { start: Moment, end: Moment } {
     const now = momentJs();
     let timeBlock: StartOf;

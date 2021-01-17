@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {StatisticsFilterSe} from '../../state/models/statistics-filter-se';
-import {StatisticsFiltersFacadeService} from '../../state/facades/statistics-filters-facade.service';
 import {FormControl, FormGroup} from '@angular/forms';
 import {HistorianService, Logging} from '@natr/historian';
 import {BaseIntervalComponent} from '../base-interval.component';
+import {StatisticsFiltersFacade} from '../../state/statistics-filters/statistics-filters-facade';
+import {StatisticsScopeSe} from '../../state/statistics-filters/statistics-scope-se.enum';
 
 @Logging
 @Component({
@@ -12,7 +12,7 @@ import {BaseIntervalComponent} from '../base-interval.component';
   styleUrls: ['./external-internal-selector.component.scss']
 })
 export class ExternalInternalSelectorComponent extends BaseIntervalComponent implements OnInit {
-  constructor(private statisticsFiltersFacade: StatisticsFiltersFacadeService) {
+  constructor(private statisticsFiltersFacade: StatisticsFiltersFacade) {
     super();
   }
 
@@ -21,15 +21,15 @@ export class ExternalInternalSelectorComponent extends BaseIntervalComponent imp
   form: FormGroup;
   filterControl: FormControl;
   meetingTypeOptions =
-    [{ value: StatisticsFilterSe.Internal,
-       text: this.formatMeetingTypeDetail(StatisticsFilterSe.Internal) },
-     { value: StatisticsFilterSe.External,
-       text: this.formatMeetingTypeDetail(StatisticsFilterSe.External)
+    [{ value: StatisticsScopeSe.Internal,
+       text: this.formatMeetingTypeDetail(StatisticsScopeSe.Internal) },
+     { value: StatisticsScopeSe.External,
+       text: this.formatMeetingTypeDetail(StatisticsScopeSe.External)
      }];
 
   private filterControlValueChange = (filterString) => {
     this.logger.debug('value changed', filterString);
-    this.statisticsFiltersFacade.setStatisticsFilter(StatisticsFilterSe[filterString]);
+    this.statisticsFiltersFacade.setStatisticsFilter(StatisticsScopeSe[filterString]);
   }
 
   ngOnInit(): void {

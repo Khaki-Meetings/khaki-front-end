@@ -4,8 +4,8 @@ import {KhakiStatisticsFeatureSm} from './models/khaki-statistics-feature-sm';
 import {timeBlockSummariesFeatureKey} from './reducers/time-block-summary.reducer';
 import {organizersStatisticsFeatureKey} from './reducers/organizers-statistics.reducer';
 import {trailingStatisticsFeatureKey} from './reducers/trailing-statistics.reducer';
-import {statisticsFiltersFeatureKey} from './reducers/statistics-filters.reducer';
 import {perDepartmentStatisticsFeatureKey} from './reducers/per-department-statistics.reducer';
+import {statisticsFiltersAttributeKey} from './statistics-filters/statistics-filters.reducer';
 
 export const khakiStatisticsFeatureSelector = createFeatureSelector(khakiStatisticsFeatureKey);
 
@@ -31,12 +31,12 @@ export const trailingStatisticsSelector = createSelector(
 
 export const currentTimeIntervalSelector = createSelector(
   khakiStatisticsFeatureSelector,
-  (state: KhakiStatisticsFeatureSm) => state[statisticsFiltersFeatureKey].interval
+  (state: KhakiStatisticsFeatureSm) => state[statisticsFiltersAttributeKey].interval
 );
 
 export const statisticsFilterSelector = createSelector(
   khakiStatisticsFeatureSelector,
-  (state: KhakiStatisticsFeatureSm) => state[statisticsFiltersFeatureKey].filter
+  (state: KhakiStatisticsFeatureSm) => state[statisticsFiltersAttributeKey].statisticsScope
 );
 
 export const trailingSStatisticsLoadingSelector = createSelector(

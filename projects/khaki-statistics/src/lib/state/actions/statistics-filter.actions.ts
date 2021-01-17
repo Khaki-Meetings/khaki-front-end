@@ -1,9 +1,9 @@
 import {createAction, props} from '@ngrx/store';
-import {StatisticsFilterSe} from '../models/statistics-filter-se';
 import {PageableActionProps} from '../models/action-props/pageable-action-props';
+import {StatisticsScopeSe} from '../statistics-filters/statistics-scope-se.enum';
 
 export interface SetStatisticsFilterActionProp {
-  filter: StatisticsFilterSe;
+  filter: StatisticsScopeSe;
 }
 
 export const setStatisticsFilterAction = createAction(

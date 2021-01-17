@@ -8,7 +8,6 @@ import {TimeBasedStatSummaryComponent} from './components/time-based-stat-summar
 import {NgxChartsLegendCustomComponent} from './components/ngx-charts-legend-custom/ngx-charts-legend-custom.component';
 import {LegendEntryCustomComponent} from './components/legend-entry-custom/legend-entry-custom.component';
 import {StoreModule} from '@ngrx/store';
-import * as fromKhakiStatistics from './state';
 import {EffectsModule} from '@ngrx/effects';
 import {TimeBlockSummaryEffects} from './state/effects/time-block-summary.effects';
 import {OrganizersStatisticsEffects} from './state/effects/organizers-statistics.effects';
@@ -29,6 +28,7 @@ import {StatisticsFiltersChangeEffects} from './state/effects/statistics-filters
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {ExternalInternalSelectorComponent} from './components/external-internal-selector/external-internal-selector.component';
 import { OrganizersTablePageableEffects } from './state/organizers-table-pageable/organizers-table-pageable.effects';
+import {khakiStatisticsFeatureKey, khakiStatisticsMetaReducers, khakiStatisticsReducers} from './state';
 
 
 @NgModule({
@@ -48,10 +48,10 @@ import { OrganizersTablePageableEffects } from './state/organizers-table-pageabl
         KhakiStatisticsRoutingModule,
         CommonModule,
         StoreModule.forFeature(
-            fromKhakiStatistics.khakiStatisticsFeatureKey,
-            fromKhakiStatistics.reducers,
+            khakiStatisticsFeatureKey,
+            khakiStatisticsReducers,
             {
-                metaReducers: fromKhakiStatistics.metaReducers
+                metaReducers: khakiStatisticsMetaReducers
             }
         ),
         EffectsModule.forFeature(

@@ -7,12 +7,12 @@ import {loadTimeBlockSummaryFailure} from '../actions/time-block-summaries.actio
 import {ErrorSm} from '../models/error-sm';
 import {of} from 'rxjs';
 import {HistorianService, Logging} from '@natr/historian';
-import {StatisticsFiltersFacadeService} from '../facades/statistics-filters-facade.service';
-import {IntervalEnum} from '../../services/models/interval.enum';
 import {OrganizersTablePageableFacade} from '../organizers-table-pageable/organizers-table-pageable-facade.service';
-import {StatisticsFiltersSm} from '../reducers/statistics-filters.reducer';
 import {TypedAction} from '@ngrx/store/src/models';
 import {OrganizersTablePageableSm} from '../organizers-table-pageable/organizers-table-pageable.reducer';
+import {StatisticsFiltersSm} from '../statistics-filters/statistics-filters-sm';
+import {StatisticsFiltersFacade} from '../statistics-filters/statistics-filters-facade';
+import {IntervalEnum} from '../../services/models/interval.enum';
 
 @Logging
 @Injectable()
@@ -35,7 +35,7 @@ export class OrganizersStatisticsEffects {
             .getOrganizersStatistics(
               IntervalEnum[joined[1].interval],
               {
-                filter: joined[1].filter,
+                statisticsScope: joined[1].statisticsScope,
                 page: joined[2].page,
                 count: joined[2].count
               }
@@ -54,7 +54,7 @@ export class OrganizersStatisticsEffects {
   constructor(
     private actions$: Actions,
     private statisticsService: StatisticsService,
-    private statisticsFiltersFacade: StatisticsFiltersFacadeService,
+    private statisticsFiltersFacade: StatisticsFiltersFacade,
     private organizersTablePageableFacade: OrganizersTablePageableFacade
   ) {
   }

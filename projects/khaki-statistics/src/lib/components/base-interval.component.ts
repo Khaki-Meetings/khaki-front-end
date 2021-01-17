@@ -1,8 +1,10 @@
 import {Logging} from '@natr/historian';
-import {StatisticsFilterSe} from '../state/models/statistics-filter-se';
 import {IntervalEnum} from '../services/models/interval.enum';
 import * as momentJs from 'moment';
 import {Moment} from 'moment';
+import {StatisticsScopeSe} from '../state/statistics-filters/statistics-scope-se.enum';
+
+const moment = momentJs;
 
 @Logging
 export class BaseIntervalComponent {
@@ -19,13 +21,13 @@ export class BaseIntervalComponent {
 
   protected formatIntervalTextDetail(interval: IntervalEnum, timeblockRange: { start: Moment, end: Moment } ): string {
     const intervalLabel = (interval === IntervalEnum.Month) ? 'Month' : '7 days';
-    const startDate = momentJs(timeblockRange.start).format('ddd, MMM D');
-    const endDate = this.setDisplayEnd(momentJs(timeblockRange.end)).format('ddd, MMM D');
+    const startDate = moment(timeblockRange.start).format('ddd, MMM D');
+    const endDate = this.setDisplayEnd(moment(timeblockRange.end)).format('ddd, MMM D');
 
     return 'Last ' + intervalLabel + ' (' + startDate + ' - ' + endDate + ')';
   }
 
-  protected formatMeetingTypeDetail(statisticsFilterSe: StatisticsFilterSe): string {
-    return (statisticsFilterSe === StatisticsFilterSe.Internal) ? 'Internal Meetings Only' : 'All Meetings';
+  protected formatMeetingTypeDetail(statisticsFilterSe: StatisticsScopeSe): string {
+    return (statisticsFilterSe === StatisticsScopeSe.Internal) ? 'Internal Meetings Only' : 'All Meetings';
   }
 }

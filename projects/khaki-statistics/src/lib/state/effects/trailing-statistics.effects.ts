@@ -5,8 +5,8 @@ import {ErrorSm} from '../models/error-sm';
 import {of} from 'rxjs';
 import {StatisticsService} from '../../services/statistics.service';
 import {loadTrailingStatistics, loadTrailingStatisticsFailure, loadTrailingStatisticsSuccess} from '../actions/trailing-statistics.actions';
-import {StatisticsFiltersFacadeService} from '../facades/statistics-filters-facade.service';
 import {IntervalEnum} from '../../services/models/interval.enum';
+import {StatisticsFiltersFacade} from '../statistics-filters/statistics-filters-facade';
 
 
 @Injectable()
@@ -31,7 +31,7 @@ export class TrailingStatisticsEffects {
   constructor(
     private actions$: Actions,
     private statisticsService: StatisticsService,
-    private statisticsFiltersFacade: StatisticsFiltersFacadeService
+    private statisticsFiltersFacade: StatisticsFiltersFacade
   ) {
   }
 

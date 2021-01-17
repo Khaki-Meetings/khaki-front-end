@@ -5,6 +5,6 @@ import {Moment} from 'moment';
 export interface StatisticsFiltersSm {
   statisticsScope: StatisticsScopeSe;
   interval: IntervalSe;
-  start: Moment;
-  end: Moment;
+  start?: Moment;
+  end?: Moment;
 }

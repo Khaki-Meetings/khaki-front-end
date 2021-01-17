@@ -5,8 +5,8 @@ import {ColorHelper} from '@swimlane/ngx-charts';
 import {HistorianService, Logging} from '@natr/historian';
 import {Utilities} from '../../services/utilities';
 import {IntervalEnum} from '../../services/models/interval.enum';
-import {StatisticsFiltersFacadeService} from '../../state/facades/statistics-filters-facade.service';
-import { StatisticsFiltersSm } from '../../state/reducers/statistics-filters.reducer';
+import {StatisticsFiltersFacade} from '../../state/statistics-filters/statistics-filters-facade';
+import {StatisticsFiltersSm} from '../../state/statistics-filters/statistics-filters-sm';
 
 interface GraphData {
   name: string;
@@ -48,7 +48,7 @@ export class PerDepartmentGraphComponent implements OnInit {
   loading = false;
 
   constructor(private perDepartmentStatisticsFacade: PerDepartmentStatisticsFacadeService,
-    private statisticsFiltersFacadeService: StatisticsFiltersFacadeService) {
+              private statisticsFiltersFacadeService: StatisticsFiltersFacade) {
   }
 
   ngOnInit(): void {
@@ -84,16 +84,16 @@ export class PerDepartmentGraphComponent implements OnInit {
           this.colors = new ColorHelper(this.colorScheme, 'ordinal', this.legendData, null);
         });
 
-        this.statisticsFiltersFacadeService.statisticsFilters()
-          .subscribe((data) => {
-            let statsFilter = data as StatisticsFiltersSm;
-            let timeBlockRange = { start : statsFilter.start, end : statsFilter.end };
-            this.intervalText =
-              Utilities.formatIntervalTextDetail(IntervalEnum[statsFilter.interval], timeBlockRange);
-            this.meetingTypeText = Utilities.formatMeetingTypeDetail(statsFilter.filter);
-          });
+    this.statisticsFiltersFacadeService.statisticsFilters()
+      .subscribe((data) => {
+        const statsFilter = data as StatisticsFiltersSm;
+        const timeBlockRange = {start: statsFilter.start, end: statsFilter.end};
+        this.intervalText =
+          Utilities.formatIntervalTextDetail(IntervalEnum[statsFilter.interval], timeBlockRange);
+        this.meetingTypeText = Utilities.formatMeetingTypeDetail(statsFilter.statisticsScope);
+      });
 
-        this.perDepartmentStatisticsFacade.perDepartmentStatisticsLoading().subscribe(loading => this.loading = loading);
+    this.perDepartmentStatisticsFacade.perDepartmentStatisticsLoading().subscribe(loading => this.loading = loading);
   }
 
   private createGraphData(): void {
