@@ -4,12 +4,10 @@ import {IntervalEnum} from '../../services/models/interval.enum';
 import {HistorianService, Logging} from '@natr/historian';
 import {CurrentTimeIntervalFacadeService} from '../../state/facades/current-time-interval-facade.service';
 import {IntervalSe} from '../../state/models/interval-se';
-import * as moment_ from 'moment';
+import {BaseIntervalComponent} from '../base-interval.component';
+import * as momentJs from 'moment';
 import {Moment} from 'moment';
-import {StatisticsFiltersFacadeService} from '../../state/facades/statistics-filters-facade.service';
-import {Utilities} from '../../services/utilities';
-
-const moment = moment_;
+import StartOf = moment.unitOfTime.StartOf;
 
 @Logging
 @Component({
@@ -17,7 +15,7 @@ const moment = moment_;
   templateUrl: './time-interval-form.component.html',
   styleUrls: ['./time-interval-form.component.scss']
 })
-export class TimeIntervalFormComponent implements OnInit {
+export class TimeIntervalFormComponent extends BaseIntervalComponent implements OnInit {
   logger: HistorianService;
   timeIntervals = [];
   form: FormGroup;
@@ -26,6 +24,7 @@ export class TimeIntervalFormComponent implements OnInit {
   private defaultTimeInterval = IntervalEnum.Week;
 
   constructor(private currentTimeIntervalFacade: CurrentTimeIntervalFacadeService) {
+    super();
   }
 
   ngOnInit(): void {
@@ -33,23 +32,47 @@ export class TimeIntervalFormComponent implements OnInit {
     this.currentTimeIntervalFacade.setCurrentTimeInterval(IntervalSe[this.defaultTimeInterval]);
   }
 
-  private buildForm(): void {
+  private calculateTimeBlock(interval: IntervalSe, subtractIntervals: number = 0): { start: Moment, end: Moment } {
+    const now = momentJs();
+    let timeBlock: StartOf;
 
-    const weekTimeBlockRange = Utilities.calculateTimeBlock(IntervalSe.Week, 1);
-    const monthTimeBlockRange = Utilities.calculateTimeBlock(IntervalSe.Month, 1);
+    switch (interval) {
+      case IntervalSe.Day:
+        timeBlock = 'day';
+        break;
+      case IntervalSe.Week:
+        timeBlock = 'week';
+        break;
+      case IntervalSe.Month:
+        timeBlock = 'month';
+        break;
+      case IntervalSe.Year:
+        timeBlock = 'year';
+        break;
+    }
+
+    return {
+      start: now.clone().utc().startOf('day').subtract(subtractIntervals, timeBlock),
+      end: now.clone().utc().startOf('day')
+    };
+  }
+
+  private buildForm(): void {
+    const weekTimeBlockRange = this.calculateTimeBlock(IntervalSe.Week, 1);
+    const monthTimeBlockRange = this.calculateTimeBlock(IntervalSe.Month, 1);
 
     this.timeIntervals.push({
       value: IntervalEnum.Week,
-      text: Utilities.formatIntervalTextDetail(IntervalEnum.Week,
-         weekTimeBlockRange )
+      text: this.formatIntervalTextDetail(IntervalEnum.Week, weekTimeBlockRange )
     });
+
     this.timeIntervals.push({
       value: IntervalEnum.Month,
-      text: Utilities.formatIntervalTextDetail(IntervalEnum.Month,
-         monthTimeBlockRange)
+      text: this.formatIntervalTextDetail(IntervalEnum.Month, monthTimeBlockRange)
     });
 
     this.timeIntervalControl = new FormControl();
+
     this.form = new FormGroup({
       timeInterval: this.timeIntervalControl
     });

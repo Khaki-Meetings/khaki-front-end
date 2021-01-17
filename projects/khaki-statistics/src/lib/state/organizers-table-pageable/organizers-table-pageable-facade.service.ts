@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {StatisticsFeature} from '../models/statistics-feature';
+import {KhakiStatisticsFeatureSm} from '../models/khaki-statistics-feature-sm';
 import {Store} from '@ngrx/store';
 import {setOrganizersTablePageablesAction} from './organizers-table-pageable.actions';
 import {Observable} from 'rxjs';
@@ -9,7 +9,7 @@ import {selectOrganizersTablePageableState} from './organizers-table-pageable.se
 @Injectable({providedIn: 'root'})
 export class OrganizersTablePageableFacade {
 
-  constructor(private store: Store<StatisticsFeature>) {
+  constructor(private store: Store<KhakiStatisticsFeatureSm>) {
   }
 
   public setPageable(page: number, count: number): void {

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {StatisticsFeature} from '../models/statistics-feature';
+import {KhakiStatisticsFeatureSm} from '../models/khaki-statistics-feature-sm';
 import {select, Store} from '@ngrx/store';
 import {setStatisticsFiltersAction} from '../actions/set-statistics-filter.actions';
 import {Observable} from 'rxjs';
@@ -15,7 +15,7 @@ import {HistorianService, Logging} from '@natr/historian';
 export class StatisticsFiltersFacadeService {
   private logger: HistorianService;
 
-  constructor(private store: Store<StatisticsFeature>) {
+  constructor(private store: Store<KhakiStatisticsFeatureSm>) {
   }
 
   public setStatisticsFilters(filter: StatisticsFiltersSm): void {

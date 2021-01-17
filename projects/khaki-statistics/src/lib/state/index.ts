@@ -4,7 +4,7 @@ import {perDepartmentStatisticsFeatureKey, perDepartmentStatisticsReducer} from 
 import {timeBlockSummariesFeatureKey, timeBlockSummaryReducer} from './reducers/time-block-summary.reducer';
 import {trailingStatisticsFeatureKey, trailingStatisticsReducer} from './reducers/trailing-statistics.reducer';
 import {spinnerFeatureKey, spinnerReducer} from './reducers/spinner.reducer';
-import {StatisticsFeature} from './models/statistics-feature';
+import {KhakiStatisticsFeatureSm} from './models/khaki-statistics-feature-sm';
 import {setStatisticsFilterReducer, statisticsFiltersFeatureKey} from './reducers/statistics-filters.reducer';
 import {
   organizersTablePageableFeatureKey,
@@ -13,7 +13,7 @@ import {
 
 export const khakiStatisticsFeatureKey = 'khakiStatistics';
 
-export const reducers: ActionReducerMap<StatisticsFeature> = {
+export const reducers: ActionReducerMap<KhakiStatisticsFeatureSm> = {
   [organizersTablePageableFeatureKey]: organizersTablePageableReducer,
   [organizersStatisticsFeatureKey]: organizersStatisticsReducer,
   [perDepartmentStatisticsFeatureKey]: perDepartmentStatisticsReducer,
@@ -24,4 +24,4 @@ export const reducers: ActionReducerMap<StatisticsFeature> = {
 };
 
 
-export const metaReducers: MetaReducer<StatisticsFeature>[] = [];
+export const metaReducers: MetaReducer<KhakiStatisticsFeatureSm>[] = [];

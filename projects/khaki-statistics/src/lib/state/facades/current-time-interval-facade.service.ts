@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {StatisticsFeature} from '../models/statistics-feature';
+import {KhakiStatisticsFeatureSm} from '../models/khaki-statistics-feature-sm';
 import {select, Store} from '@ngrx/store';
 import {setCurrentTimeIntervalAction} from '../actions/current-time-interval.actions';
 import {Observable} from 'rxjs';
@@ -12,7 +12,7 @@ import {IntervalSe} from '../models/interval-se';
 export class CurrentTimeIntervalFacadeService {
   private logger: HistorianService;
 
-  constructor(private store: Store<StatisticsFeature>) {
+  constructor(private store: Store<KhakiStatisticsFeatureSm>) {
   }
 
   setCurrentTimeInterval(interval: IntervalSe): void {
