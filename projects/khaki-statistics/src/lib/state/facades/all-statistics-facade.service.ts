@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {StatisticsFeature} from '../models/statistics-feature';
+import {KhakiStatisticsFeatureSm} from '../models/khaki-statistics-feature-sm';
 import {Store} from '@ngrx/store';
 import {loadOrganizersStatisticsAction} from '../actions/organizers-statistics.actions';
 import {loadTimeBlockSummary} from '../actions/time-block-summaries.actions';
@@ -12,7 +12,7 @@ import {HistorianService, Logging} from '@natr/historian';
 export class AllStatisticsFacadeService {
   private logger: HistorianService;
 
-  constructor(private store: Store<StatisticsFeature>) {
+  constructor(private store: Store<KhakiStatisticsFeatureSm>) {
   }
 
   requestAllStatistics(): void {

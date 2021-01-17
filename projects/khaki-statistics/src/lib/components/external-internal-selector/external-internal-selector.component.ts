@@ -3,7 +3,7 @@ import {StatisticsFilterSe} from '../../state/models/statistics-filter-se';
 import {StatisticsFiltersFacadeService} from '../../state/facades/statistics-filters-facade.service';
 import {FormControl, FormGroup} from '@angular/forms';
 import {HistorianService, Logging} from '@natr/historian';
-import { Utilities } from '../../services/utilities';
+import {BaseIntervalComponent} from '../base-interval.component';
 
 @Logging
 @Component({
@@ -11,27 +11,26 @@ import { Utilities } from '../../services/utilities';
   templateUrl: './external-internal-selector.component.html',
   styleUrls: ['./external-internal-selector.component.scss']
 })
-export class ExternalInternalSelectorComponent implements OnInit {
-
+export class ExternalInternalSelectorComponent extends BaseIntervalComponent implements OnInit {
   constructor(private statisticsFiltersFacade: StatisticsFiltersFacadeService) {
+    super();
   }
 
   private logger: HistorianService;
 
-  values = Object.values(StatisticsFilterSe);
   form: FormGroup;
   filterControl: FormControl;
   meetingTypeOptions =
     [{ value: StatisticsFilterSe.Internal,
-       text: Utilities.formatMeetingTypeDetail(StatisticsFilterSe.Internal) },
+       text: this.formatMeetingTypeDetail(StatisticsFilterSe.Internal) },
      { value: StatisticsFilterSe.External,
-       text: Utilities.formatMeetingTypeDetail(StatisticsFilterSe.External)
+       text: this.formatMeetingTypeDetail(StatisticsFilterSe.External)
      }];
 
   private filterControlValueChange = (filterString) => {
     this.logger.debug('value changed', filterString);
     this.statisticsFiltersFacade.setStatisticsFilter(StatisticsFilterSe[filterString]);
-  };
+  }
 
   ngOnInit(): void {
     this.filterControl = new FormControl();
@@ -43,5 +42,4 @@ export class ExternalInternalSelectorComponent implements OnInit {
     this.filterControl.valueChanges.subscribe(this.filterControlValueChange);
     this.statisticsFiltersFacade.currentStatisticsFilter().subscribe(filter => this.filterControl.setValue(filter));
   }
-
 }

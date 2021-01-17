@@ -11,7 +11,7 @@ import {SpinnerSm} from './spinner-sm';
 import {statisticsFiltersFeatureKey, StatisticsFiltersSm} from '../reducers/statistics-filters.reducer';
 import {organizersTablePageableFeatureKey, OrganizersTablePageableSm} from '../organizers-table-pageable/organizers-table-pageable.reducer';
 
-export interface StatisticsFeature {
+export interface KhakiStatisticsFeatureSm {
   [organizersStatisticsFeatureKey]: OrganizersStatisticsSm;
   [perDepartmentStatisticsFeatureKey]: DepartmentsStatisticsSm;
   [timeBlockSummariesFeatureKey]: TimeBlockSummarySm;
