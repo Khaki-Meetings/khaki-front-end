@@ -84,7 +84,7 @@ export class PerDepartmentGraphComponent implements OnInit {
           this.colors = new ColorHelper(this.colorScheme, 'ordinal', this.legendData, null);
         });
 
-    this.statisticsFiltersFacadeService.statisticsFilters()
+    this.statisticsFiltersFacadeService.selectStatisticsFilters()
       .subscribe((data) => {
         const statsFilter = data as StatisticsFiltersSm;
         const timeBlockRange = {start: statsFilter.start, end: statsFilter.end};

@@ -15,7 +15,7 @@ export class PerDepartmentStatisticsEffects {
   perDepartmentStatisticsEffect$ = createEffect(
     () => this.actions$.pipe(
       ofType(loadPerDepartmentStatistics),
-      mergeMap(() => this.statisticsFiltersFacade.statisticsFilters()),
+      mergeMap(() => this.statisticsFiltersFacade.selectStatisticsFilters()),
       switchMap(
         (action) => this.statisticsService.getDepartmentStatistics(IntervalEnum[action.interval], {statisticsScope: action.statisticsScope})
           .pipe(

@@ -17,7 +17,7 @@ export class TimeBlockSummaryEffects {
   timeBlockSummaryEffect$ = createEffect(
     () => this.actions$.pipe(
       ofType(loadTimeBlockSummary),
-      switchMap(() => this.statisticsFiltersFacade.statisticsFilters()),
+      switchMap(() => this.statisticsFiltersFacade.selectStatisticsFilters()),
       tap(ting => {
         this.logger.debug('thing', ting);
       }),

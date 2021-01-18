@@ -50,7 +50,7 @@ export class OrganizersTableComponent extends BaseIntervalComponent implements O
         }
       });
 
-    this.statisticsFiltersFacadeService.statisticsFilters()
+    this.statisticsFiltersFacadeService.selectStatisticsFilters()
       .subscribe((data) => {
         const statsFilter = data as StatisticsFiltersSm;
         const timeBlockRange = {start: statsFilter.start, end: statsFilter.end};

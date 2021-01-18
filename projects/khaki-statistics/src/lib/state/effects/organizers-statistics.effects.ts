@@ -24,7 +24,7 @@ export class OrganizersStatisticsEffects {
     () => this.actions$.pipe(
       ofType(loadOrganizersStatisticsAction),
       withLatestFrom(
-        this.statisticsFiltersFacade.statisticsFilters(),
+        this.statisticsFiltersFacade.selectStatisticsFilters(),
         this.organizersTablePageableFacade.pageable()
       ),
       tap((thing) => this.logger.debug('thing', thing)),

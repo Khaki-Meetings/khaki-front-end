@@ -29,7 +29,7 @@ export class ExternalInternalSelectorComponent extends BaseIntervalComponent imp
 
   private filterControlValueChange = (filterString) => {
     this.logger.debug('value changed', filterString);
-    this.statisticsFiltersFacade.setStatisticsFilter(StatisticsScopeSe[filterString]);
+    this.statisticsFiltersFacade.dispatchSetStatisticsScope(StatisticsScopeSe[filterString]);
   }
 
   ngOnInit(): void {
@@ -40,6 +40,6 @@ export class ExternalInternalSelectorComponent extends BaseIntervalComponent imp
       }
     );
     this.filterControl.valueChanges.subscribe(this.filterControlValueChange);
-    this.statisticsFiltersFacade.currentStatisticsFilter().subscribe(filter => this.filterControl.setValue(filter));
+    this.statisticsFiltersFacade.selectCurrentStatisticsScope().subscribe(filter => this.filterControl.setValue(filter));
   }
 }

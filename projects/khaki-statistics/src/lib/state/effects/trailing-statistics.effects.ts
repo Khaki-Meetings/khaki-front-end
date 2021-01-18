@@ -15,7 +15,7 @@ export class TrailingStatisticsEffects {
   trailingStatisticsEffect$ = createEffect(
     () => this.actions$.pipe(
       ofType(loadTrailingStatistics),
-      mergeMap(() => this.statisticsFiltersFacade.statisticsFilters()),
+      mergeMap(() => this.statisticsFiltersFacade.selectStatisticsFilters()),
       switchMap(
         (action) => this.statisticsService.getTrailingStatistics(IntervalEnum[action.interval], {...action})
           .pipe(
