@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {StatisticsFiltersFacade} from '../../state/statistics-filters/statistics-filters-facade.service';
+import {StatisticsFiltersFacade} from '../../state/statistics-filters/statistics-filters-facade';
 
 @Component({
   selector: 'lib-settings-employee',
