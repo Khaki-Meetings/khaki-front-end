@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {StatisticsFiltersFacade} from '../../state/statistics-filters/statistics-filters-facade.service';
 
 @Component({
   selector: 'lib-settings-employee',
@@ -7,9 +8,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./settings-employee.component.scss']
 })
 export class SettingsEmployeeComponent implements OnInit {
-  constructor(private router: Router) { }
+  interval;
+  statisticsScope;
+
+  constructor(private router: Router, private statisticsFiltersFacade: StatisticsFiltersFacade) {
+  }
 
   ngOnInit(): void {
+
   }
 
   goBack(): void {

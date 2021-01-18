@@ -1,25 +1,5 @@
 <div class="container">
-<!--  <div>-->
-<!--      <div class="add_emp" (click)="addEmployee()">-->
-<!--        <mat-icon>add_circle_outline</mat-icon>-->
-<!--        <span class="caption">Add list of employees</span>-->
-<!--      </div>-->
-<!--  </div>-->
-
-<!--    <div>-->
-<!--        <div>Department:-->
-<!--            <select>-->
-<!--                <option>all</option>-->
-<!--                <option>Development</option>-->
-<!--                <option>Agent</option>-->
-<!--                <option>Representative</option>-->
-<!--                <option>Designer</option>-->
-<!--                <option>Accountant</option>-->
-<!--                <option>AssistantDirector</option>-->
-<!--            </select>-->
-<!--        </div>-->
-<!--    </div>-->
-
+  <div>Interval: {{interval}}, Scope: {{statisticsScope}}</div>
     <table>
         <tr *ngFor="let employee of getEmployees()" >
             <td>

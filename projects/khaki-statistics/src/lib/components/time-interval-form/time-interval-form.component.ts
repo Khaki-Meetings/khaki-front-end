@@ -31,7 +31,7 @@ export class TimeIntervalFormComponent extends BaseIntervalComponent implements 
 
   ngOnInit(): void {
     this.buildForm();
-    this.currentTimeIntervalFacade.setCurrentTimeInterval(IntervalSe[this.defaultTimeInterval]);
+    // this.currentTimeIntervalFacade.setCurrentTimeInterval(IntervalSe[this.defaultTimeInterval]);
   }
 
   // noinspection JSMethodCanBeStatic

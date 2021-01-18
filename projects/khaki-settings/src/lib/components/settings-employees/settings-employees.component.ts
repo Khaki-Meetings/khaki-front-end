@@ -5,6 +5,7 @@ import {EmployeesFacadeService} from '../../state/facades/employees-facade.servi
 import {EmployeeDto} from '../../services/models/employeesResponseDto';
 import {HistorianService, Logging} from '@natr/historian';
 import {SettingsService} from '../../services/settings.service';
+import {StatisticsFiltersFacade} from '../../state/statistics-filters/statistics-filters-facade.service';
 
 export interface DialogData {
   data: string;
@@ -16,15 +17,21 @@ export interface DialogData {
   styleUrls: ['./settings-employees.component.scss']
 })
 export class SettingsEmployeesComponent implements OnInit {
+  interval;
+  statisticsScope;
 
   employees: EmployeeDto[] = [];
 
   pos = 0;
   maxShow = 6;
 
-  constructor(private router: Router, public dialog: MatDialog,
-              private facadeService: EmployeesFacadeService,
-              private settingsService: SettingsService) {
+  constructor(
+    private router: Router,
+    public dialog: MatDialog,
+    private facadeService: EmployeesFacadeService,
+    private statisticsFiltersFacade: StatisticsFiltersFacade,
+    private settingsService: SettingsService
+  ) {
   }
 
   ngOnInit(): void {
@@ -35,6 +42,15 @@ export class SettingsEmployeesComponent implements OnInit {
       .subscribe(data => {
         this.employees = data['content'] as EmployeeDto[];
       });
+
+    this.statisticsFiltersFacade
+      .selectStatisticsFilters()
+      .subscribe(
+        statisticsFilters => {
+          this.interval = statisticsFilters.interval;
+          this.statisticsScope = statisticsFilters.statisticsScope;
+        }
+      );
 
   }
 

@@ -1,6 +1,6 @@
 import {createSelector} from '@ngrx/store';
-import {khakiSettingsFeatureSelector} from '../settings.selectors';
 import {statisticsFiltersAttributeKey} from './statistics-filters.reducer';
+import {khakiSettingsFeatureSelector} from '../settings.selectors';
 
 export const statisticsFiltersSelector = createSelector(
   khakiSettingsFeatureSelector,

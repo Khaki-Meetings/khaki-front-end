@@ -50,7 +50,7 @@ export const statisticsFiltersReducer = createReducer(
     (state, action) => {
       return {
         ...state,
-        filter: action.filter
+        statisticsScope: action.statisticsScope
       };
     }
   ),

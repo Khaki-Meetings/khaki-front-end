@@ -11,7 +11,6 @@ export const initialState: UserProfileResponseDto = {
   email: 'email@abc.com'
 };
 
-
 export const userProfileReducer = createReducer(
   initialState,
   on(loadUserProfile, (state: UserProfileResponseDto, action) => state),

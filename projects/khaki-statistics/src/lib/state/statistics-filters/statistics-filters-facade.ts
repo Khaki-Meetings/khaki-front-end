@@ -39,7 +39,7 @@ export class StatisticsFiltersFacade {
 
   public setStatisticsFilter(filter: StatisticsScopeSe): void {
     this.logger.debug('filter', filter);
-    this.store.dispatch(setStatisticsFilterAction({filter}));
+    this.store.dispatch(setStatisticsFilterAction({statisticsScope: filter}));
   }
 
   public statisticsFilters(): Observable<StatisticsFiltersSm> {
