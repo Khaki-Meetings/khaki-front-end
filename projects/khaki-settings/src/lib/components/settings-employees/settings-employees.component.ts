@@ -5,7 +5,7 @@ import {EmployeesFacadeService} from '../../state/facades/employees-facade.servi
 import {EmployeeDto} from '../../services/models/employeesResponseDto';
 import {HistorianService, Logging} from '@natr/historian';
 import {SettingsService} from '../../services/settings.service';
-import {StatisticsFiltersFacade} from '../../state/statistics-filters/statistics-filters-facade.service';
+import {StatisticsFiltersFacade} from '../../state/statistics-filters/statistics-filters-facade';
 
 export interface DialogData {
   data: string;
