@@ -27,8 +27,10 @@ import {TimeIntervalFormComponent} from './components/time-interval-form/time-in
 import {StatisticsFiltersChangeEffects} from './state/effects/statistics-filters-change.effects';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {ExternalInternalSelectorComponent} from './components/external-internal-selector/external-internal-selector.component';
-import { OrganizersTablePageableEffects } from './state/organizers-table-pageable/organizers-table-pageable.effects';
+import {OrganizersTablePageableEffects} from './state/organizers-table-pageable/organizers-table-pageable.effects';
 import {khakiStatisticsFeatureKey, khakiStatisticsMetaReducers, khakiStatisticsReducers} from './state';
+import {StatisticsFiltersFacade} from './state/statistics-filters/statistics-filters-facade';
+import {HistorianService, Logging} from '@natr/historian';
 
 
 @NgModule({
@@ -43,40 +45,46 @@ import {khakiStatisticsFeatureKey, khakiStatisticsMetaReducers, khakiStatisticsR
     LegendEntryCustomComponent,
     ExternalInternalSelectorComponent
   ],
-    imports: [
-        ReactiveFormsModule,
-        KhakiStatisticsRoutingModule,
-        CommonModule,
-        StoreModule.forFeature(
-            khakiStatisticsFeatureKey,
-            khakiStatisticsReducers,
-            {
-                metaReducers: khakiStatisticsMetaReducers
-            }
-        ),
-        EffectsModule.forFeature(
-            [
-                TimeBlockSummaryEffects,
-                OrganizersStatisticsEffects,
-                TrailingStatisticsEffects,
-                PerDepartmentStatisticsEffects,
-                StatisticsFiltersChangeEffects,
-                OrganizersTablePageableEffects,
-            ]
-        ),
-        MatProgressSpinnerModule,
-        FontAwesomeModule,
-        MatTableModule,
-        MatCheckboxModule,
-        MatButtonModule,
-        NgxChartsModule,
-        MatSelectModule,
-        MatIconModule,
-        MatPaginatorModule
-    ],
+  imports: [
+    ReactiveFormsModule,
+    KhakiStatisticsRoutingModule,
+    CommonModule,
+    StoreModule.forFeature(
+      khakiStatisticsFeatureKey,
+      khakiStatisticsReducers,
+      {
+        metaReducers: khakiStatisticsMetaReducers
+      }
+    ),
+    EffectsModule.forFeature(
+      [
+        TimeBlockSummaryEffects,
+        OrganizersStatisticsEffects,
+        TrailingStatisticsEffects,
+        PerDepartmentStatisticsEffects,
+        StatisticsFiltersChangeEffects,
+        OrganizersTablePageableEffects,
+      ]
+    ),
+    MatProgressSpinnerModule,
+    FontAwesomeModule,
+    MatTableModule,
+    MatCheckboxModule,
+    MatButtonModule,
+    NgxChartsModule,
+    MatSelectModule,
+    MatIconModule,
+    MatPaginatorModule
+  ],
   exports: [KhakiStatisticsComponent],
-  providers: [
-  ]
+  providers: []
 })
+@Logging
 export class KhakiStatisticsModule {
+  private logger: HistorianService;
+
+  constructor(public statisticsFiltersFacade: StatisticsFiltersFacade) {
+    this.logger.debug('statisticsFiltersFacade', statisticsFiltersFacade);
+    // statisticsFiltersFacade.dispatchSetInterval(IntervalSe.Week);
+  }
 }

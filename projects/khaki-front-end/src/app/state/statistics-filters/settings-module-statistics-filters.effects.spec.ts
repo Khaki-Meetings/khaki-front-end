@@ -2,25 +2,25 @@ import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { Observable } from 'rxjs';
 
-import { SettingsStatisticsFiltersEffects } from './settings-statistics-filters.effects';
+import { SettingsModuleStatisticsFiltersEffects } from './settings-module-statistics-filters-effects.service';
 import {hot} from 'jasmine-marbles';
 import {setStatisticsFiltersAction} from 'khaki-settings';
 import {provideMockStore} from '@ngrx/store/testing';
 
 describe('SettingsStatisticsFiltersEffects', () => {
   let actions$: Observable<any>;
-  let effects: SettingsStatisticsFiltersEffects;
+  let effects: SettingsModuleStatisticsFiltersEffects;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        SettingsStatisticsFiltersEffects,
+        SettingsModuleStatisticsFiltersEffects,
         provideMockActions(() => actions$),
         provideMockStore({initialState: {}})
       ]
     });
 
-    effects = TestBed.inject(SettingsStatisticsFiltersEffects);
+    effects = TestBed.inject(SettingsModuleStatisticsFiltersEffects);
   });
 
   it('should be created', () => {
@@ -33,6 +33,6 @@ describe('SettingsStatisticsFiltersEffects', () => {
       {a: setStatisticsFiltersAction}
     );
 
-    expect(effects.effect$).toBeObservable({});
+    expect(effects.settingsEffects$).toBeObservable({});
   });
 });

@@ -1,13 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
-import {IntervalEnum} from '../../services/models/interval.enum';
 import {HistorianService, Logging} from '@natr/historian';
-import {CurrentTimeIntervalFacadeService} from '../../state/facades/current-time-interval-facade.service';
-import {IntervalSe} from '../../state/models/interval-se';
 import {BaseIntervalComponent} from '../base-interval.component';
 import * as moment from 'moment';
 import {Moment} from 'moment';
 import StartOf = moment.unitOfTime.StartOf;
+import {StatisticsFiltersFacade} from '../../state/statistics-filters/statistics-filters-facade';
+import {IntervalSe} from '../../state/statistics-filters/interval-se.enum';
 
 const momentJs = moment;
 
@@ -23,15 +22,21 @@ export class TimeIntervalFormComponent extends BaseIntervalComponent implements 
   form: FormGroup;
   timeIntervalControl: FormControl;
 
-  private defaultTimeInterval = IntervalEnum.Week;
+  private defaultTimeInterval = IntervalSe.Week;
 
-  constructor(private currentTimeIntervalFacade: CurrentTimeIntervalFacadeService) {
+  constructor(private statisticsFiltersFacade: StatisticsFiltersFacade) {
     super();
   }
 
   ngOnInit(): void {
     this.buildForm();
-    // this.currentTimeIntervalFacade.setCurrentTimeInterval(IntervalSe[this.defaultTimeInterval]);
+    this.statisticsFiltersFacade.selectInterval()
+      .subscribe(
+        interval => {
+          this.logger.debug('setting interval from state', interval);
+          this.timeIntervalControl.patchValue(interval);
+        }
+      );
   }
 
   // noinspection JSMethodCanBeStatic
@@ -65,13 +70,13 @@ export class TimeIntervalFormComponent extends BaseIntervalComponent implements 
     const monthTimeBlockRange = this.calculateTimeBlock(IntervalSe.Month, 1);
 
     this.timeIntervals.push({
-      value: IntervalEnum.Week,
-      text: this.formatIntervalTextDetail(IntervalEnum.Week, weekTimeBlockRange )
+      value: IntervalSe.Week,
+      text: this.formatIntervalTextDetail(IntervalSe.Week, weekTimeBlockRange )
     });
 
     this.timeIntervals.push({
-      value: IntervalEnum.Month,
-      text: this.formatIntervalTextDetail(IntervalEnum.Month, monthTimeBlockRange)
+      value: IntervalSe.Month,
+      text: this.formatIntervalTextDetail(IntervalSe.Month, monthTimeBlockRange)
     });
 
     this.timeIntervalControl = new FormControl();
@@ -82,6 +87,6 @@ export class TimeIntervalFormComponent extends BaseIntervalComponent implements 
 
     this.timeIntervalControl.setValue(this.defaultTimeInterval);
 
-    this.timeIntervalControl.valueChanges.subscribe(newValue => this.currentTimeIntervalFacade.setCurrentTimeInterval(newValue));
+    this.timeIntervalControl.valueChanges.subscribe(newValue => this.statisticsFiltersFacade.dispatchSetInterval(newValue));
   }
 }

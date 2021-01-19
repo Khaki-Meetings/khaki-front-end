@@ -1,8 +1,8 @@
 import {Logging} from '@natr/historian';
-import {IntervalEnum} from '../services/models/interval.enum';
 import * as momentJs from 'moment';
 import {Moment} from 'moment';
 import {StatisticsScopeSe} from '../state/statistics-filters/statistics-scope-se.enum';
+import {IntervalSe} from '../state/statistics-filters/interval-se.enum';
 
 const moment = momentJs;
 
@@ -19,8 +19,8 @@ export class BaseIntervalComponent {
     ) ? timestamp.subtract(1, 'days').endOf('day') : timestamp;
   }
 
-  protected formatIntervalTextDetail(interval: IntervalEnum, timeblockRange: { start: Moment, end: Moment } ): string {
-    const intervalLabel = (interval === IntervalEnum.Month) ? 'Month' : '7 days';
+  protected formatIntervalTextDetail(interval: IntervalSe, timeblockRange: { start: Moment, end: Moment }): string {
+    const intervalLabel = (interval === IntervalSe.Month) ? 'Month' : '7 days';
     const startDate = moment(timeblockRange.start).format('ddd, MMM D');
     const endDate = this.setDisplayEnd(moment(timeblockRange.end)).format('ddd, MMM D');
 

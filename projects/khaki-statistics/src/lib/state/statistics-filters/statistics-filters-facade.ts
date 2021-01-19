@@ -10,6 +10,7 @@ import {HistorianService, Logging} from '@natr/historian';
 import {StatisticsScopeSe} from './statistics-scope-se.enum';
 import {setStatisticsScopeAction} from './set-statistics-scope.actions';
 import {IntervalSe} from './interval-se.enum';
+import {setIntervalAction} from './set-interval.actions';
 
 @Logging
 @Injectable({providedIn: 'root'})
@@ -21,11 +22,13 @@ export class StatisticsFiltersFacade {
   }
 
   public dispatchSetStatisticsFilters(statisticsFilters: StatisticsFiltersSm): void {
+    this.logger.debug('new stats', statisticsFilters);
     this.store.dispatch(setStatisticsFiltersAction({statisticsFilters}));
   }
 
-  public dispatchSetInterval(statisticsFilters: StatisticsFiltersSm): void {
-    this.store.dispatch(setStatisticsFiltersAction({statisticsFilters}));
+  public dispatchSetInterval(interval: IntervalSe): void {
+    this.logger.debug('interval', interval);
+    this.store.dispatch(setIntervalAction({interval}));
   }
 
   public dispatchSetStatisticsScope(filter: StatisticsScopeSe): void {

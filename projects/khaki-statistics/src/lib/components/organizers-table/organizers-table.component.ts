@@ -4,11 +4,11 @@ import {OrganizersStatisticsFacadeService} from '../../state/facades/organizers-
 import {HistorianService, Logging} from '@natr/historian';
 import {MatPaginator, PageEvent} from '@angular/material/paginator';
 import {OrganizerStatisticsSm} from '../../state/models/organizer-statistics-sm';
-import {IntervalEnum} from '../../services/models/interval.enum';
 import {OrganizersTablePageableFacade} from '../../state/organizers-table-pageable/organizers-table-pageable-facade.service';
 import {BaseIntervalComponent} from '../base-interval.component';
 import {StatisticsFiltersFacade} from '../../state/statistics-filters/statistics-filters-facade';
 import {StatisticsFiltersSm} from '../../state/statistics-filters/statistics-filters-sm';
+import {IntervalSe} from '../../state/statistics-filters/interval-se.enum';
 
 @Logging
 @Component({
@@ -55,7 +55,7 @@ export class OrganizersTableComponent extends BaseIntervalComponent implements O
         const statsFilter = data as StatisticsFiltersSm;
         const timeBlockRange = {start: statsFilter.start, end: statsFilter.end};
 
-        this.intervalText = this.formatIntervalTextDetail(IntervalEnum[statsFilter.interval], timeBlockRange);
+        this.intervalText = this.formatIntervalTextDetail(IntervalSe[statsFilter.interval], timeBlockRange);
         this.meetingTypeText = this.formatMeetingTypeDetail(statsFilter.statisticsScope);
       });
 

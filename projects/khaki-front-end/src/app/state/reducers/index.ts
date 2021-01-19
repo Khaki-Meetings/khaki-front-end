@@ -1,9 +1,12 @@
 import {ActionReducerMap, createAction, createReducer, MetaReducer, on, props} from '@ngrx/store';
 import {environment} from '../../../environments/environment';
+import {statisticsFiltersAttributeKey, statisticsFiltersReducer} from '../statistics-filters/statistics-filters.reducer';
+import {StatisticsFiltersSm} from '../statistics-filters/statistics-filters-sm';
 
 export interface KhakiState {
   tenantKey: string;
   tenantMap: Map<string, string>;
+  [statisticsFiltersAttributeKey]: StatisticsFiltersSm;
 }
 
 export const setTenantKeyAction = createAction(
@@ -39,7 +42,8 @@ const tenantMapReducer = createReducer(
 
 export const reducers: ActionReducerMap<KhakiState> = {
   tenantKey: tenantKeyReducer,
-  tenantMap: tenantMapReducer
+  tenantMap: tenantMapReducer,
+  [statisticsFiltersAttributeKey]: statisticsFiltersReducer
 };
 
 export const metaReducers: MetaReducer<KhakiState>[] = !environment.production ? [] : [];
