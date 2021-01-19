@@ -6,8 +6,10 @@ import {catchError, map, switchMap, tap} from 'rxjs/operators';
 import {ErrorSm} from '../models/error-sm';
 import {of} from 'rxjs';
 import {HistorianService, Logging} from '@natr/historian';
-import {IntervalEnum} from '../../services/models/interval.enum';
 import {StatisticsFiltersFacade} from '../statistics-filters/statistics-filters-facade';
+import * as momentJs from 'moment/moment';
+
+const moment = momentJs;
 
 @Logging
 @Injectable()
@@ -18,11 +20,9 @@ export class TimeBlockSummaryEffects {
     () => this.actions$.pipe(
       ofType(loadTimeBlockSummary),
       switchMap(() => this.statisticsFiltersFacade.selectStatisticsFilters()),
-      tap(ting => {
-        this.logger.debug('thing', ting);
-      }),
       switchMap(
-        (action) => this.statisticsService.getTimeBlockSummary(IntervalEnum[action.interval], {...action})
+        (statisticsFilters) => this.statisticsService
+          .getTimeBlockSummary(statisticsFilters.start, statisticsFilters.end, {...statisticsFilters})
           .pipe(
             map(timeBlockSummary => loadTimeBlockSummarySuccess(timeBlockSummary)),
             catchError(

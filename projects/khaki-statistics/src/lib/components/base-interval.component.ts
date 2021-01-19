@@ -11,6 +11,21 @@ export class BaseIntervalComponent {
   constructor() {
   }
 
+  protected formatHrsMins(seconds: number): string {
+
+    const hours = Math.trunc(seconds / 60 / 60);
+    const minutes = Math.trunc(seconds / 60 % 60);
+
+    let hoursLabel = 'hrs';
+    if (hours === 1) {
+      hoursLabel = 'hr';
+    }
+
+    const minutesLabel = 'mins';
+
+    return hours + ' ' + hoursLabel + ', ' + minutes + ' ' + minutesLabel;
+  }
+
   protected setDisplayEnd(timestamp: Moment): Moment {
     return (
       timestamp.hour() === 0 &&
@@ -30,4 +45,6 @@ export class BaseIntervalComponent {
   protected formatMeetingTypeDetail(statisticsFilterSe: StatisticsScopeSe): string {
     return (statisticsFilterSe === StatisticsScopeSe.Internal) ? 'Internal Meetings Only' : 'All Meetings';
   }
+
+
 }

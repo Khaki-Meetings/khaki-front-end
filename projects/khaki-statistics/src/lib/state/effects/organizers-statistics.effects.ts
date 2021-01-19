@@ -12,7 +12,6 @@ import {TypedAction} from '@ngrx/store/src/models';
 import {OrganizersTablePageableSm} from '../organizers-table-pageable/organizers-table-pageable.reducer';
 import {StatisticsFiltersSm} from '../statistics-filters/statistics-filters-sm';
 import {StatisticsFiltersFacade} from '../statistics-filters/statistics-filters-facade';
-import {IntervalEnum} from '../../services/models/interval.enum';
 
 @Logging
 @Injectable()
@@ -33,7 +32,8 @@ export class OrganizersStatisticsEffects {
           this.logger.debug('joined', joined);
           return this.statisticsService
             .getOrganizersStatistics(
-              IntervalEnum[joined[1].interval],
+              joined[1].start,
+              joined[1].end,
               {
                 statisticsScope: joined[1].statisticsScope,
                 page: joined[2].page,

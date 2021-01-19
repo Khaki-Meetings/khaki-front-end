@@ -31,6 +31,9 @@ import {OrganizersTablePageableEffects} from './state/organizers-table-pageable/
 import {khakiStatisticsFeatureKey, khakiStatisticsMetaReducers, khakiStatisticsReducers} from './state';
 import {StatisticsFiltersFacade} from './state/statistics-filters/statistics-filters-facade';
 import {HistorianService, Logging} from '@natr/historian';
+import { HoursMinutesPipe } from './pipes/hours-minutes.pipe';
+import { IntervalTextDetailPipe } from './pipes/interval-text-detail.pipe';
+import { MeetingTypeDetailPipe } from './pipes/meeting-type-detail.pipe';
 
 
 @NgModule({
@@ -43,7 +46,10 @@ import {HistorianService, Logging} from '@natr/historian';
     TimeIntervalFormComponent,
     NgxChartsLegendCustomComponent,
     LegendEntryCustomComponent,
-    ExternalInternalSelectorComponent
+    ExternalInternalSelectorComponent,
+    HoursMinutesPipe,
+    IntervalTextDetailPipe,
+    MeetingTypeDetailPipe
   ],
   imports: [
     ReactiveFormsModule,

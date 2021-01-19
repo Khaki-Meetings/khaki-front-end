@@ -5,13 +5,16 @@ import {KhakiStatisticsFeatureSm} from '../models/khaki-statistics-feature-sm';
 import {setStatisticsFiltersAction} from './set-statistics-filters.actions';
 import {Observable} from 'rxjs';
 import {statisticsFiltersSelector, statisticsIntervalSelector, statisticsScopeSelector} from './statistics-filters.selectors';
-import {take} from 'rxjs/operators';
+import {map, take} from 'rxjs/operators';
 import {HistorianService, Logging} from '@natr/historian';
 import {StatisticsScopeSe} from './statistics-scope-se.enum';
 import {setStatisticsScopeAction} from './set-statistics-scope.actions';
 import {IntervalSe} from './interval-se.enum';
 import {setIntervalAction} from './set-interval.actions';
 import {loadSharedStatisticsAction} from './load-shared-statistics.actions';
+import * as momentJs from 'moment/moment';
+
+const moment = momentJs;
 
 @Logging
 @Injectable({providedIn: 'root'})
@@ -37,7 +40,17 @@ export class StatisticsFiltersFacade {
   }
 
   public selectStatisticsFilters(): Observable<StatisticsFiltersSm> {
-    return this.store.select(statisticsFiltersSelector);
+    return this.store.select(statisticsFiltersSelector)
+      .pipe(
+        map(statisticsFilters => (
+            {
+              ...statisticsFilters,
+              start: moment(statisticsFilters.start),
+              end: moment(statisticsFilters.end)
+            }
+          )
+        )
+      );
   }
 
   public selectCurrentStatisticsScope(): Observable<StatisticsScopeSe> {

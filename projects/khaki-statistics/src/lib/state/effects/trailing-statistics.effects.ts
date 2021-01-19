@@ -5,8 +5,8 @@ import {ErrorSm} from '../models/error-sm';
 import {of} from 'rxjs';
 import {StatisticsService} from '../../services/statistics.service';
 import {loadTrailingStatistics, loadTrailingStatisticsFailure, loadTrailingStatisticsSuccess} from '../actions/trailing-statistics.actions';
-import {IntervalEnum} from '../../services/models/interval.enum';
 import {StatisticsFiltersFacade} from '../statistics-filters/statistics-filters-facade';
+import {IntervalSe} from '../statistics-filters/interval-se.enum';
 
 
 @Injectable()
@@ -17,7 +17,7 @@ export class TrailingStatisticsEffects {
       ofType(loadTrailingStatistics),
       mergeMap(() => this.statisticsFiltersFacade.selectStatisticsFilters()),
       switchMap(
-        (action) => this.statisticsService.getTrailingStatistics(IntervalEnum[action.interval], {...action})
+        (action) => this.statisticsService.getTrailingStatistics(action.start, IntervalSe[action.interval], {...action})
           .pipe(
             map(trailingStatistics => loadTrailingStatisticsSuccess(trailingStatistics)),
             catchError(
