@@ -2,7 +2,7 @@
   <div class="component-header">
     <div class="component-caption">
       <div class="component-title">Meeting Organizers</div>
-      <div class="component-subtitle">{{ intervalText }}</div>
+      <div class="component-subtitle">{{ interval | intervalTextDetail: start : end}}</div>
     </div>
     <div class="component-help">
       <div id="meeting-breakdown-help" class="help-wrapper">

@@ -4,7 +4,6 @@ import {PerDepartmentStatisticsFacadeService} from '../../state/facades/per-depa
 import {ColorHelper} from '@swimlane/ngx-charts';
 import {HistorianService, Logging} from '@natr/historian';
 import {StatisticsFiltersFacade} from '../../state/statistics-filters/statistics-filters-facade';
-import {BaseIntervalComponent} from '../base-interval.component';
 import {IntervalSe} from '../../state/statistics-filters/interval-se.enum';
 import {Moment} from 'moment/moment';
 import {StatisticsScopeSe} from '../../state/statistics-filters/statistics-scope-se.enum';
@@ -21,7 +20,11 @@ interface GraphData {
   styleUrls: ['./per-department-graph.component.scss']
 })
 
-export class PerDepartmentGraphComponent extends BaseIntervalComponent implements OnInit {
+export class PerDepartmentGraphComponent implements OnInit {
+  constructor(private perDepartmentStatisticsFacade: PerDepartmentStatisticsFacadeService,
+              private statisticsFiltersFacadeService: StatisticsFiltersFacade) {
+  }
+
   private logger: HistorianService;
 
   perDepartmentStatistics: DepartmentsStatisticsSm;
@@ -50,9 +53,19 @@ export class PerDepartmentGraphComponent extends BaseIntervalComponent implement
   statisticsScope: StatisticsScopeSe;
   loading = false;
 
-  constructor(private perDepartmentStatisticsFacade: PerDepartmentStatisticsFacadeService,
-              private statisticsFiltersFacadeService: StatisticsFiltersFacade) {
-    super();
+  private static formatHrsMins(seconds: number): string {
+
+    const hours = Math.trunc(seconds / 60 / 60);
+    const minutes = Math.trunc(seconds / 60 % 60);
+
+    let hoursLabel = 'hrs';
+    if (hours === 1) {
+      hoursLabel = 'hr';
+    }
+
+    const minutesLabel = 'mins';
+
+    return hours + ' ' + hoursLabel + ', ' + minutes + ' ' + minutesLabel;
   }
 
   ngOnInit(): void {
@@ -128,7 +141,7 @@ export class PerDepartmentGraphComponent extends BaseIntervalComponent implement
           val = val + this.graphData[x].value;
         }
       }
-      const displayValue = this.formatHrsMins(val);
+      const displayValue = PerDepartmentGraphComponent.formatHrsMins(val);
       document.getElementById('center-text-value-bg').innerHTML = displayValue;
       document.getElementById('center-text-value').innerHTML = displayValue;
       document.getElementById('center-text-label').innerHTML = 'in meetings';

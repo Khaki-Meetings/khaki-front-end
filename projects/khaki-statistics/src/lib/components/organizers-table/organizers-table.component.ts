@@ -5,10 +5,9 @@ import {HistorianService, Logging} from '@natr/historian';
 import {MatPaginator, PageEvent} from '@angular/material/paginator';
 import {OrganizerStatisticsSm} from '../../state/models/organizer-statistics-sm';
 import {OrganizersTablePageableFacade} from '../../state/organizers-table-pageable/organizers-table-pageable-facade.service';
-import {BaseIntervalComponent} from '../base-interval.component';
 import {StatisticsFiltersFacade} from '../../state/statistics-filters/statistics-filters-facade';
-import {StatisticsFiltersSm} from '../../state/statistics-filters/statistics-filters-sm';
 import {IntervalSe} from '../../state/statistics-filters/interval-se.enum';
+import {Moment} from 'moment/moment';
 
 @Logging
 @Component({
@@ -17,14 +16,15 @@ import {IntervalSe} from '../../state/statistics-filters/interval-se.enum';
   styleUrls: ['./organizers-table.component.scss']
 })
 
-export class OrganizersTableComponent extends BaseIntervalComponent implements OnInit, AfterViewInit {
+export class OrganizersTableComponent implements OnInit, AfterViewInit {
   private logger: HistorianService;
 
   organizersStatistics: OrganizersStatisticsSm;
   displayedColumns: string[] = ['name', 'meeting', 'hours'];
   dataSource: OrganizerStatisticsSm[] = [];
-  intervalText: string;
-  meetingTypeText: string;
+  interval: IntervalSe;
+  start: Moment;
+  end: Moment;
   loading = false;
 
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
@@ -34,7 +34,6 @@ export class OrganizersTableComponent extends BaseIntervalComponent implements O
     private statisticsFiltersFacadeService: StatisticsFiltersFacade,
     private organizersTablePageableFacade: OrganizersTablePageableFacade
   ) {
-    super();
   }
 
   ngOnInit(): void {
@@ -51,12 +50,10 @@ export class OrganizersTableComponent extends BaseIntervalComponent implements O
       });
 
     this.statisticsFiltersFacadeService.selectStatisticsFilters()
-      .subscribe((data) => {
-        const statsFilter = data as StatisticsFiltersSm;
-        const timeBlockRange = {start: statsFilter.start, end: statsFilter.end};
-
-        this.intervalText = this.formatIntervalTextDetail(IntervalSe[statsFilter.interval], timeBlockRange);
-        this.meetingTypeText = this.formatMeetingTypeDetail(statsFilter.statisticsScope);
+      .subscribe((statisticsFilters) => {
+        this.interval = statisticsFilters.interval;
+        this.start = statisticsFilters.start;
+        this.end = statisticsFilters.end;
       });
 
     this.organizersStatisticsFacade.organizersStatisticsLoading().subscribe(loading => this.loading = loading);

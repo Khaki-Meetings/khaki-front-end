@@ -1,14 +1,18 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {HistorianService, Logging} from '@natr/historian';
-import {BaseIntervalComponent} from '../base-interval.component';
 import * as moment from 'moment';
 import {Moment} from 'moment';
-import StartOf = moment.unitOfTime.StartOf;
 import {StatisticsFiltersFacade} from '../../state/statistics-filters/statistics-filters-facade';
 import {IntervalSe} from '../../state/statistics-filters/interval-se.enum';
+import StartOf = moment.unitOfTime.StartOf;
 
 const momentJs = moment;
+
+interface StartEndModel {
+  start: Moment;
+  end: Moment;
+}
 
 @Logging
 @Component({
@@ -16,7 +20,7 @@ const momentJs = moment;
   templateUrl: './time-interval-form.component.html',
   styleUrls: ['./time-interval-form.component.scss']
 })
-export class TimeIntervalFormComponent extends BaseIntervalComponent implements OnInit {
+export class TimeIntervalFormComponent implements OnInit {
   logger: HistorianService;
   timeIntervals = [];
   form: FormGroup;
@@ -25,7 +29,6 @@ export class TimeIntervalFormComponent extends BaseIntervalComponent implements 
   private defaultTimeInterval = IntervalSe.Week;
 
   constructor(private statisticsFiltersFacade: StatisticsFiltersFacade) {
-    super();
   }
 
   ngOnInit(): void {
@@ -40,7 +43,7 @@ export class TimeIntervalFormComponent extends BaseIntervalComponent implements 
   }
 
   // noinspection JSMethodCanBeStatic
-  private calculateTimeBlock(interval: IntervalSe, subtractIntervals: number = 0): { start: Moment, end: Moment } {
+  private calculateTimeBlock(interval: IntervalSe, subtractIntervals: number = 0): StartEndModel {
     const now = momentJs();
     let timeBlock: StartOf;
 
@@ -66,17 +69,19 @@ export class TimeIntervalFormComponent extends BaseIntervalComponent implements 
   }
 
   private buildForm(): void {
-    const weekTimeBlockRange = this.calculateTimeBlock(IntervalSe.Week, 1);
-    const monthTimeBlockRange = this.calculateTimeBlock(IntervalSe.Month, 1);
+    const weekTimeBlock = this.calculateTimeBlock(IntervalSe.Week, 1);
+    const monthTimeBlock = this.calculateTimeBlock(IntervalSe.Month, 1);
 
     this.timeIntervals.push({
       value: IntervalSe.Week,
-      text: this.formatIntervalTextDetail(IntervalSe.Week, weekTimeBlockRange )
+      start: weekTimeBlock.start,
+      end: weekTimeBlock.end
     });
 
     this.timeIntervals.push({
       value: IntervalSe.Month,
-      text: this.formatIntervalTextDetail(IntervalSe.Month, monthTimeBlockRange)
+      start: monthTimeBlock.start,
+      end: monthTimeBlock.end
     });
 
     this.timeIntervalControl = new FormControl();

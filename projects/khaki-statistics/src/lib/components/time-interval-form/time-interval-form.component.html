@@ -1,5 +1,5 @@
 <select [formControl]="timeIntervalControl">
   <option *ngFor="let obj of timeIntervals" [value]="obj.value">
-    {{obj.text}}
+    {{obj.value | intervalTextDetail : obj.start : obj.end}}
   </option>
 </select>
