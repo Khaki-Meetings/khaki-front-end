@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { KhakiSettingsComponent } from './khaki-settings.component';
+import {NgModule} from '@angular/core';
+import {KhakiSettingsComponent} from './khaki-settings.component';
 import {KhakiSettingsRoutingModule} from './khaki-settings-routing.module';
 import {SettingsHeaderComponent} from './components/settings-header/settings-header.component';
 import {SettingsMainComponent} from './components/settings-main/settings-main.component';
@@ -12,14 +12,16 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
 import {StoreModule} from '@ngrx/store';
 import * as fromKhakiSettings from './state';
 import {EffectsModule} from '@ngrx/effects';
-import { SettingsEffects } from './state/effects/user-profile.effects';
-import { EmployeesEffects } from './state/effects/employees.effects';
-import { DepartmentsEffects } from './state/effects/departments.effects';
+import {SettingsEffects} from './state/effects/user-profile.effects';
+import {EmployeesEffects} from './state/effects/employees.effects';
+import {DepartmentsEffects} from './state/effects/departments.effects';
+import {HistorianService, Logging} from '@natr/historian';
+import {StatisticsFiltersFacade} from './state/statistics-filters/statistics-filters-facade';
 
 @NgModule({
   declarations: [
@@ -61,4 +63,12 @@ import { DepartmentsEffects } from './state/effects/departments.effects';
     KhakiSettingsComponent
   ]
 })
-export class KhakiSettingsModule { }
+@Logging
+export class KhakiSettingsModule {
+  private logger: HistorianService;
+
+  constructor(private statisticsFiltersFacade: StatisticsFiltersFacade) {
+    this.logger.debug('initiated');
+    statisticsFiltersFacade.dispatchLoadSharedStatistics();
+  }
+}

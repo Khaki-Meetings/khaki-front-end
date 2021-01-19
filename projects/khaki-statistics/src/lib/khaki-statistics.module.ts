@@ -85,6 +85,7 @@ export class KhakiStatisticsModule {
 
   constructor(public statisticsFiltersFacade: StatisticsFiltersFacade) {
     this.logger.debug('statisticsFiltersFacade', statisticsFiltersFacade);
-    // statisticsFiltersFacade.dispatchSetInterval(IntervalSe.Week);
+    statisticsFiltersFacade.dispatchLoadSharedStatistics();
   }
+
 }

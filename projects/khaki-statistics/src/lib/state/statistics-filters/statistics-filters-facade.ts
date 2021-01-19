@@ -11,6 +11,7 @@ import {StatisticsScopeSe} from './statistics-scope-se.enum';
 import {setStatisticsScopeAction} from './set-statistics-scope.actions';
 import {IntervalSe} from './interval-se.enum';
 import {setIntervalAction} from './set-interval.actions';
+import {loadSharedStatisticsAction} from './load-shared-statistics.actions';
 
 @Logging
 @Injectable({providedIn: 'root'})
@@ -51,5 +52,9 @@ export class StatisticsFiltersFacade {
 
   public selectStatisticsScope(): Observable<StatisticsScopeSe> {
     return this.store.select(statisticsScopeSelector);
+  }
+
+  public dispatchLoadSharedStatistics(): void {
+    this.store.dispatch(loadSharedStatisticsAction());
   }
 }

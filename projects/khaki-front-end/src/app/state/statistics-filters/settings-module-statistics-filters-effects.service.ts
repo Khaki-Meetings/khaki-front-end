@@ -2,7 +2,8 @@ import {Injectable} from '@angular/core';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {
   setIntervalAction,
-  setStatisticsScopeAction
+  setStatisticsScopeAction,
+  loadSharedStatisticsAction
 } from 'khaki-settings';
 import {map} from 'rxjs/operators';
 import {HistorianService, Logging} from '@natr/historian';
@@ -14,7 +15,7 @@ import {setStatisticsFiltersAction} from './set-statistics-filters.actions';
 export class SettingsModuleStatisticsFiltersEffects extends BaseChildrenStatisticsFiltersEffects {
   private logger: HistorianService;
 
-  statisticsSetIntervalEffect$ = createEffect(
+  settingsSetIntervalEffect$ = createEffect(
     () => this.actions$.pipe(
       ofType(setIntervalAction),
       map(action => {
@@ -24,7 +25,7 @@ export class SettingsModuleStatisticsFiltersEffects extends BaseChildrenStatisti
     )
   );
 
-  statisticsSetStatisticsScopeEffect$ = createEffect(
+  settingsSetStatisticsScopeEffect$ = createEffect(
     () => this.actions$.pipe(
       ofType(setStatisticsScopeAction),
       map(action => {
@@ -34,6 +35,12 @@ export class SettingsModuleStatisticsFiltersEffects extends BaseChildrenStatisti
     )
   );
 
+  settingsLoadSharedStatisticsFiltersEffect = createEffect(
+    () => this.actions$.pipe(
+      ofType(loadSharedStatisticsAction),
+      map(() => setStatisticsFiltersAction({}))
+    )
+  );
 
   constructor(
     private actions$: Actions
