@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {DepartmentsStatisticsSm} from '../models/departments-statistics-sm';
 import {Store} from '@ngrx/store';
-import {StatisticsFeature} from '../models/statistics-feature';
+import {KhakiStatisticsFeatureSm} from '../models/khaki-statistics-feature-sm';
 import {loadPerDepartmentStatistics} from '../actions/per-department-statistics.actions';
 import {departmentsStatisticsLoadingSelector, perDepartmentStatisticsSelector} from '../statistics.selectors';
 import {NotImplementedException} from '../../exceptions/not-implemented-exception';
@@ -12,7 +12,7 @@ import {NotImplementedException} from '../../exceptions/not-implemented-exceptio
 })
 export class PerDepartmentStatisticsFacadeService {
 
-  constructor(private store: Store<StatisticsFeature>) {
+  constructor(private store: Store<KhakiStatisticsFeatureSm>) {
   }
 
   requestPerDepartmentStatistics(): void {

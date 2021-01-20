@@ -16,6 +16,10 @@
       "dom"
     ],
     "paths": {
+      "@khaki/statistics": [
+        "dist/khaki-statistics/khaki-statistics",
+        "dist/khaki-statistics"
+      ],
       "khaki-statistics": [
         "dist/khaki-statistics/khaki-statistics",
         "dist/khaki-statistics"
@@ -23,6 +27,10 @@
       "khaki-profile": [
         "dist/khaki-profile/khaki-profile",
         "dist/khaki-profile"
+      ],
+      "@khaki/settings": [
+        "dist/khaki-settings/khaki-settings",
+        "dist/khaki-settings"
       ],
       "khaki-settings": [
         "dist/khaki-settings/khaki-settings",

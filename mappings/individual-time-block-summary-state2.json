@@ -1,0 +1,21 @@
+{
+  "scenarioName": "summary state",
+  "requiredScenarioState": "2nd",
+  "newScenarioState": "Started",
+  "request": {
+    "method": "GET",
+    "urlPattern": "/statistics/individual/.*"
+  },
+  "response": {
+    "status": 200,
+    "delayDistribution": {
+      "type": "lognormal",
+      "median": 750,
+      "sigma": 0.5
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "bodyFileName": "individualSummaryMonthData.json"
+  }
+}

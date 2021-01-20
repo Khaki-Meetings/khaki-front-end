@@ -1,7 +1,6 @@
 import {createReducer, on} from '@ngrx/store';
 import {loadOrganizersStatisticsAction, loadOrganizersStatisticsSuccessAction} from '../actions/organizers-statistics.actions';
 import {OrganizersStatisticsSm} from '../models/organizers-statistics-sm';
-import {Utilities} from '../../services/utilities';
 import {HistorianService, LogLevel} from '@natr/historian';
 import {loadTrailingStatisticsFailure} from '../actions/trailing-statistics.actions';
 
@@ -46,7 +45,6 @@ export const organizersStatisticsReducer = createReducer(
             totalCost: organizersStatistic.totalCost,
             totalMeetings: organizersStatistic.totalMeetings,
             totalSeconds: organizersStatistic.totalSeconds,
-            formattedTime: Utilities.formatHrsMins(organizersStatistic.totalSeconds),
             organizerEmail: organizersStatistic.organizerEmail
           };
         }

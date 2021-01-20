@@ -1,4 +1,5 @@
 export interface EmployeeDto {
+  id: string;
   avatar?: string;
   firstName?: string;
   lastName?: string;

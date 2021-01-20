@@ -4,7 +4,7 @@ import { selectOrganizersTablePageableState } from './organizers-table-pageable.
 describe('OrganizersTablePageable Selectors', () => {
   it('should select the feature state', () => {
     const result = selectOrganizersTablePageableState({
-      [fromOrganizersTablePageable.organizersTablePageableFeatureKey]: {}
+      [fromOrganizersTablePageable.organizersTablePageableAttributeKey]: {}
     });
 
     expect(result).toEqual({});

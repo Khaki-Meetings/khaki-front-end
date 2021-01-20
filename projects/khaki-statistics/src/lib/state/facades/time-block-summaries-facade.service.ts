@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {TimeBlockSummarySm} from '../models/time-block-summary-sm';
-import {StatisticsFeature} from '../models/statistics-feature';
+import {KhakiStatisticsFeatureSm} from '../models/khaki-statistics-feature-sm';
 import {Store} from '@ngrx/store';
 import {loadTimeBlockSummary} from '../actions/time-block-summaries.actions';
 import {timeBlockSummariesFeatureKey} from '../reducers/time-block-summary.reducer';
@@ -13,7 +13,7 @@ import {timeBlockSummaryLoadingSelector, timeBlockSummarySelector} from '../stat
 })
 export class TimeBlockSummariesFacadeService {
 
-  constructor(private store: Store<StatisticsFeature>) {
+  constructor(private store: Store<KhakiStatisticsFeatureSm>) {
   }
 
   requestTimeBlockSummary(): void {

@@ -2,6 +2,9 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {AuthGuard} from '@auth0/auth0-angular';
 import {MainComponent} from './components/main/main.component';
+import {CurrentLogLevel, HistorianService} from '@natr/historian';
+
+const logger = new HistorianService(CurrentLogLevel.LOG_LEVEL, 'AppRoutingModule');
 
 const routes: Routes = [
   {
@@ -10,7 +13,14 @@ const routes: Routes = [
   },
   {
     path: 'stats',
-    loadChildren: () => import('khaki-statistics').then(m => m.KhakiStatisticsModule),
+    loadChildren: () => import('khaki-statistics')
+      .then(
+        m => {
+          logger.debug('m', m);
+          logger.debug('KhakiStatisticsModule', m.KhakiStatisticsModule);
+          return m.KhakiStatisticsModule;
+        }
+    ),
     canActivate: [
       AuthGuard
     ]
@@ -37,10 +47,10 @@ const routes: Routes = [
     ]
   },
   {
-   path: '',
-   redirectTo: 'home',
-   pathMatch: 'full'
- }
+    path: '',
+    redirectTo: 'home',
+    pathMatch: 'full'
+  }
 ];
 
 @NgModule({

@@ -20,6 +20,9 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
 import {MatDialogModule} from '@angular/material/dialog';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
+import {KhakiAppStatisticsFiltersEffects} from './state/statistics-filters/khaki-app-statistics-filters-effects.service';
+import {StatisticsModuleStatisticsFiltersEffects} from './state/statistics-filters/statistics-module-statistics-filters-effects.service';
+import {SettingsModuleStatisticsFiltersEffects} from './state/statistics-filters/settings-module-statistics-filters-effects.service';
 
 @NgModule({
   declarations: [
@@ -33,7 +36,13 @@ import {StoreDevtoolsModule} from '@ngrx/store-devtools';
     AppRoutingModule,
     StoreModule.forRoot(reducers, {metaReducers}),
     StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot(
+      [
+        KhakiAppStatisticsFiltersEffects,
+        StatisticsModuleStatisticsFiltersEffects,
+        SettingsModuleStatisticsFiltersEffects
+      ]
+    ),
     AuthModule.forRoot(
       {
         domain: 'khaki.us.auth0.com',
@@ -68,7 +77,7 @@ import {StoreDevtoolsModule} from '@ngrx/store-devtools';
     MatFormFieldModule,
     MatSelectModule,
     MatInputModule,
-    MatDialogModule
+    MatDialogModule,
   ],
   providers: [
     {provide: 'environment', useValue: environment},

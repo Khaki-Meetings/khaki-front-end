@@ -1,15 +1,17 @@
 import {ActionReducerMap, MetaReducer} from '@ngrx/store';
-import {userProfileFeatureKey, userProfileReducer} from './reducers/user-profile.reducer';
-import {ProfileFeature} from './models/profile-feature';
-import { employeesFeatureKey, employeesReducer } from './reducers/employees.reducer';
-import { departmentsFeatureKey, departmentsReducer } from './reducers/departments.reducer';
+import {userProfileAttributeKey, userProfileReducer} from './reducers/user-profile.reducer';
+import {KhakiSettingsFeatureSm} from './khaki-settings-feature-sm';
+import {employeesAttributeKey, employeesReducer} from './reducers/employees.reducer';
+import {departmentsAttributeKey, departmentsReducer} from './reducers/departments.reducer';
+import {statisticsFiltersAttributeKey, statisticsFiltersReducer} from './statistics-filters/statistics-filters.reducer';
 
-export const khakiProfileFeatureKey = 'khakiProfile';
+export const khakiSettingsFeatureKey = 'khakiSettings';
 
-export const reducers: ActionReducerMap<ProfileFeature> = {
-  [userProfileFeatureKey]: userProfileReducer,
-  [employeesFeatureKey]: employeesReducer,
-  [departmentsFeatureKey]: departmentsReducer,
+export const reducers: ActionReducerMap<KhakiSettingsFeatureSm> = {
+  [userProfileAttributeKey]: userProfileReducer,
+  [employeesAttributeKey]: employeesReducer,
+  [departmentsAttributeKey]: departmentsReducer,
+  [statisticsFiltersAttributeKey]: statisticsFiltersReducer
 };
 
-export const metaReducers: MetaReducer<ProfileFeature>[] = [];
+export const metaReducers: MetaReducer<KhakiSettingsFeatureSm>[] = [];

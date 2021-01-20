@@ -8,7 +8,6 @@ import {TimeBasedStatSummaryComponent} from './components/time-based-stat-summar
 import {NgxChartsLegendCustomComponent} from './components/ngx-charts-legend-custom/ngx-charts-legend-custom.component';
 import {LegendEntryCustomComponent} from './components/legend-entry-custom/legend-entry-custom.component';
 import {StoreModule} from '@ngrx/store';
-import * as fromKhakiStatistics from './state';
 import {EffectsModule} from '@ngrx/effects';
 import {TimeBlockSummaryEffects} from './state/effects/time-block-summary.effects';
 import {OrganizersStatisticsEffects} from './state/effects/organizers-statistics.effects';
@@ -28,7 +27,13 @@ import {TimeIntervalFormComponent} from './components/time-interval-form/time-in
 import {StatisticsFiltersChangeEffects} from './state/effects/statistics-filters-change.effects';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {ExternalInternalSelectorComponent} from './components/external-internal-selector/external-internal-selector.component';
-import { OrganizersTablePageableEffects } from './state/organizers-table-pageable/organizers-table-pageable.effects';
+import {OrganizersTablePageableEffects} from './state/organizers-table-pageable/organizers-table-pageable.effects';
+import {khakiStatisticsFeatureKey, khakiStatisticsMetaReducers, khakiStatisticsReducers} from './state';
+import {StatisticsFiltersFacade} from './state/statistics-filters/statistics-filters-facade';
+import {HistorianService, Logging} from '@natr/historian';
+import { HoursMinutesPipe } from './pipes/hours-minutes.pipe';
+import { IntervalTextDetailPipe } from './pipes/interval-text-detail.pipe';
+import { MeetingTypeDetailPipe } from './pipes/meeting-type-detail.pipe';
 
 
 @NgModule({
@@ -41,42 +46,52 @@ import { OrganizersTablePageableEffects } from './state/organizers-table-pageabl
     TimeIntervalFormComponent,
     NgxChartsLegendCustomComponent,
     LegendEntryCustomComponent,
-    ExternalInternalSelectorComponent
+    ExternalInternalSelectorComponent,
+    HoursMinutesPipe,
+    IntervalTextDetailPipe,
+    MeetingTypeDetailPipe
   ],
-    imports: [
-        ReactiveFormsModule,
-        KhakiStatisticsRoutingModule,
-        CommonModule,
-        StoreModule.forFeature(
-            fromKhakiStatistics.khakiStatisticsFeatureKey,
-            fromKhakiStatistics.reducers,
-            {
-                metaReducers: fromKhakiStatistics.metaReducers
-            }
-        ),
-        EffectsModule.forFeature(
-            [
-                TimeBlockSummaryEffects,
-                OrganizersStatisticsEffects,
-                TrailingStatisticsEffects,
-                PerDepartmentStatisticsEffects,
-                StatisticsFiltersChangeEffects,
-                OrganizersTablePageableEffects,
-            ]
-        ),
-        MatProgressSpinnerModule,
-        FontAwesomeModule,
-        MatTableModule,
-        MatCheckboxModule,
-        MatButtonModule,
-        NgxChartsModule,
-        MatSelectModule,
-        MatIconModule,
-        MatPaginatorModule
-    ],
+  imports: [
+    ReactiveFormsModule,
+    KhakiStatisticsRoutingModule,
+    CommonModule,
+    StoreModule.forFeature(
+      khakiStatisticsFeatureKey,
+      khakiStatisticsReducers,
+      {
+        metaReducers: khakiStatisticsMetaReducers
+      }
+    ),
+    EffectsModule.forFeature(
+      [
+        TimeBlockSummaryEffects,
+        OrganizersStatisticsEffects,
+        TrailingStatisticsEffects,
+        PerDepartmentStatisticsEffects,
+        StatisticsFiltersChangeEffects,
+        OrganizersTablePageableEffects,
+      ]
+    ),
+    MatProgressSpinnerModule,
+    FontAwesomeModule,
+    MatTableModule,
+    MatCheckboxModule,
+    MatButtonModule,
+    NgxChartsModule,
+    MatSelectModule,
+    MatIconModule,
+    MatPaginatorModule
+  ],
   exports: [KhakiStatisticsComponent],
-  providers: [
-  ]
+  providers: []
 })
+@Logging
 export class KhakiStatisticsModule {
+  private logger: HistorianService;
+
+  constructor(public statisticsFiltersFacade: StatisticsFiltersFacade) {
+    this.logger.debug('statisticsFiltersFacade', statisticsFiltersFacade);
+    statisticsFiltersFacade.dispatchLoadSharedStatistics();
+  }
+
 }

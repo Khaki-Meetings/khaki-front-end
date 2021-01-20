@@ -1,15 +1,18 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
-import {IntervalEnum} from '../../services/models/interval.enum';
 import {HistorianService, Logging} from '@natr/historian';
-import {CurrentTimeIntervalFacadeService} from '../../state/facades/current-time-interval-facade.service';
-import {IntervalSe} from '../../state/models/interval-se';
-import * as moment_ from 'moment';
+import * as moment from 'moment';
 import {Moment} from 'moment';
-import {StatisticsFiltersFacadeService} from '../../state/facades/statistics-filters-facade.service';
-import {Utilities} from '../../services/utilities';
+import {StatisticsFiltersFacade} from '../../state/statistics-filters/statistics-filters-facade';
+import {IntervalSe} from '../../state/statistics-filters/interval-se.enum';
+import StartOf = moment.unitOfTime.StartOf;
 
-const moment = moment_;
+const momentJs = moment;
+
+interface StartEndModel {
+  start: Moment;
+  end: Moment;
+}
 
 @Logging
 @Component({
@@ -23,39 +26,72 @@ export class TimeIntervalFormComponent implements OnInit {
   form: FormGroup;
   timeIntervalControl: FormControl;
 
-  private defaultTimeInterval = IntervalEnum.Week;
+  private defaultTimeInterval = IntervalSe.Week;
 
-  constructor(private currentTimeIntervalFacade: CurrentTimeIntervalFacadeService) {
+  constructor(private statisticsFiltersFacade: StatisticsFiltersFacade) {
   }
 
   ngOnInit(): void {
     this.buildForm();
-    this.currentTimeIntervalFacade.setCurrentTimeInterval(IntervalSe[this.defaultTimeInterval]);
+    this.statisticsFiltersFacade.selectInterval()
+      .subscribe(
+        interval => {
+          this.logger.debug('setting interval from state', interval);
+          this.timeIntervalControl.patchValue(interval);
+        }
+      );
+  }
+
+  // noinspection JSMethodCanBeStatic
+  private calculateTimeBlock(interval: IntervalSe, subtractIntervals: number = 0): StartEndModel {
+    const now = momentJs();
+    let timeBlock: StartOf;
+
+    switch (interval) {
+      case IntervalSe.Day:
+        timeBlock = 'day';
+        break;
+      case IntervalSe.Week:
+        timeBlock = 'week';
+        break;
+      case IntervalSe.Month:
+        timeBlock = 'month';
+        break;
+      case IntervalSe.Year:
+        timeBlock = 'year';
+        break;
+    }
+
+    return {
+      start: now.clone().utc().startOf('day').subtract(subtractIntervals, timeBlock),
+      end: now.clone().utc().startOf('day')
+    };
   }
 
   private buildForm(): void {
-
-    const weekTimeBlockRange = Utilities.calculateTimeBlock(IntervalSe.Week, 1);
-    const monthTimeBlockRange = Utilities.calculateTimeBlock(IntervalSe.Month, 1);
+    const weekTimeBlock = this.calculateTimeBlock(IntervalSe.Week, 1);
+    const monthTimeBlock = this.calculateTimeBlock(IntervalSe.Month, 1);
 
     this.timeIntervals.push({
-      value: IntervalEnum.Week,
-      text: Utilities.formatIntervalTextDetail(IntervalEnum.Week,
-         weekTimeBlockRange )
+      value: IntervalSe.Week,
+      start: weekTimeBlock.start,
+      end: weekTimeBlock.end
     });
+
     this.timeIntervals.push({
-      value: IntervalEnum.Month,
-      text: Utilities.formatIntervalTextDetail(IntervalEnum.Month,
-         monthTimeBlockRange)
+      value: IntervalSe.Month,
+      start: monthTimeBlock.start,
+      end: monthTimeBlock.end
     });
 
     this.timeIntervalControl = new FormControl();
+
     this.form = new FormGroup({
       timeInterval: this.timeIntervalControl
     });
 
     this.timeIntervalControl.setValue(this.defaultTimeInterval);
 
-    this.timeIntervalControl.valueChanges.subscribe(newValue => this.currentTimeIntervalFacade.setCurrentTimeInterval(newValue));
+    this.timeIntervalControl.valueChanges.subscribe(newValue => this.statisticsFiltersFacade.dispatchSetInterval(newValue));
   }
 }

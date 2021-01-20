@@ -1,9 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {StatisticsFilterSe} from '../../state/models/statistics-filter-se';
-import {StatisticsFiltersFacadeService} from '../../state/facades/statistics-filters-facade.service';
 import {FormControl, FormGroup} from '@angular/forms';
 import {HistorianService, Logging} from '@natr/historian';
-import { Utilities } from '../../services/utilities';
+import {StatisticsFiltersFacade} from '../../state/statistics-filters/statistics-filters-facade';
+import {StatisticsScopeSe} from '../../state/statistics-filters/statistics-scope-se.enum';
 
 @Logging
 @Component({
@@ -12,25 +11,22 @@ import { Utilities } from '../../services/utilities';
   styleUrls: ['./external-internal-selector.component.scss']
 })
 export class ExternalInternalSelectorComponent implements OnInit {
-
-  constructor(private statisticsFiltersFacade: StatisticsFiltersFacadeService) {
+  constructor(private statisticsFiltersFacade: StatisticsFiltersFacade) {
   }
 
   private logger: HistorianService;
 
-  values = Object.values(StatisticsFilterSe);
   form: FormGroup;
   filterControl: FormControl;
   meetingTypeOptions =
-    [{ value: StatisticsFilterSe.Internal,
-       text: Utilities.formatMeetingTypeDetail(StatisticsFilterSe.Internal) },
-     { value: StatisticsFilterSe.External,
-       text: Utilities.formatMeetingTypeDetail(StatisticsFilterSe.External)
-     }];
+    [
+      {value: StatisticsScopeSe.Internal},
+      {value: StatisticsScopeSe.External}
+    ];
 
   private filterControlValueChange = (filterString) => {
     this.logger.debug('value changed', filterString);
-    this.statisticsFiltersFacade.setStatisticsFilter(StatisticsFilterSe[filterString]);
+    this.statisticsFiltersFacade.dispatchSetStatisticsScope(StatisticsScopeSe[filterString]);
   };
 
   ngOnInit(): void {
@@ -41,7 +37,6 @@ export class ExternalInternalSelectorComponent implements OnInit {
       }
     );
     this.filterControl.valueChanges.subscribe(this.filterControlValueChange);
-    this.statisticsFiltersFacade.currentStatisticsFilter().subscribe(filter => this.filterControl.setValue(filter));
+    this.statisticsFiltersFacade.selectCurrentStatisticsScope().subscribe(filter => this.filterControl.setValue(filter));
   }
-
 }

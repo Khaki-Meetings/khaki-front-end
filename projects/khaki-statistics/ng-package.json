@@ -12,7 +12,8 @@
       "@swimlane/ngx-charts": "swimlaneNgxCharts",
       "@natr/historian": "natrHistorian",
       "d3": "d3",
-      "moment": "momentJs"
+      "moment/moment": "momentJs",
+      "moment": "momentJs2"
     }
   }
 }
