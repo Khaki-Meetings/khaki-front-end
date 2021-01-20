@@ -3,7 +3,9 @@
     <div class="khaki-container time-based-stat-summary">
       <div style="float:left;">
         <div class="label">Staff Time in Meetings</div>
-        <mat-spinner class="mat-spinner-wrapper center" *ngIf="loading"></mat-spinner>
+        <div class="mat-spinner-wrapper center" *ngIf="loading">
+          <mat-spinner></mat-spinner>
+        </div>
         <div class="value" [ngClass]="loading? 'loadingComponent' : ''">{{timeBlockSummary?.totalSeconds | hoursMinutes}}</div>
       </div>
       <div style="float:right;">
@@ -18,7 +20,9 @@
     <div class="khaki-container time-based-stat-summary">
       <div style="float:left;">
         <div class="label">Average Staff Time per Meeting</div>
-        <mat-spinner class="mat-spinner-wrapper center" *ngIf="loading"></mat-spinner>
+        <div class="mat-spinner-wrapper center" *ngIf="loading">
+          <mat-spinner></mat-spinner>
+        </div>
         <div class="value" [ngClass]="loading? 'loadingComponent' : ''">{{timeBlockSummary?.averageStaffSeconds | hoursMinutes}}</div>
       </div>
       <div style="float:right;">
