@@ -6,8 +6,7 @@ import {of} from 'rxjs';
 import {loadTimeBlockSummaryFailure} from '../actions/time-block-summaries.actions';
 import {loadPerDepartmentStatistics, loadPerDepartmentStatisticsSuccess} from '../actions/per-department-statistics.actions';
 import {StatisticsService} from '../../services/statistics.service';
-import {StatisticsFiltersFacadeService} from '../facades/statistics-filters-facade.service';
-import {IntervalEnum} from '../../services/models/interval.enum';
+import {StatisticsFiltersFacade} from '../statistics-filters/statistics-filters-facade';
 
 
 @Injectable()
@@ -15,9 +14,10 @@ export class PerDepartmentStatisticsEffects {
   perDepartmentStatisticsEffect$ = createEffect(
     () => this.actions$.pipe(
       ofType(loadPerDepartmentStatistics),
-      mergeMap(() => this.statisticsFiltersFacade.statisticsFilters()),
+      mergeMap(() => this.statisticsFiltersFacade.selectStatisticsFilters()),
       switchMap(
-        (action) => this.statisticsService.getDepartmentStatistics(IntervalEnum[action.interval], {filter: action.filter})
+        (action) => this.statisticsService
+          .getDepartmentStatistics(action.start, action.end, {statisticsScope: action.statisticsScope})
           .pipe(
             map((departmentStatistics) => loadPerDepartmentStatisticsSuccess(departmentStatistics)),
             catchError(
@@ -32,7 +32,7 @@ export class PerDepartmentStatisticsEffects {
   constructor(
     private actions$: Actions,
     private statisticsService: StatisticsService,
-    private statisticsFiltersFacade: StatisticsFiltersFacadeService
+    private statisticsFiltersFacade: StatisticsFiltersFacade
   ) {
   }
 

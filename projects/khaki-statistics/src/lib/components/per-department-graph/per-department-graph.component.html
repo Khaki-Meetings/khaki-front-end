@@ -2,7 +2,7 @@
   <div class="component-header">
     <div class="component-caption">
       <div class="component-title">Meeting Time by Department</div>
-      <div class="component-subtitle">{{ intervalText }} of {{ meetingTypeText }}</div>
+      <div class="component-subtitle">{{ interval | intervalTextDetail : start : end}} of {{ statisticsScope | meetingTypeDetail }}</div>
     </div>
     <div class="component-help">
       <div id="meeting-time-by-dept-help" class="help-wrapper">
@@ -27,7 +27,6 @@
           [dataExt]="graphData"
           [colors]="colors"
           class="chart-legend"
-          (labelActivate)="legendLabelActivate($event, chartData)"
           (labelDeactivate)="legendLabelDeactivate($event)">
         </ngx-charts-legend-custom>
       </div>
@@ -41,8 +40,6 @@
           [labels]="showLabels"
           [doughnut]="isDoughnut"
           [tooltipDisabled]="tooltipDisabled"
-          (select)="onActivate($event)"
-          (activate)="onActivate($event)"
           (deactivate)="onDeactivate($event)">
         </ngx-charts-pie-chart>
       </div>

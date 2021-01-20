@@ -2,7 +2,7 @@ import {createReducer, on} from '@ngrx/store';
 import {setOrganizersTablePageablesAction} from './organizers-table-pageable.actions';
 import {setCurrentTimeIntervalAction} from '../actions/current-time-interval.actions';
 
-export const organizersTablePageableFeatureKey = 'organizersTablePageable';
+export const organizersTablePageableAttributeKey = 'organizersTablePageable';
 
 export interface OrganizersTablePageableSm {
   page: number;

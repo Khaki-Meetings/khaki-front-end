@@ -1,65 +1,49 @@
 import {createFeatureSelector, createSelector} from '@ngrx/store';
 import {khakiStatisticsFeatureKey} from './index';
-import {StatisticsFeature} from './models/statistics-feature';
+import {KhakiStatisticsFeatureSm} from './models/khaki-statistics-feature-sm';
 import {timeBlockSummariesFeatureKey} from './reducers/time-block-summary.reducer';
 import {organizersStatisticsFeatureKey} from './reducers/organizers-statistics.reducer';
 import {trailingStatisticsFeatureKey} from './reducers/trailing-statistics.reducer';
-import {statisticsFiltersFeatureKey} from './reducers/statistics-filters.reducer';
 import {perDepartmentStatisticsFeatureKey} from './reducers/per-department-statistics.reducer';
 
-const featureSelector = createFeatureSelector(khakiStatisticsFeatureKey);
+export const khakiStatisticsFeatureSelector = createFeatureSelector(khakiStatisticsFeatureKey);
 
 export const perDepartmentStatisticsSelector = createSelector(
-  featureSelector,
-  (state: StatisticsFeature) => state.perDepartmentStatistics
+  khakiStatisticsFeatureSelector,
+  (state: KhakiStatisticsFeatureSm) => state.perDepartmentStatistics
 );
 
 export const timeBlockSummarySelector = createSelector(
-  featureSelector,
+  khakiStatisticsFeatureSelector,
   state => state[timeBlockSummariesFeatureKey]
 );
 
 export const organizersStatisticsSelector = createSelector(
-  featureSelector,
-  (state: StatisticsFeature) => state[organizersStatisticsFeatureKey]
+  khakiStatisticsFeatureSelector,
+  (state: KhakiStatisticsFeatureSm) => state[organizersStatisticsFeatureKey]
 );
 
 export const trailingStatisticsSelector = createSelector(
-  featureSelector,
-  (state: StatisticsFeature) => state[trailingStatisticsFeatureKey]
-);
-
-export const currentTimeIntervalSelector = createSelector(
-  featureSelector,
-  (state: StatisticsFeature) => state[statisticsFiltersFeatureKey].interval
-);
-
-export const statisticsFiltersSelector = createSelector(
-  featureSelector,
-  (state: StatisticsFeature) => state[statisticsFiltersFeatureKey]
-);
-
-export const statisticsFilterSelector = createSelector(
-  featureSelector,
-  (state: StatisticsFeature) => state[statisticsFiltersFeatureKey].filter
+  khakiStatisticsFeatureSelector,
+  (state: KhakiStatisticsFeatureSm) => state[trailingStatisticsFeatureKey]
 );
 
 export const trailingSStatisticsLoadingSelector = createSelector(
-  featureSelector,
-  (state: StatisticsFeature) => state[trailingStatisticsFeatureKey].loading
+  khakiStatisticsFeatureSelector,
+  (state: KhakiStatisticsFeatureSm) => state[trailingStatisticsFeatureKey].loading
 );
 
 export const organizersStatisticsLoadingSelector = createSelector(
-  featureSelector,
-  (state: StatisticsFeature) => state[organizersStatisticsFeatureKey].loading
+  khakiStatisticsFeatureSelector,
+  (state: KhakiStatisticsFeatureSm) => state[organizersStatisticsFeatureKey].loading
 );
 
 export const departmentsStatisticsLoadingSelector = createSelector(
-  featureSelector,
-  (state: StatisticsFeature) => state[perDepartmentStatisticsFeatureKey].loading
+  khakiStatisticsFeatureSelector,
+  (state: KhakiStatisticsFeatureSm) => state[perDepartmentStatisticsFeatureKey].loading
 );
 
 export const timeBlockSummaryLoadingSelector = createSelector(
-  featureSelector,
-  (state: StatisticsFeature) => state[timeBlockSummariesFeatureKey].loading
+  khakiStatisticsFeatureSelector,
+  (state: KhakiStatisticsFeatureSm) => state[timeBlockSummariesFeatureKey].loading
 );

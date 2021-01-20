@@ -6,17 +6,18 @@ import {timeBlockSummariesFeatureKey} from '../reducers/time-block-summary.reduc
 import {TimeBlockSummarySm} from './time-block-summary-sm';
 import {trailingStatisticsFeatureKey} from '../reducers/trailing-statistics.reducer';
 import {TrailingStatisticsSm} from './trailing-statistics-sm';
-import {spinnerFeatureKey} from '../reducers/spinner.reducer';
+import {spinnerAttributeKey} from '../reducers/spinner.reducer';
 import {SpinnerSm} from './spinner-sm';
-import {statisticsFiltersFeatureKey, StatisticsFiltersSm} from '../reducers/statistics-filters.reducer';
-import {organizersTablePageableFeatureKey, OrganizersTablePageableSm} from '../organizers-table-pageable/organizers-table-pageable.reducer';
+import {organizersTablePageableAttributeKey, OrganizersTablePageableSm} from '../organizers-table-pageable/organizers-table-pageable.reducer';
+import {StatisticsFiltersSm} from '../statistics-filters/statistics-filters-sm';
+import {statisticsFiltersAttributeKey} from '../statistics-filters/statistics-filters.reducer';
 
-export interface StatisticsFeature {
+export interface KhakiStatisticsFeatureSm {
   [organizersStatisticsFeatureKey]: OrganizersStatisticsSm;
   [perDepartmentStatisticsFeatureKey]: DepartmentsStatisticsSm;
   [timeBlockSummariesFeatureKey]: TimeBlockSummarySm;
   [trailingStatisticsFeatureKey]: TrailingStatisticsSm;
-  [spinnerFeatureKey]: SpinnerSm;
-  [statisticsFiltersFeatureKey]: StatisticsFiltersSm;
-  [organizersTablePageableFeatureKey]: OrganizersTablePageableSm;
+  [spinnerAttributeKey]: SpinnerSm;
+  [organizersTablePageableAttributeKey]: OrganizersTablePageableSm;
+  [statisticsFiltersAttributeKey]: StatisticsFiltersSm;
 }

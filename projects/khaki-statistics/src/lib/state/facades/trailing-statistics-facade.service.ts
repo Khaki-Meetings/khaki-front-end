@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {TrailingStatisticsSm} from '../models/trailing-statistics-sm';
-import {StatisticsFeature} from '../models/statistics-feature';
+import {KhakiStatisticsFeatureSm} from '../models/khaki-statistics-feature-sm';
 import {Store} from '@ngrx/store';
 import {loadTrailingStatistics} from '../actions/trailing-statistics.actions';
 import {trailingSStatisticsLoadingSelector, trailingStatisticsSelector} from '../statistics.selectors';
@@ -11,7 +11,7 @@ import {trailingSStatisticsLoadingSelector, trailingStatisticsSelector} from '..
 })
 export class TrailingStatisticsFacadeService {
 
-  constructor(private store: Store<StatisticsFeature>) {
+  constructor(private store: Store<KhakiStatisticsFeatureSm>) {
   }
 
   requestTrailingStatistics(): void {

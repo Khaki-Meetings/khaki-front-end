@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {LegendEntryComponent} from '@swimlane/ngx-charts';
-import {Utilities} from '../../services/utilities';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -11,11 +10,10 @@ import {Utilities} from '../../services/utilities';
       {{ trimmedLabel }}
     </td>
     <td class="legend-label-text legend-value-text">
-      {{ displayValue }}
+      {{ dataExt.value | hoursMinutes }}
     </td>`,
   styleUrls: ['./legend-entry-custom.component.css']
 })
-
 export class LegendEntryCustomComponent extends LegendEntryComponent implements OnInit {
 
   @Input() dataExt: any;
@@ -29,14 +27,6 @@ export class LegendEntryCustomComponent extends LegendEntryComponent implements 
 
   get trimmedLabel(): string {
     return this.formattedLabel || '(empty)';
-  }
-
-  get displayValue(): string {
-    let displayValue = '';
-    if (this.dataExt.value !== 0) {
-      displayValue = Utilities.formatHrsMins(this.dataExt.value);
-    }
-    return displayValue || '(empty)';
   }
 
 }
