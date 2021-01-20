@@ -25,6 +25,8 @@ import {StatisticsFiltersFacade} from './state/statistics-filters/statistics-fil
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {HoursMinutesPipe} from './pipes/hours-minutes.pipe';
+import {IntervalTextDetailPipe} from './pipes/interval-text-detail.pipe';
+import {MeetingTypeDetailPipe} from './pipes/meeting-type-detail.pipe';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import {HoursMinutesPipe} from './pipes/hours-minutes.pipe';
     SettingsDepartmentComponent,
     AddEmployeeDialogComponent,
     AddDepartmentDialogComponent,
-    HoursMinutesPipe
+    HoursMinutesPipe,
+    IntervalTextDetailPipe,
+    MeetingTypeDetailPipe
   ],
   imports: [
     KhakiSettingsRoutingModule,

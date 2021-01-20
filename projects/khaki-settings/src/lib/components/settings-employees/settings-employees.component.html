@@ -1,5 +1,4 @@
 <div class="container">
-  <div>Interval: {{interval}}, Scope: {{statisticsScope}}</div>
   <mat-accordion multi="false">
 
     <mat-expansion-panel
@@ -25,6 +24,9 @@
       <ng-template matExpansionPanelContent>
         <mat-spinner *ngIf="employeeStatsLoading"></mat-spinner>
         <div *ngIf="!employeeStatsLoading">
+          <div>
+            Interval: {{interval | intervalTextDetail: start: end}}, Scope: {{statisticsScope | meetingTypeDetail}}
+          </div>
           <div>
             Total Time: {{selectedEmployeeStats.totalSeconds | hoursMinutes}}
           </div>

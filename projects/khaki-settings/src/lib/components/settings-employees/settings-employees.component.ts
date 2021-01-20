@@ -8,6 +8,7 @@ import {SettingsService} from '../../services/settings.service';
 import {StatisticsFiltersFacade} from '../../state/statistics-filters/statistics-filters-facade';
 import {mergeMap} from 'rxjs/operators';
 import {TimeBlockSummaryResponseDto} from '../../services/models/time-block-summary-response-dto';
+import {Moment} from 'moment/moment';
 
 export interface DialogData {
   data: string;
@@ -31,6 +32,9 @@ export class SettingsEmployeesComponent implements OnInit {
 
   private logger: HistorianService;
   interval;
+  start: Moment;
+  end: Moment;
+
   statisticsScope;
   employeeStatsLoading = true;
   selectedEmployeeStats: TimeBlockSummaryResponseDto;
@@ -56,6 +60,8 @@ export class SettingsEmployeesComponent implements OnInit {
         statisticsFilters => {
           this.interval = statisticsFilters.interval;
           this.statisticsScope = statisticsFilters.statisticsScope;
+          this.start = statisticsFilters.start;
+          this.end = statisticsFilters.end;
         }
       );
 
@@ -106,14 +112,8 @@ export class SettingsEmployeesComponent implements OnInit {
   panelOpen(employee: EmployeeDto): void {
     this.logger.debug('open', employee);
     this.employeeStatsLoading = true;
-    this.statisticsFiltersFacade
-      .selectStatisticsFilters()
-      .pipe(
-        mergeMap(
-          statisticsFilters => this.settingsService
-            .getEmployeeStats(employee.id, statisticsFilters.start, statisticsFilters.end)
-        )
-      )
+    this.settingsService
+      .getEmployeeStats(employee.id, this.start, this.end)
       .subscribe(
         timeBlockSummary => {
           this.employeeStatsLoading = false;
