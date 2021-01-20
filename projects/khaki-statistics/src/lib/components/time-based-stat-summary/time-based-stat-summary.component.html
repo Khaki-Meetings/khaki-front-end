@@ -3,8 +3,10 @@
     <div class="khaki-container time-based-stat-summary">
       <div style="float:left;">
         <div class="label">Staff Time in Meetings</div>
-        <mat-spinner *ngIf="loading"></mat-spinner>
-        <div class="value">{{timeBlockSummary?.totalSeconds | hoursMinutes}}</div>
+        <div class="mat-spinner-wrapper center" *ngIf="loading">
+          <mat-spinner></mat-spinner>
+        </div>
+        <div class="value" [ngClass]="loading? 'loadingComponent' : ''">{{timeBlockSummary?.totalSeconds | hoursMinutes}}</div>
       </div>
       <div style="float:right;">
         <div id="staff-hours-in-meetings-help" class="help-wrapper">
@@ -18,8 +20,10 @@
     <div class="khaki-container time-based-stat-summary">
       <div style="float:left;">
         <div class="label">Average Staff Time per Meeting</div>
-        <mat-spinner *ngIf="loading"></mat-spinner>
-        <div class="value">{{timeBlockSummary?.averageStaffSeconds | hoursMinutes}}</div>
+        <div class="mat-spinner-wrapper center" *ngIf="loading">
+          <mat-spinner></mat-spinner>
+        </div>
+        <div class="value" [ngClass]="loading? 'loadingComponent' : ''">{{timeBlockSummary?.averageStaffSeconds | hoursMinutes}}</div>
       </div>
       <div style="float:right;">
         <div id="avg-staff-hours-in-meetings-help" class="help-wrapper">
@@ -33,8 +37,12 @@
     <div class="khaki-container time-based-stat-summary">
       <div style="float:left;">
         <div class="label">Number of Meetings</div>
-        <mat-spinner *ngIf="loading"></mat-spinner>
-        <div class="value">{{timeBlockSummary?.meetingCount}}</div>
+        <div class="mat-spinner-wrapper center" *ngIf="loading">
+          <mat-spinner></mat-spinner>
+        </div>
+        <div class="value" [ngClass]="loading? 'loadingComponent' : ''">
+          {{timeBlockSummary?.meetingCount}}
+        </div>
       </div>
       <div style="float:right;">
         <div id="num-meetings-help" class="help-wrapper">
