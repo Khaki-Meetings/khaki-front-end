@@ -2,7 +2,6 @@ import {createReducer, on} from '@ngrx/store';
 import {TimeBlockSummarySm} from '../models/time-block-summary-sm';
 import {IntervalEnum} from '../../services/models/interval.enum';
 import {loadTimeBlockSummary, loadTimeBlockSummaryFailure, loadTimeBlockSummarySuccess} from '../actions/time-block-summaries.actions';
-import {Utilities} from '../../services/utilities';
 import {HistorianService, LogLevel} from '@natr/historian';
 
 export const timeBlockSummariesFeatureKey = 'timeBlockSummaries';
@@ -33,9 +32,7 @@ export const timeBlockSummaryReducer = createReducer(
         {
           ...state,
           ...action,
-          loading: false,
-          formattedTotalSeconds: Utilities.formatHrsMins(action.totalSeconds),
-          formattedAverageStaffSeconds: Utilities.formatHrsMins(action.averageStaffSeconds)
+          loading: false
         };
       logger.debug('newState', newState);
       return newState;

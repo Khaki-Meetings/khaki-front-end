@@ -3,10 +3,10 @@ import {DepartmentsStatisticsSm} from '../../state/models/departments-statistics
 import {PerDepartmentStatisticsFacadeService} from '../../state/facades/per-department-statistics-facade.service';
 import {ColorHelper} from '@swimlane/ngx-charts';
 import {HistorianService, Logging} from '@natr/historian';
-import {Utilities} from '../../services/utilities';
-import {IntervalEnum} from '../../services/models/interval.enum';
 import {StatisticsFiltersFacade} from '../../state/statistics-filters/statistics-filters-facade';
-import {StatisticsFiltersSm} from '../../state/statistics-filters/statistics-filters-sm';
+import {IntervalSe} from '../../state/statistics-filters/interval-se.enum';
+import {Moment} from 'moment/moment';
+import {StatisticsScopeSe} from '../../state/statistics-filters/statistics-scope-se.enum';
 
 interface GraphData {
   name: string;
@@ -21,6 +21,10 @@ interface GraphData {
 })
 
 export class PerDepartmentGraphComponent implements OnInit {
+  constructor(private perDepartmentStatisticsFacade: PerDepartmentStatisticsFacadeService,
+              private statisticsFiltersFacadeService: StatisticsFiltersFacade) {
+  }
+
   private logger: HistorianService;
 
   perDepartmentStatistics: DepartmentsStatisticsSm;
@@ -43,12 +47,25 @@ export class PerDepartmentGraphComponent implements OnInit {
   legendData: any[] = [];
   colors: ColorHelper = new ColorHelper('cool', 'ordinal', [], null);
 
-  intervalText: string;
-  meetingTypeText: string;
+  interval: IntervalSe;
+  start: Moment;
+  end: Moment;
+  statisticsScope: StatisticsScopeSe;
   loading = false;
 
-  constructor(private perDepartmentStatisticsFacade: PerDepartmentStatisticsFacadeService,
-              private statisticsFiltersFacadeService: StatisticsFiltersFacade) {
+  private static formatHrsMins(seconds: number): string {
+
+    const hours = Math.trunc(seconds / 60 / 60);
+    const minutes = Math.trunc(seconds / 60 % 60);
+
+    let hoursLabel = 'hrs';
+    if (hours === 1) {
+      hoursLabel = 'hr';
+    }
+
+    const minutesLabel = 'mins';
+
+    return hours + ' ' + hoursLabel + ', ' + minutes + ' ' + minutesLabel;
   }
 
   ngOnInit(): void {
@@ -84,13 +101,12 @@ export class PerDepartmentGraphComponent implements OnInit {
           this.colors = new ColorHelper(this.colorScheme, 'ordinal', this.legendData, null);
         });
 
-    this.statisticsFiltersFacadeService.statisticsFilters()
-      .subscribe((data) => {
-        const statsFilter = data as StatisticsFiltersSm;
-        const timeBlockRange = {start: statsFilter.start, end: statsFilter.end};
-        this.intervalText =
-          Utilities.formatIntervalTextDetail(IntervalEnum[statsFilter.interval], timeBlockRange);
-        this.meetingTypeText = Utilities.formatMeetingTypeDetail(statsFilter.statisticsScope);
+    this.statisticsFiltersFacadeService.selectStatisticsFilters()
+      .subscribe((statisticsFilters) => {
+        this.interval = statisticsFilters.interval;
+        this.start = statisticsFilters.start;
+        this.end = statisticsFilters.end;
+        this.statisticsScope = statisticsFilters.statisticsScope;
       });
 
     this.perDepartmentStatisticsFacade.perDepartmentStatisticsLoading().subscribe(loading => this.loading = loading);
@@ -107,37 +123,10 @@ export class PerDepartmentGraphComponent implements OnInit {
     );
   }
 
-  public legendLabelActivate(event: any, item: any): void {
-    const dataElement = this.chartData.find(x => x.extra.displayName === event.name);
-
-    const d = {
-      entries: [{
-        name: dataElement.name,
-        value: Utilities.formatHrsMins(dataElement.value),
-        label: dataElement.name
-      }],
-      value: {
-        name: dataElement.name,
-        value: Utilities.formatHrsMins(dataElement.value),
-        label: dataElement.name
-      }
-    };
-    this.onActivate(d);
-  }
-
   public legendLabelDeactivate(item: any): void {
     this.drawDefaultDonutLabel();
   }
 
-  onActivate(data): void {
-    let displayValue = '';
-    if (data.value.value !== 0) {
-      displayValue = Utilities.formatHrsMins(data.value.value);
-    }
-    // document.getElementById('center-text-label').innerHTML = data.value.name;
-    // document.getElementById('center-text-value-bg').innerHTML = displayValue;
-    // document.getElementById('center-text-value').innerHTML = displayValue;
-  }
 
   onDeactivate(data): void {
     this.drawDefaultDonutLabel();
@@ -152,7 +141,7 @@ export class PerDepartmentGraphComponent implements OnInit {
           val = val + this.graphData[x].value;
         }
       }
-      const displayValue = Utilities.formatHrsMins(val);
+      const displayValue = PerDepartmentGraphComponent.formatHrsMins(val);
       document.getElementById('center-text-value-bg').innerHTML = displayValue;
       document.getElementById('center-text-value').innerHTML = displayValue;
       document.getElementById('center-text-label').innerHTML = 'in meetings';

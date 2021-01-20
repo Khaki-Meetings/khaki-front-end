@@ -2,21 +2,21 @@ import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { Observable } from 'rxjs';
 
-import { StatisticsStatisticsFiltersEffects } from './statistics-statistics-filters.effects';
+import { KhakiAppStatisticsFiltersEffects } from './khaki-app-statistics-filters-effects.service';
 
-describe('StatisticsStatisticsFiltersEffects', () => {
+describe('KhakiAppStatitisticsFiltersEffects', () => {
   let actions$: Observable<any>;
-  let effects: StatisticsStatisticsFiltersEffects;
+  let effects: KhakiAppStatisticsFiltersEffects;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        StatisticsStatisticsFiltersEffects,
+        KhakiAppStatisticsFiltersEffects,
         provideMockActions(() => actions$)
       ]
     });
 
-    effects = TestBed.inject(StatisticsStatisticsFiltersEffects);
+    effects = TestBed.inject(KhakiAppStatisticsFiltersEffects);
   });
 
   it('should be created', () => {

@@ -1,59 +1,73 @@
 import {Injectable} from '@angular/core';
-import {select, Store} from '@ngrx/store';
+import {Store} from '@ngrx/store';
 import {StatisticsFiltersSm} from './statistics-filters-sm';
 import {KhakiStatisticsFeatureSm} from '../models/khaki-statistics-feature-sm';
 import {setStatisticsFiltersAction} from './set-statistics-filters.actions';
 import {Observable} from 'rxjs';
-import {Moment} from 'moment';
-import {setStartEndAction} from './set-start-end.actions';
-import {statisticsFiltersSelector} from './statistics-filters.selectors';
-import {setPageCountAction, setStatisticsFilterAction} from '../actions/statistics-filter.actions';
-import {take} from 'rxjs/operators';
+import {statisticsFiltersSelector, statisticsIntervalSelector, statisticsScopeSelector} from './statistics-filters.selectors';
+import {map, take} from 'rxjs/operators';
 import {HistorianService, Logging} from '@natr/historian';
-import {statisticsFilterSelector} from '../statistics.selectors';
 import {StatisticsScopeSe} from './statistics-scope-se.enum';
+import {setStatisticsScopeAction} from './set-statistics-scope.actions';
+import {IntervalSe} from './interval-se.enum';
+import {setIntervalAction} from './set-interval.actions';
+import {loadSharedStatisticsAction} from './load-shared-statistics.actions';
+import * as momentJs from 'moment/moment';
+
+const moment = momentJs;
 
 @Logging
 @Injectable({providedIn: 'root'})
 export class StatisticsFiltersFacade {
+  // noinspection JSUnusedLocalSymbols
   private logger: HistorianService;
 
   constructor(private store: Store<KhakiStatisticsFeatureSm>) {
   }
 
   public dispatchSetStatisticsFilters(statisticsFilters: StatisticsFiltersSm): void {
+    this.logger.debug('new stats', statisticsFilters);
     this.store.dispatch(setStatisticsFiltersAction({statisticsFilters}));
   }
 
+  public dispatchSetInterval(interval: IntervalSe): void {
+    this.logger.debug('interval', interval);
+    this.store.dispatch(setIntervalAction({interval}));
+  }
+
+  public dispatchSetStatisticsScope(filter: StatisticsScopeSe): void {
+    this.store.dispatch(setStatisticsScopeAction({scope: filter}));
+  }
+
   public selectStatisticsFilters(): Observable<StatisticsFiltersSm> {
-    return this.store.select(statisticsFiltersSelector);
+    return this.store.select(statisticsFiltersSelector)
+      .pipe(
+        map(statisticsFilters => (
+            {
+              ...statisticsFilters,
+              start: moment(statisticsFilters.start),
+              end: moment(statisticsFilters.end)
+            }
+          )
+        )
+      );
   }
 
-  public dispatchSetStartEndAction(start: Moment, end: Moment): void {
-    this.store.dispatch(setStartEndAction({start, end}));
-  }
-
-  public setStatisticsFilters(filter: StatisticsFiltersSm): void {
-    this.store.dispatch(setStatisticsFiltersAction({statisticsFilters: filter}));
-  }
-
-  public setStatisticsFilter(filter: StatisticsScopeSe): void {
-    this.logger.debug('filter', filter);
-    this.store.dispatch(setStatisticsFilterAction({statisticsScope: filter}));
-  }
-
-  public statisticsFilters(): Observable<StatisticsFiltersSm> {
-    return this.store.select(statisticsFiltersSelector);
-  }
-
-  public currentStatisticsFilter(): Observable<StatisticsScopeSe> {
-    return this.store.pipe(
-      take(1),
-      select(statisticsFilterSelector)
+  public selectCurrentStatisticsScope(): Observable<StatisticsScopeSe> {
+    return this.selectStatisticsScope().pipe(
+      take(1)
     );
   }
 
-  public setPageAndCount(page: number, count: number): void {
-    this.store.dispatch(setPageCountAction({page, count}));
+  public selectInterval(): Observable<IntervalSe> {
+    return this.store.select(statisticsIntervalSelector);
+  }
+
+  public selectStatisticsScope(): Observable<StatisticsScopeSe> {
+    return this.store.select(statisticsScopeSelector);
+  }
+
+  public dispatchLoadSharedStatistics(): void {
+    this.store.dispatch(loadSharedStatisticsAction());
   }
 }

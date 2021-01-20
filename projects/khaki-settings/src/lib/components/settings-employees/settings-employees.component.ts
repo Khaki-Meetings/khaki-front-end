@@ -6,25 +6,21 @@ import {EmployeeDto} from '../../services/models/employeesResponseDto';
 import {HistorianService, Logging} from '@natr/historian';
 import {SettingsService} from '../../services/settings.service';
 import {StatisticsFiltersFacade} from '../../state/statistics-filters/statistics-filters-facade';
+import {mergeMap} from 'rxjs/operators';
+import {TimeBlockSummaryResponseDto} from '../../services/models/time-block-summary-response-dto';
+import {Moment} from 'moment/moment';
 
 export interface DialogData {
   data: string;
 }
 
+@Logging
 @Component({
   selector: 'lib-settings-employees',
   templateUrl: './settings-employees.component.html',
   styleUrls: ['./settings-employees.component.scss']
 })
 export class SettingsEmployeesComponent implements OnInit {
-  interval;
-  statisticsScope;
-
-  employees: EmployeeDto[] = [];
-
-  pos = 0;
-  maxShow = 6;
-
   constructor(
     private router: Router,
     public dialog: MatDialog,
@@ -33,6 +29,21 @@ export class SettingsEmployeesComponent implements OnInit {
     private settingsService: SettingsService
   ) {
   }
+
+  private logger: HistorianService;
+  interval;
+  start: Moment;
+  end: Moment;
+
+  statisticsScope;
+  employeeStatsLoading = true;
+  selectedEmployeeStats: TimeBlockSummaryResponseDto;
+
+  employees: EmployeeDto[] = [];
+
+  pos = 0;
+  maxShow = 6;
+
 
   ngOnInit(): void {
     this.facadeService.requestEmployees();
@@ -49,6 +60,8 @@ export class SettingsEmployeesComponent implements OnInit {
         statisticsFilters => {
           this.interval = statisticsFilters.interval;
           this.statisticsScope = statisticsFilters.statisticsScope;
+          this.start = statisticsFilters.start;
+          this.end = statisticsFilters.end;
         }
       );
 
@@ -95,6 +108,20 @@ export class SettingsEmployeesComponent implements OnInit {
   isFirst(): boolean {
     return this.pos === 0;
   }
+
+  panelOpen(employee: EmployeeDto): void {
+    this.logger.debug('open', employee);
+    this.employeeStatsLoading = true;
+    this.settingsService
+      .getEmployeeStats(employee.id, this.start, this.end)
+      .subscribe(
+        timeBlockSummary => {
+          this.employeeStatsLoading = false;
+          this.selectedEmployeeStats = timeBlockSummary;
+        }
+      );
+  }
+
 }
 
 @Logging

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {KhakiSettingsFeatureSm} from '../khaki-settings-feature-sm';
 import {Store} from '@ngrx/store';
 import {setStatisticsFiltersAction} from './set-statistics-filters.actions';
@@ -11,12 +11,14 @@ import {IntervalSe} from './interval-se.enum';
 import {setIntervalAction} from './set-interval.actions';
 import {StatisticsScopeSe} from './statistics-scope-se.enum';
 import {setStatisticsScopeAction} from './set-statistics-scope.actions';
+import {loadSharedStatisticsAction} from './load-shared-statistics.actions';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StatisticsFiltersFacade {
-  constructor(private store: Store<KhakiSettingsFeatureSm>) { }
+  constructor(private store: Store<KhakiSettingsFeatureSm>) {
+  }
 
   dispatchSetStatisticsFilters(statisticsFilters: StatisticsFiltersSm): void {
     this.store.dispatch(setStatisticsFiltersAction({statisticsFilters}));
@@ -36,5 +38,9 @@ export class StatisticsFiltersFacade {
 
   public dispatchSetStatisticsScope(scope: StatisticsScopeSe): void {
     this.store.dispatch(setStatisticsScopeAction({scope}));
+  }
+
+  public dispatchLoadSharedStatistics(): void {
+    this.store.dispatch(loadSharedStatisticsAction());
   }
 }

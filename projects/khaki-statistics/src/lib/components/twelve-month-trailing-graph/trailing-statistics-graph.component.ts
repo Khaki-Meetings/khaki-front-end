@@ -5,10 +5,8 @@ import {IntervalEnum} from '../../services/models/interval.enum';
 import {HistorianService, Logging} from '@natr/historian';
 import * as moment from 'moment';
 import {CurrentTimeIntervalFacadeService} from '../../state/facades/current-time-interval-facade.service';
-import {switchMap, tap} from 'rxjs/operators';
-import {Utilities} from '../../services/utilities';
+import {switchMap} from 'rxjs/operators';
 import {IntervalSe} from '../../state/models/interval-se';
-import { TimeBlockSummarySm } from '../../state/models/time-block-summary-sm';
 
 const momentJs = moment;
 
@@ -28,7 +26,7 @@ export class TrailingStatisticsGraphComponent implements OnInit {
 
   private logger: HistorianService;
 
-  graphData: { name: string, value: number, extra: { customLabel: string } }[] = [];
+  graphData: { name: string, value: number, extra: { totalSeconds: number } }[] = [];
 
   view: any[] = [700, 400];
 
@@ -67,7 +65,7 @@ export class TrailingStatisticsGraphComponent implements OnInit {
   private createGraphData(trailingStatistics: TrailingStatisticsSm): void {
     const timeBlocks = this.getIntervalLabels().reverse();
 
-    let reverseTrailingStatistics = {
+    const reverseTrailingStatistics = {
       timeBlock: trailingStatistics.timeBlock,
       timeBlockSummaries: [...trailingStatistics.timeBlockSummaries].reverse(),
       count: trailingStatistics.count
@@ -83,7 +81,7 @@ export class TrailingStatisticsGraphComponent implements OnInit {
           name,
           value,
           extra: {
-            customLabel: Utilities.formatHrsMins(timeBlockSummary.totalSeconds)
+            totalSeconds: timeBlockSummary.totalSeconds
           }
         };
       }
