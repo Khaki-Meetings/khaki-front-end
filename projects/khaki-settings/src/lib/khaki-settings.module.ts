@@ -22,6 +22,9 @@ import {EmployeesEffects} from './state/effects/employees.effects';
 import {DepartmentsEffects} from './state/effects/departments.effects';
 import {HistorianService, Logging} from '@natr/historian';
 import {StatisticsFiltersFacade} from './state/statistics-filters/statistics-filters-facade';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {HoursMinutesPipe} from './pipes/hours-minutes.pipe';
 
 @NgModule({
   declarations: [
@@ -34,11 +37,13 @@ import {StatisticsFiltersFacade} from './state/statistics-filters/statistics-fil
     SettingsEmployeeComponent,
     SettingsDepartmentComponent,
     AddEmployeeDialogComponent,
-    AddDepartmentDialogComponent
+    AddDepartmentDialogComponent,
+    HoursMinutesPipe
   ],
   imports: [
     KhakiSettingsRoutingModule,
     MatIconModule,
+    MatExpansionModule,
     CommonModule,
     MatDialogModule,
     MatFormFieldModule,
@@ -58,6 +63,7 @@ import {StatisticsFiltersFacade} from './state/statistics-filters/statistics-fil
         DepartmentsEffects
       ]
     ),
+    MatProgressSpinnerModule,
   ],
   exports: [
     KhakiSettingsComponent
