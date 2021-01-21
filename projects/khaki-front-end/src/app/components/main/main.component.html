@@ -3,15 +3,12 @@
     <div class="login-container">
       <div *ngIf="(authService.isAuthenticated$ | async) === false">
         <div>
-          <h3>Welcome,</h3>
-        </div>
-        <div>
-          <h3>please sign in.</h3>
+          <h3>Welcome,<br/>please sign in.</h3>
         </div>
         <div class="auth0-container"
-          (click)="authService.loginWithPopup()">
+             (click)="login()">
           <a class="button"
-            data-provider="google-oauth2" type="button">
+             data-provider="google-oauth2" type="button">
             <div class="icon"></div>
             <div class="text">Sign in with Google</div>
           </a>
@@ -26,7 +23,7 @@
   </div>
   <div class="flex-child">
     <div>
-      <img src="/assets/laptop-working.png" />
+      <img src="/assets/laptop-working.png"/>
     </div>
   </div>
 </div>

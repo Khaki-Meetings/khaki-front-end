@@ -2,23 +2,23 @@ import {TestBed} from '@angular/core/testing';
 
 import {PerDepartmentStatisticsFacadeService} from './per-department-statistics-facade.service';
 import {MockStore, provideMockStore} from '@ngrx/store/testing';
-import {StatisticsFeature} from '../models/statistics-feature';
+import {KhakiStatisticsFeatureSm} from '../models/khaki-statistics-feature-sm';
 import {cold} from 'jasmine-marbles';
 import {DepartmentsStatisticsSm} from '../models/departments-statistics-sm';
 import {loadPerDepartmentStatistics, loadPerDepartmentStatisticsSuccess} from '../actions/per-department-statistics.actions';
 
 describe('PerDepartmentStatisticsFacadeService', () => {
   let service: PerDepartmentStatisticsFacadeService;
-  let mockStore: MockStore<StatisticsFeature>;
+  let mockStore: MockStore<KhakiStatisticsFeatureSm>;
 
   beforeEach(() => {
     TestBed.configureTestingModule(
       {
-        providers: [provideMockStore<StatisticsFeature>()]
+        providers: [provideMockStore<KhakiStatisticsFeatureSm>()]
       }
     );
     service = TestBed.inject(PerDepartmentStatisticsFacadeService);
-    mockStore = TestBed.inject<MockStore<StatisticsFeature>>(MockStore);
+    mockStore = TestBed.inject<MockStore<KhakiStatisticsFeatureSm>>(MockStore);
     spyOn(mockStore, 'dispatch').and.callThrough();
   });
 
@@ -36,7 +36,8 @@ describe('PerDepartmentStatisticsFacadeService', () => {
   it(
     'should select per department stats',
     () => {
-      const newState: StatisticsFeature = {
+      const newState: KhakiStatisticsFeatureSm = {
+        statisticsFilters: undefined,
         organizersStatistics: undefined,
         perDepartmentStatistics: {
           departmentsStatistics: [

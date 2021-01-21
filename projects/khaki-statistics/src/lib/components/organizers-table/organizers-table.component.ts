@@ -3,10 +3,11 @@ import {OrganizersStatisticsSm} from '../../state/models/organizers-statistics-s
 import {OrganizersStatisticsFacadeService} from '../../state/facades/organizers-statistics-facade.service';
 import {HistorianService, Logging} from '@natr/historian';
 import {MatPaginator, PageEvent} from '@angular/material/paginator';
-import {MatTableDataSource} from '@angular/material/table';
 import {OrganizerStatisticsSm} from '../../state/models/organizer-statistics-sm';
-import {IntervalEnum} from '../../services/models/interval.enum';
-import {CurrentTimeIntervalFacadeService} from '../../state/facades/current-time-interval-facade.service';
+import {OrganizersTablePageableFacade} from '../../state/organizers-table-pageable/organizers-table-pageable-facade.service';
+import {StatisticsFiltersFacade} from '../../state/statistics-filters/statistics-filters-facade';
+import {IntervalSe} from '../../state/statistics-filters/interval-se.enum';
+import {Moment} from 'moment/moment';
 
 @Logging
 @Component({
@@ -17,44 +18,53 @@ import {CurrentTimeIntervalFacadeService} from '../../state/facades/current-time
 
 export class OrganizersTableComponent implements OnInit, AfterViewInit {
   private logger: HistorianService;
+
   organizersStatistics: OrganizersStatisticsSm;
   displayedColumns: string[] = ['name', 'meeting', 'hours'];
-
   dataSource: OrganizerStatisticsSm[] = [];
-
-  currentTimeInterval: IntervalEnum;
+  interval: IntervalSe;
+  start: Moment;
+  end: Moment;
+  loading = false;
 
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
 
-
   constructor(
     private organizersStatisticsFacade: OrganizersStatisticsFacadeService,
-    private currentTimeIntervalFacade: CurrentTimeIntervalFacadeService
+    private statisticsFiltersFacadeService: StatisticsFiltersFacade,
+    private organizersTablePageableFacade: OrganizersTablePageableFacade
   ) {
   }
 
   ngOnInit(): void {
-  }
-
-  ngAfterViewInit(): void {
-    this.logger.debug('paginator is', this.paginator);
     this.organizersStatisticsFacade.organizersStatistics()
-      // .pipe(tap(data => this.logger.debug('subscription', data)))
       .subscribe(organizersStatistics => {
         this.logger.debug('onInit organizersStatistics', organizersStatistics);
         this.organizersStatistics = organizersStatistics;
         this.dataSource = organizersStatistics.content;
-        this.paginator.length = organizersStatistics.totalElements;
-        this.paginator.pageSize = organizersStatistics.size;
+
+        if (this.paginator) {
+          this.paginator.length = organizersStatistics.totalElements;
+          this.paginator.pageSize = organizersStatistics.size;
+        }
       });
+
+    this.statisticsFiltersFacadeService.selectStatisticsFilters()
+      .subscribe((statisticsFilters) => {
+        this.interval = statisticsFilters.interval;
+        this.start = statisticsFilters.start;
+        this.end = statisticsFilters.end;
+      });
+
+    this.organizersStatisticsFacade.organizersStatisticsLoading().subscribe(loading => this.loading = loading);
+  }
+
+  ngAfterViewInit(): void {
+    this.logger.debug('paginator is', this.paginator);
   }
 
   pageChange(event: PageEvent): void {
     this.logger.debug('page change event', event);
-    this.currentTimeIntervalFacade
-      .currentTimeInterval()
-      .subscribe(
-        currentInterval => this.organizersStatisticsFacade.requestOrganizersStatistics(currentInterval, event.pageSize, event.pageIndex)
-      );
+    this.organizersTablePageableFacade.setPageable(event.pageIndex, event.pageSize);
   }
 }

@@ -1,13 +1,11 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({providedIn: 'root'})
 export class SpinnerFacadeService {
-  otherProperty;
 
-  constructor() { }
+  constructor() {
+  }
 
   spinner(): Observable<boolean> {
     throw new Error('not implemented');

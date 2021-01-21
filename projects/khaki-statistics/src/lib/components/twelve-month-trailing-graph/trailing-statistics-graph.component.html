@@ -11,8 +11,11 @@
     </div>
   </div>
 
-  <div class="component-content flex-container">
-    <div class="center">
+  <div class="component-content">
+    <div class="mat-spinner-wrapper center" *ngIf="loading">
+      <mat-spinner></mat-spinner>
+    </div>
+    <div class="center" [ngClass]="loading? 'loadingComponent' : ''">
       <ngx-charts-bar-vertical
         [view]="view"
         [scheme]="colorScheme"
@@ -27,7 +30,7 @@
         <ng-template #tooltipTemplate let-model="model">
           <div class="ngx-charts-tooltip-content-container">
             <div class="modelName">{{model.name}}</div>
-            <div class="modelValue">{{model.extra.customLabel}}</div>
+            <div class="modelValue">{{model.extra.totalSeconds | hoursMinutes}}</div>
           </div>
         </ng-template>
       </ngx-charts-bar-vertical>

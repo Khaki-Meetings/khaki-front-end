@@ -3,11 +3,13 @@ import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
 import {map, tap} from 'rxjs/operators';
 import {HistorianService, Logging} from '@natr/historian';
-import {createSchema, morphism, StrictSchema} from 'morphism';
 import {UserProfileResponseDto} from './models/userProfileResponseDto';
 import {EmployeesResponseDto} from './models/employeesResponseDto';
 import {DepartmentsResponseDto} from './models/departmentsResponseDto';
 import {OrganizationResponseDto} from './models/organizationResponseDto';
+import {Moment} from 'moment/moment';
+import {TimeBlockSummaryResponseDto} from './models/time-block-summary-response-dto';
+
 
 @Logging
 @Injectable({
@@ -63,6 +65,13 @@ export class SettingsService {
       url = `${this.environment.khakiBff}/employees`;
     }
     return this.httpClient.get<EmployeesResponseDto>(url).pipe(tap(data => this.logger.debug('employee list', data)));
+  }
+
+  getEmployeeStats(employeeId: string, start: Moment, end: Moment): Observable<any> {
+    const url = `${this.environment.khakiBff}/statistics/individual/${employeeId}/${start.format()}/${end.format()}`;
+    this.logger.debug('url', url);
+    return this.httpClient
+      .get<TimeBlockSummaryResponseDto>(url);
   }
 
   getDepartments(): Observable<DepartmentsResponseDto> {

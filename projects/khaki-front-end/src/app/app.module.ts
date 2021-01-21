@@ -14,28 +14,35 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {AuthHttpInterceptor, AuthModule} from '@auth0/auth0-angular';
 import {MainComponent} from './components/main/main.component';
 import {environment} from '../environments/environment';
-import {UserMetadataComponent} from './components/user-metadata/user-metadata.component';
 import {TenantInterceptor} from './interceptors/tenant.interceptor';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
 import {MatDialogModule} from '@angular/material/dialog';
+import {StoreDevtoolsModule} from '@ngrx/store-devtools';
+import {KhakiAppStatisticsFiltersEffects} from './state/statistics-filters/khaki-app-statistics-filters-effects.service';
+import {StatisticsModuleStatisticsFiltersEffects} from './state/statistics-filters/statistics-module-statistics-filters-effects.service';
+import {SettingsModuleStatisticsFiltersEffects} from './state/statistics-filters/settings-module-statistics-filters-effects.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     SideNavComponent,
     MainComponent,
-    UserMetadataComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    StoreModule.forRoot(reducers, {
-      metaReducers
-    }),
-    EffectsModule.forRoot([]),
+    StoreModule.forRoot(reducers, {metaReducers}),
+    StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
+    EffectsModule.forRoot(
+      [
+        KhakiAppStatisticsFiltersEffects,
+        StatisticsModuleStatisticsFiltersEffects,
+        SettingsModuleStatisticsFiltersEffects
+      ]
+    ),
     AuthModule.forRoot(
       {
         domain: 'khaki.us.auth0.com',
@@ -70,7 +77,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatFormFieldModule,
     MatSelectModule,
     MatInputModule,
-    MatDialogModule
+    MatDialogModule,
   ],
   providers: [
     {provide: 'environment', useValue: environment},

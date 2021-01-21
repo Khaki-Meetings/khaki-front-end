@@ -1,29 +1,25 @@
 import {Injectable} from '@angular/core';
-import {StatisticsFeature} from '../models/statistics-feature';
+import {KhakiStatisticsFeatureSm} from '../models/khaki-statistics-feature-sm';
 import {select, Store} from '@ngrx/store';
-import {IntervalEnum} from '../../services/models/interval.enum';
 import {setCurrentTimeIntervalAction} from '../actions/current-time-interval.actions';
 import {Observable} from 'rxjs';
-import {currentTimeIntervalFeatureKey} from '../reducers/current-time-interval.reducer';
 import {HistorianService, Logging} from '@natr/historian';
-import {tap} from 'rxjs/operators';
-import {currentTimeIntervalSelector} from '../statistics.selectors';
+import {IntervalSe} from '../models/interval-se';
+import {statisticsIntervalSelector} from '../statistics-filters/statistics-filters.selectors';
 
 @Logging
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({providedIn: 'root'})
 export class CurrentTimeIntervalFacadeService {
   private logger: HistorianService;
 
-  constructor(private store: Store<StatisticsFeature>) {
+  constructor(private store: Store<KhakiStatisticsFeatureSm>) {
   }
 
-  setCurrentTimeInterval(interval: IntervalEnum): void {
+  setCurrentTimeInterval(interval: IntervalSe): void {
     this.store.dispatch(setCurrentTimeIntervalAction({interval}));
   }
 
-  currentTimeInterval(): Observable<IntervalEnum> {
-    return this.store.pipe(select(currentTimeIntervalSelector));
+  currentTimeInterval(): Observable<IntervalSe> {
+    return this.store.pipe(select(statisticsIntervalSelector));
   }
 }
