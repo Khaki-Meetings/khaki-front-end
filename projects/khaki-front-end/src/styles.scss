@@ -152,7 +152,13 @@ div.center {
   color: #718096;
 }
 
-.mat-progress-spinner {
-  margin: auto;
+.mat-spinner-wrapper {
+  margin: 10px;
   padding: 10px;
+  display: block;
+  position: relative;
+}
+
+.loadingComponent {
+  display: none;
 }
