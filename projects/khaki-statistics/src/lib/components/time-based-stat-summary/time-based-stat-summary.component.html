@@ -4,7 +4,7 @@
       <div style="float:left;">
         <div class="label">Staff Time in Meetings</div>
         <mat-spinner *ngIf="loading"></mat-spinner>
-        <div class="value">{{timeBlockSummary?.formattedTotalSeconds}}</div>
+        <div class="value">{{timeBlockSummary?.totalSeconds | hoursMinutes}}</div>
       </div>
       <div style="float:right;">
         <div id="staff-hours-in-meetings-help" class="help-wrapper">
@@ -19,7 +19,7 @@
       <div style="float:left;">
         <div class="label">Average Staff Time per Meeting</div>
         <mat-spinner *ngIf="loading"></mat-spinner>
-        <div class="value">{{timeBlockSummary?.formattedAverageStaffSeconds}}</div>
+        <div class="value">{{timeBlockSummary?.averageStaffSeconds | hoursMinutes}}</div>
       </div>
       <div style="float:right;">
         <div id="avg-staff-hours-in-meetings-help" class="help-wrapper">

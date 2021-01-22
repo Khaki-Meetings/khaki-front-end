@@ -1,7 +1,7 @@
-import {StatisticsFilterSe} from '../../state/models/statistics-filter-se';
+import {StatisticsScopeSe} from '../../state/statistics-filters/statistics-scope-se.enum';
 
 export interface StatisticsQueryParameters {
   page?: number;
   count?: number;
-  filter?: StatisticsFilterSe;
+  statisticsScope?: StatisticsScopeSe;
 }

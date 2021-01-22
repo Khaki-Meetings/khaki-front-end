@@ -3,25 +3,25 @@ import {organizersStatisticsFeatureKey, organizersStatisticsReducer} from './red
 import {perDepartmentStatisticsFeatureKey, perDepartmentStatisticsReducer} from './reducers/per-department-statistics.reducer';
 import {timeBlockSummariesFeatureKey, timeBlockSummaryReducer} from './reducers/time-block-summary.reducer';
 import {trailingStatisticsFeatureKey, trailingStatisticsReducer} from './reducers/trailing-statistics.reducer';
-import {spinnerFeatureKey, spinnerReducer} from './reducers/spinner.reducer';
-import {StatisticsFeature} from './models/statistics-feature';
-import {setStatisticsFilterReducer, statisticsFiltersFeatureKey} from './reducers/statistics-filters.reducer';
+import {spinnerAttributeKey, spinnerReducer} from './reducers/spinner.reducer';
+import {KhakiStatisticsFeatureSm} from './models/khaki-statistics-feature-sm';
 import {
-  organizersTablePageableFeatureKey,
+  organizersTablePageableAttributeKey,
   organizersTablePageableReducer
 } from './organizers-table-pageable/organizers-table-pageable.reducer';
+import {statisticsFiltersAttributeKey, statisticsFiltersReducer} from './statistics-filters/statistics-filters.reducer';
 
 export const khakiStatisticsFeatureKey = 'khakiStatistics';
 
-export const reducers: ActionReducerMap<StatisticsFeature> = {
-  [organizersTablePageableFeatureKey]: organizersTablePageableReducer,
+export const khakiStatisticsReducers: ActionReducerMap<KhakiStatisticsFeatureSm> = {
+  [organizersTablePageableAttributeKey]: organizersTablePageableReducer,
   [organizersStatisticsFeatureKey]: organizersStatisticsReducer,
   [perDepartmentStatisticsFeatureKey]: perDepartmentStatisticsReducer,
   [timeBlockSummariesFeatureKey]: timeBlockSummaryReducer,
   [trailingStatisticsFeatureKey]: trailingStatisticsReducer,
-  [spinnerFeatureKey]: spinnerReducer,
-  [statisticsFiltersFeatureKey]: setStatisticsFilterReducer
+  [spinnerAttributeKey]: spinnerReducer,
+  [statisticsFiltersAttributeKey]: statisticsFiltersReducer
 };
 
 
-export const metaReducers: MetaReducer<StatisticsFeature>[] = [];
+export const khakiStatisticsMetaReducers: MetaReducer<KhakiStatisticsFeatureSm>[] = [];

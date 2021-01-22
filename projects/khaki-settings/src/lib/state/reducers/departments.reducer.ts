@@ -2,7 +2,7 @@ import {createReducer, on} from '@ngrx/store';
 import { DepartmentsResponseDto } from '../../services/models/departmentsResponseDto';
 import {loadDepartments, loadDepartmentsSuccess} from '../actions/departments.actions';
 
-export const departmentsFeatureKey = 'departments';
+export const departmentsAttributeKey = 'departments';
 
 export const initialState: DepartmentsResponseDto = {
   departments: []

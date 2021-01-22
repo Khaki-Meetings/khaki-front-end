@@ -5,5 +5,4 @@ export interface OrganizerStatisticsSm {
   totalMeetings: number;
   totalSeconds: number;
   totalCost: number;
-  formattedTime: string;
 }

@@ -5,8 +5,8 @@ import {ErrorSm} from '../models/error-sm';
 import {of} from 'rxjs';
 import {StatisticsService} from '../../services/statistics.service';
 import {loadTrailingStatistics, loadTrailingStatisticsFailure, loadTrailingStatisticsSuccess} from '../actions/trailing-statistics.actions';
-import {StatisticsFiltersFacadeService} from '../facades/statistics-filters-facade.service';
-import {IntervalEnum} from '../../services/models/interval.enum';
+import {StatisticsFiltersFacade} from '../statistics-filters/statistics-filters-facade';
+import {IntervalSe} from '../statistics-filters/interval-se.enum';
 
 
 @Injectable()
@@ -15,9 +15,9 @@ export class TrailingStatisticsEffects {
   trailingStatisticsEffect$ = createEffect(
     () => this.actions$.pipe(
       ofType(loadTrailingStatistics),
-      mergeMap(() => this.statisticsFiltersFacade.statisticsFilters()),
+      mergeMap(() => this.statisticsFiltersFacade.selectStatisticsFilters()),
       switchMap(
-        (action) => this.statisticsService.getTrailingStatistics(IntervalEnum[action.interval], {...action})
+        (action) => this.statisticsService.getTrailingStatistics(action.start, IntervalSe[action.interval], {...action})
           .pipe(
             map(trailingStatistics => loadTrailingStatisticsSuccess(trailingStatistics)),
             catchError(
@@ -31,7 +31,7 @@ export class TrailingStatisticsEffects {
   constructor(
     private actions$: Actions,
     private statisticsService: StatisticsService,
-    private statisticsFiltersFacade: StatisticsFiltersFacadeService
+    private statisticsFiltersFacade: StatisticsFiltersFacade
   ) {
   }
 

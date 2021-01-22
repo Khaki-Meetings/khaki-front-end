@@ -1,6 +1,6 @@
 <form [formGroup]="form"></form>
 <select [formControl]="filterControl">
   <option *ngFor="let opt of meetingTypeOptions" [value]="opt.value">
-    {{opt.text}}
+    {{opt.value | meetingTypeDetail }}
   </option>
 </select>

@@ -3,6 +3,7 @@ import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {map, tap} from 'rxjs/operators';
 import {AllStatisticsFacadeService} from '../facades/all-statistics-facade.service';
 import {HistorianService, Logging} from '@natr/historian';
+import {setStatisticsFiltersAction} from '../statistics-filters/set-statistics-filters.actions';
 
 @Logging
 @Injectable()
@@ -11,7 +12,7 @@ export class StatisticsFiltersChangeEffects {
 
   effect$ = createEffect(
     () => this.actions$.pipe(
-      ofType('[StatisticsFilter] Set StatisticsFilters'),
+      ofType(setStatisticsFiltersAction),
       tap(action => this.logger.debug('action', action)),
       map(
         () => {
