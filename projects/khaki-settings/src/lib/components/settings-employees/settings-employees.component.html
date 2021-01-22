@@ -10,31 +10,36 @@
         <div class="employee-table-emp">
           <div><img *ngIf="employee.avatar" [src]="employee.avatar"/></div>
         </div>
-        <div class="employee-info" style="width: 100%; padding: 15px 15px 0 0">
-          <div class="employee-name">
-            <span class="name">{{employee.firstName}} {{employee.lastName}}</span>
-            <span>{{employee.department}}</span>
+        <div class="employee-info" style="width: 100%; padding-right: 15px;">
+          <div>
+            <div class="employee-name">
+              <span class="name">{{employee.firstName}} {{employee.lastName}}</span>
+              <span>{{employee.department}}</span>
+            </div>
           </div>
           <div>
             <span class="text-detail">{{employee.email}}</span>
           </div>
         </div>
       </mat-expansion-panel-header>
-
-      <ng-template matExpansionPanelContent>
-        <mat-spinner *ngIf="employeeStatsLoading"></mat-spinner>
-        <div *ngIf="!employeeStatsLoading">
-          <div>
-            Interval: {{interval | intervalTextDetail: start: end}}, Scope: {{statisticsScope | meetingTypeDetail}}
+      <div>
+        <ng-template matExpansionPanelContent>
+          <mat-spinner *ngIf="employeeStatsLoading"></mat-spinner>
+          <div *ngIf="!employeeStatsLoading">
+            <div>
+              {{interval | intervalTextDetail: start: end}}
+              of
+              {{statisticsScope | meetingTypeDetail}}
+            </div>
+            <div>
+              Total Time: {{selectedEmployeeStats.totalSeconds | hoursMinutes}}
+            </div>
+            <div>
+              Meetings: {{selectedEmployeeStats.meetingCount}}
+            </div>
           </div>
-          <div>
-            Total Time: {{selectedEmployeeStats.totalSeconds | hoursMinutes}}
-          </div>
-          <div>
-            Total Meetings: {{selectedEmployeeStats.meetingCount}}
-          </div>
-        </div>
-      </ng-template>
+        </ng-template>
+      </div>
     </mat-expansion-panel>
   </mat-accordion>
   <div class="arrows">
