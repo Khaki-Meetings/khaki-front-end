@@ -18,6 +18,7 @@ import {take} from 'rxjs/operators';
 export class AppComponent implements OnInit {
   title = 'khaki-front-end';
   show = false;
+  isAuthed = false;
 
   private logger: HistorianService;
 
@@ -39,6 +40,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.authService.isAuthenticated$.subscribe(authed => this.isAuthed = authed);
     this.setChildrenStatisticsFiltersInitialState();
     this.authService.idTokenClaims$
       .subscribe(
