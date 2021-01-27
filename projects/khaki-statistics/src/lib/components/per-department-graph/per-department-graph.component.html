@@ -40,6 +40,8 @@
           [labels]="showLabels"
           [doughnut]="isDoughnut"
           [tooltipDisabled]="tooltipDisabled"
+          (select)="onActivate($event)"
+          (activate)="onActivate($event)"
           (deactivate)="onDeactivate($event)">
         </ngx-charts-pie-chart>
       </div>
