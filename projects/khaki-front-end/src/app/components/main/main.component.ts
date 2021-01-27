@@ -15,6 +15,6 @@ export class MainComponent implements OnInit {
   }
 
   login(): void {
-    this.authService.loginWithRedirect();
+    this.authService.loginWithRedirect({connection: 'google-oauth2'});
   }
 }
