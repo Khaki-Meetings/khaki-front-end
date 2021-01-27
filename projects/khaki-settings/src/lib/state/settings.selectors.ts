@@ -21,5 +21,3 @@ export const departmentsSelector = createSelector(
   khakiSettingsFeatureSelector,
   (state: KhakiSettingsFeatureSm) => state[departmentsAttributeKey]
 );
-
-

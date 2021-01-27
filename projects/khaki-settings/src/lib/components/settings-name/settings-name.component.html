@@ -1,9 +1,3 @@
 <div class="companyNameWrapper">
-    <span>{{companyName}}</span>
-    <div *ngIf="editMode" class="edit">
-        <input type="text" name="name" placeholder="Cool Things Co." [(ngModel)]="companyName"/>
-    </div>
-<!--    <button *ngIf="!editMode" (click)="onChange()">Change</button>-->
-<!--    <button *ngIf="editMode" class="save" (click)="onSave()">Save</button>-->
-<!--    <button *ngIf="editMode" (click)="onCancel()">Cancel</button>-->
+    <span>{{ organization?.name }}</span>
 </div>
