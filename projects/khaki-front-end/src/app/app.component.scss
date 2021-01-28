@@ -115,3 +115,10 @@ mat-drawer {
     padding-top: 20px;
   }
 }
+
+.mat-drawer.side-nav-hide {
+  display: none;
+}
+.mat-drawer-content.main-content-show {
+  margin-left: 200px;
+}
