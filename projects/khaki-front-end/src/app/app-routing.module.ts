@@ -48,7 +48,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'stats',
+    redirectTo: 'home',
     pathMatch: 'full'
   }
 ];
