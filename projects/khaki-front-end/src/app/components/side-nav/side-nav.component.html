@@ -50,9 +50,12 @@
 
         <div class="profile-wrapper">
           <div id="profile-popup-wrapper">
-              <img [src]="userImgUrl" />
-              <span>{{displayName}}</span>
-          </div>
+            <img [src]="userImgUrl" />
+            <span>{{displayName}}</span>
+            <div class="expand">
+              <mat-icon class="profile-icon">keyboard_arrow_right</mat-icon>
+            </div>
+        </div>
           <div id="profile-popup-content" class="profile-content">
             <div>
                 <div class="name">{{displayName}}</div>

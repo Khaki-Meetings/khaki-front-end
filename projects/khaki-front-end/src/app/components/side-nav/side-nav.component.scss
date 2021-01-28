@@ -128,8 +128,23 @@
 #profile-popup-wrapper {
   display: flex;
   align-items: center;
+  -webkit-box-direction: normal;
+  -webkit-box-orient: horizontal;
+  flex-direction: row;
   span {
     padding-left: 10px;
+  }
+  .expand {
+    -webkit-box-align: end;
+    align-items: flex-end;
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+
+    float: right;
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
   }
 }
 
@@ -139,15 +154,10 @@
   flex-direction: column;
 
   mat-icon {
-    font-size: 16px;
+    font-size: 25px;
     color: #b7babd;
   }
-/*
-  position: fixed;
-  bottom: 50px;
-  left: 0px;
-  right: 0px;
-*/
+
   img {
     height: 35px;
     border-radius: 8px;
