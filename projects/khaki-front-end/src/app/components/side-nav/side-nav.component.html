@@ -1,5 +1,4 @@
-<div class="side-nav-background" style="display: flex;
-    justify-content: space-between; flex-direction: column;">
+<div class="side-nav-background">
   <div>
     <div class="logo-container">
       <a routerLink="home" routerLinkActive="active-link">
@@ -45,15 +44,15 @@
         <div class="profile-wrapper">
           <div id="profile-popup-wrapper">
             <img [src]="userImgUrl" />
-            <span>{{displayName}}</span>
+            <span>{{userDisplayName}}</span>
             <div class="expand">
               <mat-icon class="profile-icon">keyboard_arrow_right</mat-icon>
             </div>
         </div>
           <div id="profile-popup-content" class="profile-content">
             <div>
-                <div class="name">{{displayName}}</div>
-                <div class="email">{{email}}</div>
+                <div class="name">{{userDisplayName}}</div>
+                <div class="email">{{userEmail}}</div>
             </div>
             <div class="signout" (click)="logout()">
                 <a>Sign Out</a>

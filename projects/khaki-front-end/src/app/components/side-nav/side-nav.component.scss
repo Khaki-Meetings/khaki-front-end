@@ -3,6 +3,9 @@
   height: 100%;
   color: #F7FAFC;
   overflow: visible;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
 }
 
 // Logo styling

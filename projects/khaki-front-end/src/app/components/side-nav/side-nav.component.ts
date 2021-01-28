@@ -18,8 +18,8 @@ export class SideNavComponent implements OnInit {
   hasMultiTenant = false;
   defaultTenant: string;
   userImgUrl: string;
-  displayName: string;
-  email: string;
+  userDisplayName: string;
+  userEmail: string;
 
   tenantMap: Map<string, string> = new Map<string, string>();
 
@@ -31,8 +31,8 @@ export class SideNavComponent implements OnInit {
     this.tenantFacade.tenantMap().pipe(tap(map => this.logger.debug(map))).subscribe(tenantMap => this.tenants(tenantMap));
     this.authService.user$.subscribe(
       user => {
-        this.displayName = user.name;
-        this.email = user.email;
+        this.userDisplayName = user.name;
+        this.userEmail = user.email;
         this.userImgUrl = user.picture
       });
   }
