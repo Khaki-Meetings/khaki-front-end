@@ -70,17 +70,23 @@
 }
 
 .time-based-stat-summary {
-  margin: 10px 5px;
+  margin-left: 10px;
+  padding: 25px 30px 40px 30px;
+}
+
+.time-based-stat-summary:first-child {
+  margin-left: 0px;
 }
 
 .time-based-stat-summary .value {
   font-size: x-large;
-  padding-top: 5px;
+  padding-top: 10px;
 }
 
 .time-based-stat-summary .label {
   font-size: small;
   white-space: pre;
+  color: #4A5568;
 }
 
 .container{
