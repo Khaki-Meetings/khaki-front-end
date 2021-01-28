@@ -17,6 +17,9 @@ export class SideNavComponent implements OnInit {
   isAuthed = false;
   hasMultiTenant = false;
   defaultTenant: string;
+  userImgUrl: string;
+  displayName: string;
+  email: string;
 
   tenantMap: Map<string, string> = new Map<string, string>();
 
@@ -26,6 +29,12 @@ export class SideNavComponent implements OnInit {
   ngOnInit(): void {
     this.authService.isAuthenticated$.subscribe(authed => this.isAuthed = authed);
     this.tenantFacade.tenantMap().pipe(tap(map => this.logger.debug(map))).subscribe(tenantMap => this.tenants(tenantMap));
+    this.authService.user$.subscribe(
+      user => {
+        this.displayName = user.name;
+        this.email = user.email;
+        this.userImgUrl = user.picture
+      });
   }
 
   logout(): void {
