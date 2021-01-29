@@ -15,25 +15,27 @@
     <div class="mat-spinner-wrapper center" *ngIf="loading">
       <mat-spinner></mat-spinner>
     </div>
-    <div class="center" [ngClass]="loading? 'loadingComponent' : ''">
-      <ngx-charts-bar-vertical
-        [view]="view"
-        [scheme]="colorScheme"
-        [results]="graphData"
-        [gradient]="gradient"
-        [xAxis]="showXAxis"
-        [yAxis]="showYAxis"
-        [showXAxisLabel]="showXAxisLabel"
-        [showYAxisLabel]="showYAxisLabel"
-        [xAxisLabel]="xAxisLabel"
-        [yAxisLabel]="yAxisLabel">
-        <ng-template #tooltipTemplate let-model="model">
-          <div class="ngx-charts-tooltip-content-container">
-            <div class="modelName">{{model.name}}</div>
-            <div class="modelValue">{{model.extra.totalSeconds | hoursMinutes}}</div>
-          </div>
-        </ng-template>
-      </ngx-charts-bar-vertical>
+    <div class="center-90" [ngClass]="loading? 'loadingComponent' : ''">
+      <div class="bar-chart-wrapper">
+        <ngx-charts-bar-vertical
+          (window:resize)="onResize($event)"
+          [scheme]="colorScheme"
+          [results]="graphData"
+          [gradient]="gradient"
+          [xAxis]="showXAxis"
+          [yAxis]="showYAxis"
+          [showXAxisLabel]="showXAxisLabel"
+          [showYAxisLabel]="showYAxisLabel"
+          [xAxisLabel]="xAxisLabel"
+          [yAxisLabel]="yAxisLabel">
+          <ng-template #tooltipTemplate let-model="model">
+            <div class="ngx-charts-tooltip-content-container">
+              <div class="modelName">{{model.name}}</div>
+              <div class="modelValue">{{model.extra.totalSeconds | hoursMinutes}}</div>
+            </div>
+          </ng-template>
+        </ngx-charts-bar-vertical>
+      </div>
     </div>
   </div>
 </div>
