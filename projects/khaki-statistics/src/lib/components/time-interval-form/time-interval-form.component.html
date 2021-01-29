@@ -1,4 +1,4 @@
-<select [formControl]="timeIntervalControl">
+<select class="application-filter" [formControl]="timeIntervalControl">
   <option *ngFor="let obj of timeIntervals" [value]="obj.value">
     {{obj.value | intervalTextDetail : obj.start : obj.end}}
   </option>

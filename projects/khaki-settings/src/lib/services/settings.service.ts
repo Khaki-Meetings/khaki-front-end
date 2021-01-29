@@ -6,7 +6,7 @@ import {HistorianService, Logging} from '@natr/historian';
 import {UserProfileResponseDto} from './models/userProfileResponseDto';
 import {EmployeesResponseDto} from './models/employeesResponseDto';
 import {DepartmentsResponseDto} from './models/departmentsResponseDto';
-import {OrganizationResponseDto} from './models/organization-response.dto';
+import {OrganizationResponseDto} from './models/organizationResponseDto';
 import {Moment} from 'moment/moment';
 import {TimeBlockSummaryResponseDto} from './models/time-block-summary-response-dto';
 
@@ -43,7 +43,7 @@ export class SettingsService {
       .pipe(
         map(
           (data: UserProfileResponseDto) => data as UserProfileResponseDto
-        ),
+        )
       );
   }
 
@@ -79,7 +79,6 @@ export class SettingsService {
     if (this.environment.khakiBff) {
       url = `${this.environment.khakiBff}/departments`;
     }
-    return this.httpClient
-      .get<DepartmentsResponseDto>(url);
+    return this.httpClient.get<DepartmentsResponseDto>(url).pipe(tap(data => this.logger.debug('department list', data)));
   }
 }

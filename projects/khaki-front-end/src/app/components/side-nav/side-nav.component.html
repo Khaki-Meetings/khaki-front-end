@@ -1,57 +1,65 @@
 <div class="side-nav-background">
-  <div class="logo-container">
-    <a routerLink="home" routerLinkActive="active-link">
-      <img src="/assets/logo.png" class="logo"/>
-    </a>
-    <div class="label">Khaki</div>
-  </div>
-  <div class="spacer"></div>
-
-  <div *ngIf="isAuthed">
-    <div class="menu-items">
-      <div class="icon-spacing">
-        <a routerLink="stats" routerLinkActive="active-link">
-          <mat-icon class="non-profile-icons">bar_chart</mat-icon>
-          <div class="label">Dashboard</div>
-        </a>
-      </div>
-      <div class="icon-spacing">
-        <a routerLink="profile" routerLinkActive="active-link">
-          <mat-icon class="profile-icon">account_circle</mat-icon>
-          <div class="label">Profile</div>
-        </a>
-      </div>
-      <div class="icon-spacing">
-        <a routerLink="settings" routerLinkActive="active-link">
-          <mat-icon class="non-profile-icons">settings</mat-icon>
-          <div class="label">Settings</div>
-        </a>
-      </div>
-      <div class="icon-spacing">
-        <a (click)="openHelpDialog()">
-          <mat-icon class="non-profile-icons">help_outline</mat-icon>
-          <div class="label">Help</div>
-        </a>
-      </div>
-
-      <div *ngIf="hasMultiTenant" class="icon-spacing multi-tenant-selector">
-        <mat-select [value]="defaultTenant" (selectionChange)="onTenantChange($event)">
-          <mat-option *ngFor="let item of tenantMap | keyvalue" [value]="item.key">{{item.key}}</mat-option>
-        </mat-select>
-      </div>
-
+  <div>
+    <div class="logo-container">
+      <a routerLink="home" routerLinkActive="active-link">
+        <img src="/assets/logo.png" class="logo"/>
+      </a>
+      <div class="label">Khaki</div>
     </div>
+    <div class="spacer"></div>
 
-  </div>
-
-  <div *ngIf="isAuthed">
-    <div class="logout">
-      <div class="icon-spacing container">
-        <a (click)="logout()">
-          <span>Logout</span>
-        </a>
+    <div *ngIf="isAuthed">
+      <div class="menu-items">
+        <div class="icon-spacing">
+          <a routerLink="stats" routerLinkActive="active-link">
+            <mat-icon class="non-profile-icons">bar_chart</mat-icon>
+            <div class="label">Dashboard</div>
+          </a>
+        </div>
+        <div class="icon-spacing">
+          <a routerLink="settings" routerLinkActive="active-link">
+            <mat-icon class="non-profile-icons">settings</mat-icon>
+            <div class="label">Settings</div>
+          </a>
+        </div>
+        <div class="icon-spacing">
+          <a (click)="openHelpDialog()">
+            <mat-icon class="non-profile-icons">help_outline</mat-icon>
+            <div class="label">Help</div>
+          </a>
+        </div>
+        <div *ngIf="hasMultiTenant" class="icon-spacing multi-tenant-selector">
+          <mat-select [value]="defaultTenant" (selectionChange)="onTenantChange($event)">
+            <mat-option *ngFor="let item of tenantMap | keyvalue" [value]="item.key">{{item.key}}</mat-option>
+          </mat-select>
+        </div>
       </div>
     </div>
   </div>
 
+  <div *ngIf="isAuthed" style="margin-bottom: 30px;">
+
+    <div class="icon-spacing">
+
+        <div class="profile-wrapper">
+          <div id="profile-popup-wrapper">
+            <img [src]="userImgUrl" />
+            <span>{{userDisplayName}}</span>
+            <div class="expand">
+              <mat-icon class="profile-icon">keyboard_arrow_right</mat-icon>
+            </div>
+        </div>
+          <div id="profile-popup-content" class="profile-content">
+            <div>
+                <div class="name">{{userDisplayName}}</div>
+                <div class="email">{{userEmail}}</div>
+            </div>
+            <div class="signout" (click)="logout()">
+                <a>Sign Out</a>
+            </div>
+          </div>
+        </div>
+
+    </div>
+  </div>
 </div>

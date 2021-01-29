@@ -25,6 +25,6 @@ export class IntervalTextDetailPipe implements PipeTransform {
 
     const endDate = IntervalTextDetailPipe.setDisplayEnd(end);
 
-    return 'Last ' + intervalLabel + ' (' + startDate + ' - ' + endDate.format('ddd, MMM D') + ')';
+    return 'Trailing ' + intervalLabel;
   }
 }

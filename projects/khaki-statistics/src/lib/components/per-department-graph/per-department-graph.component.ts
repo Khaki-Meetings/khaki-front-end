@@ -127,6 +127,15 @@ export class PerDepartmentGraphComponent implements OnInit {
     this.drawDefaultDonutLabel();
   }
 
+  onActivate(data): void {
+    let displayValue = '';
+    if (data.value.value !== 0) {
+      displayValue = PerDepartmentGraphComponent.formatHrsMins(data.value.value);
+    }
+     document.getElementById('center-text-label').innerHTML = data.value.name;
+     document.getElementById('center-text-value-bg').innerHTML = displayValue;
+     document.getElementById('center-text-value').innerHTML = displayValue;
+  }
 
   onDeactivate(data): void {
     this.drawDefaultDonutLabel();

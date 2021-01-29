@@ -3,6 +3,9 @@
     <div class="login-container">
       <div *ngIf="(authService.isAuthenticated$ | async) === false">
         <div>
+          <img src="/assets/logo.png" class="logo"/>
+        </div>
+        <div>
           <h3>Welcome,<br/>please sign in.</h3>
         </div>
         <div class="auth0-container"
@@ -21,7 +24,7 @@
       </div>
     </div>
   </div>
-  <div class="flex-child">
+  <div class="flex-child right-image-wrapper">
     <div>
       <img src="/assets/laptop-working.png"/>
     </div>
