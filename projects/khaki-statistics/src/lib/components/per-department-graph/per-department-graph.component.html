@@ -17,8 +17,10 @@
   </div>
 
   <div class="component-content">
-    <mat-spinner *ngIf="loading"></mat-spinner>
-    <div class="center">
+    <div class="mat-spinner-wrapper center" *ngIf="loading">
+      <mat-spinner></mat-spinner>
+    </div>
+    <div class="center" [ngClass]="loading? 'loadingComponent' : ''">
       <div class="legend">
         <ngx-charts-legend-custom
           [data]="legendData"
@@ -38,6 +40,8 @@
           [labels]="showLabels"
           [doughnut]="isDoughnut"
           [tooltipDisabled]="tooltipDisabled"
+          (select)="onActivate($event)"
+          (activate)="onActivate($event)"
           (deactivate)="onDeactivate($event)">
         </ngx-charts-pie-chart>
       </div>

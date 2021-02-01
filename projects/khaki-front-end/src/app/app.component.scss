@@ -115,3 +115,14 @@ mat-drawer {
     padding-top: 20px;
   }
 }
+
+.khaki-main-container {
+  height: 100%;
+}
+
+.mat-drawer.side-nav-hide {
+  display: none;
+}
+.mat-drawer-content.main-content-show {
+  margin-left: 200px;
+}

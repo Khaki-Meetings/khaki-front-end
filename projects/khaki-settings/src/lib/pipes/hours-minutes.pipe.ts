@@ -4,11 +4,9 @@ import {Pipe, PipeTransform} from '@angular/core';
 export class HoursMinutesPipe implements PipeTransform {
 
   transform(value: number): string {
-    if (value === null || value === 0) {
-      return '(empty)';
-    }
-    const hours = Math.trunc(value / 60 / 60);
-    const minutes = Math.trunc(value / 60 % 60);
+    const displayValue = value === null ? 0 : value;
+    const hours = Math.trunc(displayValue / 60 / 60);
+    const minutes = Math.trunc(displayValue / 60 % 60);
 
     const hoursLabel = hours === 1 ? 'hr' : 'hrs';
 

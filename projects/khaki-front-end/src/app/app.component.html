@@ -56,11 +56,13 @@
 </div>
 
 
-<mat-drawer-container class="example-container">
-  <mat-drawer #drawer mode="side" opened style="min-height: 100vh">
+<mat-drawer-container class="khaki-main-container">
+  <mat-drawer #drawer mode="side" opened style="min-height: 100vh"
+        [ngClass]="isAuthed? '' : 'side-nav-hide'">
     <app-side-nav></app-side-nav>
   </mat-drawer>
-  <mat-drawer-content style="min-height: 100vh">
+  <mat-drawer-content style="min-height: 100vh"
+        [ngClass]="isAuthed? 'main-content-show' : ''">
     <router-outlet></router-outlet>
   </mat-drawer-content>
 </mat-drawer-container>

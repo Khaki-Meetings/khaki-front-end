@@ -63,18 +63,22 @@ body { margin: 0; font-family: Avenir, "Helvetica Neue", sans-serif; }
 // Component defaults
 
 .khaki-container {
-  border: 1px solid #dbdee2;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
   background-color: white;
   padding: 10px 10px 25px 10px;
   border-radius: 8px;
   flex: 1 1 0px;
-  margin: 10px 10px;
+  margin: 10px 0px;
 }
 
 .khaki-clear-container {
   padding: 0px;
   flex: 1 1 0px;
-  margin: 10px 10px;
+}
+
+.khaki-clear-container {
+  padding: 0px;
+  flex: 1 1 0px;
 }
 
 div.center {
@@ -146,13 +150,29 @@ div.center {
 .component-title {
     font-size: initial;
     font-weight: 400;
+    color: #4A5568;
 }
 
 .component-subtitle {
   color: #718096;
 }
 
-.mat-progress-spinner {
-  margin: auto;
+.mat-spinner-wrapper {
+  margin: 10px;
   padding: 10px;
+  display: block;
+  position: relative;
+}
+
+.loadingComponent {
+  display: none;
+}
+
+lib-per-department-graph .ngx-charts {
+  .arc {
+    &.active,
+    &:hover {
+      opacity: 0.2;
+    }
+  }
 }
