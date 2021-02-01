@@ -51,6 +51,12 @@ body { margin: 0; font-family: Avenir, "Helvetica Neue", sans-serif; }
 
 .page-caption {
   width: 100%;
+  padding-bottom: 20px;
+  overflow: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .title {
@@ -175,4 +181,12 @@ lib-per-department-graph .ngx-charts {
       opacity: 0.2;
     }
   }
+}
+
+
+::ng-deep .mat-select-value {
+  max-width: 0;
+  width: 100%;
+  white-space: nowrap;
+  display: contents;
 }
