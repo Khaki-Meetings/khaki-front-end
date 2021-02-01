@@ -51,13 +51,18 @@ body { margin: 0; font-family: Avenir, "Helvetica Neue", sans-serif; }
 
 .page-caption {
   width: 100%;
+  padding-bottom: 20px;
+  overflow: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .title {
   font-weight: bold;
   font-size: larger;
   line-height: 28px;
-  margin-left: 10px;
 }
 
 // Component defaults
@@ -68,7 +73,7 @@ body { margin: 0; font-family: Avenir, "Helvetica Neue", sans-serif; }
   padding: 10px 10px 25px 10px;
   border-radius: 8px;
   flex: 1 1 0px;
-  margin: 10px 0px;
+  margin: 0px 0px 20px;
 }
 
 .khaki-clear-container {
@@ -85,6 +90,12 @@ div.center {
     margin-left: auto;
     margin-right: auto;
     width: fit-content;
+}
+
+div.center-90 {
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
 }
 
 .component-header {
@@ -175,4 +186,12 @@ lib-per-department-graph .ngx-charts {
       opacity: 0.2;
     }
   }
+}
+
+
+::ng-deep .mat-select-value {
+  max-width: 0;
+  width: 100%;
+  white-space: nowrap;
+  display: contents;
 }

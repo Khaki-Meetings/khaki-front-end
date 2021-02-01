@@ -37,6 +37,7 @@ export class PerDepartmentGraphComponent implements OnInit {
   showLabels = false;
   isDoughnut = true;
   tooltipDisabled = true;
+  arcWidth = 0.2;
 
   colorScheme = {
     domain: ['#3182CE', '#48BB78', '#9F7AEA', '#ED64A6', '#667EEA', '#478aef', '#47ef88', '#b647ef', '#ef47ba', '#e3b755']
@@ -163,10 +164,6 @@ export class PerDepartmentGraphComponent implements OnInit {
   }
 
   private calculatePieDimensions(): number[] {
-    if (this.graphData === null || this.graphData.length < 4) {
-      return [200, 200];
-    }
-    const dimensionSize = this.graphData.length * 25;
-    return [dimensionSize, dimensionSize];
+    return [350, 350];
   }
 }
