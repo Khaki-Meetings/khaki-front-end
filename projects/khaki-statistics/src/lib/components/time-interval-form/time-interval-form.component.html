@@ -1,4 +1,4 @@
-<mat-select class="application-filter-mat" [formControl]="timeIntervalControl">
+<mat-select class="application-filter" [formControl]="timeIntervalControl">
   <mat-option *ngFor="let opt of timeIntervals" [value]="opt.value">
     {{opt.value | intervalTextDetail : opt.start : opt.end}}
   </mat-option>
