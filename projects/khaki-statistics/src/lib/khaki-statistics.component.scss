@@ -27,8 +27,8 @@
 .lib-time-interval-form-wrapper {
   font-weight: normal;
   line-height: 28px;
+  display: inline-flex;
   .data-selector {
-    display: inline-flex;
     padding-left: 10px;
   }
   span {
@@ -50,5 +50,5 @@
 }
 
 .data-selector {
-    margin-right: 16px;
+    margin-right: 25px;
 }
