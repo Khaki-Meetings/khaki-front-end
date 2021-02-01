@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {HistorianService, Logging} from '@natr/historian';
 import {StatisticsFiltersFacade} from '../../state/statistics-filters/statistics-filters-facade';
@@ -8,7 +8,8 @@ import {StatisticsScopeSe} from '../../state/statistics-filters/statistics-scope
 @Component({
   selector: 'lib-external-internal-selector',
   templateUrl: './external-internal-selector.component.html',
-  styleUrls: ['./external-internal-selector.component.scss']
+  styleUrls: ['./external-internal-selector.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class ExternalInternalSelectorComponent implements OnInit {
   constructor(private statisticsFiltersFacade: StatisticsFiltersFacade) {

@@ -116,4 +116,9 @@ export class TrailingStatisticsGraphComponent implements OnInit {
 
     return timeBlocks;
   }
+
+  onResize(event) {
+    this.view = [event.target.innerWidth / 1.35, 400];
+  }
+  
 }
