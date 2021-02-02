@@ -17,7 +17,7 @@
 
   <div class="component-content">
     <div class="mat-spinner-wrapper center" *ngIf="loading">
-      <mat-spinner></mat-spinner>
+      <lib-khaki-spinner></lib-khaki-spinner>
     </div>
     <div [ngClass]="loading? 'loadingComponent' : ''">
       <table mat-table [dataSource]="dataSource">
