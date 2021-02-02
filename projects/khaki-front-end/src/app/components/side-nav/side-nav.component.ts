@@ -47,7 +47,7 @@ export class SideNavComponent implements OnInit {
   }
 
   private tenants(tenantMap: Map<string, string>): void {
-    if (tenantMap.size < 1) {
+    if (!tenantMap || tenantMap.size < 1) {
       return;
     }
     const storedKey = localStorage.getItem(SideNavComponent.TenantKey);

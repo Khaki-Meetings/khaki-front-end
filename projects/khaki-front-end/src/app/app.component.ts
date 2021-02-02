@@ -7,7 +7,6 @@ import {StatisticsFiltersFacade as StatisticsModuleStatisticsFiltersFacade} from
 import {KhakiState} from './state/reducers';
 import {Store} from '@ngrx/store';
 import {statisticsFiltersAttributeKey} from './state/statistics-filters/statistics-filters.reducer';
-import {take} from 'rxjs/operators';
 
 @Logging
 @Component({
@@ -76,7 +75,7 @@ export class AppComponent implements OnInit {
     document.getElementById('helpModal').style.display = 'none';
   }
 
-  setChildrenStatisticsFiltersInitialState(): void{
+  setChildrenStatisticsFiltersInitialState(): void {
     this.store.select(state => state[statisticsFiltersAttributeKey])
       .subscribe(
         statisticsFilters => {

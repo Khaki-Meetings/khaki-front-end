@@ -3,6 +3,7 @@ import { provideMockActions } from '@ngrx/effects/testing';
 import { Observable } from 'rxjs';
 
 import { KhakiAppStatisticsFiltersEffects } from './khaki-app-statistics-filters-effects.service';
+import {provideMockStore} from '@ngrx/store/testing';
 
 describe('KhakiAppStatitisticsFiltersEffects', () => {
   let actions$: Observable<any>;
@@ -12,7 +13,8 @@ describe('KhakiAppStatitisticsFiltersEffects', () => {
     TestBed.configureTestingModule({
       providers: [
         KhakiAppStatisticsFiltersEffects,
-        provideMockActions(() => actions$)
+        provideMockActions(() => actions$),
+        provideMockStore()
       ]
     });
 

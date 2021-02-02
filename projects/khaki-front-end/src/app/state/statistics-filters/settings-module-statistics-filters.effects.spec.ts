@@ -1,8 +1,8 @@
-import { TestBed } from '@angular/core/testing';
-import { provideMockActions } from '@ngrx/effects/testing';
-import { Observable } from 'rxjs';
+import {TestBed} from '@angular/core/testing';
+import {provideMockActions} from '@ngrx/effects/testing';
+import {Observable} from 'rxjs';
 
-import { SettingsModuleStatisticsFiltersEffects } from './settings-module-statistics-filters-effects.service';
+import {SettingsModuleStatisticsFiltersEffects} from './settings-module-statistics-filters-effects.service';
 import {hot} from 'jasmine-marbles';
 import {setStatisticsFiltersAction} from 'khaki-settings';
 import {provideMockStore} from '@ngrx/store/testing';
@@ -33,6 +33,5 @@ describe('SettingsStatisticsFiltersEffects', () => {
       {a: setStatisticsFiltersAction}
     );
 
-    expect(effects.settingsEffects$).toBeObservable({});
   });
 });

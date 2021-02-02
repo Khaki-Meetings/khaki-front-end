@@ -1,6 +1,7 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { MainComponent } from './main.component';
+import {MainComponent} from './main.component';
+import {AuthModule} from '@auth0/auth0-angular';
 
 describe('MainComponent', () => {
   let component: MainComponent;
@@ -8,9 +9,10 @@ describe('MainComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MainComponent ]
+      declarations: [MainComponent],
+      imports: [AuthModule.forRoot({clientId: '', domain: ''})]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

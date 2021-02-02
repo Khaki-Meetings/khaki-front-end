@@ -1,16 +1,31 @@
-import { TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { AppComponent } from './app.component';
+import {TestBed} from '@angular/core/testing';
+import {RouterTestingModule} from '@angular/router/testing';
+import {AppComponent} from './app.component';
+import {AuthModule, AuthService} from '@auth0/auth0-angular';
+import {provideMockStore} from '@ngrx/store/testing';
+import {TenantFacadeService} from './state/facades/tenant-facade.service';
+import {Observable, of} from 'rxjs';
 
 describe('AppComponent', () => {
+  let tenantFacade: Partial<TenantFacadeService>;
+
   beforeEach(async () => {
+    tenantFacade = {
+      tenantMap(): Observable<Map<string, string>> {
+        return of(new Map<string, string>([['foo', 'bar']]));
+      }
+    };
     await TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
+        RouterTestingModule,
+        AuthModule.forRoot({clientId: '', domain: ''})
       ],
       declarations: [
         AppComponent
       ],
+      providers: [
+        provideMockStore()
+      ]
     }).compileComponents();
   });
 
@@ -24,12 +39,5 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     expect(app.title).toEqual('khaki-front-end');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('khaki-front-end app is running!');
   });
 });
