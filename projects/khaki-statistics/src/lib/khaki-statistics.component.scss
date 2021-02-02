@@ -25,16 +25,30 @@
 }
 
 .lib-time-interval-form-wrapper {
-  float: right;
-  padding-right: 10px;
-  margin-right: 10px;
   font-weight: normal;
   line-height: 28px;
+  display: inline-flex;
   .data-selector {
-    display: inline-flex;
-    padding: 0px 5px;
+    padding-left: 10px;
   }
   span {
     font-weight: bold;
   }
+}
+
+.ngx-charts {
+  .bar,
+  .cell,
+  .arc,
+  .card {
+    &.active,
+    &:hover {
+      opacity: 0.3;
+      transition: opacity 100ms ease-in-out;
+    }
+  }
+}
+
+.data-selector {
+    margin-right: 25px;
 }

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {HistorianService, Logging} from '@natr/historian';
 import * as moment from 'moment';
@@ -18,7 +18,8 @@ interface StartEndModel {
 @Component({
   selector: 'lib-time-interval-form',
   templateUrl: './time-interval-form.component.html',
-  styleUrls: ['./time-interval-form.component.scss']
+  styleUrls: ['./time-interval-form.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class TimeIntervalFormComponent implements OnInit {
   logger: HistorianService;

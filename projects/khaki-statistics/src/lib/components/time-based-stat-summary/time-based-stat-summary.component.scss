@@ -70,18 +70,30 @@
 }
 
 .time-based-stat-summary {
-  margin: 10px 5px;
+  margin-left: 20px;
+  padding: 25px 30px 40px 30px;
+
+  .value {
+    font-size: x-large;
+    padding-top: 10px;
+  }
+
+  .label {
+    font-size: small;
+    white-space: pre;
+    color: #4A5568;
+  }
+  
+  .content {
+    clear: both;
+  }
 }
 
-.time-based-stat-summary .value {
-  font-size: x-large;
-  padding-top: 5px;
+.time-based-stat-summary:first-child {
+  margin-left: 0px;
 }
 
-.time-based-stat-summary .label {
-  font-size: small;
-  white-space: pre;
-}
+
 
 .container{
   padding: 10px;

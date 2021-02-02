@@ -3,6 +3,7 @@ import {UserProfileFacadeService} from '../../state/facades/user-profile-facade.
 import {HistorianService, Logging} from '@natr/historian';
 import {UserProfileResponseDto} from '../../services/models/userProfileResponseDto';
 import {SettingsService} from '../../services/settings.service';
+import {OrganizationResponseDto} from '../../services/models/organizationResponseDto';
 
 @Logging
 @Component({
@@ -14,36 +15,35 @@ export class SettingsNameComponent implements OnInit {
   private logger: HistorianService;
   userProfile: UserProfileResponseDto = {};
 
-  constructor(private userProfileService: UserProfileFacadeService, private settingService: SettingsService) {
+  constructor(private userProfileService: UserProfileFacadeService,
+    private settingService: SettingsService) {
   }
 
   editMode = false;
-  companyName = '';
+  organization: OrganizationResponseDto;
 
   ngOnInit(): void {
+
     this.settingService
       .getCompany()
-      .subscribe(organization => this.companyName = organization.name);
+      .subscribe(data => {
+        this.organization = data as OrganizationResponseDto;
+      }
+    );
 
     this.userProfileService.userProfile()
       .subscribe(userProfile => {
         this.userProfile = userProfile;
       });
+
   }
 
   onChange(): void {
     this.editMode = true;
   }
 
-  onSave(): void {
-    this.editMode = false;
-    this.userProfileService.setUserProfile({companyName: this.companyName})
-      .subscribe(result => {
-        this.logger.debug('onSave', this.companyName);
-      });
-  }
-
   onCancel(): void {
     this.editMode = false;
   }
+
 }

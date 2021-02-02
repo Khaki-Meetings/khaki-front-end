@@ -1,6 +1,6 @@
 <form [formGroup]="form"></form>
-<select [formControl]="filterControl">
-  <option *ngFor="let opt of meetingTypeOptions" [value]="opt.value">
+<mat-select class="application-filter" [formControl]="filterControl">
+  <mat-option *ngFor="let opt of meetingTypeOptions" [value]="opt.value">
     {{opt.value | meetingTypeDetail }}
-  </option>
-</select>
+  </mat-option>
+</mat-select>

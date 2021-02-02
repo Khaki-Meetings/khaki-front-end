@@ -10,3 +10,10 @@
 #meeting-time-by-dept-help:hover #meeting-time-by-dept-help-content {
   visibility: visible;
 }
+
+.pie-with-legend-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
