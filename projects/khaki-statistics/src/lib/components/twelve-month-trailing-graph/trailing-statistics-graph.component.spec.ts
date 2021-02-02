@@ -1,10 +1,9 @@
-import {ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {TrailingStatisticsGraphComponent} from './trailing-statistics-graph.component';
 import {TrailingStatisticsFacadeService} from '../../state/facades/trailing-statistics-facade.service';
 import {By} from '@angular/platform-browser';
 import {BarVerticalComponent, NgxChartsModule} from '@swimlane/ngx-charts';
-import {testPerDepartmentStatistics} from '../per-department-graph/test-data.spec';
 import {of} from 'rxjs';
 import {testTwelveMonthTrailingData} from './test-data.spec';
 import {delay} from 'rxjs/operators';
@@ -15,7 +14,7 @@ describe('TwelveMonthTrailingGraphComponent', () => {
   let mockTrailingStatisticsService: Partial<TrailingStatisticsFacadeService>;
 
   beforeEach(async () => {
-    mockTrailingStatisticsService = new TrailingStatisticsFacadeService();
+    mockTrailingStatisticsService = {};
 
     spyOn(mockTrailingStatisticsService, 'requestTrailingStatistics');
     spyOn(mockTrailingStatisticsService, 'trailingStatistics')
@@ -57,16 +56,5 @@ describe('TwelveMonthTrailingGraphComponent', () => {
     () => {
       expect(mockTrailingStatisticsService.requestTrailingStatistics).toHaveBeenCalledTimes(1);
     }
-  );
-
-  it(
-    'should set twelveMonthTrailingStatistics to data from service observable',
-    fakeAsync(
-      () => {
-        expect(component.twelveMonthTrailingStatistics).toBeUndefined('sinceTimeBlockSummaries should not be set yet');
-        tick(100);
-        expect(component.twelveMonthTrailingStatistics).toEqual(testPerDepartmentStatistics);
-      }
-    )
   );
 });

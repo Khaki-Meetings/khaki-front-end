@@ -11,8 +11,18 @@ import {organizersStatisticsLoadingSelector, organizersStatisticsSelector} from 
   providedIn: 'root'
 })
 export class OrganizersStatisticsFacadeService {
+  private privBob: string;
+
+  set bob(value: string) {
+    this.privBob = value;
+  }
+
+  get bob(): string {
+    return this.privBob;
+  }
 
   constructor(private store: Store<KhakiStatisticsFeatureSm>) {
+    this.bob = 'fred';
   }
 
   requestOrganizersStatistics(): void {

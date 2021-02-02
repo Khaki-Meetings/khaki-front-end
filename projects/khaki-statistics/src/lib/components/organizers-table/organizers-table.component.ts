@@ -8,6 +8,8 @@ import {OrganizersTablePageableFacade} from '../../state/organizers-table-pageab
 import {StatisticsFiltersFacade} from '../../state/statistics-filters/statistics-filters-facade';
 import {IntervalSe} from '../../state/statistics-filters/interval-se.enum';
 import {Moment} from 'moment/moment';
+import {MatSort} from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
 
 @Logging
 @Component({
@@ -21,13 +23,14 @@ export class OrganizersTableComponent implements OnInit, AfterViewInit {
 
   organizersStatistics: OrganizersStatisticsSm;
   displayedColumns: string[] = ['name', 'meeting', 'hours'];
-  dataSource: OrganizerStatisticsSm[] = [];
+  dataSource: MatTableDataSource<OrganizerStatisticsSm>; // OrganizerStatisticsSm[] = [];
   interval: IntervalSe;
   start: Moment;
   end: Moment;
   loading = false;
 
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: false}) sort: MatSort;
 
   constructor(
     private organizersStatisticsFacade: OrganizersStatisticsFacadeService,
@@ -41,7 +44,8 @@ export class OrganizersTableComponent implements OnInit, AfterViewInit {
       .subscribe(organizersStatistics => {
         this.logger.debug('onInit organizersStatistics', organizersStatistics);
         this.organizersStatistics = organizersStatistics;
-        this.dataSource = organizersStatistics.content;
+        this.dataSource = new MatTableDataSource<OrganizerStatisticsSm>(organizersStatistics.content);
+        this.dataSource.sort = this.sort;
 
         if (this.paginator) {
           this.paginator.length = organizersStatistics.totalElements;

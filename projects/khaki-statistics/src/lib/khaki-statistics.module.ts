@@ -34,6 +34,7 @@ import {HistorianService, Logging} from '@natr/historian';
 import { HoursMinutesPipe } from './pipes/hours-minutes.pipe';
 import { IntervalTextDetailPipe } from './pipes/interval-text-detail.pipe';
 import { MeetingTypeDetailPipe } from './pipes/meeting-type-detail.pipe';
+import {MatSortModule} from '@angular/material/sort';
 
 
 @NgModule({
@@ -80,7 +81,8 @@ import { MeetingTypeDetailPipe } from './pipes/meeting-type-detail.pipe';
     NgxChartsModule,
     MatSelectModule,
     MatIconModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatSortModule
   ],
   exports: [KhakiStatisticsComponent],
   providers: []
