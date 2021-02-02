@@ -8,7 +8,7 @@ describe('TrailingStatisticsFacadeService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [provideMockStore()]
+      providers: [provideMockStore()]
     });
     service = TestBed.inject(TrailingStatisticsFacadeService);
   });

@@ -3,7 +3,6 @@ import {IntervalEnum} from '../../services/models/interval.enum';
 
 describe('loadTimeBlockSummary', () => {
   it('should return an action', () => {
-    expect(fromTimeBlockSummaries.loadTimeBlockSummary({interval: IntervalEnum.Week}).type)
-      .toBe('[TimeBlockSummaries] Load TimeBlockSummary');
+    expect(fromTimeBlockSummaries.loadTimeBlockSummary.type).toBe('[TimeBlockSummaries] Load TimeBlockSummary');
   });
 });

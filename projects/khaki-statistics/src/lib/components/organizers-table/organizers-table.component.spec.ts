@@ -1,18 +1,33 @@
 import {ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
 
 import {OrganizersTableComponent} from './organizers-table.component';
-import {By} from '@angular/platform-browser';
-import {MatTable, MatTableModule} from '@angular/material/table';
+import {MatTableModule} from '@angular/material/table';
 import {OrganizersStatisticsFacadeService} from '../../state/facades/organizers-statistics-facade.service';
 import {Observable, of} from 'rxjs';
 import {testOrganizersStatisticsData} from './test-data.spec';
 import {OrganizersStatisticsSm} from '../../state/models/organizers-statistics-sm';
 import {delay} from 'rxjs/operators';
+import {StatisticsFiltersFacade} from '../../state/statistics-filters/statistics-filters-facade';
+import {OrganizersTablePageableFacade} from '../../state/organizers-table-pageable/organizers-table-pageable-facade.service';
+import {IntervalTextDetailPipe} from '../../pipes/interval-text-detail.pipe';
+import {MatIconModule} from '@angular/material/icon';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {Pipe, PipeTransform} from '@angular/core';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+
+@Pipe({name: 'intervalTextDetail'})
+class MockPipe implements PipeTransform{
+  transform(value: any, ...args: any[]): any {
+    return 'hi';
+  }
+}
 
 describe('OrganizersTableComponent', () => {
   let component: OrganizersTableComponent;
   let fixture: ComponentFixture<OrganizersTableComponent>;
   let mockOrganizersStatisticsService: Partial<OrganizersStatisticsFacadeService>;
+  let mockStatisticsFilterFacade: Partial<StatisticsFiltersFacade>;
+  let mockOrganizersTablePageableFacade: Partial<OrganizersTablePageableFacade>;
 
 
   beforeEach(async () => {
@@ -23,6 +38,8 @@ describe('OrganizersTableComponent', () => {
         return null;
       }
     };
+    mockStatisticsFilterFacade = {};
+    mockOrganizersTablePageableFacade = {};
     spyOn(mockOrganizersStatisticsService, 'requestOrganizersStatistics');
     spyOn(mockOrganizersStatisticsService, 'organizersStatistics')
       .and
@@ -31,11 +48,12 @@ describe('OrganizersTableComponent', () => {
           .pipe(delay(100))
       );
     await TestBed.configureTestingModule({
-      declarations: [OrganizersTableComponent],
-      imports: [MatTableModule],
+      declarations: [OrganizersTableComponent, MockPipe],
+      imports: [MatTableModule, MatIconModule, MatPaginatorModule, NoopAnimationsModule],
       providers: [
-        {provide: OrganizersStatisticsFacadeService, useValue: mockOrganizersStatisticsService}
-
+        {provide: OrganizersStatisticsFacadeService, useValue: mockOrganizersStatisticsService},
+        {provide: StatisticsFiltersFacade, useValue: mockStatisticsFilterFacade},
+        {provide: OrganizersTablePageableFacade, useValue: mockOrganizersTablePageableFacade}
       ]
     })
       .compileComponents();
@@ -50,15 +68,6 @@ describe('OrganizersTableComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
-  it(
-    'should contain mat table',
-    () => {
-      const matTableElement = fixture.debugElement.query(By.directive(MatTable));
-      expect(matTableElement).toBeTruthy('Mat Table required on this page');
-    }
-  );
-
 
   it(
     'should set twelveMonthTrailingStatistics to data from service observable',

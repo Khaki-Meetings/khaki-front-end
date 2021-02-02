@@ -12,7 +12,8 @@ describe('StatisticsService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule(
       {
-        imports: [HttpClientTestingModule]
+        imports: [HttpClientTestingModule],
+        providers: [{provides: 'environment', useValue: {}}]
       }
     );
     service = TestBed.inject(StatisticsService);

@@ -23,7 +23,8 @@ export class OrganizersTableComponent implements OnInit, AfterViewInit {
 
   organizersStatistics: OrganizersStatisticsSm;
   displayedColumns: string[] = ['name', 'meeting', 'hours'];
-  dataSource: MatTableDataSource<OrganizerStatisticsSm>; // OrganizerStatisticsSm[] = [];
+  // dataSource: MatTableDataSource<OrganizerStatisticsSm>; // OrganizerStatisticsSm[] = [];
+  dataSource: OrganizerStatisticsSm[] = [];
   interval: IntervalSe;
   start: Moment;
   end: Moment;
@@ -40,27 +41,27 @@ export class OrganizersTableComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.organizersStatisticsFacade.organizersStatistics()
-      .subscribe(organizersStatistics => {
-        this.logger.debug('onInit organizersStatistics', organizersStatistics);
-        this.organizersStatistics = organizersStatistics;
-        this.dataSource = new MatTableDataSource<OrganizerStatisticsSm>(organizersStatistics.content);
-        this.dataSource.sort = this.sort;
-
-        if (this.paginator) {
-          this.paginator.length = organizersStatistics.totalElements;
-          this.paginator.pageSize = organizersStatistics.size;
-        }
-      });
-
-    this.statisticsFiltersFacadeService.selectStatisticsFilters()
-      .subscribe((statisticsFilters) => {
-        this.interval = statisticsFilters.interval;
-        this.start = statisticsFilters.start;
-        this.end = statisticsFilters.end;
-      });
-
-    this.organizersStatisticsFacade.organizersStatisticsLoading().subscribe(loading => this.loading = loading);
+    // this.organizersStatisticsFacade.organizersStatistics()
+    //   .subscribe(organizersStatistics => {
+    //     this.logger.debug('onInit organizersStatistics', organizersStatistics);
+    //     this.organizersStatistics = organizersStatistics;
+    //     this.dataSource = new MatTableDataSource<OrganizerStatisticsSm>(organizersStatistics.content);
+    //     this.dataSource.sort = this.sort;
+    //
+    //     if (this.paginator) {
+    //       this.paginator.length = organizersStatistics.totalElements;
+    //       this.paginator.pageSize = organizersStatistics.size;
+    //     }
+    //   });
+    //
+    // this.statisticsFiltersFacadeService.selectStatisticsFilters()
+    //   .subscribe((statisticsFilters) => {
+    //     this.interval = statisticsFilters.interval;
+    //     this.start = statisticsFilters.start;
+    //     this.end = statisticsFilters.end;
+    //   });
+    //
+    // this.organizersStatisticsFacade.organizersStatisticsLoading().subscribe(loading => this.loading = loading);
   }
 
   ngAfterViewInit(): void {

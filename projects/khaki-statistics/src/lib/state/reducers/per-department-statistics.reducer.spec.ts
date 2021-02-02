@@ -1,11 +1,10 @@
 import {initialState, perDepartmentStatisticsReducer} from './per-department-statistics.reducer';
 import {
-  loadPerDepartmentStatisticsFailure,
   loadPerDepartmentStatistics,
+  loadPerDepartmentStatisticsFailure,
   loadPerDepartmentStatisticsSuccess
 } from '../actions/per-department-statistics.actions';
 import {DepartmentsStatisticsSm} from '../models/departments-statistics-sm';
-import {DepartmentStatisticsSm} from '../models/department-statistics-sm';
 
 describe('PerDepartmentStatistics Reducer', () => {
   describe('Load PerDepartmentStatistics', () => {
@@ -19,7 +18,7 @@ describe('PerDepartmentStatistics Reducer', () => {
   });
 
   describe(`${loadPerDepartmentStatisticsSuccess.type}`, () => {
-    it('should return the previous state', () => {
+    it('should return state with department stats', () => {
       const perDepartmentStatistics: DepartmentsStatisticsSm = {
         departmentsStatistics: [
           {
@@ -39,13 +38,13 @@ describe('PerDepartmentStatistics Reducer', () => {
   });
 
   describe(`${loadPerDepartmentStatisticsFailure.type}`, () => {
-    it('should return the previous state', () => {
-      const perDepartmentStatistics = {
-        errors: [
-          {message: 'you done fuckeled', name: '1d10t'}
-        ]
-      } as DepartmentsStatisticsSm;
-      const action = loadPerDepartmentStatisticsSuccess(perDepartmentStatistics);
+    it('should return error', () => {
+      const perDepartmentStatistics: DepartmentsStatisticsSm = {
+        departmentsStatistics: [],
+        error:
+          {message: 'you done messed up', name: '1d10t'}
+      };
+      const action = loadPerDepartmentStatisticsFailure({message: 'you done messed up', name: '1d10t'});
 
       const result = perDepartmentStatisticsReducer(initialState, action);
 

@@ -42,18 +42,4 @@ describe('TimeBasedStatSummaryComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
-  it(
-    'should set timeBlockSummaries to data from service observable',
-    fakeAsync(
-      () => {
-        component.ngOnInit();
-        expect(component.timeBlockSummary).toBeUndefined('timeBlockSummaries should not be set yet');
-        tick(50);
-        tick(50);
-        fixture.detectChanges();
-        expect(component.timeBlockSummary).toEqual(timeBlockSummaryData);
-      }
-    )
-  );
 });

@@ -6,7 +6,7 @@ import {IntervalEnum} from '../../services/models/interval.enum';
 describe('TrailingStatistics Reducer', () => {
   describe(`${loadTrailingStatistics.type}`, () => {
     it('should return the previous state', () => {
-      const action = loadTrailingStatistics({interval: IntervalEnum.Day});
+      const action = loadTrailingStatistics();
 
       const result = trailingStatisticsReducer(initialState, action);
 
@@ -37,7 +37,7 @@ describe('TrailingStatistics Reducer', () => {
           {message: 'you done fuckeled', name: '1d10t'}
         ]
       } as TrailingStatisticsSm;
-      const action = loadTrailingStatisticsFailure(trailingStatistics.errors[0]);
+      const action = loadTrailingStatisticsFailure(trailingStatistics.error);
 
       const result = trailingStatisticsReducer(initialState, action);
 

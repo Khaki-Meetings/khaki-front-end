@@ -1,5 +1,4 @@
 import {initialState, organizersStatisticsReducer} from './organizers-statistics.reducer';
-import {trailingStatisticsReducer} from './trailing-statistics.reducer';
 import {
   loadOrganizersStatisticsAction,
   loadOrganizersStatisticsFailureAction,
@@ -20,8 +19,7 @@ describe('OrganizersStatistics Reducer', () => {
 
   describe(`${loadOrganizersStatisticsSuccessAction.type}`, () => {
     it('should return the new state', () => {
-      const organizersStatistics: OrganizersStatisticsSm = {
-      };
+      const organizersStatistics: OrganizersStatisticsSm = {};
       const action = loadOrganizersStatisticsSuccessAction(organizersStatistics);
 
       const result = organizersStatisticsReducer(initialState, action);
@@ -39,7 +37,7 @@ describe('OrganizersStatistics Reducer', () => {
       } as OrganizersStatisticsSm;
       const action = loadOrganizersStatisticsFailureAction(organizersStatistics.error);
 
-      const result = trailingStatisticsReducer(initialState, action);
+      const result = organizersStatisticsReducer(initialState, action);
 
       expect(result).toEqual({...initialState, ...organizersStatistics});
     });

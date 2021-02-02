@@ -1,12 +1,15 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { CurrentTimeIntervalFacadeService } from './current-time-interval-facade.service';
+import {CurrentTimeIntervalFacadeService} from './current-time-interval-facade.service';
+import {provideMockStore} from '@ngrx/store/testing';
 
 describe('CurrentTimeIntervalFacadeService', () => {
   let service: CurrentTimeIntervalFacadeService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      providers: [provideMockStore()]
+    });
     service = TestBed.inject(CurrentTimeIntervalFacadeService);
   });
 

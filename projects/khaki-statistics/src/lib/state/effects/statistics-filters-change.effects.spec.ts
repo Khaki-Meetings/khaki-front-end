@@ -3,6 +3,7 @@ import {provideMockActions} from '@ngrx/effects/testing';
 import {Observable} from 'rxjs';
 
 import {StatisticsFiltersChangeEffects} from './statistics-filters-change.effects';
+import {provideMockStore} from '@ngrx/store/testing';
 
 describe('CurrentTimeIntervalEffects', () => {
   // tslint:disable-next-line:prefer-const
@@ -13,7 +14,8 @@ describe('CurrentTimeIntervalEffects', () => {
     TestBed.configureTestingModule({
       providers: [
         StatisticsFiltersChangeEffects,
-        provideMockActions(() => actions$)
+        provideMockActions(() => actions$),
+        provideMockStore()
       ]
     });
 

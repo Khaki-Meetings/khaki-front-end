@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { TenantInterceptor } from './tenant.interceptor';
+import {TenantInterceptor} from './tenant.interceptor';
 import {provideMockStore} from '@ngrx/store/testing';
 
 describe('TenantInterceptor', () => {
@@ -8,7 +8,7 @@ describe('TenantInterceptor', () => {
     providers: [
       TenantInterceptor,
       provideMockStore()
-      ]
+    ]
   }));
 
   it('should be created', () => {

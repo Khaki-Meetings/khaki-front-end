@@ -10,6 +10,7 @@
     "serve-local-api": "ng serve -c localApi",
     "build": "ng build",
     "test": "ng test",
+    "test:statistics": "ng test --project=khaki-statistics",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "test-once": "ng test --watch=false",
