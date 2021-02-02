@@ -34,6 +34,7 @@ import {HistorianService, Logging} from '@natr/historian';
 import { HoursMinutesPipe } from './pipes/hours-minutes.pipe';
 import { IntervalTextDetailPipe } from './pipes/interval-text-detail.pipe';
 import { MeetingTypeDetailPipe } from './pipes/meeting-type-detail.pipe';
+import {KhakiSpinnerComponent} from './components/khaki-spinner/khaki-spinner.component';
 
 
 @NgModule({
@@ -47,6 +48,7 @@ import { MeetingTypeDetailPipe } from './pipes/meeting-type-detail.pipe';
     NgxChartsLegendCustomComponent,
     LegendEntryCustomComponent,
     ExternalInternalSelectorComponent,
+    KhakiSpinnerComponent,
     HoursMinutesPipe,
     IntervalTextDetailPipe,
     MeetingTypeDetailPipe
