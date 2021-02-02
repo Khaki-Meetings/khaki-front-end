@@ -1,12 +1,14 @@
 import {createReducer, on} from '@ngrx/store';
 import {setOrganizersTablePageablesAction} from './organizers-table-pageable.actions';
-import {setCurrentTimeIntervalAction} from '../actions/current-time-interval.actions';
+import {SortDirection} from '@angular/material/sort';
 
 export const organizersTablePageableAttributeKey = 'organizersTablePageable';
 
 export interface OrganizersTablePageableSm {
   page: number;
   count: number;
+  sortColumn?: string;
+  sortDirection?: SortDirection;
 }
 
 export const initialState: OrganizersTablePageableSm = {
@@ -20,7 +22,7 @@ export const organizersTablePageableReducer = createReducer(
   on(
     setOrganizersTablePageablesAction,
     (state, action) =>
-      ({...state, page: action.page, count: action.count})
+      ({...state, page: action.page, count: action.count, sortColumn: action.sortColumn, sortDirection: action.sortDirection})
   )
 );
 

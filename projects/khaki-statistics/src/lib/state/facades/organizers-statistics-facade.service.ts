@@ -15,15 +15,15 @@ export class OrganizersStatisticsFacadeService {
   constructor(private store: Store<KhakiStatisticsFeatureSm>) {
   }
 
-  requestOrganizersStatistics(): void {
+  dispatchLoadOrganizersStatistics(): void {
     this.store.dispatch(loadOrganizersStatisticsAction());
   }
 
-  organizersStatistics(): Observable<OrganizersStatisticsSm> {
+  selectOrganizersStatistics(): Observable<OrganizersStatisticsSm> {
     return this.store.select(organizersStatisticsSelector);
   }
 
-  organizersStatisticsLoading(): Observable<boolean> {
+  selectOrganizersStatisticsLoading(): Observable<boolean> {
     return this.store.select(organizersStatisticsLoadingSelector);
   }
 
