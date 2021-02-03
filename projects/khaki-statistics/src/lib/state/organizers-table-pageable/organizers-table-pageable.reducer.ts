@@ -13,7 +13,9 @@ export interface OrganizersTablePageableSm {
 
 export const initialState: OrganizersTablePageableSm = {
   page: 0,
-  count: 10
+  count: 5,
+  sortColumn: 'totalMeetings',
+  sortDirection: 'desc'
 };
 
 

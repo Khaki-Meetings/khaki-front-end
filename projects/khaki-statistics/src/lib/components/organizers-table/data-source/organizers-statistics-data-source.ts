@@ -18,8 +18,8 @@ export class OrganizersStatisticsDataSource extends DataSource<OrganizerStatisti
   private pPaginator: MatPaginator;
 
   private handlePage = (pageEvent: PageEvent) => {
-    this.logger.debug('thing', pageEvent);
-    this.organizersTablePageableFacade.dispatchSetOrganizersTablePageables(pageEvent.pageIndex, pageEvent.length);
+    this.logger.debug('pageEvent', pageEvent);
+    this.organizersTablePageableFacade.dispatchSetOrganizersTablePageables(pageEvent.pageIndex, pageEvent.pageSize);
   };
 
   private handleSort = (sort: Sort) => {
@@ -27,7 +27,7 @@ export class OrganizersStatisticsDataSource extends DataSource<OrganizerStatisti
     this.organizersTablePageableFacade
       .dispatchSetOrganizersTablePageables(
         this.pPaginator.pageIndex,
-        this.pPaginator.length,
+        this.pPaginator.pageSize,
         sort.active,
         sort.direction
       );

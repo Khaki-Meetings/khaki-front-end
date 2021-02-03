@@ -7,6 +7,7 @@ import {Moment} from 'moment/moment';
 import {OrganizersStatisticsDataSource} from './data-source/organizers-statistics-data-source';
 import {OrganizersStatisticsFacadeService} from '../../state/facades/organizers-statistics-facade.service';
 import {MatSort} from '@angular/material/sort';
+import {OrganizersTablePageableFacade} from '../../state/organizers-table-pageable/organizers-table-pageable-facade.service';
 
 @Logging
 @Component({
@@ -27,25 +28,12 @@ export class OrganizersTableComponent implements OnInit, AfterViewInit {
 
   constructor(
     private organizersStatisticsFacade: OrganizersStatisticsFacadeService,
-    // private statisticsFiltersFacadeService: StatisticsFiltersFacade,
-    // private organizersTablePageableFacade: OrganizersTablePageableFacade
+    private organizersTablePageableFacade: OrganizersTablePageableFacade,
     public organizersStatisticsDataSource: OrganizersStatisticsDataSource
   ) {
   }
 
   ngOnInit(): void {
-    // this.organizersStatisticsFacade.organizersStatistics()
-    //   .subscribe(organizersStatistics => {
-    //     this.logger.debug('onInit organizersStatistics', organizersStatistics);
-    //     this.organizersStatistics = organizersStatistics;
-    //     this.dataSource = organizersStatistics.content;
-    //
-    //     if (this.paginator) {
-    //       this.paginator.length = organizersStatistics.totalElements;
-    //       this.paginator.pageSize = organizersStatistics.size;
-    //     }
-    //   });
-    //
     this.organizersStatisticsFacade.selectOrganizersStatisticsLoading().subscribe(loading => this.loading = loading);
   }
 
