@@ -47,3 +47,9 @@ td.mat-cell, .mat-footer-cell {
 #meeting-breakdown-help:hover #meeting-breakdown-help-content {
   visibility: visible;
 }
+
+::ng-deep th.mat-header-cell.col-right {
+  .mat-sort-header-container {
+    justify-content: flex-end;
+  }
+}

@@ -5,6 +5,7 @@ import {setOrganizersTablePageablesAction} from './organizers-table-pageable.act
 import {Observable} from 'rxjs';
 import {OrganizersTablePageableSm} from './organizers-table-pageable.reducer';
 import {selectOrganizersTablePageableState} from './organizers-table-pageable.selectors';
+import {SortDirection} from '@angular/material/sort';
 
 @Injectable({providedIn: 'root'})
 export class OrganizersTablePageableFacade {
@@ -12,11 +13,11 @@ export class OrganizersTablePageableFacade {
   constructor(private store: Store<KhakiStatisticsFeatureSm>) {
   }
 
-  public setPageable(page: number, count: number): void {
-    this.store.dispatch(setOrganizersTablePageablesAction({page, count}));
+  public dispatchSetOrganizersTablePageables(page: number, count: number, sortColumn?: string, sortDirection?: SortDirection): void {
+    this.store.dispatch(setOrganizersTablePageablesAction({page, count, sortColumn, sortDirection}));
   }
 
-  public pageable(): Observable<OrganizersTablePageableSm> {
+  public selectOrganizersTablePageable(): Observable<OrganizersTablePageableSm> {
     return this.store.select(selectOrganizersTablePageableState);
   }
 }
