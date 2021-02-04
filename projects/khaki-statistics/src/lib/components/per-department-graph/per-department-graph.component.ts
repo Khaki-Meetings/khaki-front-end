@@ -1,4 +1,4 @@
-import {Component, HostListener, OnInit} from '@angular/core';
+import {Component, ElementRef, HostListener, OnInit} from '@angular/core';
 import {DepartmentsStatisticsSm} from '../../state/models/departments-statistics-sm';
 import {PerDepartmentStatisticsFacadeService} from '../../state/facades/per-department-statistics-facade.service';
 import {ColorHelper} from '@swimlane/ngx-charts';
@@ -22,7 +22,9 @@ interface GraphData {
 
 export class PerDepartmentGraphComponent implements OnInit {
   constructor(private perDepartmentStatisticsFacade: PerDepartmentStatisticsFacadeService,
-              private statisticsFiltersFacadeService: StatisticsFiltersFacade) {
+              private statisticsFiltersFacadeService: StatisticsFiltersFacade,
+              elementRef: ElementRef) {
+    this.elementRef = elementRef;
   }
 
   private logger: HistorianService;
@@ -53,6 +55,8 @@ export class PerDepartmentGraphComponent implements OnInit {
   end: Moment;
   statisticsScope: StatisticsScopeSe;
   loading = false;
+
+  elementRef: any;
 
   private static formatHrsMins(seconds: number): string {
 
@@ -136,10 +140,22 @@ export class PerDepartmentGraphComponent implements OnInit {
      document.getElementById('center-text-label').innerHTML = data.value.name;
      document.getElementById('center-text-value-bg').innerHTML = displayValue;
      document.getElementById('center-text-value').innerHTML = displayValue;
+
+     const dom: HTMLElement = this.elementRef.nativeElement;
+     const elements = dom.querySelectorAll('lib-per-department-graph .ngx-charts .arc:not(.active)');
+     elements.forEach((x) => {
+       (x as HTMLElement).classList.add('inactive');
+     });
   }
 
   onDeactivate(data): void {
     this.drawDefaultDonutLabel();
+
+    const dom: HTMLElement = this.elementRef.nativeElement;
+    const elements = dom.querySelectorAll('lib-per-department-graph .ngx-charts .arc');
+    elements.forEach((x) => {
+      (x as HTMLElement).classList.remove('inactive');
+    });
   }
 
   public drawDefaultDonutLabel(): void {
