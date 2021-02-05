@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'lib-client-onboarding',
@@ -6,10 +7,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./client-onboarding.component.scss']
 })
 export class ClientOnboardingComponent implements OnInit {
+  constructor(private formBuilder: FormBuilder) {
+  }
 
-  constructor() { }
+  form: FormGroup;
+
+  companyNameFormControlName = 'companyName';
+  adminEmailFormControlName = 'companyName';
+  domainFormControlName = 'companyName';
 
   ngOnInit(): void {
+    this.form = this.formBuilder.group(
+      {
+        [this.companyNameFormControlName]: '',
+        [this.adminEmailFormControlName]: '',
+        [this.domainFormControlName]: ''
+      }
+    );
   }
 
 }

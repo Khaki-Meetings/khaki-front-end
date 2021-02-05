@@ -1,1 +1,16 @@
-<p>client-onboarding works!</p>
+<div>
+  <form [formGroup]="form">
+    <mat-form-field>
+      <mat-label>Company Name</mat-label>
+      <input matInput [formControlName]="companyNameFormControlName"/>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Admin Email</mat-label>
+      <input matInput [formControlName]="adminEmailFormControlName"/>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Domain Name</mat-label>
+      <input matInput [formControlName]="domainFormControlName"/>
+    </mat-form-field>
+  </form>
+</div>
