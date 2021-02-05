@@ -183,11 +183,17 @@ lib-per-department-graph .ngx-charts {
   .arc {
     &.active,
     &:hover {
-      opacity: 0.2;
+      opacity: 1;
+      cursor: default;
     }
   }
 }
 
+lib-per-department-graph .ngx-charts {
+  .arc.inactive:not(.active) {
+      opacity: 0.2;
+  }
+}
 
 ::ng-deep .mat-select-value {
   max-width: 0;

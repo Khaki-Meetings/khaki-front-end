@@ -48,10 +48,10 @@
     "paged": true,
     "unpaged": false
   },
-  "totalPages": 5,
-  "totalElements": 5,
+  "totalPages": 2,
+  "totalElements": 10,
   "last": false,
-  "size": 1,
+  "size": 5,
   "number": 2,
   "sort": {
     "sorted": false,

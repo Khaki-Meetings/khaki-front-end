@@ -14,6 +14,7 @@ import {DepartmentsStatisticsSm} from '../state/models/departments-statistics-sm
 import {StatisticsQueryParameters} from './models/statistics-query-parameters';
 import {IntervalSe} from '../state/statistics-filters/interval-se.enum';
 import Moment = momentJs.Moment;
+import {SortDirection} from '@angular/material/sort';
 
 interface TimeBlockRange {
   start: Moment;
@@ -53,8 +54,11 @@ export class StatisticsService {
     this.logger.debug('statisticsQueryParams', statisticsQueryParams);
     const page = statisticsQueryParams.page ? statisticsQueryParams.page.toString() : '0';
     const count = statisticsQueryParams.count ? statisticsQueryParams.count.toString() : '5';
+    const sortColumn = statisticsQueryParams.sortColumn ?? 'totalMeetings';
+    const sortDirection: SortDirection = statisticsQueryParams.sortDirection ?? 'desc';
     params = params.set('page', page);
     params = params.set('count', count);
+    params = params.set('sort', `${sortColumn},${sortDirection}`);
     params = params.set('filter', statisticsQueryParams.statisticsScope.toString());
     this.logger.debug('organizers params', params);
     this.logger.debug('organizers params.keys', params.keys());

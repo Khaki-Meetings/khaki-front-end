@@ -18,13 +18,12 @@ import {StatisticsFiltersFacade} from '../statistics-filters/statistics-filters-
 export class OrganizersStatisticsEffects {
   private logger: HistorianService;
 
-
   organizersStatisticsEffect$ = createEffect(
     () => this.actions$.pipe(
       ofType(loadOrganizersStatisticsAction),
       withLatestFrom(
         this.statisticsFiltersFacade.selectStatisticsFilters(),
-        this.organizersTablePageableFacade.pageable()
+        this.organizersTablePageableFacade.selectOrganizersTablePageable()
       ),
       tap((thing) => this.logger.debug('thing', thing)),
       switchMap(
@@ -37,7 +36,9 @@ export class OrganizersStatisticsEffects {
               {
                 statisticsScope: joined[1].statisticsScope,
                 page: joined[2].page,
-                count: joined[2].count
+                count: joined[2].count,
+                sortDirection: joined[2].sortDirection,
+                sortColumn: joined[2].sortColumn
               }
             )
             .pipe(
