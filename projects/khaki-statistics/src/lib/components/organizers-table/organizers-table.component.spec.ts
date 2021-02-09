@@ -17,9 +17,9 @@ describe('OrganizersTableComponent', () => {
 
   beforeEach(async () => {
     mockOrganizersStatisticsService = {
-      requestOrganizersStatistics(): void {
+      dispatchLoadOrganizersStatistics(): void {
       },
-      organizersStatistics(): Observable<OrganizersStatisticsSm> {
+      selectOrganizersStatistics(): Observable<OrganizersStatisticsSm> {
         return null;
       }
     };
