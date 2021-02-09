@@ -4,4 +4,5 @@ export interface DepartmentStatisticsResponseDto {
   totalSeconds: number;
   totalCost: number;
   averageCost: number;
+  inventorySecondsAvailable: number;
 }
