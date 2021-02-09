@@ -4,7 +4,7 @@
   </header>
   <div class="legend-wrap">
     <table class="legend-labels" [class.horizontal-legend]="horizontal" [style.max-height.px]="height - 45">
-      <tr ngx-charts-legend-entry-custom *ngFor="let entry of legendEntries; trackBy: trackBy" class="legend-label"
+      <tr ngx-charts-legend-entry-custom *ngFor="let entry of legendEntries; index as idx; trackBy: trackBy" class="legend-label"
           [label]="entry.label"
           [dataExt]="entry.dataExt"
           [formattedLabel]="entry.formattedLabel"
@@ -13,8 +13,8 @@
           (select)="labelClick.emit($event)"
           (activate)="activate($event)"
           (deactivate)="deactivate($event)"
-          (mouseenter)="mouseenter(entry)"
-          (mouseleave)="mouseleave(entry)">
+          (mouseenter)="mouseenter(idx)"
+          (mouseleave)="mouseleave(idx)">
       </tr>
     </table>
   </div>

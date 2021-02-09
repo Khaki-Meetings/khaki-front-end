@@ -76,31 +76,33 @@ export class NgxChartsLegendCustomComponent extends LegendComponent implements A
     return items;
   }
 
-  getMatchingArcPath(fillColor): Element {
-    const arcElement = document.querySelectorAll('[ng-reflect-fill="' + fillColor + '"]');
-    const matchingArcPath = arcElement[0].querySelector('.arc');
-    return matchingArcPath;
+  getMatchingArcPath(index): Element {
+    return document.querySelectorAll('lib-per-department-graph path.arc')[index];
   }
 
-  mouseenter(data): void {
+  mouseenter(index): void {
     const event = new MouseEvent('mouseenter', {
       view: window,
       bubbles: true,
       cancelable: true
     });
 
-    const arcPath = this.getMatchingArcPath(data.color);
-    arcPath.dispatchEvent(event);
+    const arcPath = this.getMatchingArcPath(index);
+    if (arcPath) {
+      arcPath.dispatchEvent(event);
+    }
   }
 
-  mouseleave(data): void {
+  mouseleave(index): void {
     const event = new MouseEvent('mouseleave', {
       view: window,
       bubbles: true,
       cancelable: true
     });
 
-    const arcPath = this.getMatchingArcPath(data.color);
-    arcPath.dispatchEvent(event);
+    const arcPath = this.getMatchingArcPath(index);
+    if (arcPath) {
+      arcPath.dispatchEvent(event);
+    }
   }
 }
