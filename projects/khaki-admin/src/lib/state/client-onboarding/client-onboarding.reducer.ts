@@ -20,8 +20,9 @@ export const initialState: ClientOnboardingSm = {
 export const clientOnboardingReducer = createReducer(
   initialState,
   on(ClientOnboardingActions.saveClientOnboarding, (state, action) => {
-      logger.debug('state', state);
+      logger.debug('saveClientOnboarding state', state);
       const newState = {...state, spinner: true, errorCode: undefined, errorMessage: undefined};
+      logger.debug('saveClientOnboarding newState', newState);
       return newState;
     }
   ),

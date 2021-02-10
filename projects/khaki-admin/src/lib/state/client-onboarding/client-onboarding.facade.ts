@@ -18,6 +18,7 @@ export class ClientOnboardingFacade {
   private logger: HistorianService;
 
   dispatchSaveClientOnboarding(props: SaveClientOnboardingActionProps): void {
+    this.logger.debug('dispatchSaveClientOnboarding', props);
     this.store.dispatch(saveClientOnboarding(props));
   }
 

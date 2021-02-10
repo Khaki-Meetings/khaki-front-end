@@ -14,7 +14,8 @@ export class KhakiAdminService {
   private logger: HistorianService;
 
   saveOrganization(organizationInfo: { name: string, adminEmail: string }): Observable<any> {
-    const url = `${this.environment.khakiBff}/organizations)`;
+    const url = `${this.environment.khakiBff}/organizations`;
+    this.logger.debug('url is', url);
     return this.httpClient.post(url, organizationInfo);
   }
 }
