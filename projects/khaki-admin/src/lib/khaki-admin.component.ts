@@ -1,17 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'lib-khaki-admin',
   template: `
-    Admin:
     <router-outlet></router-outlet>
   `,
-  styles: [
-  ]
+  styles: []
 })
 export class KhakiAdminComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

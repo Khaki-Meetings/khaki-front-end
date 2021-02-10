@@ -7,6 +7,11 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {StoreModule} from '@ngrx/store';
 import * as fromKhakiAdmin from './state';
+import {MatButtonModule} from '@angular/material/button';
+import {MatProgressBar, MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {EffectsModule} from '@ngrx/effects';
+import {ClientOnboardingEffects} from './state/client-onboarding/client-onboarding.effects';
 
 const routes: Routes = [
   {
@@ -25,7 +30,11 @@ const routes: Routes = [
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
-    StoreModule.forFeature(fromKhakiAdmin.khakiAdminFeatureKey, fromKhakiAdmin.reducers, {metaReducers: fromKhakiAdmin.metaReducers})
+    StoreModule.forFeature(fromKhakiAdmin.khakiAdminFeatureKey, fromKhakiAdmin.reducers, {metaReducers: fromKhakiAdmin.metaReducers}),
+    EffectsModule.forFeature([ClientOnboardingEffects]),
+    MatButtonModule,
+    MatProgressBarModule,
+    MatSnackBarModule
   ],
   exports: [KhakiAdminComponent]
 })

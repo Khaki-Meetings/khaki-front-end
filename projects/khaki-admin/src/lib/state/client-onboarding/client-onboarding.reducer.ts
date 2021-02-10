@@ -1,7 +1,10 @@
-import { Action, createReducer, on } from '@ngrx/store';
+import {Action, createReducer, on} from '@ngrx/store';
 import * as ClientOnboardingActions from './client-onboarding.actions';
+import {CurrentLogLevel, HistorianService} from '@natr/historian';
 
 export const clientOnboardingAttributeKey = 'clientOnboarding';
+
+const logger = new HistorianService(CurrentLogLevel.LOG_LEVEL, 'ClientOnboardingReducer');
 
 export interface ClientOnboardingSm {
   errorMessage?: string;
@@ -16,7 +19,21 @@ export const initialState: ClientOnboardingSm = {
 
 export const clientOnboardingReducer = createReducer(
   initialState,
-  on(ClientOnboardingActions.saveClientOnboardingSuccess, (state, action) => state),
-  on(ClientOnboardingActions.saveClientOnboardingFailure, (state, action) => state),
+  on(ClientOnboardingActions.saveClientOnboarding, (state, action) => {
+      logger.debug('state', state);
+      const newState = {...state, spinner: true, errorCode: undefined, errorMessage: undefined};
+      return newState;
+    }
+  ),
+  on(ClientOnboardingActions.saveClientOnboardingSuccess, (state, action) => {
+    logger.debug('saveClientOnboardingSuccess state', state);
+    return {...state, spinner: false, errorCode: undefined, errorMessage: undefined};
+  }),
+  on(ClientOnboardingActions.saveClientOnboardingFailure, (state, action) => {
+    logger.debug('saveClientOnboardingFailure state', state);
+    const newState = {...state, spinner: false, errorCode: action.errorCode, errorMessage: action.errorMessage};
+    logger.debug('saveClientOnboardingFailure newState', newState);
+    return newState;
+  }),
 );
 

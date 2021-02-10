@@ -1,9 +1,20 @@
-import { Injectable } from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {HistorianService, Logging} from '@natr/historian';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Logging
+@Injectable({providedIn: 'root'})
 export class KhakiAdminService {
 
-  constructor() { }
+  constructor(private httpClient: HttpClient, @Inject('environment') private environment) {
+  }
+
+  // noinspection JSUnusedLocalSymbols
+  private logger: HistorianService;
+
+  saveOrganization(organizationInfo: { name: string, adminEmail: string }): Observable<any> {
+    const url = `${this.environment.khakiBff}/organizations)`;
+    return this.httpClient.post(url, organizationInfo);
+  }
 }

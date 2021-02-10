@@ -2,7 +2,7 @@ import {createAction, props} from '@ngrx/store';
 import {SaveClientOnboardingActionProps} from './save-client-onboarding-action-props';
 
 export const saveClientOnboarding = createAction(
-  '[Khaki Admin] Load ClientOnboarding',
+  '[Khaki Admin] Save ClientOnboarding',
   props<SaveClientOnboardingActionProps>()
 );
 
@@ -11,6 +11,6 @@ export const saveClientOnboardingSuccess = createAction(
 );
 
 export const saveClientOnboardingFailure = createAction(
-  '[Khaki Admin] Load ClientOnboarding Failure',
+  '[Khaki Admin] Save ClientOnboarding Failure',
   props<{ errorMessage: string, errorCode: number }>()
 );
