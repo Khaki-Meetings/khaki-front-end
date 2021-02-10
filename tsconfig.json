@@ -39,6 +39,10 @@
       "khaki-info": [
         "dist/khaki-info/khaki-info",
         "dist/khaki-info"
+      ],
+      "khaki-admin": [
+        "dist/khaki-admin/khaki-admin",
+        "dist/khaki-admin"
       ]
     }
   }
