@@ -1,0 +1,21 @@
+<div>
+  <form [formGroup]="form" (ngSubmit)="formSubmit()">
+    <div>
+      <mat-form-field>
+        <mat-label>Company Name</mat-label>
+        <input matInput [formControlName]="companyNameFormControlName"/>
+      </mat-form-field>
+      <div [hidden]="!isFieldValid(companyNameFormControlName)" style="color: red">Company Name Required</div>
+    </div>
+    <br>
+    <div>
+      <mat-form-field>
+        <mat-label>Admin Email</mat-label>
+        <input matInput [formControlName]="adminEmailFormControlName"/>
+      </mat-form-field>
+      <div [hidden]="!isFieldValid(adminEmailFormControlName)" style="color: red">Valid Email Required</div>
+    </div>
+<!--    <button mat-button type="submit" [disabled]="!form.valid">Save</button>-->
+        <button mat-button type="submit" >Save</button>
+  </form>
+</div>

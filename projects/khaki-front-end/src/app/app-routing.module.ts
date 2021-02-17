@@ -7,50 +7,13 @@ import {CurrentLogLevel, HistorianService} from '@natr/historian';
 const logger = new HistorianService(CurrentLogLevel.LOG_LEVEL, 'AppRoutingModule');
 
 const routes: Routes = [
-  {
-    path: 'home',
-    component: MainComponent
-  },
-  {
-    path: 'stats',
-    loadChildren: () => import('khaki-statistics')
-      .then(
-        m => {
-          logger.debug('m', m);
-          logger.debug('KhakiStatisticsModule', m.KhakiStatisticsModule);
-          return m.KhakiStatisticsModule;
-        }
-    ),
-    canActivate: [
-      AuthGuard
-    ]
-  },
-  {
-    path: 'profile',
-    loadChildren: () => import('khaki-profile').then(m => m.KhakiProfileModule),
-    canActivate: [
-      AuthGuard
-    ]
-  },
-  {
-    path: 'settings',
-    loadChildren: () => import('khaki-settings').then(m => m.KhakiSettingsModule),
-    canActivate: [
-      AuthGuard
-    ]
-  },
-  {
-    path: 'info',
-    loadChildren: () => import('khaki-info').then(m => m.KhakiInfoModule),
-    canActivate: [
-      AuthGuard
-    ]
-  },
-  {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
-  }
+  {path: 'home', component: MainComponent},
+  {path: 'stats', loadChildren: () => import('khaki-statistics').then(m => m.KhakiStatisticsModule), canActivate: [AuthGuard]},
+  {path: 'profile', loadChildren: () => import('khaki-profile').then(m => m.KhakiProfileModule), canActivate: [AuthGuard]},
+  {path: 'settings', loadChildren: () => import('khaki-settings').then(m => m.KhakiSettingsModule), canActivate: [AuthGuard]},
+  {path: 'info', loadChildren: () => import('khaki-info').then(m => m.KhakiInfoModule), canActivate: [AuthGuard]},
+  {path: 'admin', loadChildren: () => import('khaki-admin').then(m => m.KhakiAdminModule), canActivate: [AuthGuard]},
+  {path: '', redirectTo: 'home', pathMatch: 'full'}
 ];
 
 @NgModule({
