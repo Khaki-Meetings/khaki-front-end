@@ -182,10 +182,8 @@ export class PerDepartmentGraphComponent implements OnInit {
 
     const dom: HTMLElement = this.elementRef.nativeElement;
 
-    if (dom.querySelectorAll('#center-text-value') != null &&
-        dom.querySelectorAll('#center-text-value').length > 0 &&
-        dom.querySelectorAll('#center-text-label') != null &&
-        dom.querySelectorAll('#center-text-label').length > 0) {
+    if (dom.querySelector('#center-text-value') != null &&
+        dom.querySelector('#center-text-label') != null) {
       let val = 0;
 
       for (const x in this.graphData) {
@@ -195,9 +193,9 @@ export class PerDepartmentGraphComponent implements OnInit {
       }
       const displayValue = PerDepartmentGraphComponent.formatHrsMins(val);
 
-      this.renderer.setProperty(dom.querySelectorAll('#center-text-value')[0],
+      this.renderer.setProperty(dom.querySelector('#center-text-value'),
            'innerHTML', displayValue);
-      this.renderer.setProperty(dom.querySelectorAll('#center-text-label')[0],
+      this.renderer.setProperty(dom.querySelector('#center-text-label'),
            'innerHTML', 'in meetings');
     }
   }
