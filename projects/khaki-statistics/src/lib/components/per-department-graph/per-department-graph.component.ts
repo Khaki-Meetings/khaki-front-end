@@ -155,10 +155,10 @@ export class PerDepartmentGraphComponent implements OnInit {
       displayValue = PerDepartmentGraphComponent.formatHrsMins(data.value.value);
     }
 
-    this.renderer.setProperty(this.elementRef.nativeElement.querySelectorAll('#center-text-label')[0],
+    this.renderer.setProperty(this.elementRef.nativeElement.querySelector('#center-text-label'),
         'innerHTML', data.value.name);
 
-    this.renderer.setProperty(this.elementRef.nativeElement.querySelectorAll('#center-text-value')[0],
+    this.renderer.setProperty(this.elementRef.nativeElement.querySelector('#center-text-value'),
         'innerHTML', displayValue);
 
      const dom: HTMLElement = this.elementRef.nativeElement;
