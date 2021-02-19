@@ -1,6 +1,6 @@
-import {AfterViewInit, ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, Input, ElementRef, Inject} from '@angular/core';
 import {formatLabel, LegendComponent} from '@swimlane/ngx-charts';
-import * as d3 from 'd3';
+import { PerDepartmentGraphComponent } from '../per-department-graph/per-department-graph.component'
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -9,50 +9,14 @@ import * as d3 from 'd3';
   styleUrls: ['./ngx-charts-legend-custom.component.css']
 })
 
-export class NgxChartsLegendCustomComponent extends LegendComponent implements AfterViewInit, OnInit {
+export class NgxChartsLegendCustomComponent extends LegendComponent {
 
   @Input() dataExt: any;
 
-  constructor(cd: ChangeDetectorRef) {
+  constructor(cd: ChangeDetectorRef,
+      private elementRef: ElementRef,
+      @Inject(PerDepartmentGraphComponent) private parent: PerDepartmentGraphComponent) {
     super(cd);
-  }
-
-  ngOnInit(): void {
-  }
-
-  ngAfterViewInit(): void {
-
-    d3.select('g.pie-chart.chart').append('text')
-      .attr('text-anchor', 'middle')
-      .attr('stroke', 'white')
-      .attr('stroke-width', '0.2em')
-      .attr('font-size', '16px')
-      .attr('font-weight', 'bold')
-      .attr('font-family', 'sans-serif')
-      .attr('y', 5)
-      .attr('id', 'center-text-value-bg')
-      .text('');
-
-    d3.select('g.pie-chart.chart').append('text')
-      .attr('text-anchor', 'middle')
-      .attr('font-size', '24px')
-      .attr('font-weight', '500')
-      .attr('font-family', 'sans-serif')
-      .attr('y', 5)
-      .attr('id', 'center-text-value')
-      .text('');
-
-    d3.select('g.pie-chart.chart').append('text')
-      .attr('text-anchor', 'middle')
-      .attr('font-size', '16px')
-      .attr('font-family', 'sans-serif')
-      .attr('y', 28)
-      .attr('id', 'center-text-label')
-      .text('');
-
-    const event = new CustomEvent('pieChartReady', {});
-    window.dispatchEvent(event);
-
   }
 
   getLegendEntries(): any[] {
@@ -77,7 +41,7 @@ export class NgxChartsLegendCustomComponent extends LegendComponent implements A
   }
 
   getMatchingArcPath(index): Element {
-    return document.querySelectorAll('lib-per-department-graph path.arc')[index];
+    return this.parent.getMatchingArcPath(index);
   }
 
   mouseenter(index): void {
