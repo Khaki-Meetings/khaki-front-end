@@ -27,12 +27,14 @@ export class NgxChartsLegendCustomComponent extends LegendComponent {
       const idx = items.findIndex(i => {
         return i.label === formattedLabel;
       });
+      const formattedInventoryUsage = dataExt.totalSeconds / dataExt.inventorySecondsAvailable * 100;
 
       if (idx === -1) {
         items.push({
           label,
           formattedLabel,
           dataExt,
+          formattedInventoryUsage,
           color: this.colors.getColor(label)
         });
       }

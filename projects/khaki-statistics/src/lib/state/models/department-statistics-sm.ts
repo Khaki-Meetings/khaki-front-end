@@ -5,4 +5,5 @@ export interface DepartmentStatisticsSm {
   totalSeconds?: number;
   totalCost?: number;
   averageCost?: number;
+  inventorySecondsAvailable?: number;
 }

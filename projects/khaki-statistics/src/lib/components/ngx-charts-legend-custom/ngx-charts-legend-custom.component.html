@@ -4,6 +4,16 @@
   </header>
   <div class="legend-wrap">
     <table class="legend-labels" [class.horizontal-legend]="horizontal" [style.max-height.px]="height - 45">
+      <tr>
+        <th></th>
+        <th></th>
+        <th class="legend-column-label-text">
+          Total time
+        </th>
+        <th class="legend-column-label-text">
+          Time %
+        </th>
+      </tr>
       <tr ngx-charts-legend-entry-custom *ngFor="let entry of legendEntries; index as idx; trackBy: trackBy" class="legend-label"
           [label]="entry.label"
           [dataExt]="entry.dataExt"
