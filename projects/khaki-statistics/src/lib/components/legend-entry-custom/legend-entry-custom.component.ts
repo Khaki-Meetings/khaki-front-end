@@ -11,6 +11,9 @@ import {LegendEntryComponent} from '@swimlane/ngx-charts';
     </td>
     <td class="legend-label-text legend-value-text">
       {{ dataExt.value | hoursMinutes }}
+    </td>
+    <td class="legend-label-text legend-value-text">
+      {{ formattedInventoryUsage }}
     </td>`,
   styleUrls: ['./legend-entry-custom.component.css']
 })
@@ -29,4 +32,14 @@ export class LegendEntryCustomComponent extends LegendEntryComponent implements 
     return this.formattedLabel || '(empty)';
   }
 
+  get inventoryUsageDisplay(): string {
+    return this.dataExt.inventorySecondsAvailable || 'N/A';
+  }
+
+  get formattedInventoryUsage(): string {
+    if (!this.dataExt.inventorySecondsAvailable || this.dataExt.inventorySecondsAvailable == 0) {
+      return "N/A";
+    }
+    return Math.floor(this.dataExt.value / this.dataExt.inventorySecondsAvailable * 100) + "%";
+  }
 }
