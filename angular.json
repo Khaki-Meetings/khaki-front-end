@@ -305,43 +305,83 @@
         }
       }
     },
-    "khaki-meetings": {
+    "khaki-admin": {
       "projectType": "library",
-      "root": "projects/khaki-meetings",
-      "sourceRoot": "projects/khaki-meetings/src",
+      "root": "projects/khaki-admin",
+      "sourceRoot": "projects/khaki-admin/src",
       "prefix": "lib",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "tsConfig": "projects/khaki-meetings/tsconfig.lib.json",
-            "project": "projects/khaki-meetings/ng-package.json"
+            "tsConfig": "projects/khaki-admin/tsconfig.lib.json",
+            "project": "projects/khaki-admin/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "projects/khaki-meetings/tsconfig.lib.prod.json"
+              "tsConfig": "projects/khaki-admin/tsconfig.lib.prod.json"
             }
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/khaki-meetings/src/test.ts",
-            "tsConfig": "projects/khaki-meetings/tsconfig.spec.json",
-            "karmaConfig": "projects/khaki-meetings/karma.conf.js"
+            "main": "projects/khaki-admin/src/test.ts",
+            "tsConfig": "projects/khaki-admin/tsconfig.spec.json",
+            "karmaConfig": "projects/khaki-admin/karma.conf.js"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "projects/khaki-meetings/tsconfig.lib.json",
-              "projects/khaki-meetings/tsconfig.spec.json"
+              "projects/khaki-admin/tsconfig.lib.json",
+              "projects/khaki-admin/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
             ]
           }
+        }
+      }
+    }
+  },
+  "khaki-meetings": {
+    "projectType": "library",
+    "root": "projects/khaki-meetings",
+    "sourceRoot": "projects/khaki-meetings/src",
+    "prefix": "lib",
+    "architect": {
+      "build": {
+        "builder": "@angular-devkit/build-angular:ng-packagr",
+        "options": {
+          "tsConfig": "projects/khaki-meetings/tsconfig.lib.json",
+          "project": "projects/khaki-meetings/ng-package.json"
+        },
+        "configurations": {
+          "production": {
+            "tsConfig": "projects/khaki-meetings/tsconfig.lib.prod.json"
+          }
+        }
+      },
+      "test": {
+        "builder": "@angular-devkit/build-angular:karma",
+        "options": {
+          "main": "projects/khaki-meetings/src/test.ts",
+          "tsConfig": "projects/khaki-meetings/tsconfig.spec.json",
+          "karmaConfig": "projects/khaki-meetings/karma.conf.js"
+        }
+      },
+      "lint": {
+        "builder": "@angular-devkit/build-angular:tslint",
+        "options": {
+          "tsConfig": [
+            "projects/khaki-meetings/tsconfig.lib.json",
+            "projects/khaki-meetings/tsconfig.spec.json"
+          ],
+          "exclude": [
+            "**/node_modules/**"
+          ]
         }
       }
     }

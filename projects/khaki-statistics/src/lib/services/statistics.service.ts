@@ -1,21 +1,20 @@
 import {Inject, Injectable} from '@angular/core';
 import {Observable, throwError} from 'rxjs';
 import {TimeBlockSummarySm} from '../state/models/time-block-summary-sm';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {TimeBlockSummaryResponseDto} from './models/time-block-summary-response-dto';
 import {catchError, map, tap} from 'rxjs/operators';
 import {HistorianService, Logging} from '@natr/historian';
 import {OrganizersStatisticsSm} from '../state/models/organizers-statistics-sm';
 import {TrailingStatisticsResponseDto} from './models/trailing-statistics-response-dto';
 import {TrailingStatisticsSm} from '../state/models/trailing-statistics-sm';
-import {IntervalEnum} from './models/interval.enum';
 import * as momentJs from 'moment';
 import {DepartmentsStatisticsResponseDto} from './models/departments-statistics-response-dto';
 import {DepartmentsStatisticsSm} from '../state/models/departments-statistics-sm';
-import StartOf = momentJs.unitOfTime.StartOf;
+import {StatisticsQueryParameters} from './models/statistics-query-parameters';
+import {IntervalSe} from '../state/statistics-filters/interval-se.enum';
 import Moment = momentJs.Moment;
-
-const moment = momentJs;
+import {SortDirection} from '@angular/material/sort';
 
 interface TimeBlockRange {
   start: Moment;
@@ -32,99 +31,117 @@ export class StatisticsService {
   constructor(private httpClient: HttpClient, @Inject('environment') private environment) {
   }
 
-  private getStartEnd(interval: IntervalEnum): TimeBlockRange {
-    const now = moment();
-    let timeBlock: StartOf;
-    switch (interval) {
-      case IntervalEnum.Day:
-        timeBlock = 'day';
-        break;
-      case IntervalEnum.Week:
-        timeBlock = 'week';
-        break;
-      case IntervalEnum.Month:
-        timeBlock = 'month';
-        break;
-      case IntervalEnum.Year:
-        timeBlock = 'year';
-        break;
-    }
+  private getStartEndUrl(start: Moment, end: Moment, statName: string): string {
+    this.logger.debug('start', start);
+    this.logger.debug('start.utc', start.utcOffset());
+    this.logger.debug('start.utc', start.utc().format());
+    const formattedStart = start.utc().format();
+    const formattedEnd = end.utc().format();
+    const url = `${this.environment.khakiBff}/statistics/${statName}/${formattedStart}/${formattedEnd}`;
 
-    this.logger.debug('now is', now);
-    this.logger.debug('interval is', interval);
-
-    return {
-      start: now.clone().utc().startOf(timeBlock),
-      end: now.clone().utc().endOf(timeBlock)
-    };
-  }
-
-  private getStartEndUrl(interval: IntervalEnum, statName: string): string {
-    let url = `/assets/${statName}${interval}Data.json`;
-    if (this.environment.khakiBff) {
-      const startEnd = this.getStartEnd(interval);
-      this.logger.debug('startEnd is', startEnd);
-      const formattedStart = startEnd.start.utc().format();
-      const formattedEnd = startEnd.end.utc().format();
-      url = `${this.environment.khakiBff}/statistics/${statName}/${formattedStart}/${formattedEnd}`;
-    }
-
+    this.logger.debug('here 1');
     this.logger.debug('url is', url);
 
     return url;
   }
 
-  getOrganizersStatistics(interval: IntervalEnum, count: number = 5, page: number = 0): Observable<OrganizersStatisticsSm> {
-    this.logger.debug('called ');
+  getOrganizersStatistics(
+    start: Moment,
+    end: Moment,
+    statisticsQueryParams: StatisticsQueryParameters
+  ): Observable<OrganizersStatisticsSm> {
+    let params = new HttpParams();
+    this.logger.debug('statisticsQueryParams', statisticsQueryParams);
+    const page = statisticsQueryParams.page ? statisticsQueryParams.page.toString() : '0';
+    const count = statisticsQueryParams.count ? statisticsQueryParams.count.toString() : '5';
+    const sortColumn = statisticsQueryParams.sortColumn ?? 'totalMeetings';
+    const sortDirection: SortDirection = statisticsQueryParams.sortDirection ?? 'desc';
+    params = params.set('page', page);
+    params = params.set('count', count);
+    params = params.set('sort', `${sortColumn},${sortDirection}`);
+    params = params.set('filter', statisticsQueryParams.statisticsScope.toString());
+    this.logger.debug('organizers params', params);
+    this.logger.debug('organizers params.keys', params.keys());
+    this.logger.debug('start/end', start, end);
+    const url = this.getStartEndUrl(start, end, 'organizers');
+    this.logger.debug('organizersStatistics url', url, params.toString());
     return this.httpClient
-      .get(this.getStartEndUrl(interval, 'organizers') + `?count=${count}&page=${page}`)
+      .get(url, {params})
       .pipe(
-        tap(data => this.logger.debug('organizers statistics response', data)),
+        tap(organizersData => this.logger.debug('organizersStatistics response', organizersData)),
         catchError(
           error => {
-            this.logger.error('Failed to get organizers statistics', error);
+            this.logger.debug('Failed to get organizers statistics', error);
             return throwError('Failed to get organizers statistics');
           }
         ),
-        map(data => data as OrganizersStatisticsSm)
+        map(organizersStatisticsData => organizersStatisticsData as OrganizersStatisticsSm)
       );
+
   }
 
-  getTrailingStatistics(interval: IntervalEnum): Observable<TrailingStatisticsSm> {
-    let url = `/assets/twelve${interval}TrailingData.json`;
-
-    if (this.environment.khakiBff) {
-      const count = 12;
-      const startEnd = this.getStartEnd(interval);
-      this.logger.debug('start is', startEnd.start);
-      const formattedStart = startEnd.start.utc().format();
-      url = `${this.environment.khakiBff}/statistics/trailing/${formattedStart}/${interval}/${count}`;
-    }
+  getTrailingStatistics(
+    start: Moment,
+    interval: IntervalSe,
+    statisticsQueryParams: StatisticsQueryParameters
+  ): Observable<TrailingStatisticsSm> {
+    let params = new HttpParams();
+    params = params.set('filter', statisticsQueryParams.statisticsScope.toString());
+    const intervalCount = 12;
+    const formattedStart = start.utc().format();
+    const url = `${this.environment.khakiBff}/statistics/trailing/${formattedStart}/${interval}/${intervalCount}`;
+    this.logger.debug('trailing url', url);
 
     return this.httpClient
-      .get(url)
+      .get(url, {params})
       .pipe(
+        tap(trailingData => this.logger.debug('Server response: trailing', trailingData)),
+        catchError(
+          error => {
+            this.logger.debug('Server response: trailing', error);
+            return throwError('Failed to get trailing statistics');
+          }
+        ),
         map(
-          (data: TrailingStatisticsResponseDto) => data as TrailingStatisticsSm
+          (trailingStatisticsResponseDto: TrailingStatisticsResponseDto) => trailingStatisticsResponseDto as TrailingStatisticsSm
         ),
       );
   }
 
-
-  getDepartmentStatistics(interval: IntervalEnum): Observable<DepartmentsStatisticsSm> {
+  getDepartmentStatistics(
+    start: Moment,
+    end: Moment,
+    statisticsQueryParams: StatisticsQueryParameters
+  ): Observable<DepartmentsStatisticsSm> {
+    let params = new HttpParams();
+    params = params.set('filter', statisticsQueryParams.statisticsScope.toString());
     return this.httpClient
-      .get(this.getStartEndUrl(interval, 'department'))
+      .get(this.getStartEndUrl(start, end, 'department'), {params})
       .pipe(
-        tap(data => this.logger.debug('raw department data from server', data)),
-        map((data: DepartmentsStatisticsResponseDto) => data as DepartmentsStatisticsSm),
+        tap(departmentData => this.logger.debug('Server response: department', departmentData)),
+        catchError(
+          error => {
+            this.logger.debug('Failed to get department statistics', error);
+            return throwError('Failed to get department statistics');
+          }
+        ),
+        map((departmentsStatistics: DepartmentsStatisticsResponseDto) => departmentsStatistics as DepartmentsStatisticsSm)
       );
   }
 
-  getTimeBlockSummary(interval: IntervalEnum): Observable<TimeBlockSummarySm> {
+  getTimeBlockSummary(start: Moment, end: Moment, statisticsQueryParams: StatisticsQueryParameters): Observable<TimeBlockSummarySm> {
+    let params = new HttpParams();
+    params = params.set('filter', statisticsQueryParams.statisticsScope.toString());
     return this.httpClient
-      .get(this.getStartEndUrl(interval, 'summary'))
+      .get(this.getStartEndUrl(start, end, 'summary'), {params})
       .pipe(
-        tap(ret => this.logger.debug('timeBlockSummary data', ret)),
+        tap(summaryData => this.logger.debug('Server response: summary', summaryData)),
+        catchError(
+          error => {
+            this.logger.debug('Failed to get time block summary', error);
+            return throwError('Failed to get time block summary');
+          }
+        ),
         map(
           (timeBlockSummary: TimeBlockSummaryResponseDto) => {
             timeBlockSummary.averageStaffSeconds = 0;

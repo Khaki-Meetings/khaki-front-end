@@ -35,8 +35,8 @@ export class NgxChartsLegendCustomComponent extends LegendComponent implements A
 
     d3.select('g.pie-chart.chart').append('text')
       .attr('text-anchor', 'middle')
-      .attr('font-size', '16px')
-      .attr('font-weight', 'bold')
+      .attr('font-size', '24px')
+      .attr('font-weight', '500')
       .attr('font-family', 'sans-serif')
       .attr('y', 5)
       .attr('id', 'center-text-value')
@@ -44,9 +44,9 @@ export class NgxChartsLegendCustomComponent extends LegendComponent implements A
 
     d3.select('g.pie-chart.chart').append('text')
       .attr('text-anchor', 'middle')
-      .attr('font-size', '10px')
+      .attr('font-size', '16px')
       .attr('font-family', 'sans-serif')
-      .attr('y', 18)
+      .attr('y', 28)
       .attr('id', 'center-text-label')
       .text('');
 
@@ -63,12 +63,14 @@ export class NgxChartsLegendCustomComponent extends LegendComponent implements A
       const idx = items.findIndex(i => {
         return i.label === formattedLabel;
       });
+      const formattedInventoryUsage = dataExt.totalSeconds / dataExt.inventorySecondsAvailable * 100;
 
       if (idx === -1) {
         items.push({
           label,
           formattedLabel,
           dataExt,
+          formattedInventoryUsage,
           color: this.colors.getColor(label)
         });
       }

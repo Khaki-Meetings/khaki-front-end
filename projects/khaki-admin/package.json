@@ -1,0 +1,12 @@
+{
+  "name": "khaki-admin",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/common": "^10.1.6",
+    "@angular/core": "^10.1.6",
+    "@auth0/auth0-angular": "^1.2.0"
+  },
+  "dependencies": {
+    "tslib": "^2.0.0"
+  }
+}

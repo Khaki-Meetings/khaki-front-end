@@ -8,7 +8,6 @@ import {TimeBasedStatSummaryComponent} from './components/time-based-stat-summar
 import {NgxChartsLegendCustomComponent} from './components/ngx-charts-legend-custom/ngx-charts-legend-custom.component';
 import {LegendEntryCustomComponent} from './components/legend-entry-custom/legend-entry-custom.component';
 import {StoreModule} from '@ngrx/store';
-import * as fromKhakiStatistics from './state';
 import {EffectsModule} from '@ngrx/effects';
 import {TimeBlockSummaryEffects} from './state/effects/time-block-summary.effects';
 import {OrganizersStatisticsEffects} from './state/effects/organizers-statistics.effects';
@@ -22,13 +21,22 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatButtonModule} from '@angular/material/button';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {MatSelectModule} from '@angular/material/select';
 import {ReactiveFormsModule} from '@angular/forms';
 import {TimeIntervalFormComponent} from './components/time-interval-form/time-interval-form.component';
-import {CurrentTimeIntervalEffects} from './state/effects/current-time-interval.effects';
-import {AuthHttpInterceptor} from '@auth0/auth0-angular';
+import {StatisticsFiltersChangeEffects} from './state/effects/statistics-filters-change.effects';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {ExternalInternalSelectorComponent} from './components/external-internal-selector/external-internal-selector.component';
+import {OrganizersTablePageableEffects} from './state/organizers-table-pageable/organizers-table-pageable.effects';
+import {khakiStatisticsFeatureKey, khakiStatisticsMetaReducers, khakiStatisticsReducers} from './state';
+import {StatisticsFiltersFacade} from './state/statistics-filters/statistics-filters-facade';
+import {HistorianService, Logging} from '@natr/historian';
+import {HoursMinutesPipe} from './pipes/hours-minutes.pipe';
+import {IntervalTextDetailPipe} from './pipes/interval-text-detail.pipe';
+import {MeetingTypeDetailPipe} from './pipes/meeting-type-detail.pipe';
+import {KhakiSpinnerComponent} from './components/khaki-spinner/khaki-spinner.component';
+import {OrganizersStatisticsDataSource} from './components/organizers-table/data-source/organizers-statistics-data-source';
+import {MatSortModule} from '@angular/material/sort';
 
 
 @NgModule({
@@ -40,41 +48,55 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     TimeBasedStatSummaryComponent,
     TimeIntervalFormComponent,
     NgxChartsLegendCustomComponent,
-    LegendEntryCustomComponent
+    LegendEntryCustomComponent,
+    ExternalInternalSelectorComponent,
+    KhakiSpinnerComponent,
+    HoursMinutesPipe,
+    IntervalTextDetailPipe,
+    MeetingTypeDetailPipe
   ],
-    imports: [
-        ReactiveFormsModule,
-        KhakiStatisticsRoutingModule,
-        CommonModule,
-        StoreModule.forFeature(
-            fromKhakiStatistics.khakiStatisticsFeatureKey,
-            fromKhakiStatistics.reducers,
-            {
-                metaReducers: fromKhakiStatistics.metaReducers
-            }
-        ),
-        EffectsModule.forFeature(
-            [
-                TimeBlockSummaryEffects,
-                OrganizersStatisticsEffects,
-                TrailingStatisticsEffects,
-                PerDepartmentStatisticsEffects,
-                CurrentTimeIntervalEffects
-            ]
-        ),
-        MatProgressSpinnerModule,
-        FontAwesomeModule,
-        MatTableModule,
-        MatCheckboxModule,
-        MatButtonModule,
-        NgxChartsModule,
-        MatSelectModule,
-        MatIconModule,
-        MatPaginatorModule
-    ],
+  imports: [
+    ReactiveFormsModule,
+    KhakiStatisticsRoutingModule,
+    CommonModule,
+    StoreModule.forFeature(
+      khakiStatisticsFeatureKey,
+      khakiStatisticsReducers,
+      {
+        metaReducers: khakiStatisticsMetaReducers
+      }
+    ),
+    EffectsModule.forFeature(
+      [
+        TimeBlockSummaryEffects,
+        OrganizersStatisticsEffects,
+        TrailingStatisticsEffects,
+        PerDepartmentStatisticsEffects,
+        StatisticsFiltersChangeEffects,
+        OrganizersTablePageableEffects,
+      ]
+    ),
+    MatProgressSpinnerModule,
+    FontAwesomeModule,
+    MatTableModule,
+    MatCheckboxModule,
+    MatButtonModule,
+    NgxChartsModule,
+    MatSelectModule,
+    MatIconModule,
+    MatPaginatorModule,
+    MatSortModule
+  ],
   exports: [KhakiStatisticsComponent],
-  providers: [
-  ]
+  providers: [OrganizersStatisticsDataSource]
 })
+@Logging
 export class KhakiStatisticsModule {
+  private logger: HistorianService;
+
+  constructor(public statisticsFiltersFacade: StatisticsFiltersFacade) {
+    this.logger.debug('statisticsFiltersFacade', statisticsFiltersFacade);
+    statisticsFiltersFacade.dispatchLoadSharedStatistics();
+  }
+
 }

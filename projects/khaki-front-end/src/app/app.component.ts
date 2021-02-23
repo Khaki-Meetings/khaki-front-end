@@ -2,6 +2,12 @@ import {Component, OnInit} from '@angular/core';
 import {AuthService} from '@auth0/auth0-angular';
 import {HistorianService, Logging} from '@natr/historian';
 import {TenantFacadeService} from './state/facades/tenant-facade.service';
+import {StatisticsFiltersFacade as SettingsModuleStatisticsFiltersFacade} from 'khaki-settings';
+import {StatisticsFiltersFacade as StatisticsModuleStatisticsFiltersFacade} from 'khaki-statistics';
+import {KhakiState} from './state/reducers';
+import {Store} from '@ngrx/store';
+import {statisticsFiltersAttributeKey} from './state/statistics-filters/statistics-filters.reducer';
+import {take} from 'rxjs/operators';
 
 @Logging
 @Component({
@@ -12,10 +18,17 @@ import {TenantFacadeService} from './state/facades/tenant-facade.service';
 export class AppComponent implements OnInit {
   title = 'khaki-front-end';
   show = false;
+  isAuthed = false;
 
   private logger: HistorianService;
 
-  constructor(private authService: AuthService, private tenantFacade: TenantFacadeService) {
+  constructor(
+    private authService: AuthService,
+    private tenantFacade: TenantFacadeService,
+    private settingsModuleStatisticsFiltersFacade: SettingsModuleStatisticsFiltersFacade,
+    private statisticsModuleStatisticsFiltersFacade: StatisticsModuleStatisticsFiltersFacade,
+    private store: Store<KhakiState>
+  ) {
   }
 
   toggleDrawerShow(): void {
@@ -27,6 +40,8 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.authService.isAuthenticated$.subscribe(authed => this.isAuthed = authed);
+    this.setChildrenStatisticsFiltersInitialState();
     this.authService.idTokenClaims$
       .subscribe(
         claims => {
@@ -53,11 +68,22 @@ export class AppComponent implements OnInit {
     });
   }
 
-  openHelpDialog() : void {
-    document.getElementById("helpModal").style.display = "block";
+  openHelpDialog(): void {
+    document.getElementById('helpModal').style.display = 'block';
   }
 
-  closeHelpDialog() : void {
-    document.getElementById("helpModal").style.display = "none";
+  closeHelpDialog(): void {
+    document.getElementById('helpModal').style.display = 'none';
+  }
+
+  setChildrenStatisticsFiltersInitialState(): void{
+    this.store.select(state => state[statisticsFiltersAttributeKey])
+      .subscribe(
+        statisticsFilters => {
+          this.logger.debug('statisticsFilters', statisticsFilters);
+          this.settingsModuleStatisticsFiltersFacade.dispatchSetStatisticsFilters(statisticsFilters);
+          this.statisticsModuleStatisticsFiltersFacade.dispatchSetStatisticsFilters(statisticsFilters);
+        }
+      );
   }
 }

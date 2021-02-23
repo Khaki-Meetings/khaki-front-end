@@ -30,10 +30,10 @@ describe('StatisticsService', () => {
   it(
     'getOrganizersStatistics should return correct Sm object',
     () => {
-      const organizersStatisticsSm: OrganizersStatisticsSm = {organizersStatistics: [], page: 5};
-      const organizersStatisticsDto: OrganizersStatisticsDto = {organizersStatistics: [], page: 5};
+      const organizersStatisticsSm: OrganizersStatisticsSm = {};
+      const organizersStatisticsDto: OrganizersStatisticsDto = {};
 
-      service.getOrganizersStatistics(IntervalEnum.Week)
+      service.getOrganizersStatistics(IntervalEnum.Week, {})
         .subscribe(
           organizersStatistics => {
             expect(organizersStatistics).toEqual(organizersStatisticsSm);

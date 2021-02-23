@@ -2,26 +2,29 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {OrganizersStatisticsSm} from '../models/organizers-statistics-sm';
 import {NotImplementedException} from '../../exceptions/not-implemented-exception';
-import {StatisticsFeature} from '../models/statistics-feature';
+import {KhakiStatisticsFeatureSm} from '../models/khaki-statistics-feature-sm';
 import {Store} from '@ngrx/store';
-import {loadOrganizersStatistics} from '../actions/organizers-statistics.actions';
-import {organizersStatisticsSelector} from '../statistics.selectors';
-import {IntervalEnum} from '../../services/models/interval.enum';
+import {loadOrganizersStatisticsAction} from '../actions/organizers-statistics.actions';
+import {organizersStatisticsLoadingSelector, organizersStatisticsSelector} from '../statistics.selectors';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrganizersStatisticsFacadeService {
 
-  constructor(private store: Store<StatisticsFeature>) {
+  constructor(private store: Store<KhakiStatisticsFeatureSm>) {
   }
 
-  requestOrganizersStatistics(interval: IntervalEnum, count: number, page: number): void {
-    this.store.dispatch(loadOrganizersStatistics({interval, count, page}));
+  dispatchLoadOrganizersStatistics(): void {
+    this.store.dispatch(loadOrganizersStatisticsAction());
   }
 
-  organizersStatistics(): Observable<OrganizersStatisticsSm> {
+  selectOrganizersStatistics(): Observable<OrganizersStatisticsSm> {
     return this.store.select(organizersStatisticsSelector);
+  }
+
+  selectOrganizersStatisticsLoading(): Observable<boolean> {
+    return this.store.select(organizersStatisticsLoadingSelector);
   }
 
   setOrganizersStatistics(data: OrganizersStatisticsSm): void {

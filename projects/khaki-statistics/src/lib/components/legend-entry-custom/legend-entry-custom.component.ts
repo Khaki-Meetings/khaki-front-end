@@ -1,6 +1,5 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {LegendEntryComponent} from '@swimlane/ngx-charts';
-import {Utilities} from '../../services/utilities';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -11,12 +10,14 @@ import {Utilities} from '../../services/utilities';
       {{ trimmedLabel }}
     </td>
     <td class="legend-label-text legend-value-text">
-      {{ displayValue }}
+      {{ dataExt.value | hoursMinutes }}
+    </td>
+    <td class="legend-label-text legend-value-text">
+      {{ formattedInventoryUsage }}
     </td>`,
   styleUrls: ['./legend-entry-custom.component.css']
 })
-
-export class LegendEntryCustomComponent extends LegendEntryComponent implements OnInit{
+export class LegendEntryCustomComponent extends LegendEntryComponent implements OnInit {
 
   @Input() dataExt: any;
 
@@ -31,12 +32,14 @@ export class LegendEntryCustomComponent extends LegendEntryComponent implements 
     return this.formattedLabel || '(empty)';
   }
 
-  get displayValue(): string {
-    let displayValue = '';
-    if (this.dataExt.value !== 0) {
-      displayValue = Utilities.formatHrsMins(this.dataExt.value)
-    }
-    return displayValue || '(empty)';
+  get inventoryUsageDisplay(): string {
+    return this.dataExt.inventorySecondsAvailable || 'N/A';
   }
 
+  get formattedInventoryUsage(): string {
+    if (!this.dataExt.inventorySecondsAvailable || this.dataExt.inventorySecondsAvailable == 0) {
+      return "N/A";
+    }
+    return Math.floor(this.dataExt.value / this.dataExt.inventorySecondsAvailable * 100) + "%";
+  }
 }

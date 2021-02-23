@@ -104,6 +104,7 @@ div.container {
 
   .employee-info {
     padding-left: 10px;
+    width: 100%;
 
     .text-name {
       font-weight: bold;
@@ -113,4 +114,19 @@ div.container {
         color: darkgray;
     }
   }
+}
+
+.employee-name {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.mat-expansion-panel-header {
+  align-items: flex-start;
+}
+
+.employee-info {
+   width: 100%;
+   padding-right: 15px;
 }

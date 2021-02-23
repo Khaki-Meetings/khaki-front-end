@@ -1,10 +1,12 @@
-import {Component, OnInit, ChangeDetectorRef, HostListener} from '@angular/core';
+import {Component, ElementRef, HostListener, OnInit} from '@angular/core';
 import {DepartmentsStatisticsSm} from '../../state/models/departments-statistics-sm';
 import {PerDepartmentStatisticsFacadeService} from '../../state/facades/per-department-statistics-facade.service';
 import {ColorHelper} from '@swimlane/ngx-charts';
-import {NgxChartsLegendCustomComponent} from '../ngx-charts-legend-custom/ngx-charts-legend-custom.component';
 import {HistorianService, Logging} from '@natr/historian';
-import {Utilities} from '../../services/utilities';
+import {StatisticsFiltersFacade} from '../../state/statistics-filters/statistics-filters-facade';
+import {IntervalSe} from '../../state/statistics-filters/interval-se.enum';
+import {Moment} from 'moment/moment';
+import {StatisticsScopeSe} from '../../state/statistics-filters/statistics-scope-se.enum';
 
 interface GraphData {
   name: string;
@@ -19,6 +21,12 @@ interface GraphData {
 })
 
 export class PerDepartmentGraphComponent implements OnInit {
+  constructor(private perDepartmentStatisticsFacade: PerDepartmentStatisticsFacadeService,
+              private statisticsFiltersFacadeService: StatisticsFiltersFacade,
+              elementRef: ElementRef) {
+    this.elementRef = elementRef;
+  }
+
   private logger: HistorianService;
 
   perDepartmentStatistics: DepartmentsStatisticsSm;
@@ -31,6 +39,7 @@ export class PerDepartmentGraphComponent implements OnInit {
   showLabels = false;
   isDoughnut = true;
   tooltipDisabled = true;
+  arcWidth = 0.2;
 
   colorScheme = {
     domain: ['#3182CE', '#48BB78', '#9F7AEA', '#ED64A6', '#667EEA', '#478aef', '#47ef88', '#b647ef', '#ef47ba', '#e3b755']
@@ -41,8 +50,27 @@ export class PerDepartmentGraphComponent implements OnInit {
   legendData: any[] = [];
   colors: ColorHelper = new ColorHelper('cool', 'ordinal', [], null);
 
-  constructor(private perDepartmentStatisticsFacade: PerDepartmentStatisticsFacadeService) {
+  interval: IntervalSe;
+  start: Moment;
+  end: Moment;
+  statisticsScope: StatisticsScopeSe;
+  loading = false;
 
+  elementRef: any;
+
+  private static formatHrsMins(seconds: number): string {
+
+    const hours = Math.trunc(seconds / 60 / 60);
+    const minutes = Math.trunc(seconds / 60 % 60);
+
+    let hoursLabel = 'hrs';
+    if (hours === 1) {
+      hoursLabel = 'hr';
+    }
+
+    const minutesLabel = 'mins';
+
+    return hours + ' ' + hoursLabel + ', ' + minutes + ' ' + minutesLabel;
   }
 
   ngOnInit(): void {
@@ -74,10 +102,19 @@ export class PerDepartmentGraphComponent implements OnInit {
           );
 
           this.logger.debug('chart data', this.chartData);
-
           this.legendData = this.chartData.map(d => d.extra.displayName);
           this.colors = new ColorHelper(this.colorScheme, 'ordinal', this.legendData, null);
         });
+
+    this.statisticsFiltersFacadeService.selectStatisticsFilters()
+      .subscribe((statisticsFilters) => {
+        this.interval = statisticsFilters.interval;
+        this.start = statisticsFilters.start;
+        this.end = statisticsFilters.end;
+        this.statisticsScope = statisticsFilters.statisticsScope;
+      });
+
+    this.perDepartmentStatisticsFacade.perDepartmentStatisticsLoading().subscribe(loading => this.loading = loading);
   }
 
   private createGraphData(): void {
@@ -85,28 +122,11 @@ export class PerDepartmentGraphComponent implements OnInit {
       el => {
         return {
           name: el.department,
-          value: el.totalSeconds
+          value: el.totalSeconds,
+          inventorySecondsAvailable: el.inventorySecondsAvailable
         };
       }
     );
-  }
-
-  public legendLabelActivate(event: any, item: any): void {
-    const dataElement = this.chartData.find(x => x.extra.displayName === event.name);
-
-    const d = {
-      entries: [{
-        name: dataElement.name,
-        value: Utilities.formatHrsMins(dataElement.value),
-        label: dataElement.name
-      }],
-      value: {
-        name: dataElement.name,
-        value: Utilities.formatHrsMins(dataElement.value),
-        label: dataElement.name
-      }
-    };
-    this.onActivate(d);
   }
 
   public legendLabelDeactivate(item: any): void {
@@ -116,15 +136,27 @@ export class PerDepartmentGraphComponent implements OnInit {
   onActivate(data): void {
     let displayValue = '';
     if (data.value.value !== 0) {
-      displayValue = Utilities.formatHrsMins(data.value.value)
+      displayValue = PerDepartmentGraphComponent.formatHrsMins(data.value.value);
     }
-    document.getElementById('center-text-label').innerHTML = data.value.name;
-    document.getElementById('center-text-value-bg').innerHTML = displayValue;
-    document.getElementById('center-text-value').innerHTML = displayValue;
+     document.getElementById('center-text-label').innerHTML = data.value.name;
+     document.getElementById('center-text-value-bg').innerHTML = displayValue;
+     document.getElementById('center-text-value').innerHTML = displayValue;
+
+     const dom: HTMLElement = this.elementRef.nativeElement;
+     const elements = dom.querySelectorAll('lib-per-department-graph .ngx-charts .arc:not(.active)');
+     elements.forEach((x) => {
+       (x as HTMLElement).classList.add('inactive');
+     });
   }
 
   onDeactivate(data): void {
     this.drawDefaultDonutLabel();
+
+    const dom: HTMLElement = this.elementRef.nativeElement;
+    const elements = dom.querySelectorAll('lib-per-department-graph .ngx-charts .arc');
+    elements.forEach((x) => {
+      (x as HTMLElement).classList.remove('inactive');
+    });
   }
 
   public drawDefaultDonutLabel(): void {
@@ -136,7 +168,7 @@ export class PerDepartmentGraphComponent implements OnInit {
           val = val + this.graphData[x].value;
         }
       }
-      const displayValue = Utilities.formatHrsMins(val);
+      const displayValue = PerDepartmentGraphComponent.formatHrsMins(val);
       document.getElementById('center-text-value-bg').innerHTML = displayValue;
       document.getElementById('center-text-value').innerHTML = displayValue;
       document.getElementById('center-text-label').innerHTML = 'in meetings';
@@ -149,10 +181,6 @@ export class PerDepartmentGraphComponent implements OnInit {
   }
 
   private calculatePieDimensions(): number[] {
-    if (this.graphData === null || this.graphData.length < 4) {
-      return [200, 200];
-    }
-    const dimensionSize = this.graphData.length * 25;
-    return [dimensionSize, dimensionSize];
+    return [350, 350];
   }
 }

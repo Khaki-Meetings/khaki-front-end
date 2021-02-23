@@ -12,10 +12,14 @@ import {DOCUMENT} from '@angular/common';
   styleUrls: ['./side-nav.component.scss']
 })
 export class SideNavComponent implements OnInit {
+  private static readonly TenantKey = 'tenantKey';
   private logger: HistorianService;
   isAuthed = false;
   hasMultiTenant = false;
   defaultTenant: string;
+  userImgUrl: string;
+  userDisplayName: string;
+  userEmail: string;
 
   tenantMap: Map<string, string> = new Map<string, string>();
 
@@ -25,6 +29,12 @@ export class SideNavComponent implements OnInit {
   ngOnInit(): void {
     this.authService.isAuthenticated$.subscribe(authed => this.isAuthed = authed);
     this.tenantFacade.tenantMap().pipe(tap(map => this.logger.debug(map))).subscribe(tenantMap => this.tenants(tenantMap));
+    this.authService.user$.subscribe(
+      user => {
+        this.userDisplayName = user.name;
+        this.userEmail = user.email;
+        this.userImgUrl = user.picture
+      });
   }
 
   logout(): void {
@@ -40,7 +50,8 @@ export class SideNavComponent implements OnInit {
     if (tenantMap.size < 1) {
       return;
     }
-    this.defaultTenant = tenantMap.keys().next().value;
+    const storedKey = localStorage.getItem(SideNavComponent.TenantKey);
+    this.defaultTenant = storedKey ? storedKey : tenantMap.keys().next().value;
     this.tenantFacade.setTenantKey(this.defaultTenant);
 
     if (tenantMap.size > 1) {

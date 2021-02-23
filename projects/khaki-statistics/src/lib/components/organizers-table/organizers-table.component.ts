@@ -1,7 +1,14 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {OrganizersStatisticsSm} from '../../state/models/organizers-statistics-sm';
-import {OrganizersStatisticsFacadeService} from '../../state/facades/organizers-statistics-facade.service';
 import {HistorianService, Logging} from '@natr/historian';
+import {MatPaginator, PageEvent} from '@angular/material/paginator';
+import {IntervalSe} from '../../state/statistics-filters/interval-se.enum';
+import {Moment} from 'moment/moment';
+import {OrganizersStatisticsDataSource} from './data-source/organizers-statistics-data-source';
+import {OrganizersStatisticsFacadeService} from '../../state/facades/organizers-statistics-facade.service';
+import {MatSort} from '@angular/material/sort';
+import {OrganizersTablePageableFacade} from '../../state/organizers-table-pageable/organizers-table-pageable-facade.service';
+import {StatisticsFiltersFacade} from '../../state/statistics-filters/statistics-filters-facade';
 
 @Logging
 @Component({
@@ -10,22 +17,40 @@ import {HistorianService, Logging} from '@natr/historian';
   styleUrls: ['./organizers-table.component.scss']
 })
 
-export class OrganizersTableComponent implements OnInit {
+export class OrganizersTableComponent implements OnInit, AfterViewInit {
+  constructor(
+    private organizersStatisticsFacade: OrganizersStatisticsFacadeService,
+    public organizersStatisticsDataSource: OrganizersStatisticsDataSource,
+    private statisticsFiltersFacade: StatisticsFiltersFacade
+  ) {
+  }
+
   private logger: HistorianService;
+
   organizersStatistics: OrganizersStatisticsSm;
   displayedColumns: string[] = ['name', 'meeting', 'hours'];
+  loading = false;
 
+  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: false}) sort: MatSort;
 
-  constructor(private organizersStatisticsService: OrganizersStatisticsFacadeService) {
-  }
+  interval: IntervalSe;
+  start: Moment;
+  end: Moment;
 
   ngOnInit(): void {
-    this.organizersStatisticsService.organizersStatistics()
-      // .pipe(tap(data => this.logger.debug('subscription', data)))
-      .subscribe(organizersStatistics => {
-        this.logger.debug('onInit', organizersStatistics);
-        this.organizersStatistics = organizersStatistics;
+    this.organizersStatisticsFacade.selectOrganizersStatisticsLoading().subscribe(loading => this.loading = loading);
+    this.statisticsFiltersFacade.selectStatisticsFilters()
+      .subscribe((statisticsFilters) => {
+        this.interval = statisticsFilters.interval;
+        this.start = statisticsFilters.start;
+        this.end = statisticsFilters.end;
       });
   }
-  
+
+  ngAfterViewInit(): void {
+    this.logger.debug('paginator is', this.paginator);
+    this.organizersStatisticsDataSource.paginator = this.paginator;
+    this.organizersStatisticsDataSource.sort = this.sort;
+  }
 }

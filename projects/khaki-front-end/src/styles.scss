@@ -47,62 +47,43 @@ body { margin: 0; font-family: Avenir, "Helvetica Neue", sans-serif; }
   }
 }
 
-// Time Interval wrapper
+// Page title
 
-.lib-time-interval-form-wrapper {
+.page-caption {
   width: 100%;
+  padding-bottom: 20px;
+  overflow: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 
-// Time Interval dropdown
-
-.lib-time-interval-form-wrapper h3 {
-  width: 75px;
-  float: right;
-  padding-right: 10px;
-  margin-right: 10px;
-  font-weight: normal;
-}
-
-.lib-time-interval-form-wrapper .mat-select {
-    background-color: white;
-    border: 1px solid #dbdee2;
-    border-radius: 3px;
-    padding-left: 5px;
-}
-
-.mat-option {
-  line-height: 36px !important;
-  height: 36px !important;
-}
-
-// Page Caption
-
-.lib-time-interval-form-wrapper .title {
+.title {
   font-weight: bold;
   font-size: larger;
   line-height: 28px;
-  margin-left: 10px;
-}
-
-.mat-typography h3 {
-    font-size: larger;
 }
 
 // Component defaults
 
 .khaki-container {
-  border: 1px solid #dbdee2;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
   background-color: white;
   padding: 10px 10px 25px 10px;
   border-radius: 8px;
   flex: 1 1 0px;
-  margin: 10px 10px;
+  margin: 0px 0px 20px;
 }
 
 .khaki-clear-container {
   padding: 0px;
   flex: 1 1 0px;
-  margin: 10px 10px;
+}
+
+.khaki-clear-container {
+  padding: 0px;
+  flex: 1 1 0px;
 }
 
 div.center {
@@ -111,12 +92,19 @@ div.center {
     width: fit-content;
 }
 
+div.center-90 {
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+}
+
 .component-header {
   padding: 10px;
   overflow: visible;
 
   .component-caption {
     float: left;
+    padding: 0 0 20px;
   }
 
   .component-help {
@@ -168,4 +156,48 @@ div.center {
   .mat-select-value-text {
     padding-left: 5px;
   }
+}
+
+.component-title {
+    font-size: initial;
+    font-weight: 400;
+    color: #4A5568;
+}
+
+.component-subtitle {
+  color: #718096;
+}
+
+.mat-spinner-wrapper {
+  margin: 10px;
+  padding: 10px;
+  display: block;
+  position: relative;
+}
+
+.loadingComponent {
+  display: none;
+}
+
+lib-per-department-graph .ngx-charts {
+  .arc {
+    &.active,
+    &:hover {
+      opacity: 1;
+      cursor: default;
+    }
+  }
+}
+
+lib-per-department-graph .ngx-charts {
+  .arc.inactive:not(.active) {
+      opacity: 0.2;
+  }
+}
+
+::ng-deep .mat-select-value {
+  max-width: 0;
+  width: 100%;
+  white-space: nowrap;
+  display: contents;
 }

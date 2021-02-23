@@ -1,0 +1,21 @@
+{
+  "scenarioName": "trailing state",
+  "requiredScenarioState": "2nd",
+  "newScenarioState": "Started",
+  "request": {
+    "method": "GET",
+    "urlPattern": "/statistics/trailing/\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(.\\d{2,5})?Z/(Month|Week)/\\d+(\\\\?(.*)=(.*))?"
+  },
+  "response": {
+    "status": 200,
+    "delayDistribution": {
+      "type": "lognormal",
+      "median": 750,
+      "sigma": 0.5
+    },
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "bodyFileName": "twelveMonthTrailingData.json"
+  }
+}

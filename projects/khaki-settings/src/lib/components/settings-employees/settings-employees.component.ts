@@ -1,31 +1,49 @@
-import {AfterViewInit, Component, ElementRef, Inject, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Inject, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {EmployeesFacadeService} from '../../state/facades/employees-facade.service';
 import {EmployeeDto} from '../../services/models/employeesResponseDto';
 import {HistorianService, Logging} from '@natr/historian';
 import {SettingsService} from '../../services/settings.service';
+import {StatisticsFiltersFacade} from '../../state/statistics-filters/statistics-filters-facade';
+import {mergeMap} from 'rxjs/operators';
+import {TimeBlockSummaryResponseDto} from '../../services/models/time-block-summary-response-dto';
+import {Moment} from 'moment/moment';
 
 export interface DialogData {
   data: string;
 }
 
+@Logging
 @Component({
   selector: 'lib-settings-employees',
   templateUrl: './settings-employees.component.html',
   styleUrls: ['./settings-employees.component.scss']
 })
 export class SettingsEmployeesComponent implements OnInit {
+  constructor(
+    private router: Router,
+    public dialog: MatDialog,
+    private facadeService: EmployeesFacadeService,
+    private statisticsFiltersFacade: StatisticsFiltersFacade,
+    private settingsService: SettingsService
+  ) {
+  }
+
+  private logger: HistorianService;
+  interval;
+  start: Moment;
+  end: Moment;
+
+  statisticsScope;
+  employeeStatsLoading = true;
+  selectedEmployeeStats: TimeBlockSummaryResponseDto;
 
   employees: EmployeeDto[] = [];
 
   pos = 0;
   maxShow = 6;
 
-  constructor(private router: Router, public dialog: MatDialog,
-    private facadeService: EmployeesFacadeService,
-    private settingsService: SettingsService) {
-  }
 
   ngOnInit(): void {
     this.facadeService.requestEmployees();
@@ -33,8 +51,19 @@ export class SettingsEmployeesComponent implements OnInit {
     this.settingsService
       .getEmployees()
       .subscribe(data => {
-        this.employees = data["content"] as EmployeeDto[];
-    });
+        this.employees = data['content'] as EmployeeDto[];
+      });
+
+    this.statisticsFiltersFacade
+      .selectStatisticsFilters()
+      .subscribe(
+        statisticsFilters => {
+          this.interval = statisticsFilters.interval;
+          this.statisticsScope = statisticsFilters.statisticsScope;
+          this.start = statisticsFilters.start;
+          this.end = statisticsFilters.end;
+        }
+      );
 
   }
 
@@ -79,6 +108,20 @@ export class SettingsEmployeesComponent implements OnInit {
   isFirst(): boolean {
     return this.pos === 0;
   }
+
+  panelOpen(employee: EmployeeDto): void {
+    this.logger.debug('open', employee);
+    this.employeeStatsLoading = true;
+    this.settingsService
+      .getEmployeeStats(employee.id, this.start, this.end)
+      .subscribe(
+        timeBlockSummary => {
+          this.employeeStatsLoading = false;
+          this.selectedEmployeeStats = timeBlockSummary;
+        }
+      );
+  }
+
 }
 
 @Logging

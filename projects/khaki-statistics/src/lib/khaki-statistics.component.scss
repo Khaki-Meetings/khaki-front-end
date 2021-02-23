@@ -23,3 +23,32 @@
   display: flex;
   justify-content: center;
 }
+
+.lib-time-interval-form-wrapper {
+  font-weight: normal;
+  line-height: 28px;
+  display: inline-flex;
+  .data-selector {
+    padding-left: 10px;
+  }
+  span {
+    font-weight: bold;
+  }
+}
+
+.ngx-charts {
+  .bar,
+  .cell,
+  .arc,
+  .card {
+    &.active,
+    &:hover {
+      opacity: 0.3;
+      transition: opacity 100ms ease-in-out;
+    }
+  }
+}
+
+.data-selector {
+    margin-right: 25px;
+}

@@ -1,5 +1,6 @@
 .flex-container {
     display: flex;
+    background-color: #F7FAFC;
 }
 
 .flex-child {
@@ -13,10 +14,22 @@
 
 .flex-child img {
   float: right;
+  height: 100vh;
+}
+
+.flex-child img.logo {
+  height: 60px;
+  float: none;
+  padding: 10px;
+}
+
+.flex-child .right-image-wrapper {
+  max-width: 25%;
+  float: right;
 }
 
 h3 {
-  font-size: xxx-large;
+  font-size: -webkit-xxx-large;
   font-weight: bold;
   padding: 10px;
 }
@@ -24,13 +37,16 @@ h3 {
 .login-container {
   padding-top: 100px;
   padding-left: 50px;
+  h3 {
+    line-height: initial;
+  }
 }
 
 .auth0-container {
   padding-top: 20px;
+  padding-left: 10px;
 
   .button {
-    margin: 0 auto;
     background-color: #fff;
     border: 1px solid #dee0e2;
     display: block;

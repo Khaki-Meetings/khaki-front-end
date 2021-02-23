@@ -3,8 +3,8 @@
   color: #000000;
   white-space: nowrap;
   font-size: 14px;
-  font-weight: bold;
-  padding-left: 10px;
+  font-weight: 400;
+  padding-left: 50px;
 }
 
 .legend-wrap {
@@ -12,7 +12,6 @@
 }
 
 .legend-label-color {
-  border-radius: 3px;
   color: #5b646b;
   display: inline-block;
   height: 15px;
@@ -21,8 +20,9 @@
 }
 
 .legend-value-text {
-  text-align: right;
+  text-align: left;
   font-weight: normal;
+  padding-left: 50px;
 }
 
 .legend-label td {

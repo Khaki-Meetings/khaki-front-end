@@ -2,6 +2,10 @@
   background-color: #1A202C;
   height: 100%;
   color: #F7FAFC;
+  overflow: visible;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
 }
 
 // Logo styling
@@ -122,4 +126,85 @@
     margin-top: 30px;
     line-height: 2em;
   }
+}
+
+#profile-popup-wrapper {
+  display: flex;
+  align-items: center;
+  -webkit-box-direction: normal;
+  -webkit-box-orient: horizontal;
+  flex-direction: row;
+  span {
+    padding-left: 10px;
+  }
+  .expand {
+    -webkit-box-align: end;
+    align-items: flex-end;
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+
+    float: right;
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.profile-wrapper {
+
+  display: flex;
+  flex-direction: column;
+
+  mat-icon {
+    font-size: 25px;
+    color: #b7babd;
+  }
+
+  img {
+    height: 35px;
+    border-radius: 8px;
+  }
+}
+
+.profile-content {
+  visibility: hidden;
+  border-radius: 6px;
+
+  position: fixed;
+  z-index: 1;
+
+  background-color: white;
+  color: rgba(0, 0, 0, 0.87);
+  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
+
+  width: 240px;
+
+  left: 150px;
+  bottom: 10px;
+
+  overflow: hidden;
+
+  .name {
+    padding: 19px 19px 0px 19px;
+    font-weight: bold;
+  }
+  .email {
+    color: #718096;
+    font-size: smaller;
+    padding-left: 19px;
+  }
+  .signout {
+    font-size: initial;
+    padding: 19px;
+    margin-top: 25px;
+  }
+  .signout:hover {
+    background-color: #4AABE2;
+    color: #FFFFFF;
+  }
+}
+
+.profile-wrapper:hover #profile-popup-content {
+  visibility: visible;
 }
