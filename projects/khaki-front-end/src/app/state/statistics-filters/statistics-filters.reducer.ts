@@ -73,6 +73,7 @@ export const initialState: StatisticsFiltersSm = {
   statisticsScope: StatisticsScopeSe.External,
   start: startEnd.start,
   end: startEnd.end,
+  organizer: ''
 };
 
 

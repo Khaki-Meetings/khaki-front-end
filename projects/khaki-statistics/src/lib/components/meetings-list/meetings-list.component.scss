@@ -1,3 +1,7 @@
+.data-selector {
+    margin-right: 25px;
+}
+
 table {
   width: 460px;
   margin: 0;
@@ -42,10 +46,6 @@ td.row-caption {
 }
 td.mat-cell, .mat-footer-cell {
   font-size: larger;
-}
-
-.mat-row:hover {
-  background-color: #4AABE2;
 }
 
 #meeting-breakdown-help:hover #meeting-breakdown-help-content {

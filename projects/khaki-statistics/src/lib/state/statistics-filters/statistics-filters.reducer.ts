@@ -28,6 +28,7 @@ export const statisticsFiltersReducer = createReducer(
         interval: action.statisticsFilters.interval,
         start: action.statisticsFilters.start,
         end: action.statisticsFilters.end,
+        organizer: action.statisticsFilters.organizer
       };
     }
   ),

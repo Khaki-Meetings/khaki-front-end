@@ -1,0 +1,97 @@
+
+<div class="padding">
+  <div class="khaki-clear-container">
+    <div class="page-caption">
+      <span class="title">
+        Meetings
+      </span>
+      <div class="lib-time-interval-form-wrapper">
+        <div class="data-selector">
+          <lib-time-interval-form></lib-time-interval-form>
+        </div>
+        <div class="data-selector">
+          <lib-external-internal-selector></lib-external-internal-selector>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="khaki-container">
+
+    <div class="component-header">
+      <div class="component-caption">
+        <div class="component-title">Meeting List</div>
+        <div class="component-subtitle">{{ interval | intervalTextDetail: start : end}}</div>
+      </div>
+      <div class="component-help">
+        <div id="meeting-breakdown-help" class="help-wrapper">
+          <mat-icon class="non-profile-icons">help_outline</mat-icon>
+          <div id="meeting-breakdown-help-content" class="help-content">
+            Details about meetings
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="component-content">
+      <div class="mat-spinner-wrapper center" *ngIf="loading">
+        <lib-khaki-spinner></lib-khaki-spinner>
+      </div>
+      <div [ngClass]="loading? 'loadingComponent' : ''">
+        <table mat-table [dataSource]="meetingsListDataSource" matSort>
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef class="table-border header-font" mat-sort-header="organizerLastName">
+              Employee
+            </th>
+            <td mat-cell *matCellDef="let element"
+                class="table-border row-caption"> {{element.organizerFirstName}} {{element.organizerLastName}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="start">
+            <th mat-header-cell *matHeaderCellDef class="table-border header-font"
+                mat-sort-header="start">Start
+            </th>
+            <td mat-cell *matCellDef="let element"
+                class="table-border"> {{ element.start }} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="end">
+            <th mat-header-cell *matHeaderCellDef class="table-border header-font"
+                mat-sort-header="end">End
+            </th>
+            <td mat-cell *matCellDef="let element"
+                class="table-border"> {{element.end}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="hours">
+            <th mat-header-cell *matHeaderCellDef class="table-border header-font"
+                mat-sort-header="totalSeconds">Time
+            </th>
+            <td mat-cell *matCellDef="let element"
+                class="table-border"> {{element.totalSeconds | hoursMinutes}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="summary">
+            <th mat-header-cell *matHeaderCellDef class="table-border header-font"
+                mat-sort-header="summary">Title
+            </th>
+            <td mat-cell *matCellDef="let element"
+                class="table-border"> {{element.summary}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="numberInternalAttendees">
+            <th mat-header-cell *matHeaderCellDef class="table-border header-font col-right"
+                mat-sort-header="numberInternalAttendees">Attendees
+            </th>
+            <td mat-cell *matCellDef="let element"
+                class="table-border col-right"> {{element.numberInternalAttendees}} </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns" class="header-font"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 15]"></mat-paginator>
+      </div>
+    </div>
+  </div>
+</div>

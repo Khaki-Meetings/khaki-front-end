@@ -9,6 +9,7 @@ import {OrganizersStatisticsFacadeService} from '../../state/facades/organizers-
 import {MatSort} from '@angular/material/sort';
 import {OrganizersTablePageableFacade} from '../../state/organizers-table-pageable/organizers-table-pageable-facade.service';
 import {StatisticsFiltersFacade} from '../../state/statistics-filters/statistics-filters-facade';
+import { Router } from '@angular/router';
 
 @Logging
 @Component({
@@ -21,7 +22,8 @@ export class OrganizersTableComponent implements OnInit, AfterViewInit {
   constructor(
     private organizersStatisticsFacade: OrganizersStatisticsFacadeService,
     public organizersStatisticsDataSource: OrganizersStatisticsDataSource,
-    private statisticsFiltersFacade: StatisticsFiltersFacade
+    private statisticsFiltersFacade: StatisticsFiltersFacade,
+    private router: Router
   ) {
   }
 
@@ -53,4 +55,11 @@ export class OrganizersTableComponent implements OnInit, AfterViewInit {
     this.organizersStatisticsDataSource.paginator = this.paginator;
     this.organizersStatisticsDataSource.sort = this.sort;
   }
+
+  showMeetings(data): void {
+    this.statisticsFiltersFacade.dispatchSetOrganizer(data['organizerId']);
+    this.statisticsFiltersFacade.selectOrganizer();
+    this.router.navigateByUrl('/stats/meetings');
+  }
+
 }

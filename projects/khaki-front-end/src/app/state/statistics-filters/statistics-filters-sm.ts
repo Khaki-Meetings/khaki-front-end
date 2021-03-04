@@ -7,4 +7,5 @@ export interface StatisticsFiltersSm {
   interval: IntervalSe;
   start: Moment;
   end: Moment;
+  organizer: string;
 }

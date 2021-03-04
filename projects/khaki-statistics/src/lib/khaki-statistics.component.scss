@@ -4,10 +4,6 @@
   flex-wrap: wrap
 }
 
-.padding {
-  padding: 30px 50px;
-}
-
 .white-container {
   background-color: white;
   padding: 30px
@@ -22,18 +18,6 @@
 .center {
   display: flex;
   justify-content: center;
-}
-
-.lib-time-interval-form-wrapper {
-  font-weight: normal;
-  line-height: 28px;
-  display: inline-flex;
-  .data-selector {
-    padding-left: 10px;
-  }
-  span {
-    font-weight: bold;
-  }
 }
 
 .ngx-charts {

@@ -11,6 +11,9 @@ import {SpinnerSm} from './spinner-sm';
 import {organizersTablePageableAttributeKey, OrganizersTablePageableSm} from '../organizers-table-pageable/organizers-table-pageable.reducer';
 import {StatisticsFiltersSm} from '../statistics-filters/statistics-filters-sm';
 import {statisticsFiltersAttributeKey} from '../statistics-filters/statistics-filters.reducer';
+import {meetingsListFeatureKey} from '../reducers/meetings-list.reducer';
+import {MeetingsListSm} from './meetings-list-sm';
+import {meetingsTablePageableAttributeKey, MeetingsTablePageableSm} from '../meetings-table-pageable/meetings-table-pageable.reducer';
 
 export interface KhakiStatisticsFeatureSm {
   [organizersStatisticsFeatureKey]: OrganizersStatisticsSm;
@@ -20,4 +23,6 @@ export interface KhakiStatisticsFeatureSm {
   [spinnerAttributeKey]: SpinnerSm;
   [organizersTablePageableAttributeKey]: OrganizersTablePageableSm;
   [statisticsFiltersAttributeKey]: StatisticsFiltersSm;
+  [meetingsListFeatureKey]: MeetingsListSm;
+  [meetingsTablePageableAttributeKey]: MeetingsTablePageableSm;
 }

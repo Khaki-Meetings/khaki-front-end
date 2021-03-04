@@ -1,0 +1,57 @@
+import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import {HistorianService, Logging } from '@natr/historian';
+import {MatPaginator } from '@angular/material/paginator';
+import {MeetingsListSm} from '../../state/models/meetings-list-sm';
+import {MatSort} from '@angular/material/sort';
+import {IntervalSe} from '../../state/statistics-filters/interval-se.enum';
+import {Moment} from 'moment/moment';
+import {StatisticsFiltersFacade} from '../../state/statistics-filters/statistics-filters-facade';
+import {MeetingsListFacadeService} from '../../state/facades/meetings-list-facade.service';
+import {MeetingsListDataSource} from './data-source/meetings-list-data-source';
+
+@Logging
+@Component({
+  selector: 'lib-meetings-list',
+  templateUrl: './meetings-list.component.html',
+  styleUrls: ['./meetings-list.component.scss']
+})
+export class MeetingsListComponent implements OnInit, AfterViewInit {
+
+    constructor(
+      private meetingsListFacade: MeetingsListFacadeService,
+      public meetingsListDataSource: MeetingsListDataSource,
+      private statisticsFiltersFacade: StatisticsFiltersFacade
+    ) {
+    }
+
+    private logger: HistorianService;
+
+    meetingList: MeetingsListSm;
+    displayedColumns: string[] = ['start', 'end', 'summary', 'numberInternalAttendees'];
+    loading = false;
+
+    @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
+    @ViewChild(MatSort, {static: false}) sort: MatSort;
+
+    interval: IntervalSe;
+    start: Moment;
+    end: Moment;
+    organizer: string;
+
+    ngOnInit(): void {
+      this.meetingsListFacade.selectMeetingsListLoading().subscribe(loading => this.loading = loading);
+      this.statisticsFiltersFacade.selectStatisticsFilters()
+        .subscribe((statisticsFilters) => {
+          this.interval = statisticsFilters.interval;
+          this.start = statisticsFilters.start;
+          this.end = statisticsFilters.end;
+          this.organizer = statisticsFilters.organizer;
+        });
+    }
+
+    ngAfterViewInit(): void {
+      this.logger.debug('paginator is', this.paginator);
+      this.meetingsListDataSource.paginator = this.paginator;
+      this.meetingsListDataSource.sort = this.sort;
+    }
+}

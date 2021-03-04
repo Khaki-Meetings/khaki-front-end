@@ -6,6 +6,7 @@ import {TimeBlockSummaryResponseDto} from './models/time-block-summary-response-
 import {catchError, map, tap} from 'rxjs/operators';
 import {HistorianService, Logging} from '@natr/historian';
 import {OrganizersStatisticsSm} from '../state/models/organizers-statistics-sm';
+import {MeetingsListSm} from '../state/models/meetings-list-sm';
 import {TrailingStatisticsResponseDto} from './models/trailing-statistics-response-dto';
 import {TrailingStatisticsSm} from '../state/models/trailing-statistics-sm';
 import * as momentJs from 'moment';
@@ -38,10 +39,7 @@ export class StatisticsService {
     const formattedStart = start.utc().format();
     const formattedEnd = end.utc().format();
     const url = `${this.environment.khakiBff}/statistics/${statName}/${formattedStart}/${formattedEnd}`;
-
-    this.logger.debug('here 1');
     this.logger.debug('url is', url);
-
     return url;
   }
 
@@ -153,4 +151,53 @@ export class StatisticsService {
         )
       );
   }
+
+  private getNonStatisticsStartEndUrl(start: Moment, end: Moment, statName: string): string {
+    this.logger.debug('start', start);
+    this.logger.debug('start.utc', start.utcOffset());
+    this.logger.debug('start.utc', start.utc().format());
+    const formattedStart = start.utc().format();
+    const formattedEnd = end.utc().format();
+    const url = `${this.environment.khakiBff}/${statName}/${formattedStart}/${formattedEnd}`;
+    this.logger.debug('url is', url);
+    return url;
+  }
+
+  getMeetingsList(
+    start: Moment,
+    end: Moment,
+    organizer: string,
+    statisticsQueryParams: StatisticsQueryParameters
+  ): Observable<MeetingsListSm> {
+    let params = new HttpParams();
+    this.logger.debug('statisticsQueryParams', statisticsQueryParams);
+    const page = statisticsQueryParams.page ? statisticsQueryParams.page.toString() : '0';
+    const count = statisticsQueryParams.count ? statisticsQueryParams.count.toString() : '5';
+    const sortColumn = statisticsQueryParams.sortColumn ?? 'start';
+    const sortDirection: SortDirection = statisticsQueryParams.sortDirection ?? 'asc';
+    params = params.set('page', page);
+    params = params.set('count', count);
+    params = params.set('sort', `${sortColumn},${sortDirection}`);
+    params = params.set('filter', statisticsQueryParams.statisticsScope.toString());
+    params = params.set('organizer', organizer);
+    this.logger.debug('meetings params', params);
+    this.logger.debug('meetings params.keys', params.keys());
+    this.logger.debug('start/end', start, end);
+    const url = this.getNonStatisticsStartEndUrl(start, end, 'calendar-events');
+    this.logger.debug('calendar-events url', url, params.toString());
+    return this.httpClient
+      .get(url, {params})
+      .pipe(
+        tap(meetingsData => this.logger.debug('calendar-events response', meetingsData)),
+        catchError(
+          error => {
+            this.logger.debug('Failed to get calendar-events', error);
+            return throwError('Failed to get calendar-events');
+          }
+        ),
+        map(meetingsListData => meetingsListData as MeetingsListSm)
+      );
+
+  }
+
 }
