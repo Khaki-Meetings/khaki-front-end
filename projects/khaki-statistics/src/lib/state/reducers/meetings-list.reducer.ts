@@ -48,7 +48,7 @@ export const meetingsListReducer = createReducer(
             start: meetingList.start,
             end: meetingList.end,
             summary: meetingList.summary,
-            numberInternalAttendees: meetingList.numberInternalAttendees
+            numberTotalAttendees: meetingList.numberTotalAttendees
           };
         }
       );

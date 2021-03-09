@@ -16,6 +16,8 @@ import {StatisticsQueryParameters} from './models/statistics-query-parameters';
 import {IntervalSe} from '../state/statistics-filters/interval-se.enum';
 import Moment = momentJs.Moment;
 import {SortDirection} from '@angular/material/sort';
+import { OrganizerSm } from '../state/models/organizer-sm';
+import { PersonSm } from '../state/models/person-sm';
 
 interface TimeBlockRange {
   start: Moment;
@@ -199,5 +201,27 @@ export class StatisticsService {
       );
 
   }
+
+  getPerson(
+    id: string
+  ): Observable<PersonSm> {
+    let params = new HttpParams();
+    this.logger.debug('person ID', id);
+    const url = `${this.environment.khakiBff}/persons/id/${id}`;
+    return this.httpClient
+      .get(url, {params})
+      .pipe(
+        tap(personData => this.logger.debug('person response', personData)),
+        catchError(
+          error => {
+            this.logger.debug('Failed to get person', error);
+            return throwError('Failed to get person');
+          }
+        ),
+        map(personData => personData as PersonSm)
+      );
+
+  }
+
 
 }

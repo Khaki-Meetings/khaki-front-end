@@ -8,6 +8,8 @@ import {Moment} from 'moment/moment';
 import {StatisticsFiltersFacade} from '../../state/statistics-filters/statistics-filters-facade';
 import {MeetingsListFacadeService} from '../../state/facades/meetings-list-facade.service';
 import {MeetingsListDataSource} from './data-source/meetings-list-data-source';
+import { StatisticsService } from '../../services/statistics.service';
+import { PersonSm } from '../../state/models/person-sm';
 
 @Logging
 @Component({
@@ -20,14 +22,15 @@ export class MeetingsListComponent implements OnInit, AfterViewInit {
     constructor(
       private meetingsListFacade: MeetingsListFacadeService,
       public meetingsListDataSource: MeetingsListDataSource,
-      private statisticsFiltersFacade: StatisticsFiltersFacade
+      private statisticsFiltersFacade: StatisticsFiltersFacade,
+      private statisticsService: StatisticsService
     ) {
     }
 
     private logger: HistorianService;
 
     meetingList: MeetingsListSm;
-    displayedColumns: string[] = ['start', 'end', 'summary', 'numberInternalAttendees'];
+    displayedColumns: string[] = ['start', 'totalSeconds', 'summary', 'numberTotalAttendees'];
     loading = false;
 
     @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
@@ -37,6 +40,7 @@ export class MeetingsListComponent implements OnInit, AfterViewInit {
     start: Moment;
     end: Moment;
     organizer: string;
+    person: PersonSm;
 
     ngOnInit(): void {
       this.meetingsListFacade.selectMeetingsListLoading().subscribe(loading => this.loading = loading);
@@ -47,11 +51,16 @@ export class MeetingsListComponent implements OnInit, AfterViewInit {
           this.end = statisticsFilters.end;
           this.organizer = statisticsFilters.organizer;
         });
+
     }
 
     ngAfterViewInit(): void {
       this.logger.debug('paginator is', this.paginator);
       this.meetingsListDataSource.paginator = this.paginator;
       this.meetingsListDataSource.sort = this.sort;
+
+      this.statisticsService.getPerson(this.organizer).subscribe(val => {
+        this.person = val;
+      });
     }
 }

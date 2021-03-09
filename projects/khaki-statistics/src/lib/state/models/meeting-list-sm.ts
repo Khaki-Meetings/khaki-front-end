@@ -8,5 +8,5 @@ export interface MeetingListSm {
   start: Date;
   end: Date;
   summary: string;
-  numberInternalAttendees: number;
+  numberTotalAttendees: number;
 }

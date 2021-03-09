@@ -7,14 +7,18 @@ table {
   margin: 0;
   padding: 0;
 }
+
 .table-border {
   border-bottom-style: none;
 }
 .mat-table {
   background: none;
-  width: 90%;
+  width: 100%;
   margin: auto;
+  border-collapse: separate;
+  border-spacing: 0 1em;
 }
+
 .header-font {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
@@ -28,18 +32,24 @@ tr.mat-header-row {
 
 th.mat-header-cell {
   text-align: left;
-  border-bottom: 1px solid #E2E8F0;
-  padding-bottom: 8px;
+  padding-bottom: 0px;
 }
 th.mat-header-cell.col-right {
   text-align: right;
 }
 th.mat-header-cell:first-of-type, td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type {
-  padding-left: 0px;
+  padding-left: 10px;
+}
+
+tr.mat-row {
+  box-shadow: 0px 1px 3px rgb(0 0 0 / 10%);
+  border-radius: 12px;
+  transform: scale(1);
 }
 
 td.mat-cell.col-right {
   text-align: right;
+  padding-right: 10px;
 }
 td.row-caption {
   font-weight: bold;
@@ -56,4 +66,40 @@ td.mat-cell, .mat-footer-cell {
   .mat-sort-header-container {
     justify-content: flex-end;
   }
+}
+
+td.mat-cell.col-right {
+  text-align: right;
+  padding-right: 24px;
+  border-radius: 12px 12px 0px 0px;
+}
+
+td.mat-cell.col-left {
+  text-align: right;
+  padding-right: 10px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+td.mat-cell.col-bold {
+  font-weight: bold;
+}
+
+td.mat-cell:first-child {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+td.mat-cell:last-child {
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+td.mat-cell {
+ padding: 16px 0;
+ background: white;
+ font-size: 14px;
+}
+
+.mat-paginator {
+  background: none;
 }

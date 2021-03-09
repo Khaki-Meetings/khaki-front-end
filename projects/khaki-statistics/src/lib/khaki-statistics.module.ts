@@ -37,11 +37,12 @@ import {HistorianService, Logging} from '@natr/historian';
 import {HoursMinutesPipe} from './pipes/hours-minutes.pipe';
 import {IntervalTextDetailPipe} from './pipes/interval-text-detail.pipe';
 import {MeetingTypeDetailPipe} from './pipes/meeting-type-detail.pipe';
+import {MeetingStartDatePipe} from './pipes/meeting-start-date.pipe';
+import {MeetingStartEndTimesPipe} from './pipes/meeting-start-end-times.pipe';
 import {KhakiSpinnerComponent} from './components/khaki-spinner/khaki-spinner.component';
 import {OrganizersStatisticsDataSource} from './components/organizers-table/data-source/organizers-statistics-data-source';
 import {MeetingsListDataSource} from './components/meetings-list/data-source/meetings-list-data-source';
 import {MatSortModule} from '@angular/material/sort';
-
 
 @NgModule({
   declarations: [
@@ -58,7 +59,9 @@ import {MatSortModule} from '@angular/material/sort';
     KhakiSpinnerComponent,
     HoursMinutesPipe,
     IntervalTextDetailPipe,
-    MeetingTypeDetailPipe
+    MeetingTypeDetailPipe,
+    MeetingStartDatePipe,
+    MeetingStartEndTimesPipe
   ],
   imports: [
     ReactiveFormsModule,

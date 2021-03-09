@@ -3,7 +3,10 @@
   <div class="khaki-clear-container">
     <div class="page-caption">
       <span class="title">
-        Meetings
+        <div *ngIf="(person); else noname">
+          {{person?.firstName}}'s Meetings
+        </div>
+        <ng-template #noname>Meetings</ng-template>
       </span>
       <div class="lib-time-interval-form-wrapper">
         <div class="data-selector">
@@ -16,23 +19,11 @@
     </div>
   </div>
 
-  <div class="khaki-container">
-
-    <div class="component-header">
-      <div class="component-caption">
-        <div class="component-title">Meeting List</div>
-        <div class="component-subtitle">{{ interval | intervalTextDetail: start : end}}</div>
-      </div>
-      <div class="component-help">
-        <div id="meeting-breakdown-help" class="help-wrapper">
-          <mat-icon class="non-profile-icons">help_outline</mat-icon>
-          <div id="meeting-breakdown-help-content" class="help-content">
-            Details about meetings
-          </div>
-        </div>
-      </div>
-    </div>
-
+  <div class="khaki-breadcrumb">
+    <a href="/stats">&lt; Company Dashboard</a>
+  </div>
+  
+  <div class="khaki-clear-container">
     <div class="component-content">
       <div class="mat-spinner-wrapper center" *ngIf="loading">
         <lib-khaki-spinner></lib-khaki-spinner>
@@ -49,48 +40,47 @@
 
           <ng-container matColumnDef="start">
             <th mat-header-cell *matHeaderCellDef class="table-border header-font"
-                mat-sort-header="start">Start
+                mat-sort-header="start">Date
             </th>
             <td mat-cell *matCellDef="let element"
-                class="table-border"> {{ element.start }} </td>
+                class="table-border">{{ element.start | meetingStartDate }}
+            </td>
           </ng-container>
 
-          <ng-container matColumnDef="end">
-            <th mat-header-cell *matHeaderCellDef class="table-border header-font"
-                mat-sort-header="end">End
-            </th>
-            <td mat-cell *matCellDef="let element"
-                class="table-border"> {{element.end}} </td>
-          </ng-container>
-
-          <ng-container matColumnDef="hours">
+          <ng-container matColumnDef="totalSeconds">
             <th mat-header-cell *matHeaderCellDef class="table-border header-font"
                 mat-sort-header="totalSeconds">Time
             </th>
             <td mat-cell *matCellDef="let element"
-                class="table-border"> {{element.totalSeconds | hoursMinutes}} </td>
+                class="table-border">{{ element.totalSeconds | meetingStartEndTimes: element.start : element.end }} </td>
           </ng-container>
 
           <ng-container matColumnDef="summary">
             <th mat-header-cell *matHeaderCellDef class="table-border header-font"
-                mat-sort-header="summary">Title
+                mat-sort-header="summary">Meeting Title
             </th>
             <td mat-cell *matCellDef="let element"
-                class="table-border"> {{element.summary}} </td>
+                class="table-border col-bold"> {{element.summary}} </td>
           </ng-container>
 
-          <ng-container matColumnDef="numberInternalAttendees">
+          <ng-container matColumnDef="numberTotalAttendees">
             <th mat-header-cell *matHeaderCellDef class="table-border header-font col-right"
-                mat-sort-header="numberInternalAttendees">Attendees
+                mat-sort-header="numberTotalAttendees">Total Attendees
             </th>
-            <td mat-cell *matCellDef="let element"
-                class="table-border col-right"> {{element.numberInternalAttendees}} </td>
+            <td mat-cell *matCellDef="let element" class="table-border col-right">
+                <span *ngIf="element.numberTotalAttendees == 1">
+                  {{element.numberTotalAttendees}} attendee
+                </span>
+                <span *ngIf="element.numberTotalAttendees > 1">
+                  {{element.numberTotalAttendees}} attendees
+                </span>
+            </td>
           </ng-container>
 
           <tr mat-header-row *matHeaderRowDef="displayedColumns" class="header-font"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table>
-        <mat-paginator [pageSizeOptions]="[5, 10, 15]"></mat-paginator>
+        <mat-paginator [pageSize]="20" [pageSizeOptions]="[10, 20, 30]"></mat-paginator>
       </div>
     </div>
   </div>
