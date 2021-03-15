@@ -12,6 +12,11 @@ export const intervalSelector = createSelector(
   state => state[statisticsFiltersAttributeKey].interval
 );
 
+export const organizerSelector = createSelector(
+  khakiSettingsFeatureSelector,
+  state => state[statisticsFiltersAttributeKey].organizer
+);
+
 export const statisticsScopeSelector = createSelector(
   khakiSettingsFeatureSelector,
   state => state[statisticsFiltersAttributeKey].statisticsScope

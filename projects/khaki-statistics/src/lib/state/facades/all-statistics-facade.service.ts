@@ -5,6 +5,7 @@ import {loadOrganizersStatisticsAction} from '../actions/organizers-statistics.a
 import {loadTimeBlockSummary} from '../actions/time-block-summaries.actions';
 import {loadPerDepartmentStatistics} from '../actions/per-department-statistics.actions';
 import {loadTrailingStatistics} from '../actions/trailing-statistics.actions';
+import {loadMeetingsListAction} from '../actions/meetings-list.actions';
 import {HistorianService, Logging} from '@natr/historian';
 
 @Logging
@@ -21,5 +22,6 @@ export class AllStatisticsFacadeService {
     this.store.dispatch(loadTimeBlockSummary());
     this.store.dispatch(loadPerDepartmentStatistics());
     this.store.dispatch(loadTrailingStatistics());
+    this.store.dispatch(loadMeetingsListAction());
   }
 }

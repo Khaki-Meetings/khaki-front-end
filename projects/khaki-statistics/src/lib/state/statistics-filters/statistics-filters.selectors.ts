@@ -18,3 +18,7 @@ export const statisticsIntervalSelector = createSelector(
   (state: KhakiStatisticsFeatureSm) => state[statisticsFiltersAttributeKey].interval
 );
 
+export const statisticsOrganizerSelector = createSelector(
+  khakiStatisticsFeatureSelector,
+  (state: KhakiStatisticsFeatureSm) => state[statisticsFiltersAttributeKey].organizer
+);

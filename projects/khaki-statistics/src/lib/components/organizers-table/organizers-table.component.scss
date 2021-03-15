@@ -44,6 +44,10 @@ td.mat-cell, .mat-footer-cell {
   font-size: larger;
 }
 
+.mat-row:hover {
+  background-color: #4AABE2;
+}
+
 #meeting-breakdown-help:hover #meeting-breakdown-help-content {
   visibility: visible;
 }

@@ -3,7 +3,7 @@ import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {map} from 'rxjs/operators';
 import {HistorianService, Logging} from '@natr/historian';
 import {BaseChildrenStatisticsFiltersEffects} from './base-children-statistics-filters.effects';
-import {setIntervalAction, setStatisticsScopeAction} from 'khaki-statistics';
+import {setIntervalAction, setOrganizerAction, setStatisticsScopeAction} from 'khaki-statistics';
 import {setStatisticsFiltersAction} from './set-statistics-filters.actions';
 
 
@@ -18,6 +18,16 @@ export class StatisticsModuleStatisticsFiltersEffects extends BaseChildrenStatis
       map(action => {
         this.logger.debug('effect', action);
         return setStatisticsFiltersAction({interval: action.interval});
+      }),
+    )
+  );
+
+  statisticsSetOrganizerEffect$ = createEffect(
+    () => this.actions$.pipe(
+      ofType(setOrganizerAction),
+      map(action => {
+        this.logger.debug('effect', action);
+        return setStatisticsFiltersAction({organizer: action.organizer});
       }),
     )
   );

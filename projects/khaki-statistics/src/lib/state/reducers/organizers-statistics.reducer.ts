@@ -40,6 +40,7 @@ export const organizersStatisticsReducer = createReducer(
       newState.content = newState.content.map(
         organizersStatistic => {
           return {
+            organizerId: organizersStatistic.organizerId,
             organizerFirstName: organizersStatistic.organizerFirstName,
             organizerLastName: organizersStatistic.organizerLastName,
             totalCost: organizersStatistic.totalCost,
