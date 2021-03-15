@@ -3,6 +3,7 @@ import {khakiStatisticsFeatureKey} from './index';
 import {KhakiStatisticsFeatureSm} from './models/khaki-statistics-feature-sm';
 import {timeBlockSummariesFeatureKey} from './reducers/time-block-summary.reducer';
 import {organizersStatisticsFeatureKey} from './reducers/organizers-statistics.reducer';
+import {meetingsListFeatureKey} from './reducers/meetings-list.reducer';
 import {trailingStatisticsFeatureKey} from './reducers/trailing-statistics.reducer';
 import {perDepartmentStatisticsFeatureKey} from './reducers/per-department-statistics.reducer';
 
@@ -23,6 +24,11 @@ export const organizersStatisticsSelector = createSelector(
   (state: KhakiStatisticsFeatureSm) => state[organizersStatisticsFeatureKey]
 );
 
+export const meetingsListSelector = createSelector(
+  khakiStatisticsFeatureSelector,
+  (state: KhakiStatisticsFeatureSm) => state[meetingsListFeatureKey]
+);
+
 export const trailingStatisticsSelector = createSelector(
   khakiStatisticsFeatureSelector,
   (state: KhakiStatisticsFeatureSm) => state[trailingStatisticsFeatureKey]
@@ -36,6 +42,11 @@ export const trailingSStatisticsLoadingSelector = createSelector(
 export const organizersStatisticsLoadingSelector = createSelector(
   khakiStatisticsFeatureSelector,
   (state: KhakiStatisticsFeatureSm) => state[organizersStatisticsFeatureKey].loading
+);
+
+export const meetingsListLoadingSelector = createSelector(
+  khakiStatisticsFeatureSelector,
+  (state: KhakiStatisticsFeatureSm) => state[meetingsListFeatureKey].loading
 );
 
 export const departmentsStatisticsLoadingSelector = createSelector(

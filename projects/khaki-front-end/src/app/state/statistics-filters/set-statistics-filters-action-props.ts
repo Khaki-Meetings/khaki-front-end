@@ -7,4 +7,5 @@ export interface SetStatisticsFiltersActionProps {
   interval?: IntervalSe;
   start?: Moment;
   end?: Moment;
+  organizer?: string;
 }

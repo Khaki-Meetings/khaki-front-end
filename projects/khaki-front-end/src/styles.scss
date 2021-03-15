@@ -201,3 +201,25 @@ lib-per-department-graph .ngx-charts {
   white-space: nowrap;
   display: contents;
 }
+
+.padding {
+  padding: 30px 50px;
+}
+
+.lib-time-interval-form-wrapper {
+  font-weight: normal;
+  line-height: 28px;
+  display: inline-flex;
+  .data-selector {
+    padding-left: 10px;
+  }
+}
+
+.khaki-breadcrumb {
+  padding-bottom: 20px;
+  a {
+    text-decoration: none;
+    color: #4AABE2;
+    font-weight: bold;
+  }
+}

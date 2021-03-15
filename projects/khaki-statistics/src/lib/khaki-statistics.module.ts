@@ -3,6 +3,7 @@ import {KhakiStatisticsComponent} from './khaki-statistics.component';
 import {KhakiStatisticsRoutingModule} from './khaki-statistics-routing.module';
 import {PerDepartmentGraphComponent} from './components/per-department-graph/per-department-graph.component';
 import {OrganizersTableComponent} from './components/organizers-table/organizers-table.component';
+import {MeetingsListComponent} from './components/meetings-list/meetings-list.component';
 import {TrailingStatisticsGraphComponent} from './components/twelve-month-trailing-graph/trailing-statistics-graph.component';
 import {TimeBasedStatSummaryComponent} from './components/time-based-stat-summary/time-based-stat-summary.component';
 import {NgxChartsLegendCustomComponent} from './components/ngx-charts-legend-custom/ngx-charts-legend-custom.component';
@@ -11,6 +12,7 @@ import {StoreModule} from '@ngrx/store';
 import {EffectsModule} from '@ngrx/effects';
 import {TimeBlockSummaryEffects} from './state/effects/time-block-summary.effects';
 import {OrganizersStatisticsEffects} from './state/effects/organizers-statistics.effects';
+import {MeetingsListEffects} from './state/effects/meetings-list.effects';
 import {TrailingStatisticsEffects} from './state/effects/trailing-statistics.effects';
 import {PerDepartmentStatisticsEffects} from './state/effects/per-department-statistics.effects';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
@@ -28,22 +30,26 @@ import {StatisticsFiltersChangeEffects} from './state/effects/statistics-filters
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {ExternalInternalSelectorComponent} from './components/external-internal-selector/external-internal-selector.component';
 import {OrganizersTablePageableEffects} from './state/organizers-table-pageable/organizers-table-pageable.effects';
+import {MeetingsTablePageableEffects} from './state/meetings-table-pageable/meetings-table-pageable.effects';
 import {khakiStatisticsFeatureKey, khakiStatisticsMetaReducers, khakiStatisticsReducers} from './state';
 import {StatisticsFiltersFacade} from './state/statistics-filters/statistics-filters-facade';
 import {HistorianService, Logging} from '@natr/historian';
 import {HoursMinutesPipe} from './pipes/hours-minutes.pipe';
 import {IntervalTextDetailPipe} from './pipes/interval-text-detail.pipe';
 import {MeetingTypeDetailPipe} from './pipes/meeting-type-detail.pipe';
+import {MeetingStartDatePipe} from './pipes/meeting-start-date.pipe';
+import {MeetingStartEndTimesPipe} from './pipes/meeting-start-end-times.pipe';
 import {KhakiSpinnerComponent} from './components/khaki-spinner/khaki-spinner.component';
 import {OrganizersStatisticsDataSource} from './components/organizers-table/data-source/organizers-statistics-data-source';
+import {MeetingsListDataSource} from './components/meetings-list/data-source/meetings-list-data-source';
 import {MatSortModule} from '@angular/material/sort';
-
 
 @NgModule({
   declarations: [
     KhakiStatisticsComponent,
     PerDepartmentGraphComponent,
     OrganizersTableComponent,
+    MeetingsListComponent,
     TrailingStatisticsGraphComponent,
     TimeBasedStatSummaryComponent,
     TimeIntervalFormComponent,
@@ -53,7 +59,9 @@ import {MatSortModule} from '@angular/material/sort';
     KhakiSpinnerComponent,
     HoursMinutesPipe,
     IntervalTextDetailPipe,
-    MeetingTypeDetailPipe
+    MeetingTypeDetailPipe,
+    MeetingStartDatePipe,
+    MeetingStartEndTimesPipe
   ],
   imports: [
     ReactiveFormsModule,
@@ -70,10 +78,12 @@ import {MatSortModule} from '@angular/material/sort';
       [
         TimeBlockSummaryEffects,
         OrganizersStatisticsEffects,
+        MeetingsListEffects,
         TrailingStatisticsEffects,
         PerDepartmentStatisticsEffects,
         StatisticsFiltersChangeEffects,
         OrganizersTablePageableEffects,
+        MeetingsTablePageableEffects
       ]
     ),
     MatProgressSpinnerModule,
@@ -88,7 +98,7 @@ import {MatSortModule} from '@angular/material/sort';
     MatSortModule
   ],
   exports: [KhakiStatisticsComponent],
-  providers: [OrganizersStatisticsDataSource]
+  providers: [OrganizersStatisticsDataSource, MeetingsListDataSource]
 })
 @Logging
 export class KhakiStatisticsModule {
