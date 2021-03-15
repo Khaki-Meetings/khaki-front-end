@@ -43,10 +43,6 @@
       "khaki-admin": [
         "dist/khaki-admin/khaki-admin",
         "dist/khaki-admin"
-      ],
-      "khaki-meetings": [
-        "dist/khaki-meetings/khaki-meetings",
-        "dist/khaki-meetings"
       ]
     }
   }
