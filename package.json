@@ -16,6 +16,8 @@
     "watch-all-modules": "concurrently -k -s all \"yarn:build-*-with-watch\"",
     "build-statistics-with-watch": "ng build khaki-statistics --watch",
     "build-statistics-once": "ng build khaki-statistics",
+    "build-meetings-with-watch": "ng build khaki-meetings --watch",
+    "build-meetings-once": "ng build khaki-meetings",
     "build-profile-with-watch": "ng build khaki-profile --watch",
     "build-profile-once": "ng build khaki-profile",
     "build-settings-with-watch": "ng build khaki-settings --watch",
