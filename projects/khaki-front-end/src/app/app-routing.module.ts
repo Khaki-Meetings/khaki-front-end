@@ -13,6 +13,7 @@ const routes: Routes = [
   {path: 'settings', loadChildren: () => import('khaki-settings').then(m => m.KhakiSettingsModule), canActivate: [AuthGuard]},
   {path: 'info', loadChildren: () => import('khaki-info').then(m => m.KhakiInfoModule), canActivate: [AuthGuard]},
   {path: 'admin', loadChildren: () => import('khaki-admin').then(m => m.KhakiAdminModule), canActivate: [AuthGuard]},
+  {path: 'meetings', loadChildren: () => import('khaki-meetings').then(m => m.KhakiMeetingsModule), canActivate: [AuthGuard]},
   {path: '', redirectTo: 'home', pathMatch: 'full'}
 ];
 

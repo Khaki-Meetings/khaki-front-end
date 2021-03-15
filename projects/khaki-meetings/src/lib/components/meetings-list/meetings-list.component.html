@@ -1,0 +1,37 @@
+<div class="container">
+  <table mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="meetingDate">
+      <th mat-header-cell *matHeaderCellDef class="table-border header-font">Date</th>
+      <td mat-cell *matCellDef="let element" class="table-border row-caption">
+        {{ element.eventStartDate | date: 'E, MMM dd' }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="meetingTime">
+      <th mat-header-cell *matHeaderCellDef class="table-border header-font">Time</th>
+      <td mat-cell *matCellDef="let element" class="table-border row-caption">
+        {{ element.eventStartDate | date: 'h:mmaa' }}
+        -
+        {{ element.eventEndDate | date: 'h:mmaa' }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="title">
+      <th mat-header-cell *matHeaderCellDef class="table-border header-font">Title</th>
+      <td mat-cell *matCellDef="let element" class="table-border row-caption">
+        {{ element.title }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="attendees">
+      <th mat-header-cell *matHeaderCellDef class="table-border header-font">Attendees</th>
+      <td mat-cell *matCellDef="let element" class="table-border row-caption">
+        {{ element.numAttendees }}
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns" class="header-font"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator (page)="pageChange($event)" length="paginator.length" pageSize="paginator.pageSize" [pageSizeOptions]="pageSizeOptions"></mat-paginator>
+</div>
