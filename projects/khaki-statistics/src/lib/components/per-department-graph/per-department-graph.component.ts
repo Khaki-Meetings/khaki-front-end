@@ -1,4 +1,4 @@
-import {Component, ElementRef, HostListener, OnInit} from '@angular/core';
+import {Component, Renderer2, ElementRef, OnInit} from '@angular/core';
 import {DepartmentsStatisticsSm} from '../../state/models/departments-statistics-sm';
 import {PerDepartmentStatisticsFacadeService} from '../../state/facades/per-department-statistics-facade.service';
 import {ColorHelper} from '@swimlane/ngx-charts';
@@ -7,6 +7,7 @@ import {StatisticsFiltersFacade} from '../../state/statistics-filters/statistics
 import {IntervalSe} from '../../state/statistics-filters/interval-se.enum';
 import {Moment} from 'moment/moment';
 import {StatisticsScopeSe} from '../../state/statistics-filters/statistics-scope-se.enum';
+import * as d3 from 'd3';
 
 interface GraphData {
   name: string;
@@ -23,8 +24,8 @@ interface GraphData {
 export class PerDepartmentGraphComponent implements OnInit {
   constructor(private perDepartmentStatisticsFacade: PerDepartmentStatisticsFacadeService,
               private statisticsFiltersFacadeService: StatisticsFiltersFacade,
-              elementRef: ElementRef) {
-    this.elementRef = elementRef;
+              private elementRef: ElementRef,
+              private renderer: Renderer2) {
   }
 
   private logger: HistorianService;
@@ -55,8 +56,6 @@ export class PerDepartmentGraphComponent implements OnInit {
   end: Moment;
   statisticsScope: StatisticsScopeSe;
   loading = false;
-
-  elementRef: any;
 
   private static formatHrsMins(seconds: number): string {
 
@@ -115,6 +114,23 @@ export class PerDepartmentGraphComponent implements OnInit {
       });
 
     this.perDepartmentStatisticsFacade.perDepartmentStatisticsLoading().subscribe(loading => this.loading = loading);
+
+    d3.select('g.pie-chart.chart').append('text')
+      .attr('text-anchor', 'middle')
+      .attr('font-size', '24px')
+      .attr('font-weight', '500')
+      .attr('font-family', 'sans-serif')
+      .attr('y', 5)
+      .attr('id', 'center-text-value')
+      .text('');
+
+    d3.select('g.pie-chart.chart').append('text')
+      .attr('text-anchor', 'middle')
+      .attr('font-size', '16px')
+      .attr('font-family', 'sans-serif')
+      .attr('y', 28)
+      .attr('id', 'center-text-label')
+      .text('');
   }
 
   private createGraphData(): void {
@@ -138,12 +154,15 @@ export class PerDepartmentGraphComponent implements OnInit {
     if (data.value.value !== 0) {
       displayValue = PerDepartmentGraphComponent.formatHrsMins(data.value.value);
     }
-     document.getElementById('center-text-label').innerHTML = data.value.name;
-     document.getElementById('center-text-value-bg').innerHTML = displayValue;
-     document.getElementById('center-text-value').innerHTML = displayValue;
+
+    this.renderer.setProperty(this.elementRef.nativeElement.querySelector('#center-text-label'),
+        'innerHTML', data.value.name);
+
+    this.renderer.setProperty(this.elementRef.nativeElement.querySelector('#center-text-value'),
+        'innerHTML', displayValue);
 
      const dom: HTMLElement = this.elementRef.nativeElement;
-     const elements = dom.querySelectorAll('lib-per-department-graph .ngx-charts .arc:not(.active)');
+     const elements = dom.querySelectorAll('.ngx-charts .arc:not(.active)');
      elements.forEach((x) => {
        (x as HTMLElement).classList.add('inactive');
      });
@@ -153,14 +172,18 @@ export class PerDepartmentGraphComponent implements OnInit {
     this.drawDefaultDonutLabel();
 
     const dom: HTMLElement = this.elementRef.nativeElement;
-    const elements = dom.querySelectorAll('lib-per-department-graph .ngx-charts .arc');
+    const elements = dom.querySelectorAll('.ngx-charts .arc');
     elements.forEach((x) => {
       (x as HTMLElement).classList.remove('inactive');
     });
   }
 
   public drawDefaultDonutLabel(): void {
-    if (document.getElementById('center-text-label') != null) {
+
+    const dom: HTMLElement = this.elementRef.nativeElement;
+
+    if (dom.querySelector('#center-text-value') != null &&
+        dom.querySelector('#center-text-label') != null) {
       let val = 0;
 
       for (const x in this.graphData) {
@@ -169,18 +192,20 @@ export class PerDepartmentGraphComponent implements OnInit {
         }
       }
       const displayValue = PerDepartmentGraphComponent.formatHrsMins(val);
-      document.getElementById('center-text-value-bg').innerHTML = displayValue;
-      document.getElementById('center-text-value').innerHTML = displayValue;
-      document.getElementById('center-text-label').innerHTML = 'in meetings';
-    }
-  }
 
-  @HostListener('window:pieChartReady', ['$event.detail'])
-  pieChartReady(): void {
-    this.drawDefaultDonutLabel();
+      this.renderer.setProperty(dom.querySelector('#center-text-value'),
+           'innerHTML', displayValue);
+      this.renderer.setProperty(dom.querySelector('#center-text-label'),
+           'innerHTML', 'in meetings');
+    }
   }
 
   private calculatePieDimensions(): number[] {
     return [350, 350];
+  }
+
+  public getMatchingArcPath(index): Element {
+    const dom: HTMLElement = this.elementRef.nativeElement;
+    return dom.querySelectorAll('path.arc')[index];
   }
 }
