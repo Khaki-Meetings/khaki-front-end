@@ -5,9 +5,13 @@
   white-space: nowrap;
   font-size: 14px;
   font-weight: 400;
-  padding-left: 50px;
+  padding: 2px 0px 2px 50px;
 }
 
 .legend-wrap {
   cursor: default;
+}
+
+table.legend-labels {
+  border-spacing: 0px;
 }
