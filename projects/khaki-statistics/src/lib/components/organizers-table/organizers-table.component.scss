@@ -20,6 +20,7 @@ table {
 
 tr.mat-header-row {
   height: auto;
+  cursor: pointer;
 }
 
 th.mat-header-cell {
@@ -31,7 +32,7 @@ th.mat-header-cell.col-right {
   text-align: right;
 }
 th.mat-header-cell:first-of-type, td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type {
-  padding-left: 0px;
+  padding-left: 20px;
 }
 
 td.mat-cell.col-right {
@@ -45,7 +46,8 @@ td.mat-cell, .mat-footer-cell {
 }
 
 .mat-row:hover {
-  background-color: #4AABE2;
+  background-color: #b7e9f7;
+  cursor: pointer;
 }
 
 #meeting-breakdown-help:hover #meeting-breakdown-help-content {
