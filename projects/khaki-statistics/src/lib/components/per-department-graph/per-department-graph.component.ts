@@ -77,14 +77,14 @@ export class PerDepartmentGraphComponent implements OnInit {
       .perDepartmentStatistics()
       .subscribe(
         (data) => {
-          this.logger.debug('data from state', data);
+          console.log('data from state', data); // was natr-historian  this.logger.debug
           this.perDepartmentStatistics = data;
           this.createGraphData();
 
           this.view = this.calculatePieDimensions();
           this.drawDefaultDonutLabel();
 
-          this.logger.debug('graph data', this.graphData);
+          console.log('graph data', this.graphData); // was natr-historian  this.logger.debug
           this.chartData = [];
           this.graphData.forEach(
             departmentData => {
@@ -100,7 +100,7 @@ export class PerDepartmentGraphComponent implements OnInit {
             }
           );
 
-          this.logger.debug('chart data', this.chartData);
+          console.log('chart data', this.chartData); // was natr-historian  this.logger.debug
           this.legendData = this.chartData.map(d => d.extra.displayName);
           this.colors = new ColorHelper(this.colorScheme, 'ordinal', this.legendData, null);
         });

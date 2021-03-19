@@ -21,7 +21,7 @@ export const statisticsFiltersReducer = createReducer(
   on(
     setStatisticsFiltersAction,
     (state, action) => {
-      logger.debug('state/action', state, action);
+      console.log('state/action', state, action);  // was natr-historian  this.logger.debug
       return {
         ...state,
         statisticsScope: action.statisticsFilters.statisticsScope,
