@@ -4,13 +4,14 @@ import {StatisticsFiltersSm} from './statistics-filters-sm';
 import {KhakiStatisticsFeatureSm} from '../models/khaki-statistics-feature-sm';
 import {setStatisticsFiltersAction} from './set-statistics-filters.actions';
 import {Observable} from 'rxjs';
-import {statisticsFiltersSelector, statisticsIntervalSelector, statisticsScopeSelector} from './statistics-filters.selectors';
+import {statisticsFiltersSelector, statisticsIntervalSelector, statisticsScopeSelector, statisticsOrganizerSelector} from './statistics-filters.selectors';
 import {map, take} from 'rxjs/operators';
 import {HistorianService, Logging} from '@natr/historian';
 import {StatisticsScopeSe} from './statistics-scope-se.enum';
 import {setStatisticsScopeAction} from './set-statistics-scope.actions';
 import {IntervalSe} from './interval-se.enum';
 import {setIntervalAction} from './set-interval.actions';
+import {setOrganizerAction} from './set-organizer.actions';
 import {loadSharedStatisticsAction} from './load-shared-statistics.actions';
 import * as momentJs from 'moment/moment';
 
@@ -35,6 +36,11 @@ export class StatisticsFiltersFacade {
     this.store.dispatch(setIntervalAction({interval}));
   }
 
+  public dispatchSetOrganizer(organizer: string): void {
+    this.logger.debug('organizer', organizer);
+    this.store.dispatch(setOrganizerAction({organizer}));
+  }
+
   public dispatchSetStatisticsScope(filter: StatisticsScopeSe): void {
     this.store.dispatch(setStatisticsScopeAction({scope: filter}));
   }
@@ -46,7 +52,8 @@ export class StatisticsFiltersFacade {
             {
               ...statisticsFilters,
               start: moment(statisticsFilters.start),
-              end: moment(statisticsFilters.end)
+              end: moment(statisticsFilters.end),
+              organizer: statisticsFilters.organizer
             }
           )
         )
@@ -61,6 +68,10 @@ export class StatisticsFiltersFacade {
 
   public selectInterval(): Observable<IntervalSe> {
     return this.store.select(statisticsIntervalSelector);
+  }
+
+  public selectOrganizer(): Observable<string> {
+    return this.store.select(statisticsOrganizerSelector);
   }
 
   public selectStatisticsScope(): Observable<StatisticsScopeSe> {

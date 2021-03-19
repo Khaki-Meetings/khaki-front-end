@@ -26,7 +26,7 @@ export class ExternalInternalSelectorComponent implements OnInit {
     ];
 
   private filterControlValueChange = (filterString) => {
-    this.logger.debug('value changed', filterString);
+    console.log('value changed', filterString); // was natr-historian  this.logger.debug
     this.statisticsFiltersFacade.dispatchSetStatisticsScope(StatisticsScopeSe[filterString]);
   };
 

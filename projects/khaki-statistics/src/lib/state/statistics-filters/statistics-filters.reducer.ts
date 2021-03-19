@@ -21,13 +21,14 @@ export const statisticsFiltersReducer = createReducer(
   on(
     setStatisticsFiltersAction,
     (state, action) => {
-      logger.debug('state/action', state, action);
+      console.log('state/action', state, action);  // was natr-historian  this.logger.debug
       return {
         ...state,
         statisticsScope: action.statisticsFilters.statisticsScope,
         interval: action.statisticsFilters.interval,
         start: action.statisticsFilters.start,
         end: action.statisticsFilters.end,
+        organizer: action.statisticsFilters.organizer
       };
     }
   ),

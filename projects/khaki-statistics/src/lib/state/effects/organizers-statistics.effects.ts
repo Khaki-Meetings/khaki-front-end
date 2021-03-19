@@ -28,7 +28,7 @@ export class OrganizersStatisticsEffects {
       tap((thing) => this.logger.debug('thing', thing)),
       switchMap(
         (joined: [TypedAction<'[OrganizersStatistics] Load OrganizersStatistics'>, StatisticsFiltersSm, OrganizersTablePageableSm]) => {
-          this.logger.debug('joined', joined);
+          console.log('joined', joined); // was natr-historian  this.logger.debug
           return this.statisticsService
             .getOrganizersStatistics(
               joined[1].start,

@@ -16,7 +16,7 @@ export class StatisticsFiltersChangeEffects {
       tap(action => this.logger.debug('action', action)),
       map(
         () => {
-          this.logger.debug('setCurrentTimeIntervalAction, setStatisticsFiltersAction');
+          console.log('setCurrentTimeIntervalAction, setStatisticsFiltersAction'); // was natr-historian  this.logger.debug
           this.allStatisticsFacade.requestAllStatistics();
         }
       )

@@ -73,6 +73,7 @@ export const initialState: StatisticsFiltersSm = {
   statisticsScope: StatisticsScopeSe.External,
   start: startEnd.start,
   end: startEnd.end,
+  organizer: ''
 };
 
 
@@ -82,7 +83,7 @@ export const statisticsFiltersReducer = createReducer(
     setStatisticsFiltersAction,
     (state, action) => {
       const {type, ...typeLess} = action;
-      logger.debug('state/action', state, action);
+      console.log('state/action', state, action); // was natr-historian  this.logger.debug
       const newState = {
         ...state,
         ...typeLess
@@ -90,7 +91,7 @@ export const statisticsFiltersReducer = createReducer(
       const se = calculateTimeBlock(newState.interval, 1);
       newState.start = se.start;
       newState.end = se.end;
-      logger.debug('newState', newState);
+      console.log('newState', newState); // was natr-historian  this.logger.debug
       return newState;
     }
   )

@@ -24,7 +24,7 @@ export class TenantInterceptor implements HttpInterceptor {
       .pipe(
         concatMap(
           tenantKey => {
-            this.logger.debug('tenantKey', tenantKey);
+            console.log('tenantKey', tenantKey); // was natr-historian  this.logger.debug
             tenantKey = tenantKey || '';
             request = request.clone(
               {
