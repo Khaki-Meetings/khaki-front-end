@@ -23,7 +23,7 @@ export class KhakiAppStatisticsFiltersEffects {
         this.store.select(state => state[statisticsFiltersAttributeKey])
       ),
       tap(joined => {
-        this.logger.debug('joined', joined);
+        console.log('joined', joined); // was natr-historian  this.logger.debug
         this.statisticsModuleStatisticsFiltersFacade.dispatchSetStatisticsFilters(joined[1]);
         this.settingsModuleStatisticsFiltersFacade.dispatchSetStatisticsFilters(joined[1]);
       }),

@@ -37,7 +37,7 @@ export class TimeIntervalFormComponent implements OnInit {
     this.statisticsFiltersFacade.selectInterval()
       .subscribe(
         interval => {
-          this.logger.debug('setting interval from state', interval);
+          console.log('setting interval from state', interval); // was natr-historian  this.logger.debug
           this.timeIntervalControl.patchValue(interval);
         }
       );

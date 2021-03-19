@@ -45,13 +45,13 @@ export class AppComponent implements OnInit {
     this.authService.idTokenClaims$
       .subscribe(
         claims => {
-          this.logger.debug('claims', claims);
+          console.log('claims', claims); // was natr-historian  this.logger.debug
           const tenantIds: object = claims['https://getkhaki.com/tenantIds'];
           if (typeof tenantIds === 'object') {
-            this.logger.debug('tenantId', tenantIds);
+            console.log('tenantId', tenantIds); // was natr-historian  this.logger.debug
             const keys = Object.keys(tenantIds);
             if (keys.length > 0) {
-              this.logger.debug('tenantIds keys', keys);
+              console.log('tenantIds keys', keys); // was natr-historian  this.logger.debug
               // this.tenantFacade.setTenantKey(keys[0]);
               const map = new Map<string, string>(Object.entries(tenantIds));
               this.tenantFacade.setTenantMap(map);
@@ -64,7 +64,7 @@ export class AppComponent implements OnInit {
         accessToken => this.logger.debug('secret thing', accessToken)
       );
     this.authService.user$.subscribe(user => {
-      this.logger.debug('authed user', user);
+        console.log('authed user', user); // was natr-historian  this.logger.debug
     });
   }
 
@@ -80,7 +80,7 @@ export class AppComponent implements OnInit {
     this.store.select(state => state[statisticsFiltersAttributeKey])
       .subscribe(
         statisticsFilters => {
-          this.logger.debug('statisticsFilters', statisticsFilters);
+          console.log('statisticsFilters', statisticsFilters);  // was natr-historian  this.logger.debug
           this.settingsModuleStatisticsFiltersFacade.dispatchSetStatisticsFilters(statisticsFilters);
           this.statisticsModuleStatisticsFiltersFacade.dispatchSetStatisticsFilters(statisticsFilters);
         }

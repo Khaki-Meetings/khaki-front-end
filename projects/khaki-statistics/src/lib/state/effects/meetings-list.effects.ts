@@ -28,7 +28,7 @@ export class MeetingsListEffects {
       tap((thing) => this.logger.debug('thing meeting list', thing)),
       switchMap(
         (joined: [TypedAction<'[MeetingsList] Load MeetingsList'>, StatisticsFiltersSm, MeetingsTablePageableSm]) => {
-          this.logger.debug('joined', joined);
+          console.log('joined', joined); // was natr-historian  this.logger.debug
           return this.statisticsService
             .getMeetingsList(
               joined[1].start,
