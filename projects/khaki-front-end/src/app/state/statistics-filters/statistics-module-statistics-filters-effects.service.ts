@@ -16,7 +16,7 @@ export class StatisticsModuleStatisticsFiltersEffects extends BaseChildrenStatis
     () => this.actions$.pipe(
       ofType(setIntervalAction),
       map(action => {
-        this.logger.debug('effect', action);
+        console.log('effect', action); // was natr-historian  this.logger.debug
         return setStatisticsFiltersAction({interval: action.interval});
       }),
     )
@@ -26,7 +26,7 @@ export class StatisticsModuleStatisticsFiltersEffects extends BaseChildrenStatis
     () => this.actions$.pipe(
       ofType(setOrganizerAction),
       map(action => {
-        this.logger.debug('effect', action);
+        console.log('effect', action); // was natr-historian  this.logger.debug
         return setStatisticsFiltersAction({organizer: action.organizer});
       }),
     )
@@ -36,7 +36,7 @@ export class StatisticsModuleStatisticsFiltersEffects extends BaseChildrenStatis
     () => this.actions$.pipe(
       ofType(setStatisticsScopeAction),
       map(action => {
-        this.logger.debug('effect', action);
+        console.log('effect', action); // was natr-historian  this.logger.debug
         return setStatisticsFiltersAction({statisticsScope: action.scope});
       }),
     )

@@ -26,15 +26,15 @@ export const timeBlockSummaryReducer = createReducer(
   on(
     loadTimeBlockSummarySuccess,
     (state, action) => {
-      logger.debug('state', state);
-      logger.debug('action', action);
+        console.debug('state', state);  // was natr-historian  this.logger.debug
+        console.debug('action', action);  // was natr-historian  this.logger.debug
       const newState =
         {
           ...state,
           ...action,
           loading: false
         };
-      logger.debug('newState', newState);
+        console.debug('newState', newState);  // was natr-historian  this.logger.debug
       return newState;
     }
   ),
