@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, Input, ElementRef, Inject} from '@angular/core';
+import {ChangeDetectorRef, Component, Input, ElementRef, Inject, ViewEncapsulation} from '@angular/core';
 import {formatLabel, LegendComponent} from '@swimlane/ngx-charts';
 import { PerDepartmentGraphComponent } from '../per-department-graph/per-department-graph.component'
 
@@ -6,7 +6,8 @@ import { PerDepartmentGraphComponent } from '../per-department-graph/per-departm
   // tslint:disable-next-line:component-selector
   selector: 'ngx-charts-legend-custom',
   templateUrl: './ngx-charts-legend-custom.component.html',
-  styleUrls: ['./ngx-charts-legend-custom.component.css']
+  styleUrls: ['./ngx-charts-legend-custom.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 
 export class NgxChartsLegendCustomComponent extends LegendComponent {
