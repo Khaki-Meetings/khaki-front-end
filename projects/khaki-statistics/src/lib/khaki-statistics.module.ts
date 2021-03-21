@@ -3,6 +3,7 @@ import {KhakiStatisticsComponent} from './khaki-statistics.component';
 import {KhakiStatisticsRoutingModule} from './khaki-statistics-routing.module';
 import {PerDepartmentGraphComponent} from './components/per-department-graph/per-department-graph.component';
 import {OrganizersTableComponent} from './components/organizers-table/organizers-table.component';
+import {MtgInvBarChartComponent} from './components/mtg-inv-bar-chart/mtg-inv-bar-chart.component';
 import {MeetingsListComponent} from './components/meetings-list/meetings-list.component';
 import {TrailingStatisticsGraphComponent} from './components/twelve-month-trailing-graph/trailing-statistics-graph.component';
 import {TimeBasedStatSummaryComponent} from './components/time-based-stat-summary/time-based-stat-summary.component';
@@ -49,6 +50,7 @@ import {MatSortModule} from '@angular/material/sort';
     KhakiStatisticsComponent,
     PerDepartmentGraphComponent,
     OrganizersTableComponent,
+    MtgInvBarChartComponent,
     MeetingsListComponent,
     TrailingStatisticsGraphComponent,
     TimeBasedStatSummaryComponent,
