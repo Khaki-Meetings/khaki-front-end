@@ -1,4 +1,4 @@
-import {Component, Renderer2, ElementRef, OnInit} from '@angular/core';
+import {Component, Renderer2, ElementRef, OnInit, ViewEncapsulation} from '@angular/core';
 import {DepartmentsStatisticsSm} from '../../state/models/departments-statistics-sm';
 import {PerDepartmentStatisticsFacadeService} from '../../state/facades/per-department-statistics-facade.service';
 import {ColorHelper} from '@swimlane/ngx-charts';
@@ -18,7 +18,8 @@ interface GraphData {
 @Component({
   selector: 'lib-per-department-graph',
   templateUrl: './per-department-graph.component.html',
-  styleUrls: ['./per-department-graph.component.scss']
+  styleUrls: ['./per-department-graph.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 
 export class PerDepartmentGraphComponent implements OnInit {

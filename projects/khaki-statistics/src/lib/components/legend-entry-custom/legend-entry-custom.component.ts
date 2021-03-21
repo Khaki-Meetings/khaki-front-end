@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {LegendEntryComponent} from '@swimlane/ngx-charts';
 
 @Component({
@@ -15,7 +15,8 @@ import {LegendEntryComponent} from '@swimlane/ngx-charts';
     <td class="legend-label-text legend-value-text">
       {{ formattedInventoryUsage }}
     </td>`,
-  styleUrls: ['./legend-entry-custom.component.css']
+  styleUrls: ['./legend-entry-custom.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class LegendEntryCustomComponent extends LegendEntryComponent implements OnInit {
 
