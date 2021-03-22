@@ -1,16 +1,16 @@
-<div [style.width.px]="width">
+<div>
   <header class="legend-title" *ngIf="title?.length > 0">
     <span class="legend-title-text">{{ title }}</span>
   </header>
   <div class="legend-wrap">
     <table class="legend-labels" [class.horizontal-legend]="horizontal" [style.max-height.px]="height - 45">
       <tr>
-        <th></th>
-        <th></th>
-        <th class="legend-column-label-text">
+        <th class="legend-label-color"></th>
+        <th class="legend-label-text"></th>
+        <th class="legend-column-label-text legend-label-text">
           Total time
         </th>
-        <th class="legend-column-label-text">
+        <th class="legend-column-label-text legend-label-text">
           Time %
         </th>
       </tr>
