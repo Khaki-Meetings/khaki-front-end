@@ -43,6 +43,7 @@
             <div class="ngx-charts-tooltip-content-container">
               <div class="modelName">{{model.name}}</div>
               <div class="modelValue">{{model.value}}%</div>
+              <div class="modelValue">{{model.extra.hours | hoursMinutes}}</div>
             </div>
           </ng-template>
           </ngx-charts-bar-horizontal>
