@@ -44,6 +44,7 @@ import {KhakiSpinnerComponent} from './components/khaki-spinner/khaki-spinner.co
 import {OrganizersStatisticsDataSource} from './components/organizers-table/data-source/organizers-statistics-data-source';
 import {MeetingsListDataSource} from './components/meetings-list/data-source/meetings-list-data-source';
 import {MatSortModule} from '@angular/material/sort';
+import { MtgInvPercChartComponent } from './components/mtg-inv-perc-chart/mtg-inv-perc-chart.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import {MatSortModule} from '@angular/material/sort';
     IntervalTextDetailPipe,
     MeetingTypeDetailPipe,
     MeetingStartDatePipe,
-    MeetingStartEndTimesPipe
+    MeetingStartEndTimesPipe,
+    MtgInvPercChartComponent
   ],
   imports: [
     ReactiveFormsModule,
