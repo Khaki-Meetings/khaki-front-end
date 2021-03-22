@@ -81,7 +81,9 @@ export class MtgInvPercChartComponent implements OnInit {
               const newDataPoint = {
                 name: departmentData.name,
                 value: Math.floor(departmentData.value / departmentData.inventorySecondsAvailable * 100),
-                hours: departmentData.value
+                extra: {
+                  hours: departmentData.value
+                }
               };
               this.chartData.push(newDataPoint);
             }
