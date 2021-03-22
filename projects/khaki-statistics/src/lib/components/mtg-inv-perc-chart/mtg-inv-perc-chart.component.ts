@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewEncapsulation } from '@angular/core';
 import {IntervalSe} from '../../state/statistics-filters/interval-se.enum';
 import {Moment} from 'moment/moment';
 import {StatisticsScopeSe} from '../../state/statistics-filters/statistics-scope-se.enum';
@@ -27,7 +27,7 @@ export class MtgInvPercChartComponent implements OnInit {
   perDepartmentStatistics: DepartmentsStatisticsSm;
 
   single: any[];
-  view: any[] = [700, 600];
+  view: any[] = [];
 
   chartData: any[] = [];
   graphData: GraphData[] = [];
@@ -54,13 +54,17 @@ export class MtgInvPercChartComponent implements OnInit {
   loading = false;
 
   constructor(private perDepartmentStatisticsFacade: PerDepartmentStatisticsFacadeService,
-              private statisticsFiltersFacadeService: StatisticsFiltersFacade) {
+              private statisticsFiltersFacadeService: StatisticsFiltersFacade,
+              private el:ElementRef) {
 
   }
 
   ngOnInit(): void {
 
     Object.assign(this, { single });
+
+    var graphElement = this.el.nativeElement.querySelector('.graph');
+    var chartWidth = graphElement.clientWidth * 0.9;
 
     this.perDepartmentStatisticsFacade
       .perDepartmentStatistics()
@@ -85,7 +89,7 @@ export class MtgInvPercChartComponent implements OnInit {
 
           this.single = this.chartData;
 
-          this.view = [700, this.chartData.length * 35];
+          this.view = [chartWidth, this.single.length * 35];
 
           console.log('INV chart data', this.chartData); // was natr-historian  this.logger.debug
 
@@ -125,4 +129,10 @@ export class MtgInvPercChartComponent implements OnInit {
 
   onSelect(data): void {}
 
+  onResize(event) {
+    var graphElement = this.el.nativeElement.querySelector('.graph');
+    var chartWidth = graphElement.clientWidth * 0.9;
+
+    this.view = [chartWidth, this.single.length * 35];
+  }
 }
