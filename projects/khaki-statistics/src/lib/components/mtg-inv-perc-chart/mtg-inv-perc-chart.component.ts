@@ -44,7 +44,7 @@ export class MtgInvPercChartComponent implements OnInit {
   showDataLabel: boolean = false;
 
   colorScheme = {
-    domain: ['#3182CE', '#48BB78', '#9F7AEA', '#ED64A6', '#667EEA', '#478aef', '#47ef88', '#b647ef', '#ef47ba', '#e3b755']
+    domain: ['#3182CE']
   };
 
   interval: IntervalSe;
