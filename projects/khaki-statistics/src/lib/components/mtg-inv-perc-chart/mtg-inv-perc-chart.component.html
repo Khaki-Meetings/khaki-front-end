@@ -1,0 +1,53 @@
+<div>
+  <div class="component-header">
+    <div class="component-caption">
+      <div class="component-title">Portion of Time in Meetings by Department</div>
+      <div class="component-subtitle">{{ interval | intervalTextDetail : start : end}} of {{ statisticsScope | meetingTypeDetail }}</div>
+    </div>
+    <div class="component-help">
+      <div id="meeting-time-by-dept-help" class="help-wrapper">
+        <mat-icon class="non-profile-icons">help_outline</mat-icon>
+        <div id="meeting-time-by-dept-help-content" class="help-content">
+          All meetings attended by staff members, by department,
+          regardless of who organized it (e.g. staff members, vendors,
+          partners)
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="component-content">
+    <div class="mat-spinner-wrapper center" *ngIf="loading">
+      <lib-khaki-spinner></lib-khaki-spinner>
+    </div>
+    <div class="center-90" [ngClass]="loading? 'loadingComponent' : ''">
+        <div class="graph">
+          <ngx-charts-bar-horizontal
+          [view]="view"
+          [scheme]="colorScheme"
+          [results]="single"
+          [gradient]="gradient"
+          [xAxis]="showXAxis"
+          [yAxis]="showYAxis"
+          [legend]="showLegend"
+          [showXAxisLabel]="showXAxisLabel"
+          [showYAxisLabel]="showYAxisLabel"
+          [xAxisTickFormatting]='formatXaxis'
+          [xScaleMax]=100
+          [showDataLabel]="showDataLabel"
+          (window:resize)="onResize($event)"
+          (select)="onSelect($event)"
+          (activate)="onActivate($event)"
+          (deactivate)="onDeactivate($event)">
+          <ng-template #tooltipTemplate let-model="model">
+            <div class="ngx-charts-tooltip-content-container">
+              <div class="modelName">{{model.name}}</div>
+              <div class="modelValue">{{model.value}}%</div>
+              <div class="modelValue">{{model.extra.hours | hoursMinutes}}</div>
+            </div>
+          </ng-template>
+          </ngx-charts-bar-horizontal>
+        </div>
+    </div>
+  </div>
+</div>
