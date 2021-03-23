@@ -6,8 +6,10 @@ import {PerDepartmentStatisticsFacadeService} from '../../state/facades/per-depa
 import {StatisticsFiltersFacade} from '../../state/statistics-filters/statistics-filters-facade';
 import {DepartmentsStatisticsSm} from '../../state/models/departments-statistics-sm';
 import * as d3 from 'd3';
+import { Pipe, PipeTransform } from '@angular/core';
 
 import { single } from './data';
+import { HoursMinutesPipe } from '../../pipes/hours-minutes.pipe';
 
 interface GraphData {
   name: string;
@@ -19,7 +21,8 @@ interface GraphData {
   selector: 'lib-mtg-inv-perc-chart',
   templateUrl: './mtg-inv-perc-chart.component.html',
   styleUrls: ['./mtg-inv-perc-chart.component.css'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  providers: [ HoursMinutesPipe ]
 })
 
 export class MtgInvPercChartComponent implements OnInit {
@@ -41,7 +44,7 @@ export class MtgInvPercChartComponent implements OnInit {
   schemeType: string = 'linear';
   legendPosition: string = 'below';
   showGridLines: boolean = false;
-  showDataLabel: boolean = false;
+  showDataLabel: boolean = true;
 
   colorScheme = {
     domain: ['#3182CE']
@@ -56,7 +59,6 @@ export class MtgInvPercChartComponent implements OnInit {
   constructor(private perDepartmentStatisticsFacade: PerDepartmentStatisticsFacadeService,
               private statisticsFiltersFacadeService: StatisticsFiltersFacade,
               private el:ElementRef) {
-
   }
 
   ngOnInit(): void {
@@ -90,11 +92,8 @@ export class MtgInvPercChartComponent implements OnInit {
           );
 
           this.single = this.chartData;
-
           this.view = [chartWidth, this.single.length * 35];
-
           console.log('INV chart data', this.chartData); // was natr-historian  this.logger.debug
-
         });
 
     this.statisticsFiltersFacadeService.selectStatisticsFilters()
@@ -107,6 +106,17 @@ export class MtgInvPercChartComponent implements OnInit {
 
     this.perDepartmentStatisticsFacade.perDepartmentStatisticsLoading().subscribe(loading => this.loading = loading);
 
+  }
+
+  ngAfterViewChecked() {
+    var pipe = new HoursMinutesPipe();
+
+    var arr = this.single;
+
+    var textLabels = d3.selectAll('text.textDataLabel')
+        .each(function(d, i) {
+      d3.select(this).text(pipe.transform(arr[i].extra.hours));
+    });;
   }
 
   private createGraphData(): void {
