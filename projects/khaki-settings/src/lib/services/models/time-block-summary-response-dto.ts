@@ -5,4 +5,7 @@ export class TimeBlockSummaryResponseDto {
   meetingCount: number;
   start: Moment;
   end: Moment;
+  numEmployees: number;
+  numWorkdays: number;
+  totalMeetingAttendees: number;
 }
