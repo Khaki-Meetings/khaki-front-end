@@ -1,3 +1,4 @@
+import { Moment } from 'moment';
 import {IntervalEnum} from '../../services/models/interval.enum';
 import {BaseStatisticsStateSm} from './base-statistics-state-sm';
 
@@ -10,4 +11,7 @@ export interface TimeBlockSummarySm extends BaseStatisticsStateSm {
   averageStaffSeconds?: number;
   formattedTotalSeconds?: string;
   formattedAverageStaffSeconds?: string;
+  numEmployees?: number;
+  numWorkdays?: number;
+  totalMeetingAttendees?: number;
 }
