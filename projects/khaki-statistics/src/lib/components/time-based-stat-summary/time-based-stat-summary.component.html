@@ -1,5 +1,85 @@
 <div>
   <div class="flex-container">
+
+    <div class="khaki-container time-based-stat-summary">
+      <div class="header">
+        <div style="float:left;">
+          <div class="label">Number of Employees</div>
+        </div>
+        <div style="float:right;">
+          <div id="num-meetings-help" class="help-wrapper">
+            <mat-icon class="non-profile-icons">help_outline</mat-icon>
+            <div id="num-meetings-help-content" class="help-content">
+              Number of employees in Khaki roster
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="content">
+        <div class="mat-spinner-wrapper center" *ngIf="loading">
+          <lib-khaki-spinner></lib-khaki-spinner>
+        </div>
+        <div class="value" [ngClass]="loading? 'loadingComponent' : ''">
+          {{timeBlockSummary?.numEmployees}}
+        </div>
+      </div>
+    </div>
+
+    <div class="khaki-container time-based-stat-summary">
+      <div class="header">
+        <div style="float:left;">
+          <div class="label">Meetings per Day per Employee</div>
+        </div>
+        <div style="float:right;">
+          <div id="num-meetings-help" class="help-wrapper">
+            <mat-icon class="non-profile-icons">help_outline</mat-icon>
+            <div id="num-meetings-help-content" class="help-content">
+              Average number of meetings per employees in Khaki roster
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="content">
+        <div class="mat-spinner-wrapper center" *ngIf="loading">
+          <lib-khaki-spinner></lib-khaki-spinner>
+        </div>
+        <div class="value" [ngClass]="loading? 'loadingComponent' : ''">
+          {{ (timeBlockSummary?.totalMeetingInternalAttendees
+            / timeBlockSummary?.numWorkdays
+            / timeBlockSummary?.numEmployees) || 0 | number:'1.0-1' }}
+        </div>
+      </div>
+    </div>
+
+    <div class="khaki-container time-based-stat-summary">
+      <div class="header">
+        <div style="float:left;">
+          <div class="label">Daily Meeting Time per Employee</div>
+        </div>
+        <div style="float:right;">
+          <div id="num-meetings-help" class="help-wrapper">
+            <mat-icon class="non-profile-icons">help_outline</mat-icon>
+            <div id="num-meetings-help-content" class="help-content">
+              Average number of hours of meetings per employees in Khaki roster
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="content">
+        <div class="mat-spinner-wrapper center" *ngIf="loading">
+          <lib-khaki-spinner></lib-khaki-spinner>
+        </div>
+        <div class="value" [ngClass]="loading? 'loadingComponent' : ''">
+          {{ (timeBlockSummary?.totalSeconds / timeBlockSummary?.numEmployees
+            / timeBlockSummary?.numWorkdays) || 0 | hoursMinutes
+          }}
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="flex-container">
+
     <div class="khaki-container time-based-stat-summary">
       <div class="header">
         <div style="float:left;">
@@ -69,5 +149,57 @@
         </div>
       </div>
     </div>
+
+  </div>
+  <div class="flex-container">
+
+    <div class="khaki-container time-based-stat-summary">
+      <div class="header">
+        <div style="float:left;">
+          <div class="label">Average meeting length</div>
+        </div>
+        <div style="float:right;">
+          <div id="num-meetings-help" class="help-wrapper">
+            <mat-icon class="non-profile-icons">help_outline</mat-icon>
+            <div id="num-meetings-help-content" class="help-content">
+              Average length of meetings
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="content">
+        <div class="mat-spinner-wrapper center" *ngIf="loading">
+          <lib-khaki-spinner></lib-khaki-spinner>
+        </div>
+        <div class="value" [ngClass]="loading? 'loadingComponent' : ''">
+          {{ (timeBlockSummary?.meetingLengthSeconds / timeBlockSummary?.meetingCount) | hoursMinutes }}
+        </div>
+      </div>
+    </div>
+
+    <div class="khaki-container time-based-stat-summary">
+      <div class="header">
+        <div style="float:left;">
+          <div class="label">Average # of attendees</div>
+        </div>
+        <div style="float:right;">
+          <div id="num-meetings-help" class="help-wrapper">
+            <mat-icon class="non-profile-icons">help_outline</mat-icon>
+            <div id="num-meetings-help-content" class="help-content">
+              Average number of attendees in meetings
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="content">
+        <div class="mat-spinner-wrapper center" *ngIf="loading">
+          <lib-khaki-spinner></lib-khaki-spinner>
+        </div>
+        <div class="value" [ngClass]="loading? 'loadingComponent' : ''">
+          {{ timeBlockSummary?.totalMeetingAttendees / timeBlockSummary?.meetingCount | number:'1.0-1'}}
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>

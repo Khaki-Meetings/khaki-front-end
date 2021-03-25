@@ -8,4 +8,9 @@ export interface TimeBlockSummaryResponseDto {
   averageCost: number;
   meetingCount: number;
   averageStaffSeconds: number;
+  numEmployees: number;
+  numWorkdays: number;
+  totalMeetingAttendees: number;
+  totalMeetingInternalAttendees: number;
+  meetingLengthSeconds: number;
 }
