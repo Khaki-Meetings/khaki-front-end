@@ -8,6 +8,7 @@ import {StatisticsFiltersFacade} from '../../state/statistics-filters/statistics
 import {ColorHelper} from '@swimlane/ngx-charts';
 
 import { multi } from './data';
+import { DepartmentsStatisticsAggSm } from '../../state/models/departments-statistics-agg-sm';
 
 interface GraphData {
   name: string;
@@ -23,7 +24,7 @@ interface GraphData {
 })
 export class MtgInvBarChartComponent implements OnInit {
 
-  perDepartmentStatistics: DepartmentsStatisticsSm;
+  perDepartmentStatistics: DepartmentsStatisticsAggSm;
 
   multi: any[] = [];
 
@@ -110,6 +111,11 @@ export class MtgInvBarChartComponent implements OnInit {
   }
 
   private createGraphData(): void {
+    /*
+
+    THIS WILL NEED TO BE UPDATED FOR THE NEW SERVICE W/O INT/EXT
+    IF WE EVER DECIDE WE NEED IT AGAIN
+    
     this.graphData = this.perDepartmentStatistics.departmentsStatistics.map(
       el => {
         return {
@@ -119,6 +125,7 @@ export class MtgInvBarChartComponent implements OnInit {
         };
       }
     );
+    */
   }
 
   formatXaxis(x) {

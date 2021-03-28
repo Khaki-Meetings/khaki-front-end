@@ -31,4 +31,5 @@ export class TimeBlockSummariesFacadeService {
   timeBlockSummaryErrors(): Observable<ErrorSm> {
     return this.store.select(state => state[timeBlockSummariesFeatureKey].error);
   }
+
 }

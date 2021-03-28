@@ -20,7 +20,13 @@
           <lib-khaki-spinner></lib-khaki-spinner>
         </div>
         <div class="value" [ngClass]="loading? 'loadingComponent' : ''">
-          {{timeBlockSummary?.numEmployees}}
+          <div class="contentInside">
+            <div class="contentLabelRow">
+            </div>
+            <div class="valueRow">
+              {{timeBlockSummary?.internal?.numEmployees}}
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -43,10 +49,29 @@
         <div class="mat-spinner-wrapper center" *ngIf="loading">
           <lib-khaki-spinner></lib-khaki-spinner>
         </div>
-        <div class="value" [ngClass]="loading? 'loadingComponent' : ''">
-          {{ (timeBlockSummary?.totalMeetingInternalAttendees
-            / timeBlockSummary?.numWorkdays
-            / timeBlockSummary?.numEmployees) || 0 | number:'1.0-1' }}
+        <div [ngClass]="loading? 'loadingComponent' : ''">
+          <div class="contentInside">
+            <div class="contentLabelRow">
+              <div class="contentLabelCell">
+                Internal
+              </div>
+              <div class="contentLabelCell">
+                External
+              </div>
+            </div>
+            <div class="valueRow">
+              <div class="internalValue">
+                {{ (timeBlockSummary?.internal?.totalMeetingInternalAttendees
+                  / timeBlockSummary?.internal?.numWorkdays
+                  / timeBlockSummary?.internal?.numEmployees) || 0 | number:'1.0-1' }}
+              </div>
+              <div class="externalValue">
+                {{ (timeBlockSummary?.external?.totalMeetingInternalAttendees
+                  / timeBlockSummary?.external?.numWorkdays
+                  / timeBlockSummary?.external?.numEmployees) || 0 | number:'1.0-1' }}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -70,9 +95,28 @@
           <lib-khaki-spinner></lib-khaki-spinner>
         </div>
         <div class="value" [ngClass]="loading? 'loadingComponent' : ''">
-          {{ (timeBlockSummary?.totalSeconds / timeBlockSummary?.numEmployees
-            / timeBlockSummary?.numWorkdays) || 0 | hoursMinutes
-          }}
+          <div class="contentInside">
+            <div class="contentLabelRow">
+              <div class="contentLabelCell">
+                Internal
+              </div>
+              <div class="contentLabelCell">
+                External
+              </div>
+            </div>
+            <div class="valueRow">
+              <div class="internalValue">
+                {{ (timeBlockSummary?.internal?.totalSeconds / timeBlockSummary?.internal?.numEmployees
+                  / timeBlockSummary?.internal?.numWorkdays) || 0 | hoursMinutes
+                }}
+              </div>
+              <div class="externalValue">
+                {{ (timeBlockSummary?.external?.totalSeconds / timeBlockSummary?.external?.numEmployees
+                  / timeBlockSummary?.external?.numWorkdays) || 0 | hoursMinutes
+                }}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -99,7 +143,24 @@
           <lib-khaki-spinner></lib-khaki-spinner>
         </div>
         <div class="value" [ngClass]="loading? 'loadingComponent' : ''">
-          {{timeBlockSummary?.totalSeconds | hoursMinutes}}
+          <div class="contentInside">
+            <div class="contentLabelRow">
+              <div class="contentLabelCell">
+                Internal
+              </div>
+              <div class="contentLabelCell">
+                External
+              </div>
+            </div>
+            <div class="valueRow">
+              <div class="internalValue">
+                {{timeBlockSummary?.internal?.totalSeconds | hoursMinutes}}
+              </div>
+              <div class="externalValue">
+                {{timeBlockSummary?.external?.totalSeconds | hoursMinutes}}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -122,7 +183,24 @@
           <lib-khaki-spinner></lib-khaki-spinner>
         </div>
         <div class="value" [ngClass]="loading? 'loadingComponent' : ''">
-          {{timeBlockSummary?.averageStaffSeconds | hoursMinutes}}
+          <div class="contentInside">
+            <div class="contentLabelRow">
+              <div class="contentLabelCell">
+                Internal
+              </div>
+              <div class="contentLabelCell">
+                External
+              </div>
+            </div>
+            <div class="valueRow">
+              <div class="internalValue">
+                {{timeBlockSummary?.internal?.averageStaffSeconds | hoursMinutes}}
+              </div>
+              <div class="externalValue">
+                {{timeBlockSummary?.external?.averageStaffSeconds | hoursMinutes}}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -145,7 +223,24 @@
           <lib-khaki-spinner></lib-khaki-spinner>
         </div>
         <div class="value" [ngClass]="loading? 'loadingComponent' : ''">
-          {{timeBlockSummary?.meetingCount}}
+          <div class="contentInside">
+            <div class="contentLabelRow">
+              <div class="contentLabelCell">
+                Internal
+              </div>
+              <div class="contentLabelCell">
+                External
+              </div>
+            </div>
+            <div class="valueRow">
+              <div class="internalValue">
+                {{timeBlockSummary?.internal?.meetingCount}}
+              </div>
+              <div class="externalValue">
+                {{timeBlockSummary?.external?.meetingCount}}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -172,7 +267,24 @@
           <lib-khaki-spinner></lib-khaki-spinner>
         </div>
         <div class="value" [ngClass]="loading? 'loadingComponent' : ''">
-          {{ (timeBlockSummary?.meetingLengthSeconds / timeBlockSummary?.meetingCount) | hoursMinutes }}
+          <div class="contentInside">
+            <div class="contentLabelRow">
+              <div class="contentLabelCell">
+                Internal
+              </div>
+              <div class="contentLabelCell">
+                External
+              </div>
+            </div>
+            <div class="valueRow">
+              <div class="internalValue">
+                {{ (timeBlockSummary?.internal?.meetingLengthSeconds / timeBlockSummary?.internal?.meetingCount) | hoursMinutes }}
+              </div>
+              <div class="externalValue">
+                {{ (timeBlockSummary?.external?.meetingLengthSeconds / timeBlockSummary?.external?.meetingCount) | hoursMinutes }}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -196,7 +308,24 @@
           <lib-khaki-spinner></lib-khaki-spinner>
         </div>
         <div class="value" [ngClass]="loading? 'loadingComponent' : ''">
-          {{ timeBlockSummary?.totalMeetingAttendees / timeBlockSummary?.meetingCount | number:'1.0-1'}}
+          <div class="contentInside">
+            <div class="contentLabelRow">
+              <div class="contentLabelCell">
+                Internal
+              </div>
+              <div class="contentLabelCell">
+                External
+              </div>
+            </div>
+            <div class="valueRow">
+              <div class="internalValue">
+                {{ timeBlockSummary?.internal?.totalMeetingAttendees / timeBlockSummary?.internal?.meetingCount | number:'1.0-1'}}
+              </div>
+              <div class="externalValue">
+                {{ timeBlockSummary?.external?.totalMeetingAttendees / timeBlockSummary?.external?.meetingCount | number:'1.0-1'}}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

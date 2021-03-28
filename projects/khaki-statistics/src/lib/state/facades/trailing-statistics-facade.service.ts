@@ -4,7 +4,8 @@ import {TrailingStatisticsSm} from '../models/trailing-statistics-sm';
 import {KhakiStatisticsFeatureSm} from '../models/khaki-statistics-feature-sm';
 import {Store} from '@ngrx/store';
 import {loadTrailingStatistics} from '../actions/trailing-statistics.actions';
-import {trailingSStatisticsLoadingSelector, trailingStatisticsSelector} from '../statistics.selectors';
+import {trailingStatisticsLoadingSelector, trailingStatisticsSelector} from '../statistics.selectors';
+import { TrailingStatisticsAggSm } from '../models/trailing-statistics-agg-sm';
 
 @Injectable({
   providedIn: 'root'
@@ -18,11 +19,11 @@ export class TrailingStatisticsFacadeService {
     this.store.dispatch(loadTrailingStatistics());
   }
 
-  trailingStatistics(): Observable<TrailingStatisticsSm> {
+  trailingStatistics(): Observable<TrailingStatisticsAggSm> {
     return this.store.select(trailingStatisticsSelector);
   }
 
   trailingStatisticsLoading(): Observable<boolean> {
-    return this.store.select(trailingSStatisticsLoadingSelector);
+    return this.store.select(trailingStatisticsLoadingSelector);
   }
 }

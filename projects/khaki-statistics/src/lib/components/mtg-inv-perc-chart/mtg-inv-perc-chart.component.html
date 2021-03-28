@@ -22,7 +22,7 @@
     </div>
     <div class="center-90" [ngClass]="loading? 'loadingComponent' : ''">
         <div class="graph">
-          <ngx-charts-bar-horizontal
+          <ngx-charts-bar-horizontal-stacked
           [view]="view"
           [scheme]="colorScheme"
           [results]="single"
@@ -42,11 +42,11 @@
           <ng-template #tooltipTemplate let-model="model">
             <div class="ngx-charts-tooltip-content-container">
               <div class="modelName">{{model.name}}</div>
-              <div class="modelValue">{{model.value}}%</div>
-              <div class="modelValue">{{model.extra.hours | hoursMinutes}}</div>
+              <div class="modelValue">{{model.value | number:'1.0-1'}}%</div>
+              <div class="modelValue">{{model.hours | hoursMinutes}}</div>
             </div>
           </ng-template>
-          </ngx-charts-bar-horizontal>
+          </ngx-charts-bar-horizontal-stacked>
         </div>
     </div>
   </div>
