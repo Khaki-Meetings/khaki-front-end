@@ -59,3 +59,13 @@ td.mat-cell, .mat-footer-cell {
     justify-content: flex-end;
   }
 }
+
+.organizerAvatar {
+  height: 35px;
+  border-radius: 10px;
+  vertical-align: middle;
+}
+
+.organizerName {
+  padding-left: 10px;
+}
