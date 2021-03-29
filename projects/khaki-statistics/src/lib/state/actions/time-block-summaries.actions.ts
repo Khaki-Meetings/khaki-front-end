@@ -1,7 +1,6 @@
 import {createAction, props} from '@ngrx/store';
 import {ErrorSm} from '../models/error-sm';
-import {TimeBlockSummarySm} from '../models/time-block-summary-sm';
-import {SetCurrentTimeIntervalActionProp} from './current-time-interval.actions';
+import { TimeBlockSummaryAggSm } from '../models/time-block-summary-agg-sm';
 
 export const loadTimeBlockSummary = createAction(
   '[TimeBlockSummary] Load TimeBlockSummary',
@@ -9,7 +8,7 @@ export const loadTimeBlockSummary = createAction(
 
 export const loadTimeBlockSummarySuccess = createAction(
   '[TimeBlockSummary] Load TimeBlockSummary Success',
-  props<TimeBlockSummarySm>()
+  props<TimeBlockSummaryAggSm>()
 );
 
 export const loadTimeBlockSummaryFailure = createAction(

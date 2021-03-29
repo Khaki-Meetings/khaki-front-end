@@ -73,7 +73,21 @@ export class PerDepartmentGraphComponent implements OnInit {
     return hours + ' ' + hoursLabel + ', ' + minutes + ' ' + minutesLabel;
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void { }
+
+  onActivate(data): void { }
+
+  onDeactivate(data): void { }
+
+  public getMatchingArcPath(index): Element { return null; }
+
+  public legendLabelDeactivate(item: any): void { return null; }
+
+  /*
+
+  THIS WILL NEED TO BE UPDATED FOR THE NEW SERVICE W/O INT/EXT
+  IF WE EVER DECIDE WE NEED IT AGAIN
+  
     this.perDepartmentStatisticsFacade
       .perDepartmentStatistics()
       .subscribe(
@@ -209,4 +223,5 @@ export class PerDepartmentGraphComponent implements OnInit {
     const dom: HTMLElement = this.elementRef.nativeElement;
     return dom.querySelectorAll('path.arc')[index];
   }
+  */
 }

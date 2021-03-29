@@ -6,6 +6,7 @@ import {
 } from '../actions/per-department-statistics.actions';
 import {DepartmentsStatisticsSm} from '../models/departments-statistics-sm';
 import {DepartmentStatisticsSm} from '../models/department-statistics-sm';
+import { DepartmentsStatisticsAggSm } from '../models/departments-statistics-agg-sm';
 
 describe('PerDepartmentStatistics Reducer', () => {
   describe('Load PerDepartmentStatistics', () => {
@@ -20,15 +21,27 @@ describe('PerDepartmentStatistics Reducer', () => {
 
   describe(`${loadPerDepartmentStatisticsSuccess.type}`, () => {
     it('should return the previous state', () => {
-      const perDepartmentStatistics: DepartmentsStatisticsSm = {
-        departmentsStatistics: [
-          {
-            department: 'Finance',
-            totalSeconds: 1000,
-            averageCost: 10993.00,
-            totalCost: 1000323.43
-          }
-        ]
+      const perDepartmentStatistics: DepartmentsStatisticsAggSm = {
+        internal: {
+          departmentsStatistics: [
+            {
+              department: 'Finance',
+              totalSeconds: 1000,
+              averageCost: 10993.00,
+              totalCost: 1000323.43
+            }
+          ]
+        },
+        external: {
+          departmentsStatistics: [
+            {
+              department: 'Finance',
+              totalSeconds: 1000,
+              averageCost: 10993.00,
+              totalCost: 1000323.43
+            }
+          ]
+        }
       };
       const action = loadPerDepartmentStatisticsSuccess(perDepartmentStatistics);
 
@@ -41,10 +54,8 @@ describe('PerDepartmentStatistics Reducer', () => {
   describe(`${loadPerDepartmentStatisticsFailure.type}`, () => {
     it('should return the previous state', () => {
       const perDepartmentStatistics = {
-        errors: [
-          {message: 'you done fuckeled', name: '1d10t'}
-        ]
-      } as DepartmentsStatisticsSm;
+        error: {message: 'error message', name: 'error name'}
+      } as DepartmentsStatisticsAggSm;
       const action = loadPerDepartmentStatisticsSuccess(perDepartmentStatistics);
 
       const result = perDepartmentStatisticsReducer(initialState, action);
