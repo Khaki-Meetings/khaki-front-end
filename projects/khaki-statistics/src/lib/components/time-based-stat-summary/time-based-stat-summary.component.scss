@@ -83,6 +83,7 @@
     font-size: small;
     white-space: pre;
     color: #4A5568;
+    font-weight: bold;
   }
 
   .content {
@@ -101,6 +102,11 @@
     padding-top: 5px;
   }
 
+  .totalValue {
+    display: table-cell;
+    padding-top: 5px;
+  }
+
   .contentInside {
     display: table;
     width: 90%;
@@ -113,6 +119,12 @@
   .contentLabelCell {
     display: table-cell;
   }
+
+  .contentLabelCellHide {
+    display: table-cell;
+    visibility: hidden;
+  }
+
 }
 
 .time-based-stat-summary:first-child {

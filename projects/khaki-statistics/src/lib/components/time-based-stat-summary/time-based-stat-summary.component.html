@@ -22,9 +22,14 @@
         <div class="value" [ngClass]="loading? 'loadingComponent' : ''">
           <div class="contentInside">
             <div class="contentLabelRow">
+              <div class="contentLabelCellHide">
+                Total
+              </div>
             </div>
             <div class="valueRow">
-              {{timeBlockSummary?.internal?.numEmployees}}
+              <div class="totalValue">
+                {{timeBlockSummary?.internal?.numEmployees}}
+              </div>
             </div>
           </div>
         </div>
@@ -79,7 +84,7 @@
     <div class="khaki-container time-based-stat-summary">
       <div class="header">
         <div style="float:left;">
-          <div class="label">Daily Meeting Time per Employee</div>
+          <div class="label">Employee Daily Meeting Time</div>
         </div>
         <div style="float:right;">
           <div id="num-meetings-help" class="help-wrapper">
@@ -251,7 +256,7 @@
     <div class="khaki-container time-based-stat-summary">
       <div class="header">
         <div style="float:left;">
-          <div class="label">Average meeting length</div>
+          <div class="label">Average Meeting Length</div>
         </div>
         <div style="float:right;">
           <div id="num-meetings-help" class="help-wrapper">
@@ -292,7 +297,7 @@
     <div class="khaki-container time-based-stat-summary">
       <div class="header">
         <div style="float:left;">
-          <div class="label">Average # of attendees</div>
+          <div class="label">Average # of Attendees</div>
         </div>
         <div style="float:right;">
           <div id="num-meetings-help" class="help-wrapper">
