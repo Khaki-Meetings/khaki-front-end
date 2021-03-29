@@ -25,7 +25,10 @@
           Employee
         </th>
         <td mat-cell *matCellDef="let element"
-            class="table-border row-caption"> {{element.organizerFirstName}} {{element.organizerLastName}} </td>
+            class="table-border row-caption">
+          <img class="organizerAvatar" src="{{element.organizerAvatarUrl}}" />
+          <span class="organizerName">{{element.organizerFirstName}} {{element.organizerLastName}}</span>
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="meeting">

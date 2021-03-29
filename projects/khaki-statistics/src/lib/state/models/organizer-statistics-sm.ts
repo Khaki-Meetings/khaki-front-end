@@ -3,6 +3,7 @@ export interface OrganizerStatisticsSm {
   organizerEmail: string;
   organizerFirstName: string;
   organizerLastName: string;
+  organizerAvatarUrl: string;
   totalMeetings: number;
   totalSeconds: number;
   totalCost: number;
