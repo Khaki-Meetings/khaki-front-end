@@ -34,7 +34,7 @@ export const trailingStatisticsSelector = createSelector(
   (state: KhakiStatisticsFeatureSm) => state[trailingStatisticsFeatureKey]
 );
 
-export const trailingSStatisticsLoadingSelector = createSelector(
+export const trailingStatisticsLoadingSelector = createSelector(
   khakiStatisticsFeatureSelector,
   (state: KhakiStatisticsFeatureSm) => state[trailingStatisticsFeatureKey].loading
 );

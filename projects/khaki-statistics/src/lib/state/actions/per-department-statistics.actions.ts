@@ -1,7 +1,6 @@
 import {createAction, props} from '@ngrx/store';
-import {DepartmentsStatisticsSm} from '../models/departments-statistics-sm';
+import { DepartmentsStatisticsAggSm } from '../models/departments-statistics-agg-sm';
 import {ErrorSm} from '../models/error-sm';
-import {SetCurrentTimeIntervalActionProp} from './current-time-interval.actions';
 
 export const loadPerDepartmentStatistics = createAction(
   '[PerDepartmentStatistics] Load PerDepartmentStatistics',
@@ -9,7 +8,7 @@ export const loadPerDepartmentStatistics = createAction(
 
 export const loadPerDepartmentStatisticsSuccess = createAction(
   '[PerDepartmentStatistics] Load PerDepartmentStatistics Success',
-  props<DepartmentsStatisticsSm>()
+  props<DepartmentsStatisticsAggSm>()
 );
 
 export const loadPerDepartmentStatisticsFailure = createAction(

@@ -1,5 +1,5 @@
 import {Inject, Injectable} from '@angular/core';
-import {Observable, throwError} from 'rxjs';
+import {Observable, throwError, zip} from 'rxjs';
 import {TimeBlockSummarySm} from '../state/models/time-block-summary-sm';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {TimeBlockSummaryResponseDto} from './models/time-block-summary-response-dto';
@@ -18,11 +18,10 @@ import Moment = momentJs.Moment;
 import {SortDirection} from '@angular/material/sort';
 import { OrganizerSm } from '../state/models/organizer-sm';
 import { PersonSm } from '../state/models/person-sm';
-
-interface TimeBlockRange {
-  start: Moment;
-  end: Moment;
-}
+import {TimeBlockSummaryAggSm} from '../state/models/time-block-summary-agg-sm';
+import {DepartmentsStatisticsAggSm} from '../state/models/departments-statistics-agg-sm';
+import {StatisticsScopeSe} from '../state/statistics-filters/statistics-scope-se.enum';
+import {TrailingStatisticsAggSm} from '../state/models/trailing-statistics-agg-sm';
 
 @Logging
 @Injectable({
@@ -80,7 +79,7 @@ export class StatisticsService {
 
   }
 
-  getTrailingStatistics(
+  getTrailingStatisticsScoped(
     start: Moment,
     interval: IntervalSe,
     statisticsQueryParams: StatisticsQueryParameters
@@ -108,7 +107,31 @@ export class StatisticsService {
       );
   }
 
-  getDepartmentStatistics(
+  getTrailingStatistics(
+    start: Moment,
+    interval: IntervalSe,
+    statisticsQueryParams: StatisticsQueryParameters
+  ): Observable<TrailingStatisticsAggSm> {
+
+    statisticsQueryParams.statisticsScope = StatisticsScopeSe.Internal;
+    let o1: Observable<TrailingStatisticsSm> = this.getTrailingStatisticsScoped(start, interval, statisticsQueryParams);
+
+    statisticsQueryParams.statisticsScope = StatisticsScopeSe.External;
+    let o2: Observable<TrailingStatisticsSm> = this.getTrailingStatisticsScoped(start, interval, statisticsQueryParams);
+
+    return zip(o1, o2)
+      .pipe<TrailingStatisticsAggSm>(map(x => {
+        let trailingStatisticsAggSm : TrailingStatisticsAggSm = {
+          internal : x[0],
+          external : x[1]
+        };
+        console.log("trailingStatistics: " + JSON.stringify(trailingStatisticsAggSm));
+        return trailingStatisticsAggSm;
+    }));
+
+  }
+
+  getDepartmentStatisticsScoped(
     start: Moment,
     end: Moment,
     statisticsQueryParams: StatisticsQueryParameters
@@ -127,9 +150,33 @@ export class StatisticsService {
         ),
         map((departmentsStatistics: DepartmentsStatisticsResponseDto) => departmentsStatistics as DepartmentsStatisticsSm)
       );
+    }
+
+  getDepartmentStatistics(
+    start: Moment,
+    end: Moment,
+    statisticsQueryParams: StatisticsQueryParameters
+  ): Observable<DepartmentsStatisticsAggSm> {
+
+    statisticsQueryParams.statisticsScope = StatisticsScopeSe.Internal;
+    let o1: Observable<DepartmentsStatisticsSm> = this.getDepartmentStatisticsScoped(start, end, statisticsQueryParams);
+
+    statisticsQueryParams.statisticsScope = StatisticsScopeSe.External;
+    let o2: Observable<DepartmentsStatisticsSm> = this.getDepartmentStatisticsScoped(start, end, statisticsQueryParams);
+
+    return zip(o1, o2)
+      .pipe<DepartmentsStatisticsAggSm>(map(x => {
+        let departmentsStatisticsAggSm : DepartmentsStatisticsAggSm = {
+          internal : x[0],
+          external : x[1]
+        };
+        return departmentsStatisticsAggSm;
+    }));
+
   }
 
-  getTimeBlockSummary(start: Moment, end: Moment, statisticsQueryParams: StatisticsQueryParameters): Observable<TimeBlockSummarySm> {
+  getTimeBlockSummaryScoped(start: Moment, end: Moment, statisticsQueryParams: StatisticsQueryParameters):
+    Observable<TimeBlockSummarySm> {
     let params = new HttpParams();
     params = params.set('filter', statisticsQueryParams.statisticsScope.toString());
     return this.httpClient
@@ -152,6 +199,27 @@ export class StatisticsService {
           }
         )
       );
+
+    }
+
+    getTimeBlockSummary(start: Moment, end: Moment, statisticsQueryParams: StatisticsQueryParameters):
+        Observable<TimeBlockSummarySm> {
+
+        statisticsQueryParams.statisticsScope = StatisticsScopeSe.Internal;
+        let o1: Observable<TimeBlockSummarySm> = this.getTimeBlockSummaryScoped(start, end, statisticsQueryParams);
+
+        statisticsQueryParams.statisticsScope = StatisticsScopeSe.External;
+        let o2: Observable<TimeBlockSummarySm> = this.getTimeBlockSummaryScoped(start, end, statisticsQueryParams);
+
+        return zip(o1, o2)
+          .pipe<TimeBlockSummaryAggSm>(map(x => {
+            let timeBlockSummaryAggSm : TimeBlockSummaryAggSm = {
+              internal : x[0],
+              external : x[1]
+            };
+            return timeBlockSummaryAggSm;
+        }));
+
   }
 
   private getNonStatisticsStartEndUrl(start: Moment, end: Moment, statName: string): string {

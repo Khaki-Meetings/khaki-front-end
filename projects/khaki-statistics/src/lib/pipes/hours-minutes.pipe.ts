@@ -8,11 +8,13 @@ export class HoursMinutesPipe implements PipeTransform {
     const hours = Math.trunc(displayValue / 60 / 60);
     const minutes = Math.trunc(displayValue / 60 % 60);
 
-    const hoursLabel = hours === 1 ? 'hr' : 'hrs';
+    // SOURCE FOR XX HRS, YY MINS
+    // const hoursLabel = hours === 1 ? 'hr' : 'hrs';
+    // const minutesLabel = 'mins';
+    // return hours + ' ' + hoursLabel + ', ' + minutes + ' ' + minutesLabel;
 
-    const minutesLabel = 'mins';
+    return hours.toString().padStart(2, "0") + ':' + minutes.toString().padStart(2, "0");
 
-    return hours + ' ' + hoursLabel + ', ' + minutes + ' ' + minutesLabel;
   }
 
 }

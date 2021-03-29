@@ -1,6 +1,6 @@
 import {createAction, props} from '@ngrx/store';
-import {TrailingStatisticsSm} from '../models/trailing-statistics-sm';
 import {ErrorSm} from '../models/error-sm';
+import { TrailingStatisticsAggSm } from '../models/trailing-statistics-agg-sm';
 
 export const loadTrailingStatistics = createAction(
   '[TrailingStatistics] Load TrailingStatistics',
@@ -8,11 +8,10 @@ export const loadTrailingStatistics = createAction(
 
 export const loadTrailingStatisticsSuccess = createAction(
   '[TrailingStatistics] Load TrailingStatistics Success',
-  props<TrailingStatisticsSm>()
+  props<TrailingStatisticsAggSm>()
 );
 
 export const loadTrailingStatisticsFailure = createAction(
   '[TrailingStatistics] Load TrailingStatistics Failure',
   props<ErrorSm>()
 );
-

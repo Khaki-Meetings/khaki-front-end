@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import {DepartmentsStatisticsSm} from '../models/departments-statistics-sm';
 import {Store} from '@ngrx/store';
 import {KhakiStatisticsFeatureSm} from '../models/khaki-statistics-feature-sm';
 import {loadPerDepartmentStatistics} from '../actions/per-department-statistics.actions';
 import {departmentsStatisticsLoadingSelector, perDepartmentStatisticsSelector} from '../statistics.selectors';
 import {NotImplementedException} from '../../exceptions/not-implemented-exception';
+import { DepartmentsStatisticsAggSm } from '../models/departments-statistics-agg-sm';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +19,7 @@ export class PerDepartmentStatisticsFacadeService {
     this.store.dispatch(loadPerDepartmentStatistics());
   }
 
-  perDepartmentStatistics(): Observable<DepartmentsStatisticsSm> {
+  perDepartmentStatistics(): Observable<DepartmentsStatisticsAggSm> {
     return this.store.select(perDepartmentStatisticsSelector);
   }
 

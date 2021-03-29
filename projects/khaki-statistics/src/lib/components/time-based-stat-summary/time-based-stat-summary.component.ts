@@ -4,6 +4,7 @@ import {TimeBlockSummarySm} from '../../state/models/time-block-summary-sm';
 import {ErrorSm} from '../../state/models/error-sm';
 import {HistorianService, Logging} from '@natr/historian';
 import {tap} from 'rxjs/operators';
+import { TimeBlockSummaryAggSm } from '../../state/models/time-block-summary-agg-sm';
 
 @Logging
 @Component({
@@ -13,7 +14,7 @@ import {tap} from 'rxjs/operators';
 })
 export class TimeBasedStatSummaryComponent implements OnInit {
   logger: HistorianService;
-  timeBlockSummary: TimeBlockSummarySm;
+  timeBlockSummary: TimeBlockSummaryAggSm;
   error: ErrorSm;
   loading = false;
 
@@ -27,7 +28,8 @@ export class TimeBasedStatSummaryComponent implements OnInit {
 
   private timeBlockData(): void {
     this.sinceTimeBlockSummariesFacade.timeBlockSummary()
-      .pipe(tap(data => this.logger.debug('data', data)))
+      .pipe(tap(data => this.logger.debug('timeBlockSummary data', data)))
       .subscribe(timeBlockSummary => this.timeBlockSummary = timeBlockSummary);
   }
+
 }

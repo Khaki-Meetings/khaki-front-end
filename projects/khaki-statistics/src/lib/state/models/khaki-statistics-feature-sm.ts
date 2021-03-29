@@ -14,10 +14,12 @@ import {statisticsFiltersAttributeKey} from '../statistics-filters/statistics-fi
 import {meetingsListFeatureKey} from '../reducers/meetings-list.reducer';
 import {MeetingsListSm} from './meetings-list-sm';
 import {meetingsTablePageableAttributeKey, MeetingsTablePageableSm} from '../meetings-table-pageable/meetings-table-pageable.reducer';
+import { TimeBlockSummaryAggSm } from './time-block-summary-agg-sm';
+import { DepartmentsStatisticsAggSm } from './departments-statistics-agg-sm';
 
 export interface KhakiStatisticsFeatureSm {
   [organizersStatisticsFeatureKey]: OrganizersStatisticsSm;
-  [perDepartmentStatisticsFeatureKey]: DepartmentsStatisticsSm;
+  [perDepartmentStatisticsFeatureKey]: DepartmentsStatisticsAggSm;
   [timeBlockSummariesFeatureKey]: TimeBlockSummarySm;
   [trailingStatisticsFeatureKey]: TrailingStatisticsSm;
   [spinnerAttributeKey]: SpinnerSm;

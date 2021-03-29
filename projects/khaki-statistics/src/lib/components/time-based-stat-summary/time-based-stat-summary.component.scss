@@ -73,20 +73,58 @@
   margin-left: 20px;
   padding: 25px 30px 40px 30px;
 
-  .value {
+  .valueRow {
     font-size: x-large;
     padding-top: 10px;
+    display: table-row;
   }
 
   .label {
     font-size: small;
     white-space: pre;
     color: #4A5568;
+    font-weight: bold;
   }
-  
+
   .content {
     clear: both;
   }
+
+  .externalValue {
+    display: table-cell;
+    color: #EA8C00;
+    padding-top: 5px;
+  }
+
+  .internalValue {
+    display: table-cell;
+    color: #3182CE;
+    padding-top: 5px;
+  }
+
+  .totalValue {
+    display: table-cell;
+    padding-top: 5px;
+  }
+
+  .contentInside {
+    display: table;
+    width: 90%;
+  }
+
+  .contentLabelRow {
+    display: table-row;
+  }
+
+  .contentLabelCell {
+    display: table-cell;
+  }
+
+  .contentLabelCellHide {
+    display: table-cell;
+    visibility: hidden;
+  }
+
 }
 
 .time-based-stat-summary:first-child {
