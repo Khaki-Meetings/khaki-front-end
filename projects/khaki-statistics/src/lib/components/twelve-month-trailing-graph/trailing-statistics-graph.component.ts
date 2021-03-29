@@ -20,6 +20,7 @@ interface SeriesPoint {
   name: string;
   value: number;
   hours: number;
+  seconds: number;
 }
 
 interface GraphData {
@@ -102,6 +103,7 @@ export class TrailingStatisticsGraphComponent implements OnInit {
     this.statisticsFiltersFacadeService.selectStatisticsFilters()
       .subscribe((statisticsFilters) => {
         this.interval = statisticsFilters.interval;
+        this.currentInterval = IntervalEnum[statisticsFilters.interval];
         this.start = statisticsFilters.start;
         this.end = statisticsFilters.end;
         this.statisticsScope = statisticsFilters.statisticsScope;
@@ -117,45 +119,35 @@ export class TrailingStatisticsGraphComponent implements OnInit {
 
     console.log("trailing statistics " + JSON.stringify(this.trailingStatistics));
 
-/*    const reverseTrailingStatistics = {
-      timeBlock: trailingStatistics.timeBlock,
-      timeBlockSummaries: [...trailingStatistics.external.timeBlockSummaries].reverse(),
-      count: trailingStatistics.count
-    } as TrailingStatisticsAggSm;
-*
-/*
-
-    this.graphData = reverseTrailingStatistics.timeBlockSummaries.map(
-      (timeBlockSummary, index) => {
-        const totalSeconds = (timeBlockSummary.totalSeconds && typeof timeBlockSummary.totalSeconds === 'number')
-          ? timeBlockSummary.totalSeconds : 0;
-        const value = totalSeconds / 3600;
-        const name = timeBlocks[index];
-        return {
-          name,
-          value,
-          extra: {
-            totalSeconds: timeBlockSummary.totalSeconds
-          }
-        };
+    const reverseTrailingStatistics = {
+      internal: {
+        timeBlockSummaries:
+          [...this.trailingStatistics.internal.timeBlockSummaries].reverse(),
+      },
+      external: {
+        timeBlockSummaries:
+          [...this.trailingStatistics.external.timeBlockSummaries].reverse(),
       }
-    ); */
+    } as TrailingStatisticsAggSm;
 
+    console.log("reverseTrailingStatistics " + JSON.stringify(reverseTrailingStatistics));
 
-
-    this.graphData = this.trailingStatistics.internal.timeBlockSummaries.map(
+    this.graphData = reverseTrailingStatistics.internal.timeBlockSummaries.map(
       (timeBlockSummary, index) => {
         const totalSeconds = (timeBlockSummary.totalSeconds && typeof timeBlockSummary.totalSeconds === 'number')
           ? timeBlockSummary.totalSeconds : 0;
         const value = totalSeconds / 3600;
+        console.log("TIME: " + timeBlockSummary.totalSeconds + " "
+          + totalSeconds + " " + value);
         const name = timeBlocks[index];
         return {
           name,
           value,
           series: [{
             name: "Internal",
-            value: Math.floor(timeBlockSummary.totalSeconds / 3600),
-            hours: timeBlockSummary.totalSeconds,
+            value: value,
+            hours: value,
+            seconds: totalSeconds,
             extra: {
               totalSeconds: timeBlockSummary.totalSeconds
             }
@@ -166,21 +158,18 @@ export class TrailingStatisticsGraphComponent implements OnInit {
 
     console.log("TRAILING STATISTICS " + JSON.stringify(this.graphData));
 
-  /*  this.trailingStatistics.external.timeBlockSummaries.forEach((x, index) => {
-      this.graphData.find(item => item.name == x.start).series.push(
-          {
-            name: "External",
-            value: Math.floor(x.totalSeconds / 3600),
-            hours: x.totalSeconds
-          }
-        );
-    });
-*/
-    this.trailingStatistics.external.timeBlockSummaries.forEach((x, index) => {
+    reverseTrailingStatistics.external.timeBlockSummaries.forEach((x, index) => {
+
+      const totalSeconds = (x.totalSeconds && typeof x.totalSeconds === 'number')
+        ? x.totalSeconds : 0;
+      const value = totalSeconds / 3600;
+      const name = timeBlocks[index];
+
       this.graphData[index].series.push({
         name: "External",
-        value: Math.floor(x.totalSeconds / 3600),
-        hours: x.totalSeconds
+        value: value,
+        hours: value,
+        seconds: totalSeconds
       })
 
     });
