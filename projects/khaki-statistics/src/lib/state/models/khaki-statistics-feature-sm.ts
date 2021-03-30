@@ -16,9 +16,12 @@ import {MeetingsListSm} from './meetings-list-sm';
 import {meetingsTablePageableAttributeKey, MeetingsTablePageableSm} from '../meetings-table-pageable/meetings-table-pageable.reducer';
 import { TimeBlockSummaryAggSm } from './time-block-summary-agg-sm';
 import { DepartmentsStatisticsAggSm } from './departments-statistics-agg-sm';
+import { OrganizersAggregateStatisticsSm } from './organizers-aggregate-statistics-sm';
+import { organizersAggregateStatisticsFeatureKey } from '../reducers/organizers-aggregate-statistics.reducer';
 
 export interface KhakiStatisticsFeatureSm {
   [organizersStatisticsFeatureKey]: OrganizersStatisticsSm;
+  [organizersAggregateStatisticsFeatureKey]: OrganizersAggregateStatisticsSm;
   [perDepartmentStatisticsFeatureKey]: DepartmentsStatisticsAggSm;
   [timeBlockSummariesFeatureKey]: TimeBlockSummarySm;
   [trailingStatisticsFeatureKey]: TrailingStatisticsSm;

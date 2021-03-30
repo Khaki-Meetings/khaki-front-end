@@ -45,6 +45,8 @@ import {OrganizersStatisticsDataSource} from './components/organizers-table/data
 import {MeetingsListDataSource} from './components/meetings-list/data-source/meetings-list-data-source';
 import {MatSortModule} from '@angular/material/sort';
 import { MtgInvPercChartComponent } from './components/mtg-inv-perc-chart/mtg-inv-perc-chart.component';
+import { OrganizersAggregateStatisticsDataSource } from './components/organizers-table/data-source/organizers-aggregate-statistics-data-source';
+import { OrganizersAggregateStatisticsEffects } from './state/effects/organizers-aggregate-statistics-effects';
 
 @NgModule({
   declarations: [
@@ -82,6 +84,7 @@ import { MtgInvPercChartComponent } from './components/mtg-inv-perc-chart/mtg-in
       [
         TimeBlockSummaryEffects,
         OrganizersStatisticsEffects,
+        OrganizersAggregateStatisticsEffects,
         MeetingsListEffects,
         TrailingStatisticsEffects,
         PerDepartmentStatisticsEffects,
@@ -102,7 +105,7 @@ import { MtgInvPercChartComponent } from './components/mtg-inv-perc-chart/mtg-in
     MatSortModule
   ],
   exports: [KhakiStatisticsComponent],
-  providers: [OrganizersStatisticsDataSource, MeetingsListDataSource]
+  providers: [OrganizersStatisticsDataSource, OrganizersAggregateStatisticsDataSource, MeetingsListDataSource]
 })
 @Logging
 export class KhakiStatisticsModule {

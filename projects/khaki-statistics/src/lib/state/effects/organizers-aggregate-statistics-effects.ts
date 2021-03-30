@@ -25,10 +25,10 @@ export class OrganizersAggregateStatisticsEffects {
         this.statisticsFiltersFacade.selectStatisticsFilters(),
         this.organizersTablePageableFacade.selectOrganizersTablePageable()
       ),
-      tap((thing) => this.logger.debug('thing', thing)),
+      tap((thing) => this.logger.debug('organizers agg thing', thing)),
       switchMap(
         (joined: [TypedAction<'[OrganizersAggregateStatistics] Load OrganizersAggregateStatistics'>, StatisticsFiltersSm, OrganizersTablePageableSm]) => {
-          console.log('joined', joined); // was natr-historian  this.logger.debug
+          console.log('organizers agg joined', joined); // was natr-historian  this.logger.debug
           return this.statisticsService
             .getAggregateOrganizersStatistics(
               joined[1].start,

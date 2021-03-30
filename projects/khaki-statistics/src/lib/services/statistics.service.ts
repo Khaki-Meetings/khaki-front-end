@@ -88,7 +88,7 @@ export class StatisticsService {
     this.logger.debug('statisticsQueryParams', statisticsQueryParams);
     const page = statisticsQueryParams.page ? statisticsQueryParams.page.toString() : '0';
     const count = statisticsQueryParams.count ? statisticsQueryParams.count.toString() : '5';
-    const sortColumn = statisticsQueryParams.sortColumn ?? 'totalMeetings';
+    const sortColumn = statisticsQueryParams.sortColumn ?? 'internalMeetingCount';
     const sortDirection: SortDirection = statisticsQueryParams.sortDirection ?? 'desc';
     params = params.set('page', page);
     params = params.set('count', count);
