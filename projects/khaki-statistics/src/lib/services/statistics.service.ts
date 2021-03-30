@@ -22,6 +22,7 @@ import {TimeBlockSummaryAggSm} from '../state/models/time-block-summary-agg-sm';
 import {DepartmentsStatisticsAggSm} from '../state/models/departments-statistics-agg-sm';
 import {StatisticsScopeSe} from '../state/statistics-filters/statistics-scope-se.enum';
 import {TrailingStatisticsAggSm} from '../state/models/trailing-statistics-agg-sm';
+import { OrganizersAggregateStatisticsSm } from '../state/models/organizers-aggregate-statistics-sm';
 
 @Logging
 @Injectable({
@@ -76,7 +77,39 @@ export class StatisticsService {
         ),
         map(organizersStatisticsData => organizersStatisticsData as OrganizersStatisticsSm)
       );
+  }
 
+  getAggregateOrganizersStatistics(
+    start: Moment,
+    end: Moment,
+    statisticsQueryParams: StatisticsQueryParameters
+  ): Observable<OrganizersAggregateStatisticsSm> {
+    let params = new HttpParams();
+    this.logger.debug('statisticsQueryParams', statisticsQueryParams);
+    const page = statisticsQueryParams.page ? statisticsQueryParams.page.toString() : '0';
+    const count = statisticsQueryParams.count ? statisticsQueryParams.count.toString() : '5';
+    const sortColumn = statisticsQueryParams.sortColumn ?? 'totalMeetings';
+    const sortDirection: SortDirection = statisticsQueryParams.sortDirection ?? 'desc';
+    params = params.set('page', page);
+    params = params.set('count', count);
+    params = params.set('sort', `${sortColumn},${sortDirection}`);
+    this.logger.debug('organizers agg params', params);
+    this.logger.debug('organizers agg params.keys', params.keys());
+    this.logger.debug('start/end', start, end);
+    const url = this.getStartEndUrl(start, end, 'organizers/aggregate');
+    this.logger.debug('organizersStatistics agg url', url, params.toString());
+    return this.httpClient
+      .get(url, {params})
+      .pipe(
+        tap(organizersData => this.logger.debug('organizersStatistics agg response', organizersData)),
+        catchError(
+          error => {
+            this.logger.debug('Failed to get organizers agg statistics', error);
+            return throwError('Failed to get organizers agg statistics');
+          }
+        ),
+        map(organizersStatisticsData => organizersStatisticsData as OrganizersAggregateStatisticsSm)
+      );
   }
 
   getTrailingStatisticsScoped(
