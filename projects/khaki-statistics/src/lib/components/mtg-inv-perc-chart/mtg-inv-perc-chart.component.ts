@@ -123,7 +123,8 @@ export class MtgInvPercChartComponent implements OnInit {
       });
 
       this.perDepartmentStatistics.external.departmentsStatistics.forEach(x => {
-        this.graphData.find(item => item.name == x.department).series.push(
+        if (this.graphData.find(item => item.name == x.department) != null) {
+          this.graphData.find(item => item.name == x.department).series.push(
             {
               name: "External",
               value: x.totalSeconds / x.inventorySecondsAvailable * 100,
@@ -131,21 +132,38 @@ export class MtgInvPercChartComponent implements OnInit {
               inventorySecondsAvailable: x.inventorySecondsAvailable
             }
           );
+        } else {
+          console.log("No internal value for department: " + x.department);
+          this.graphData.push(
+            {name: x.department,
+              series: [
+                {
+                name: "External",
+                value: x.totalSeconds / x.inventorySecondsAvailable * 100,
+                hours: x.totalSeconds,
+                inventorySecondsAvailable: x.inventorySecondsAvailable
+              }]
+            }
+          );
+        }
       });
 
       this.graphData.forEach(x => {
-        let intVal = x.series.find(item => item.name == "Internal").value;
 
-        x.series.find(item => item.name == "External").value =
-          x.series.find(item => item.name == "External").value -
-          intVal;
+        if (x.series.find(item => item.name == "Internal") != null &&
+          x.series.find(item => item.name == "External")) {
 
-        let intHours = x.series.find(item => item.name == "Internal").hours;
+          let intVal = x.series.find(item => item.name == "Internal").value;
+          x.series.find(item => item.name == "External").value =
+            x.series.find(item => item.name == "External").value -
+            intVal;
 
-        x.series.find(item => item.name == "External").hours =
-          x.series.find(item => item.name == "External").hours -
-          intHours;
+          let intHours = x.series.find(item => item.name == "Internal").hours;
+          x.series.find(item => item.name == "External").hours =
+            x.series.find(item => item.name == "External").hours -
+            intHours;
 
+        }
       });
   }
 
