@@ -133,7 +133,7 @@ export class MtgInvPercChartComponent implements OnInit {
             }
           );
         } else {
-          console.log("CAN'T FIND DEPARTMENT: " + x.department);
+          console.log("No internal value for department: " + x.department);
           this.graphData.push(
             {name: x.department,
               series: [
