@@ -3,38 +3,37 @@ import {ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing'
 import {OrganizersTableComponent} from './organizers-table.component';
 import {By} from '@angular/platform-browser';
 import {MatTable, MatTableModule} from '@angular/material/table';
-import {OrganizersStatisticsFacadeService} from '../../state/facades/organizers-statistics-facade.service';
 import {Observable, of} from 'rxjs';
-import {testOrganizersStatisticsData} from './test-data.spec';
-import {OrganizersStatisticsSm} from '../../state/models/organizers-statistics-sm';
+import {testOrganizersAggregateStatisticsData} from './test-data.spec';
 import {delay} from 'rxjs/operators';
+import { OrganizersAggregateStatisticsFacadeService } from '../../state/facades/organizers-aggregate-statistics-facade.service';
+import { OrganizersAggregateStatisticsSm } from '../../state/models/organizers-aggregate-statistics-sm';
 
 describe('OrganizersTableComponent', () => {
   let component: OrganizersTableComponent;
   let fixture: ComponentFixture<OrganizersTableComponent>;
-  let mockOrganizersStatisticsService: Partial<OrganizersStatisticsFacadeService>;
+  let mockOrganizersStatisticsService: Partial<OrganizersAggregateStatisticsFacadeService>;
 
 
   beforeEach(async () => {
     mockOrganizersStatisticsService = {
-      dispatchLoadOrganizersStatistics(): void {
+      dispatchLoadOrganizersAggregateStatistics(): void {
       },
-      selectOrganizersStatistics(): Observable<OrganizersStatisticsSm> {
+      selectOrganizersAggregateStatistics(): Observable<OrganizersAggregateStatisticsSm> {
         return null;
       }
     };
-    spyOn(mockOrganizersStatisticsService, 'requestOrganizersStatistics');
-    spyOn(mockOrganizersStatisticsService, 'organizersStatistics')
+    spyOn(mockOrganizersStatisticsService, 'selectOrganizersAggregateStatistics')
       .and
       .returnValue(
-        of(testOrganizersStatisticsData)
+        of(testOrganizersAggregateStatisticsData)
           .pipe(delay(100))
       );
     await TestBed.configureTestingModule({
       declarations: [OrganizersTableComponent],
       imports: [MatTableModule],
       providers: [
-        {provide: OrganizersStatisticsFacadeService, useValue: mockOrganizersStatisticsService}
+        {provide: OrganizersAggregateStatisticsFacadeService, useValue: mockOrganizersStatisticsService}
 
       ]
     })
@@ -66,7 +65,7 @@ describe('OrganizersTableComponent', () => {
       () => {
         expect(component.organizersStatistics).toBeUndefined('organizersStatistics should not be set yet');
         tick(100);
-        expect(component.organizersStatistics).toEqual(testOrganizersStatisticsData);
+        expect(component.organizersStatistics).toEqual(testOrganizersAggregateStatisticsData);
       }
     )
   );

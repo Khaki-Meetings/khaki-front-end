@@ -18,7 +18,7 @@ export interface OrganizersTablePageableSm {
 export const initialState: OrganizersTablePageableSm = {
   page: 0,
   count: 5,
-  sortColumn: 'totalMeetings',
+  sortColumn: 'internalMeetingCount',
   sortDirection: 'desc'
 };
 
@@ -38,4 +38,3 @@ export const organizersTablePageableReducer = createReducer(
     }
   )
 );
-
