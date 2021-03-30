@@ -6,6 +6,7 @@ import {HttpClient} from '@angular/common/http';
 import {OrganizersStatisticsSm} from '../state/models/organizers-statistics-sm';
 import {OrganizersStatisticsDto} from './models/organizers-statistics-dto';
 import {IntervalEnum} from './models/interval.enum';
+import * as moment from 'moment';
 
 describe('StatisticsService', () => {
   let service: StatisticsService;
@@ -33,7 +34,7 @@ describe('StatisticsService', () => {
       const organizersStatisticsSm: OrganizersStatisticsSm = {};
       const organizersStatisticsDto: OrganizersStatisticsDto = {};
 
-      service.getOrganizersStatistics(IntervalEnum.Week, {})
+      service.getAggregateOrganizersStatistics(moment(), moment(), {})
         .subscribe(
           organizersStatistics => {
             expect(organizersStatistics).toEqual(organizersStatisticsSm);
