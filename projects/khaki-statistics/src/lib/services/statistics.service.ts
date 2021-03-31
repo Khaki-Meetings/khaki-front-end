@@ -281,7 +281,6 @@ export class StatisticsService {
     params = params.set('page', page);
     params = params.set('count', count);
     params = params.set('sort', `${sortColumn},${sortDirection}`);
-    params = params.set('filter', statisticsQueryParams.statisticsScope.toString());
     params = params.set('organizer', organizer);
     this.logger.debug('meetings params', params);
     this.logger.debug('meetings params.keys', params.keys());
