@@ -8,3 +8,7 @@
 .ngx-charts-tooltip-content-container {
   padding: 5px;
 }
+
+#meeting-time-by-dept-help:hover #meeting-time-by-dept-help-content {
+  visibility: visible;
+}
