@@ -83,7 +83,6 @@ import { OrganizersAggregateStatisticsEffects } from './state/effects/organizers
     EffectsModule.forFeature(
       [
         TimeBlockSummaryEffects,
-        OrganizersStatisticsEffects,
         OrganizersAggregateStatisticsEffects,
         MeetingsListEffects,
         TrailingStatisticsEffects,
@@ -105,7 +104,7 @@ import { OrganizersAggregateStatisticsEffects } from './state/effects/organizers
     MatSortModule
   ],
   exports: [KhakiStatisticsComponent],
-  providers: [OrganizersStatisticsDataSource, OrganizersAggregateStatisticsDataSource, MeetingsListDataSource]
+  providers: [OrganizersAggregateStatisticsDataSource, MeetingsListDataSource]
 })
 @Logging
 export class KhakiStatisticsModule {
