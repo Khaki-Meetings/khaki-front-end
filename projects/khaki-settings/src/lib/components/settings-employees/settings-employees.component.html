@@ -24,12 +24,12 @@
       </mat-expansion-panel-header>
       <div>
         <ng-template matExpansionPanelContent>
-          <mat-spinner *ngIf="employeeStatsLoading"></mat-spinner>
+          <div class="mat-spinner-wrapper center" *ngIf="employeeStatsLoading">
+            <lib-khaki-spinner></lib-khaki-spinner>
+          </div>
           <div *ngIf="!employeeStatsLoading">
             <div>
               {{interval | intervalTextDetail: start: end}}
-              of
-              {{statisticsScope | meetingTypeDetail}}
             </div>
             <div>
               Total Time: {{selectedEmployeeStats.totalSeconds | hoursMinutes}}
