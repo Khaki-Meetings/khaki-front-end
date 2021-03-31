@@ -35,7 +35,6 @@ export class SettingsEmployeesComponent implements OnInit {
   start: Moment;
   end: Moment;
 
-  statisticsScope;
   employeeStatsLoading = true;
   selectedEmployeeStats: TimeBlockSummaryResponseDto;
 
@@ -59,7 +58,6 @@ export class SettingsEmployeesComponent implements OnInit {
       .subscribe(
         statisticsFilters => {
           this.interval = statisticsFilters.interval;
-          this.statisticsScope = statisticsFilters.statisticsScope;
           this.start = statisticsFilters.start;
           this.end = statisticsFilters.end;
         }
