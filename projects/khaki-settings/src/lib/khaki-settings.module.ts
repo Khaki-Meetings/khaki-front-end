@@ -8,6 +8,7 @@ import {SettingsNameComponent} from './components/settings-name/settings-name.co
 import {SettingsEmployeesComponent, AddEmployeeDialogComponent} from './components/settings-employees/settings-employees.component';
 import {SettingsEmployeeComponent} from './components/settings-employee/settings-employee.component';
 import {SettingsDepartmentComponent, AddDepartmentDialogComponent} from './components/settings-department/settings-department.component';
+import {KhakiSpinnerComponent} from './components/khaki-spinner/khaki-spinner.component';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -40,6 +41,7 @@ import {MeetingTypeDetailPipe} from './pipes/meeting-type-detail.pipe';
     SettingsDepartmentComponent,
     AddEmployeeDialogComponent,
     AddDepartmentDialogComponent,
+    KhakiSpinnerComponent,
     HoursMinutesPipe,
     IntervalTextDetailPipe,
     MeetingTypeDetailPipe
