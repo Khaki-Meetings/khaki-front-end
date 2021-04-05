@@ -6,17 +6,23 @@ import {
   loadPerDepartmentStatisticsSuccess
 } from '../actions/per-department-statistics.actions';
 import {HistorianService, LogLevel} from '@natr/historian';
+import { DepartmentsStatisticsAggSm } from '../models/departments-statistics-agg-sm';
 
 
 export const perDepartmentStatisticsFeatureKey = 'perDepartmentStatistics';
 
 const logger = new HistorianService(LogLevel.ALL, perDepartmentStatisticsFeatureKey);
 
-export const initialState: DepartmentsStatisticsSm = {
-  departmentsStatistics: [],
-  loading: false
+const initialDeptState: DepartmentsStatisticsSm = {
+ departmentsStatistics: [],
+ loading: false
 };
 
+export const initialState: DepartmentsStatisticsAggSm = {
+  internal: initialDeptState,
+  external: initialDeptState,
+  loading: false
+};
 
 export const perDepartmentStatisticsReducer = createReducer(
   initialState,
@@ -28,7 +34,8 @@ export const perDepartmentStatisticsReducer = createReducer(
       (
         {
           ...state,
-          departmentsStatistics: action.departmentsStatistics,
+          internal: action.internal,
+          external: action.external,
           loading: false
         }
       )

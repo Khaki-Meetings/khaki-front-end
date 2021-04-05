@@ -43,6 +43,7 @@ export const organizersStatisticsReducer = createReducer(
             organizerId: organizersStatistic.organizerId,
             organizerFirstName: organizersStatistic.organizerFirstName,
             organizerLastName: organizersStatistic.organizerLastName,
+            organizerAvatarUrl:  organizersStatistic.organizerAvatarUrl,
             totalCost: organizersStatistic.totalCost,
             totalMeetings: organizersStatistic.totalMeetings,
             totalSeconds: organizersStatistic.totalSeconds,

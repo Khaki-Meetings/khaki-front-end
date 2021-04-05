@@ -4,17 +4,20 @@ import {Moment} from 'moment/moment';
 import {StatisticsScopeSe} from '../../state/statistics-filters/statistics-scope-se.enum';
 import {PerDepartmentStatisticsFacadeService} from '../../state/facades/per-department-statistics-facade.service';
 import {StatisticsFiltersFacade} from '../../state/statistics-filters/statistics-filters-facade';
-import {DepartmentsStatisticsSm} from '../../state/models/departments-statistics-sm';
-import * as d3 from 'd3';
-import { Pipe, PipeTransform } from '@angular/core';
-
 import { single } from './data';
 import { HoursMinutesPipe } from '../../pipes/hours-minutes.pipe';
+import { DepartmentsStatisticsAggSm } from '../../state/models/departments-statistics-agg-sm';
+
+interface SeriesPoint {
+  name: string;
+  value: number;
+  hours: number;
+  inventorySecondsAvailable: number;
+}
 
 interface GraphData {
   name: string;
-  value: number;
-  inventorySecondsAvailable: number;
+  series: SeriesPoint[];
 }
 
 @Component({
@@ -27,7 +30,7 @@ interface GraphData {
 
 export class MtgInvPercChartComponent implements OnInit {
 
-  perDepartmentStatistics: DepartmentsStatisticsSm;
+  perDepartmentStatistics: DepartmentsStatisticsAggSm;
 
   single: any[];
   view: any[] = [];
@@ -44,10 +47,10 @@ export class MtgInvPercChartComponent implements OnInit {
   schemeType: string = 'linear';
   legendPosition: string = 'below';
   showGridLines: boolean = false;
-  showDataLabel: boolean = true;
+  showDataLabel: boolean = false;
 
   colorScheme = {
-    domain: ['#3182CE']
+    domain: ['#3182CE','#ea8c00']
   };
 
   interval: IntervalSe;
@@ -82,10 +85,7 @@ export class MtgInvPercChartComponent implements OnInit {
             departmentData => {
               const newDataPoint = {
                 name: departmentData.name,
-                value: Math.floor(departmentData.value / departmentData.inventorySecondsAvailable * 100),
-                extra: {
-                  hours: departmentData.value
-                }
+                series: departmentData.series
               };
               this.chartData.push(newDataPoint);
             }
@@ -93,7 +93,7 @@ export class MtgInvPercChartComponent implements OnInit {
 
           this.single = this.chartData;
           this.view = [chartWidth, this.single.length * 35];
-          console.log('INV chart data', this.chartData); // was natr-historian  this.logger.debug
+          console.log('chart data', this.chartData); // was natr-historian  this.logger.debug
         });
 
     this.statisticsFiltersFacadeService.selectStatisticsFilters()
@@ -108,27 +108,63 @@ export class MtgInvPercChartComponent implements OnInit {
 
   }
 
-  ngAfterViewChecked() {
-    var pipe = new HoursMinutesPipe();
-
-    var arr = this.single;
-
-    var textLabels = d3.selectAll('text.textDataLabel')
-        .each(function(d, i) {
-      d3.select(this).text(pipe.transform(arr[i].extra.hours));
-    });;
-  }
-
   private createGraphData(): void {
-    this.graphData = this.perDepartmentStatistics.departmentsStatistics.map(
+      this.graphData = this.perDepartmentStatistics.internal.departmentsStatistics.map(
       el => {
         return {
           name: el.department,
-          value: el.totalSeconds,
-          inventorySecondsAvailable: el.inventorySecondsAvailable
+          series: [{
+            name: "Internal",
+            value: el.totalSeconds / el.inventorySecondsAvailable * 100,
+            hours: el.totalSeconds,
+            inventorySecondsAvailable: el.inventorySecondsAvailable
+          }]
         };
-      }
-    );
+      });
+
+      this.perDepartmentStatistics.external.departmentsStatistics.forEach(x => {
+        if (this.graphData.find(item => item.name == x.department) != null) {
+          this.graphData.find(item => item.name == x.department).series.push(
+            {
+              name: "External",
+              value: x.totalSeconds / x.inventorySecondsAvailable * 100,
+              hours: x.totalSeconds,
+              inventorySecondsAvailable: x.inventorySecondsAvailable
+            }
+          );
+        } else {
+          console.log("No internal value for department: " + x.department);
+          this.graphData.push(
+            {name: x.department,
+              series: [
+                {
+                name: "External",
+                value: x.totalSeconds / x.inventorySecondsAvailable * 100,
+                hours: x.totalSeconds,
+                inventorySecondsAvailable: x.inventorySecondsAvailable
+              }]
+            }
+          );
+        }
+      });
+
+      this.graphData.forEach(x => {
+
+        if (x.series.find(item => item.name == "Internal") != null &&
+          x.series.find(item => item.name == "External")) {
+
+          let intVal = x.series.find(item => item.name == "Internal").value;
+          x.series.find(item => item.name == "External").value =
+            x.series.find(item => item.name == "External").value -
+            intVal;
+
+          let intHours = x.series.find(item => item.name == "Internal").hours;
+          x.series.find(item => item.name == "External").hours =
+            x.series.find(item => item.name == "External").hours -
+            intHours;
+
+        }
+      });
   }
 
   formatXaxis(x) {

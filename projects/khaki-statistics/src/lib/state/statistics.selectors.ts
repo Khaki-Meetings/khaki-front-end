@@ -6,6 +6,7 @@ import {organizersStatisticsFeatureKey} from './reducers/organizers-statistics.r
 import {meetingsListFeatureKey} from './reducers/meetings-list.reducer';
 import {trailingStatisticsFeatureKey} from './reducers/trailing-statistics.reducer';
 import {perDepartmentStatisticsFeatureKey} from './reducers/per-department-statistics.reducer';
+import { organizersAggregateStatisticsFeatureKey } from './reducers/organizers-aggregate-statistics.reducer';
 
 export const khakiStatisticsFeatureSelector = createFeatureSelector(khakiStatisticsFeatureKey);
 
@@ -24,6 +25,11 @@ export const organizersStatisticsSelector = createSelector(
   (state: KhakiStatisticsFeatureSm) => state[organizersStatisticsFeatureKey]
 );
 
+export const organizersAggregateStatisticsSelector = createSelector(
+  khakiStatisticsFeatureSelector,
+  (state: KhakiStatisticsFeatureSm) => state[organizersAggregateStatisticsFeatureKey]
+);
+
 export const meetingsListSelector = createSelector(
   khakiStatisticsFeatureSelector,
   (state: KhakiStatisticsFeatureSm) => state[meetingsListFeatureKey]
@@ -34,7 +40,7 @@ export const trailingStatisticsSelector = createSelector(
   (state: KhakiStatisticsFeatureSm) => state[trailingStatisticsFeatureKey]
 );
 
-export const trailingSStatisticsLoadingSelector = createSelector(
+export const trailingStatisticsLoadingSelector = createSelector(
   khakiStatisticsFeatureSelector,
   (state: KhakiStatisticsFeatureSm) => state[trailingStatisticsFeatureKey].loading
 );
@@ -42,6 +48,11 @@ export const trailingSStatisticsLoadingSelector = createSelector(
 export const organizersStatisticsLoadingSelector = createSelector(
   khakiStatisticsFeatureSelector,
   (state: KhakiStatisticsFeatureSm) => state[organizersStatisticsFeatureKey].loading
+);
+
+export const organizersAggregateStatisticsLoadingSelector = createSelector(
+  khakiStatisticsFeatureSelector,
+  (state: KhakiStatisticsFeatureSm) => state[organizersAggregateStatisticsFeatureKey].loading
 );
 
 export const meetingsListLoadingSelector = createSelector(

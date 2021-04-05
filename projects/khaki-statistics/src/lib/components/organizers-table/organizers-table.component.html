@@ -19,28 +19,46 @@
     <lib-khaki-spinner></lib-khaki-spinner>
   </div>
   <div [ngClass]="loading? 'loadingComponent' : ''">
-    <table mat-table [dataSource]="organizersStatisticsDataSource" matSort>
+    <table mat-table [dataSource]="organizersAggregateStatisticsDataSource" matSort>
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef class="table-border header-font" mat-sort-header="organizerLastName">
           Employee
         </th>
         <td mat-cell *matCellDef="let element"
-            class="table-border row-caption"> {{element.organizerFirstName}} {{element.organizerLastName}} </td>
+            class="table-border row-caption">
+          <img class="organizerAvatar" src="{{element.organizerAvatarUrl}}" />
+          <span class="organizerName">{{element.organizerFirstName}} {{element.organizerLastName}}</span>
+        </td>
       </ng-container>
 
-      <ng-container matColumnDef="meeting">
+      <ng-container matColumnDef="internalMeetingCount">
         <th mat-header-cell *matHeaderCellDef class="table-border header-font col-right"
-            mat-sort-header="totalMeetings">Meetings
+            mat-sort-header="internalMeetingCount">Internal Meetings
         </th>
-        <td mat-cell *matCellDef="let element" class="table-border col-right"> {{element.totalMeetings}} </td>
+        <td mat-cell *matCellDef="let element" class="table-border col-right"> {{element.internalMeetingCount}} </td>
       </ng-container>
 
-      <ng-container matColumnDef="hours">
+      <ng-container matColumnDef="internalMeetingSeconds">
         <th mat-header-cell *matHeaderCellDef class="table-border header-font col-right"
-            mat-sort-header="totalSeconds">Time
+            mat-sort-header="internalMeetingSeconds">Time
         </th>
         <td mat-cell *matCellDef="let element"
-            class="table-border col-right"> {{element.totalSeconds | hoursMinutes}} </td>
+            class="table-border col-right"> {{element.internalMeetingSeconds | hoursMinutes}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="externalMeetingCount">
+        <th mat-header-cell *matHeaderCellDef class="table-border header-font col-right"
+            mat-sort-header="externalMeetingCount">External Meetings
+        </th>
+        <td mat-cell *matCellDef="let element" class="table-border col-right"> {{element.externalMeetingCount}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="externalMeetingSeconds">
+        <th mat-header-cell *matHeaderCellDef class="table-border header-font col-right"
+            mat-sort-header="externalMeetingSeconds">Time
+        </th>
+        <td mat-cell *matCellDef="let element"
+            class="table-border col-right"> {{element.externalMeetingSeconds | hoursMinutes}} </td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns" class="header-font"></tr>

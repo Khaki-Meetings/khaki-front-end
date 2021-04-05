@@ -1,15 +1,15 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {OrganizersStatisticsSm} from '../../state/models/organizers-statistics-sm';
 import {HistorianService, Logging} from '@natr/historian';
 import {MatPaginator, PageEvent} from '@angular/material/paginator';
 import {IntervalSe} from '../../state/statistics-filters/interval-se.enum';
 import {Moment} from 'moment/moment';
-import {OrganizersStatisticsDataSource} from './data-source/organizers-statistics-data-source';
-import {OrganizersStatisticsFacadeService} from '../../state/facades/organizers-statistics-facade.service';
 import {MatSort} from '@angular/material/sort';
 import {OrganizersTablePageableFacade} from '../../state/organizers-table-pageable/organizers-table-pageable-facade.service';
 import {StatisticsFiltersFacade} from '../../state/statistics-filters/statistics-filters-facade';
 import { Router } from '@angular/router';
+import { OrganizersAggregateStatisticsFacadeService } from '../../state/facades/organizers-aggregate-statistics-facade.service';
+import { OrganizersAggregateStatisticsDataSource } from './data-source/organizers-aggregate-statistics-data-source';
+import { OrganizersAggregateStatisticsSm } from '../../state/models/organizers-aggregate-statistics-sm';
 
 @Logging
 @Component({
@@ -20,8 +20,8 @@ import { Router } from '@angular/router';
 
 export class OrganizersTableComponent implements OnInit, AfterViewInit {
   constructor(
-    private organizersStatisticsFacade: OrganizersStatisticsFacadeService,
-    public organizersStatisticsDataSource: OrganizersStatisticsDataSource,
+    private organizersAggregateStatisticsFacade: OrganizersAggregateStatisticsFacadeService,
+    public organizersAggregateStatisticsDataSource: OrganizersAggregateStatisticsDataSource,
     private statisticsFiltersFacade: StatisticsFiltersFacade,
     private router: Router
   ) {
@@ -29,8 +29,9 @@ export class OrganizersTableComponent implements OnInit, AfterViewInit {
 
   private logger: HistorianService;
 
-  organizersStatistics: OrganizersStatisticsSm;
-  displayedColumns: string[] = ['name', 'meeting', 'hours'];
+  organizersStatistics: OrganizersAggregateStatisticsSm;
+  displayedColumns: string[] = ['name', 'internalMeetingCount',
+    'internalMeetingSeconds', 'externalMeetingCount', 'externalMeetingSeconds'];
   loading = false;
 
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
@@ -41,7 +42,7 @@ export class OrganizersTableComponent implements OnInit, AfterViewInit {
   end: Moment;
 
   ngOnInit(): void {
-    this.organizersStatisticsFacade.selectOrganizersStatisticsLoading().subscribe(loading => this.loading = loading);
+    this.organizersAggregateStatisticsFacade.selectOrganizersAggregateStatisticsLoading().subscribe(loading => this.loading = loading);
     this.statisticsFiltersFacade.selectStatisticsFilters()
       .subscribe((statisticsFilters) => {
         this.interval = statisticsFilters.interval;
@@ -52,8 +53,8 @@ export class OrganizersTableComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.logger.debug('paginator is', this.paginator);
-    this.organizersStatisticsDataSource.paginator = this.paginator;
-    this.organizersStatisticsDataSource.sort = this.sort;
+    this.organizersAggregateStatisticsDataSource.paginator = this.paginator;
+    this.organizersAggregateStatisticsDataSource.sort = this.sort;
   }
 
   showMeetings(data): void {

@@ -15,12 +15,14 @@ import {
   meetingsTablePageableReducer
 } from './meetings-table-pageable/meetings-table-pageable.reducer';
 import {statisticsFiltersAttributeKey, statisticsFiltersReducer} from './statistics-filters/statistics-filters.reducer';
+import { organizersAggregateStatisticsFeatureKey, organizersAggregateStatisticsReducer } from './reducers/organizers-aggregate-statistics.reducer';
 
 export const khakiStatisticsFeatureKey = 'khakiStatistics';
 
 export const khakiStatisticsReducers: ActionReducerMap<KhakiStatisticsFeatureSm> = {
   [organizersTablePageableAttributeKey]: organizersTablePageableReducer,
   [organizersStatisticsFeatureKey]: organizersStatisticsReducer,
+  [organizersAggregateStatisticsFeatureKey]: organizersAggregateStatisticsReducer,
   [perDepartmentStatisticsFeatureKey]: perDepartmentStatisticsReducer,
   [timeBlockSummariesFeatureKey]: timeBlockSummaryReducer,
   [trailingStatisticsFeatureKey]: trailingStatisticsReducer,

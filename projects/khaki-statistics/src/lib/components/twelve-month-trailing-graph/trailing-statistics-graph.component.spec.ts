@@ -63,9 +63,9 @@ describe('TwelveMonthTrailingGraphComponent', () => {
     'should set twelveMonthTrailingStatistics to data from service observable',
     fakeAsync(
       () => {
-        expect(component.twelveMonthTrailingStatistics).toBeUndefined('sinceTimeBlockSummaries should not be set yet');
+        expect(component.trailingStatistics).toBeUndefined('sinceTimeBlockSummaries should not be set yet');
         tick(100);
-        expect(component.twelveMonthTrailingStatistics).toEqual(testPerDepartmentStatistics);
+        expect(component.trailingStatistics).toEqual(testPerDepartmentStatistics);
       }
     )
   );
