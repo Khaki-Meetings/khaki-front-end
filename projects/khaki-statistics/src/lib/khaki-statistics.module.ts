@@ -48,6 +48,8 @@ import { MtgInvPercChartComponent } from './components/mtg-inv-perc-chart/mtg-in
 import { OrganizersAggregateStatisticsDataSource } from './components/organizers-table/data-source/organizers-aggregate-statistics-data-source';
 import { OrganizersAggregateStatisticsEffects } from './state/effects/organizers-aggregate-statistics-effects';
 import { TimeBlockSummaryGoalEffects } from './state/effects/time-block-summary-goal.effects';
+import { GoalDisplayPipe } from './pipes/goal-display.pipe';
+import { GoalDisplayHoursMinutesPipe } from './pipes/goal-display-hours-minutes.pipe';
 
 @NgModule({
   declarations: [
@@ -68,6 +70,8 @@ import { TimeBlockSummaryGoalEffects } from './state/effects/time-block-summary-
     MeetingTypeDetailPipe,
     MeetingStartDatePipe,
     MeetingStartEndTimesPipe,
+    GoalDisplayPipe,
+    GoalDisplayHoursMinutesPipe,
     MtgInvPercChartComponent
   ],
   imports: [

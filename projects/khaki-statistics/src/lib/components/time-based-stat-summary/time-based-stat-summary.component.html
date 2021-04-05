@@ -293,13 +293,13 @@
         </div>
       </div>
       <div class="goalRowWrapper"
-      [ngClass]="(timeBlockSummary?.internal?.meetingLengthSeconds >= meetingLengthGoalMin * 60
-         && timeBlockSummary?.internal?.meetingLengthSeconds <= meetingLengthGoalMax * 60)
+      [ngClass]="(timeBlockSummary?.internal?.meetingLengthSeconds >= meetingLengthGoal?.min
+         && timeBlockSummary?.internal?.meetingLengthSeconds <= meetingLengthGoal?.max)
          ? 'goalMet'
          : 'goalMissed'">
         <div class="goalRow">
              <div class="goalContent">
-               Goal: Between {{ meetingLengthGoalMin * 60 | hoursMinutes }} and {{ meetingLengthGoalMax * 60 | hoursMinutes }}
+               Goal: {{ meetingLengthGoal.desc | goalDisplayHoursMinutes: meetingLengthGoal.min : meetingLengthGoal.max }}
              </div>
         </div>
       </div>
@@ -345,13 +345,13 @@
         </div>
       </div>
       <div class="goalRowWrapper"
-      [ngClass]="(timeBlockSummary?.internal?.totalMeetingAttendees / timeBlockSummary?.internal?.meetingCount >= attendeesPerMeetingGoalMin
-         && timeBlockSummary?.external?.totalMeetingAttendees / timeBlockSummary?.external?.meetingCount <= attendeesPerMeetingGoalMax)
+      [ngClass]="(timeBlockSummary?.internal?.totalMeetingAttendees / timeBlockSummary?.internal?.meetingCount >= attendeesPerMeetingGoal?.min
+         && timeBlockSummary?.external?.totalMeetingAttendees / timeBlockSummary?.external?.meetingCount <= attendeesPerMeetingGoal?.max)
          ? 'goalMet'
          : 'goalMissed'">
         <div class="goalRow">
              <div class="goalContent">
-               Goal: Between {{ attendeesPerMeetingGoalMin }} and {{ attendeesPerMeetingGoalMax }} attendees
+               Goal: {{ attendeesPerMeetingGoal.desc | goalDisplay: attendeesPerMeetingGoal.min : attendeesPerMeetingGoal.max }} attendees
              </div>
         </div>
       </div>

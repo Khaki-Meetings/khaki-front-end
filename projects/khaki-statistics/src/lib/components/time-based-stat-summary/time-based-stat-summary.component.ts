@@ -9,6 +9,14 @@ import { TimeBlockSummaryGoalsFacadeService } from '../../state/facades/time-blo
 import { TimeBlockSummaryGoalListSm } from '../../state/models/time-block-summary-goal-list-sm';
 import { TimeBlockSummaryGoalSm } from '../../state/models/time-block-summary-goal-sm';
 import { GoalMeasureEnum } from '../../services/models/goal-measure-enum';
+import { GoalDisplayPipe } from '../../pipes/goal-display.pipe';
+import { GoalDisplayHoursMinutesPipe } from '../../pipes/goal-display-hours-minutes.pipe';
+
+interface GoalData {
+  min: number;
+  max: number;
+  desc: string;
+}
 
 @Logging
 @Component({
@@ -16,6 +24,8 @@ import { GoalMeasureEnum } from '../../services/models/goal-measure-enum';
   templateUrl: './time-based-stat-summary.component.html',
   styleUrls: ['./time-based-stat-summary.component.scss']
 })
+
+
 export class TimeBasedStatSummaryComponent implements OnInit {
   logger: HistorianService;
   timeBlockSummary: TimeBlockSummaryAggSm;
@@ -23,10 +33,8 @@ export class TimeBasedStatSummaryComponent implements OnInit {
   error: ErrorSm;
   loading = false;
 
-  meetingLengthGoalMin: number;
-  meetingLengthGoalMax: number;
-  attendeesPerMeetingGoalMin: number;
-  attendeesPerMeetingGoalMax: number;
+  meetingLengthGoal: GoalData;
+  attendeesPerMeetingGoal: GoalData;
 
   constructor(private sinceTimeBlockSummariesFacade: TimeBlockSummariesFacadeService,
     private timeBlockSummaryGoalsFacadeService: TimeBlockSummaryGoalsFacadeService) {
@@ -48,11 +56,17 @@ export class TimeBasedStatSummaryComponent implements OnInit {
           (data) => {
             this.timeBlockSummaryGoal = data;
             console.log('data from state', data); // was natr-historian  this.logger.debug
-            this.meetingLengthGoalMin = data?.goals?.find(x => x.measure == GoalMeasureEnum.AverageMeetingLength)?.greaterThanOrEqualTo;
-            this.meetingLengthGoalMax = data?.goals?.find(x => x.measure == GoalMeasureEnum.AverageMeetingLength)?.lessThanOrEqualTo;
-            this.attendeesPerMeetingGoalMin = data?.goals?.find(x => x.measure == GoalMeasureEnum.AttendeesPerMeeting)?.greaterThanOrEqualTo;
-            this.attendeesPerMeetingGoalMax = data?.goals?.find(x => x.measure == GoalMeasureEnum.AttendeesPerMeeting)?.lessThanOrEqualTo;
-            console.log('meetingLengthGoalMin', this.meetingLengthGoalMin);
+            this.meetingLengthGoal = {
+              min : data?.goals?.find(x => x.measure == GoalMeasureEnum.AverageMeetingLength)?.greaterThanOrEqualTo,
+              max : data?.goals?.find(x => x.measure == GoalMeasureEnum.AverageMeetingLength)?.lessThanOrEqualTo,
+              desc : ''
+            }
+            this.attendeesPerMeetingGoal = {
+              min : data?.goals?.find(x => x.measure == GoalMeasureEnum.AttendeesPerMeeting)?.greaterThanOrEqualTo,
+              max : data?.goals?.find(x => x.measure == GoalMeasureEnum.AttendeesPerMeeting)?.lessThanOrEqualTo,
+              desc: ''
+            }
+            console.log('attendeesPerMeetingGoal', this.attendeesPerMeetingGoal);
           }
         );
   }

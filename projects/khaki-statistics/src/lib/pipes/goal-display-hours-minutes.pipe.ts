@@ -1,0 +1,22 @@
+import {Pipe, PipeTransform} from '@angular/core';
+
+@Pipe({name: 'goalDisplayHoursMinutes'})
+export class GoalDisplayHoursMinutesPipe implements PipeTransform {
+
+  transform(desc: string, minValue: number, maxValue: number): string {
+
+    const minDisplayValue = minValue === null ? 0 : minValue;
+    const minHours = Math.trunc(minDisplayValue / 60 / 60);
+    const minMinutes = Math.trunc(minDisplayValue / 60 % 60);
+    const minDisplay = minHours.toString().padStart(2, "0") + ':' + minMinutes.toString().padStart(2, "0");
+
+    const maxDisplayValue = maxValue === null ? 0 : maxValue;
+    const maxHours = Math.trunc(maxDisplayValue / 60 / 60);
+    const maxmaxutes = Math.trunc(maxDisplayValue / 60 % 60);
+    const maxDisplay = maxHours.toString().padStart(2, "0") + ':' + maxmaxutes.toString().padStart(2, "0");
+
+    return "Between " + minDisplay + " and " + maxDisplay;
+
+  }
+
+}
