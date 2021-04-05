@@ -47,6 +47,7 @@ import {MatSortModule} from '@angular/material/sort';
 import { MtgInvPercChartComponent } from './components/mtg-inv-perc-chart/mtg-inv-perc-chart.component';
 import { OrganizersAggregateStatisticsDataSource } from './components/organizers-table/data-source/organizers-aggregate-statistics-data-source';
 import { OrganizersAggregateStatisticsEffects } from './state/effects/organizers-aggregate-statistics-effects';
+import { TimeBlockSummaryGoalEffects } from './state/effects/time-block-summary-goal.effects';
 
 @NgModule({
   declarations: [
@@ -83,6 +84,7 @@ import { OrganizersAggregateStatisticsEffects } from './state/effects/organizers
     EffectsModule.forFeature(
       [
         TimeBlockSummaryEffects,
+        TimeBlockSummaryGoalEffects,
         OrganizersAggregateStatisticsEffects,
         MeetingsListEffects,
         TrailingStatisticsEffects,

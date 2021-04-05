@@ -8,6 +8,7 @@ import {loadTrailingStatistics} from '../actions/trailing-statistics.actions';
 import {loadMeetingsListAction} from '../actions/meetings-list.actions';
 import {HistorianService, Logging} from '@natr/historian';
 import { loadOrganizersAggregateStatisticsAction } from '../actions/organizers-aggregate-statistics.actions';
+import { loadTimeBlockSummaryGoals } from '../actions/time-block-summary-goals.actions';
 
 @Logging
 @Injectable({providedIn: 'root'})
@@ -22,6 +23,7 @@ export class AllStatisticsFacadeService {
     this.store.dispatch(loadOrganizersStatisticsAction());
     this.store.dispatch(loadOrganizersAggregateStatisticsAction());
     this.store.dispatch(loadTimeBlockSummary());
+    this.store.dispatch(loadTimeBlockSummaryGoals());
     this.store.dispatch(loadPerDepartmentStatistics());
     this.store.dispatch(loadTrailingStatistics());
     this.store.dispatch(loadMeetingsListAction());

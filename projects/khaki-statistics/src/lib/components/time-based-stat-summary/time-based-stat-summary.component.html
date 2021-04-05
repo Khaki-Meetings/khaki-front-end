@@ -253,7 +253,7 @@
   </div>
   <div class="flex-container">
 
-    <div class="khaki-container time-based-stat-summary">
+    <div class="khaki-container time-based-stat-summary-with-goal">
       <div class="header">
         <div style="float:left;">
           <div class="label">Average Meeting Length</div>
@@ -292,9 +292,20 @@
           </div>
         </div>
       </div>
+      <div class="goalRowWrapper"
+      [ngClass]="(timeBlockSummary?.internal?.meetingLengthSeconds >= meetingLengthGoalMin * 60
+         && timeBlockSummary?.internal?.meetingLengthSeconds <= meetingLengthGoalMax * 60)
+         ? 'goalMet'
+         : 'goalMissed'">
+        <div class="goalRow">
+             <div class="goalContent">
+               Goal: Between {{ meetingLengthGoalMin * 60 | hoursMinutes }} and {{ meetingLengthGoalMax * 60 | hoursMinutes }}
+             </div>
+        </div>
+      </div>
     </div>
 
-    <div class="khaki-container time-based-stat-summary">
+    <div class="khaki-container time-based-stat-summary-with-goal">
       <div class="header">
         <div style="float:left;">
           <div class="label">Average # of Attendees</div>
@@ -331,6 +342,17 @@
               </div>
             </div>
           </div>
+        </div>
+      </div>
+      <div class="goalRowWrapper"
+      [ngClass]="(timeBlockSummary?.internal?.totalMeetingAttendees / timeBlockSummary?.internal?.meetingCount >= attendeesPerMeetingGoalMin
+         && timeBlockSummary?.external?.totalMeetingAttendees / timeBlockSummary?.external?.meetingCount <= attendeesPerMeetingGoalMax)
+         ? 'goalMet'
+         : 'goalMissed'">
+        <div class="goalRow">
+             <div class="goalContent">
+               Goal: Between {{ attendeesPerMeetingGoalMin }} and {{ attendeesPerMeetingGoalMax }} attendees
+             </div>
         </div>
       </div>
     </div>
