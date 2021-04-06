@@ -14,6 +14,18 @@ export class GoalDisplayPipe implements PipeTransform {
     // return hours + ' ' + hoursLabel + ', ' + minutes + ' ' + minutesLabel;
 
     //return hours.toString().padStart(2, "0") + ':' + minutes.toString().padStart(2, "0");
+    if (minValue == maxValue) {
+      return "" + minValue;
+    }
+
+    if (minValue == null) {
+      return "Less than " + maxValue;
+    }
+
+    if (maxValue == null) {
+      return "More than " + minValue;
+    }
+
     return "Between " + minValue + " and " + maxValue;
   }
 

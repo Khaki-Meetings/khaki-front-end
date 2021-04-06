@@ -15,6 +15,14 @@ export class GoalDisplayHoursMinutesPipe implements PipeTransform {
     const maxmaxutes = Math.trunc(maxDisplayValue / 60 % 60);
     const maxDisplay = maxHours.toString().padStart(2, "0") + ':' + maxmaxutes.toString().padStart(2, "0");
 
+    if (minValue == null) {
+      return minDisplay;
+    }
+
+    if (maxValue == null) {
+      return "More than " + minDisplay;
+    }
+
     return "Between " + minDisplay + " and " + maxDisplay;
 
   }
