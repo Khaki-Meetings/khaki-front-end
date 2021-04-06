@@ -250,7 +250,22 @@ export class StatisticsService {
           .pipe<TimeBlockSummaryAggSm>(map(x => {
             let timeBlockSummaryAggSm : TimeBlockSummaryAggSm = {
               internal : x[0],
-              external : x[1]
+              external : x[1],
+              total : {
+                numEmployees : x[0].numEmployees,
+                numWorkdays : x[0].numWorkdays,
+                meetingCount : x[0].meetingCount + x[1].meetingCount,
+                totalMeetingInternalAttendees : x[0].totalMeetingInternalAttendees
+                  + x[1].totalMeetingInternalAttendees,
+                totalSeconds : x[0].totalSeconds + x[1].totalSeconds,
+                meetingLengthSeconds : x[0].meetingLengthSeconds +
+                  x[1].meetingLengthSeconds,
+                totalMeetingAttendees : x[0].totalMeetingAttendees +
+                  x[1].totalMeetingAttendees,
+                averageStaffSeconds : (x[0].meetingCount + x[1].meetingCount) > 0 ?
+                  (x[0].totalSeconds + x[1].totalSeconds) /
+                    (x[0].meetingCount + x[1].meetingCount) : 0
+              }
             };
             return timeBlockSummaryAggSm;
         }));

@@ -58,6 +58,9 @@
           <div class="contentInside">
             <div class="contentLabelRow">
               <div class="contentLabelCell">
+                Total
+              </div>
+              <div class="contentLabelCell">
                 Internal
               </div>
               <div class="contentLabelCell">
@@ -65,6 +68,11 @@
               </div>
             </div>
             <div class="valueRow">
+              <div>
+                {{ (timeBlockSummary?.total?.totalMeetingInternalAttendees
+                  / timeBlockSummary?.total?.numWorkdays
+                  / timeBlockSummary?.total?.numEmployees) || 0 | number:'1.0-1' }}
+              </div>
               <div class="internalValue">
                 {{ (timeBlockSummary?.internal?.totalMeetingInternalAttendees
                   / timeBlockSummary?.internal?.numWorkdays
@@ -103,6 +111,9 @@
           <div class="contentInside">
             <div class="contentLabelRow">
               <div class="contentLabelCell">
+                Total
+              </div>
+              <div class="contentLabelCell">
                 Internal
               </div>
               <div class="contentLabelCell">
@@ -110,6 +121,11 @@
               </div>
             </div>
             <div class="valueRow">
+              <div>
+                {{ (timeBlockSummary?.total?.totalSeconds / timeBlockSummary?.total?.numEmployees
+                  / timeBlockSummary?.total?.numWorkdays) || 0 | hoursMinutes
+                }}
+              </div>
               <div class="internalValue">
                 {{ (timeBlockSummary?.internal?.totalSeconds / timeBlockSummary?.internal?.numEmployees
                   / timeBlockSummary?.internal?.numWorkdays) || 0 | hoursMinutes
@@ -151,6 +167,9 @@
           <div class="contentInside">
             <div class="contentLabelRow">
               <div class="contentLabelCell">
+                Total
+              </div>
+              <div class="contentLabelCell">
                 Internal
               </div>
               <div class="contentLabelCell">
@@ -158,6 +177,9 @@
               </div>
             </div>
             <div class="valueRow">
+              <div class="internalValue">
+                {{timeBlockSummary?.total?.totalSeconds | hoursMinutes}}
+              </div>
               <div class="internalValue">
                 {{timeBlockSummary?.internal?.totalSeconds | hoursMinutes}}
               </div>
@@ -191,6 +213,9 @@
           <div class="contentInside">
             <div class="contentLabelRow">
               <div class="contentLabelCell">
+                Total
+              </div>
+              <div class="contentLabelCell">
                 Internal
               </div>
               <div class="contentLabelCell">
@@ -198,6 +223,9 @@
               </div>
             </div>
             <div class="valueRow">
+              <div>
+                {{timeBlockSummary?.total?.averageStaffSeconds | hoursMinutes}}
+              </div>
               <div class="internalValue">
                 {{timeBlockSummary?.internal?.averageStaffSeconds | hoursMinutes}}
               </div>
@@ -230,6 +258,9 @@
         <div class="value" [ngClass]="loading? 'loadingComponent' : ''">
           <div class="contentInside">
             <div class="contentLabelRow">
+              <div>
+                Total
+              </div>
               <div class="contentLabelCell">
                 Internal
               </div>
@@ -238,6 +269,9 @@
               </div>
             </div>
             <div class="valueRow">
+              <div>
+                {{timeBlockSummary?.total?.meetingCount}}
+              </div>
               <div class="internalValue">
                 {{timeBlockSummary?.internal?.meetingCount}}
               </div>
@@ -274,6 +308,9 @@
         <div class="value" [ngClass]="loading? 'loadingComponent' : ''">
           <div class="contentInside">
             <div class="contentLabelRow">
+              <div>
+                Total
+              </div>
               <div class="contentLabelCell">
                 Internal
               </div>
@@ -282,6 +319,9 @@
               </div>
             </div>
             <div class="valueRow">
+              <div>
+                {{ (timeBlockSummary?.total?.meetingLengthSeconds / timeBlockSummary?.total?.meetingCount) | hoursMinutes }}
+              </div>
               <div class="internalValue">
                 {{ (timeBlockSummary?.internal?.meetingLengthSeconds / timeBlockSummary?.internal?.meetingCount) | hoursMinutes }}
               </div>
@@ -326,6 +366,9 @@
         <div class="value" [ngClass]="loading? 'loadingComponent' : ''">
           <div class="contentInside">
             <div class="contentLabelRow">
+              <div>
+                Total
+              </div>
               <div class="contentLabelCell">
                 Internal
               </div>
@@ -334,6 +377,9 @@
               </div>
             </div>
             <div class="valueRow">
+              <div>
+                {{ timeBlockSummary?.total?.totalMeetingAttendees / timeBlockSummary?.total?.meetingCount | number:'1.0-1'}}
+              </div>
               <div class="internalValue">
                 {{ timeBlockSummary?.internal?.totalMeetingAttendees / timeBlockSummary?.internal?.meetingCount | number:'1.0-1'}}
               </div>
