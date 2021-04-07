@@ -51,38 +51,57 @@ export class TimeBasedStatSummaryComponent implements OnInit {
   private createGoal(goal : any, value: any): GoalData {
     var min = goal?.greaterThanOrEqualTo;
     var max = goal?.lessThanOrEqualTo;
+    var met: any;
+
+    if (min != null && max != null) {
+        met = (value >= min && value <= max) ? true : false;
+    } else if (min != null) {
+        met = (value >= min) ? true : false;
+    } else if (max != null) {
+        met = (value <= max) ? true : false;
+    }
 
     console.log("Goal evaluation: " + min + " " + value + " " + max + " "
-      + (value >= min && value <= max ? true : false));
+      + met);
 
     return {
       min: min,
       max: max,
       desc: '',
-      met: value >= min && value <= max ? true : false
+      met: met
     }
+   }
+
+   private setupGoalEvalation() {
+     if (this.timeBlockSummary != null && this.timeBlockSummaryGoal != null) {
+       this.meetingLengthGoal = this.createGoal(
+         this.timeBlockSummaryGoal?.goals?.find(x => x.measure == GoalMeasureEnum.AverageMeetingLength),
+         this.timeBlockSummary.total?.meetingLengthSeconds /
+           this.timeBlockSummary.total?.meetingCount);
+       this.attendeesPerMeetingGoal = this.createGoal(
+         this.timeBlockSummaryGoal?.goals?.find(x => x.measure == GoalMeasureEnum.AttendeesPerMeeting),
+         this.timeBlockSummary.total?.totalMeetingAttendees / this.timeBlockSummary.total?.meetingCount
+       );
+     }
    }
 
   private timeBlockData(): void {
     this.sinceTimeBlockSummariesFacade.timeBlockSummary()
       .pipe(tap(data => this.logger.debug('timeBlockSummary data', data)))
-      .subscribe(timeBlockSummary => this.timeBlockSummary = timeBlockSummary);
+      .subscribe(
+        timeBlockSummary => {
+          this.timeBlockSummary = timeBlockSummary;
+          this.setupGoalEvalation();
+        });
     this.timeBlockSummaryGoalsFacadeService.timeBlockGoalSummary()
       .pipe(tap(data => this.logger.debug('timeBlockSummaryGoal data', data)))
       .subscribe(
-          (data) => {
-            this.timeBlockSummaryGoal = data;
-            console.log('data from state', data); // was natr-historian  this.logger.debug
-            this.meetingLengthGoal = this.createGoal(
-              data?.goals?.find(x => x.measure == GoalMeasureEnum.AverageMeetingLength),
-              this.timeBlockSummary.total?.meetingLengthSeconds /
-                this.timeBlockSummary.total?.meetingCount);
-            this.attendeesPerMeetingGoal = this.createGoal(
-              data?.goals?.find(x => x.measure == GoalMeasureEnum.AttendeesPerMeeting),
-              this.timeBlockSummary.total?.totalMeetingAttendees / this.timeBlockSummary.total?.meetingCount
-            );
-          }
-        );
+        timeBlockSummaryGoal => {
+          this.timeBlockSummaryGoal = timeBlockSummaryGoal;
+          this.setupGoalEvalation();
+          console.log('data from state', timeBlockSummaryGoal); // was natr-historian  this.logger.debug
+        }
+      );
   }
 
 }
