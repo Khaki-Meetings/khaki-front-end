@@ -7,6 +7,7 @@ import {MtgInvBarChartComponent} from './components/mtg-inv-bar-chart/mtg-inv-ba
 import {MeetingsListComponent} from './components/meetings-list/meetings-list.component';
 import {TrailingStatisticsGraphComponent} from './components/twelve-month-trailing-graph/trailing-statistics-graph.component';
 import {TimeBasedStatSummaryComponent} from './components/time-based-stat-summary/time-based-stat-summary.component';
+import {TimeBasedStatComponent} from './components/time-based-stat/time-based-stat.component';
 import {NgxChartsLegendCustomComponent} from './components/ngx-charts-legend-custom/ngx-charts-legend-custom.component';
 import {LegendEntryCustomComponent} from './components/legend-entry-custom/legend-entry-custom.component';
 import {StoreModule} from '@ngrx/store';
@@ -47,6 +48,9 @@ import {MatSortModule} from '@angular/material/sort';
 import { MtgInvPercChartComponent } from './components/mtg-inv-perc-chart/mtg-inv-perc-chart.component';
 import { OrganizersAggregateStatisticsDataSource } from './components/organizers-table/data-source/organizers-aggregate-statistics-data-source';
 import { OrganizersAggregateStatisticsEffects } from './state/effects/organizers-aggregate-statistics-effects';
+import { TimeBlockSummaryGoalEffects } from './state/effects/time-block-summary-goal.effects';
+import { GoalDisplayPipe } from './pipes/goal-display.pipe';
+import { GoalDisplayHoursMinutesPipe } from './pipes/goal-display-hours-minutes.pipe';
 
 @NgModule({
   declarations: [
@@ -57,6 +61,7 @@ import { OrganizersAggregateStatisticsEffects } from './state/effects/organizers
     MeetingsListComponent,
     TrailingStatisticsGraphComponent,
     TimeBasedStatSummaryComponent,
+    TimeBasedStatComponent,
     TimeIntervalFormComponent,
     NgxChartsLegendCustomComponent,
     LegendEntryCustomComponent,
@@ -67,6 +72,8 @@ import { OrganizersAggregateStatisticsEffects } from './state/effects/organizers
     MeetingTypeDetailPipe,
     MeetingStartDatePipe,
     MeetingStartEndTimesPipe,
+    GoalDisplayPipe,
+    GoalDisplayHoursMinutesPipe,
     MtgInvPercChartComponent
   ],
   imports: [
@@ -83,6 +90,7 @@ import { OrganizersAggregateStatisticsEffects } from './state/effects/organizers
     EffectsModule.forFeature(
       [
         TimeBlockSummaryEffects,
+        TimeBlockSummaryGoalEffects,
         OrganizersAggregateStatisticsEffects,
         MeetingsListEffects,
         TrailingStatisticsEffects,

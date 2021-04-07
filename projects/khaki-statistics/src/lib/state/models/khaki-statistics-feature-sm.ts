@@ -18,12 +18,16 @@ import { TimeBlockSummaryAggSm } from './time-block-summary-agg-sm';
 import { DepartmentsStatisticsAggSm } from './departments-statistics-agg-sm';
 import { OrganizersAggregateStatisticsSm } from './organizers-aggregate-statistics-sm';
 import { organizersAggregateStatisticsFeatureKey } from '../reducers/organizers-aggregate-statistics.reducer';
+import { timeBlockSummaryGoalsFeatureKey } from '../reducers/time-block-summary-goal-list.reducer';
+import { TimeBlockSummaryGoalSm } from './time-block-summary-goal-sm';
+import { TimeBlockSummaryGoalListSm } from './time-block-summary-goal-list-sm';
 
 export interface KhakiStatisticsFeatureSm {
   [organizersStatisticsFeatureKey]: OrganizersStatisticsSm;
   [organizersAggregateStatisticsFeatureKey]: OrganizersAggregateStatisticsSm;
   [perDepartmentStatisticsFeatureKey]: DepartmentsStatisticsAggSm;
   [timeBlockSummariesFeatureKey]: TimeBlockSummarySm;
+  [timeBlockSummaryGoalsFeatureKey]: TimeBlockSummaryGoalListSm,
   [trailingStatisticsFeatureKey]: TrailingStatisticsSm;
   [spinnerAttributeKey]: SpinnerSm;
   [organizersTablePageableAttributeKey]: OrganizersTablePageableSm;
