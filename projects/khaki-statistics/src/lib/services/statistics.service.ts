@@ -23,6 +23,8 @@ import {DepartmentsStatisticsAggSm} from '../state/models/departments-statistics
 import {StatisticsScopeSe} from '../state/statistics-filters/statistics-scope-se.enum';
 import {TrailingStatisticsAggSm} from '../state/models/trailing-statistics-agg-sm';
 import { OrganizersAggregateStatisticsSm } from '../state/models/organizers-aggregate-statistics-sm';
+import { TimeBlockSummaryGoalsResponseDto } from './models/time-block-summary-goals-response-dto';
+import { TimeBlockSummaryGoalListSm } from '../state/models/time-block-summary-goal-list-sm';
 
 @Logging
 @Injectable({
@@ -337,6 +339,23 @@ export class StatisticsService {
       );
 
   }
+
+  getTimeBlockSummaryGoals():
+    Observable<TimeBlockSummaryGoalListSm> {
+    return this.httpClient
+      .get(`${this.environment.khakiBff}/goals`)
+      .pipe(
+        tap(summaryData => this.logger.debug('Server response: summary goal', summaryData)),
+        catchError(
+          error => {
+            this.logger.debug('Failed to get time block summary goal', error);
+            return throwError('Failed to get time block summary goal');
+          }
+        ),
+        map(timeBlockSummary => timeBlockSummary as TimeBlockSummaryGoalListSm)
+      );
+
+    }
 
 
 }
