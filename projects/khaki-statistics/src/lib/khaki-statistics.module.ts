@@ -7,6 +7,7 @@ import {MtgInvBarChartComponent} from './components/mtg-inv-bar-chart/mtg-inv-ba
 import {MeetingsListComponent} from './components/meetings-list/meetings-list.component';
 import {TrailingStatisticsGraphComponent} from './components/twelve-month-trailing-graph/trailing-statistics-graph.component';
 import {TimeBasedStatSummaryComponent} from './components/time-based-stat-summary/time-based-stat-summary.component';
+import {TimeBasedStatComponent} from './components/time-based-stat/time-based-stat.component';
 import {NgxChartsLegendCustomComponent} from './components/ngx-charts-legend-custom/ngx-charts-legend-custom.component';
 import {LegendEntryCustomComponent} from './components/legend-entry-custom/legend-entry-custom.component';
 import {StoreModule} from '@ngrx/store';
@@ -60,6 +61,7 @@ import { GoalDisplayHoursMinutesPipe } from './pipes/goal-display-hours-minutes.
     MeetingsListComponent,
     TrailingStatisticsGraphComponent,
     TimeBasedStatSummaryComponent,
+    TimeBasedStatComponent,
     TimeIntervalFormComponent,
     NgxChartsLegendCustomComponent,
     LegendEntryCustomComponent,

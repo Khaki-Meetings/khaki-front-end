@@ -11,11 +11,13 @@ import { TimeBlockSummaryGoalSm } from '../../state/models/time-block-summary-go
 import { GoalMeasureEnum } from '../../services/models/goal-measure-enum';
 import { GoalDisplayPipe } from '../../pipes/goal-display.pipe';
 import { GoalDisplayHoursMinutesPipe } from '../../pipes/goal-display-hours-minutes.pipe';
+import { TimeBasedStatComponent } from '../time-based-stat/time-based-stat.component';
 
 interface GoalData {
   min: number;
   max: number;
   desc: string;
+  met: boolean;
 }
 
 @Logging
@@ -46,6 +48,21 @@ export class TimeBasedStatSummaryComponent implements OnInit {
     this.timeBlockSummaryGoalsFacadeService.timeBlockSummaryGoalLoading().subscribe(loading => this.loading = loading);
   }
 
+  private createGoal(goal : any, value: any): GoalData {
+    var min = goal?.greaterThanOrEqualTo;
+    var max = goal?.lessThanOrEqualTo;
+
+    console.log("Goal evaluation: " + min + " " + value + " " + max + " "
+      + (value >= min && value <= max ? true : false));
+
+    return {
+      min: min,
+      max: max,
+      desc: '',
+      met: value >= min && value <= max ? true : false
+    }
+   }
+
   private timeBlockData(): void {
     this.sinceTimeBlockSummariesFacade.timeBlockSummary()
       .pipe(tap(data => this.logger.debug('timeBlockSummary data', data)))
@@ -56,17 +73,14 @@ export class TimeBasedStatSummaryComponent implements OnInit {
           (data) => {
             this.timeBlockSummaryGoal = data;
             console.log('data from state', data); // was natr-historian  this.logger.debug
-            this.meetingLengthGoal = {
-              min : data?.goals?.find(x => x.measure == GoalMeasureEnum.AverageMeetingLength)?.greaterThanOrEqualTo,
-              max : data?.goals?.find(x => x.measure == GoalMeasureEnum.AverageMeetingLength)?.lessThanOrEqualTo,
-              desc : ''
-            }
-            this.attendeesPerMeetingGoal = {
-              min : data?.goals?.find(x => x.measure == GoalMeasureEnum.AttendeesPerMeeting)?.greaterThanOrEqualTo,
-              max : data?.goals?.find(x => x.measure == GoalMeasureEnum.AttendeesPerMeeting)?.lessThanOrEqualTo,
-              desc: ''
-            }
-            console.log('attendeesPerMeetingGoal', this.attendeesPerMeetingGoal);
+            this.meetingLengthGoal = this.createGoal(
+              data?.goals?.find(x => x.measure == GoalMeasureEnum.AverageMeetingLength),
+              this.timeBlockSummary.total?.meetingLengthSeconds /
+                this.timeBlockSummary.total?.meetingCount);
+            this.attendeesPerMeetingGoal = this.createGoal(
+              data?.goals?.find(x => x.measure == GoalMeasureEnum.AttendeesPerMeeting),
+              this.timeBlockSummary.total?.totalMeetingAttendees / this.timeBlockSummary.total?.meetingCount
+            );
           }
         );
   }
