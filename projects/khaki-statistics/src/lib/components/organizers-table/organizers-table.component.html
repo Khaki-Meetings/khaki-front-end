@@ -26,7 +26,10 @@
         </th>
         <td mat-cell *matCellDef="let element"
             class="table-border row-caption">
-          <img class="organizerAvatar" src="{{element.organizerAvatarUrl}}" />
+          <img class="organizerAvatar" *ngIf="element.organizerAvatarUrl != null"
+            src={{element.organizerAvatarUrl}} />
+          <img class="organizerAvatar" *ngIf="element.organizerAvatarUrl == null"
+            src="/assets/googledefaultsilhouette.png" />
           <span class="organizerName">{{element.organizerFirstName}} {{element.organizerLastName}}</span>
         </td>
       </ng-container>
