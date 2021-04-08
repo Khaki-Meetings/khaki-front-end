@@ -20,6 +20,12 @@ interface GoalData {
   met: boolean;
 }
 
+interface StatData {
+  internal: number;
+  external: number;
+  total: number;
+}
+
 @Logging
 @Component({
   selector: 'lib-time-based-stat-summary',
@@ -34,6 +40,9 @@ export class TimeBasedStatSummaryComponent implements OnInit {
   timeBlockSummaryGoal: TimeBlockSummaryGoalListSm;
   error: ErrorSm;
   loading = false;
+
+  percStaffTimeInMtgs: StatData;
+  avgDailyMeetingTime: StatData;
 
   meetingLengthGoal: GoalData;
   attendeesPerMeetingGoal: GoalData;
@@ -85,6 +94,46 @@ export class TimeBasedStatSummaryComponent implements OnInit {
      }
    }
 
+   private calculateStatData(): void {
+
+     this.percStaffTimeInMtgs = {
+       external: 0, internal: 0, total: 0
+     }
+     this.avgDailyMeetingTime = {
+       external: 0, internal: 0, total: 0
+     }
+
+     if (this.timeBlockSummary?.total?.numWorkdays != null &&
+       this.timeBlockSummary?.total?.numWorkdays != 0 &&
+       this.timeBlockSummary?.total?.numEmployees != null &&
+       this.timeBlockSummary?.total?.numEmployees != 0
+     ) {
+        var divisor = this.timeBlockSummary?.total?.numWorkdays * 8 *
+          this.timeBlockSummary?.total?.numEmployees;
+
+        this.percStaffTimeInMtgs = {
+          external: this.timeBlockSummary?.external?.totalSeconds / 3600 / divisor,
+          internal: this.timeBlockSummary?.internal?.totalSeconds / 3600 / divisor,
+          total: this.timeBlockSummary?.total?.totalSeconds / 3600 / divisor
+        }
+
+        this.avgDailyMeetingTime = {
+          external: this.timeBlockSummary?.external?.totalSeconds
+            / this.timeBlockSummary?.total?.numEmployees
+            / this.timeBlockSummary?.total?.numWorkdays,
+          internal: this.timeBlockSummary?.internal?.totalSeconds
+            / this.timeBlockSummary?.total?.numEmployees
+            / this.timeBlockSummary?.total?.numWorkdays,
+          total: this.timeBlockSummary?.total?.totalSeconds
+            / this.timeBlockSummary?.total?.numEmployees
+            / this.timeBlockSummary?.total?.numWorkdays
+        }
+
+     }
+
+   }
+
+
   private timeBlockData(): void {
     this.sinceTimeBlockSummariesFacade.timeBlockSummary()
       .pipe(tap(data => this.logger.debug('timeBlockSummary data', data)))
@@ -92,6 +141,7 @@ export class TimeBasedStatSummaryComponent implements OnInit {
         timeBlockSummary => {
           this.timeBlockSummary = timeBlockSummary;
           this.setupGoalEvalation();
+          this.calculateStatData();
         });
     this.timeBlockSummaryGoalsFacadeService.timeBlockGoalSummary()
       .pipe(tap(data => this.logger.debug('timeBlockSummaryGoal data', data)))
