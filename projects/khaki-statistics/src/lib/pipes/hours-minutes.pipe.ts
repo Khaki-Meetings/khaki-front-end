@@ -13,6 +13,10 @@ export class HoursMinutesPipe implements PipeTransform {
     // const minutesLabel = 'mins';
     // return hours + ' ' + hoursLabel + ', ' + minutes + ' ' + minutesLabel;
 
+    if (hours > 1000) {
+      return hours.toString();
+    };
+    
     return hours.toString().padStart(2, "0") + ':' + minutes.toString().padStart(2, "0");
 
   }
