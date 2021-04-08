@@ -2,9 +2,21 @@
   <div class="flex-container">
     <div class="khaki-container time-based-stat-summary-with-goal">
       <lib-time-based-stat
+        label="Staff % of Time in Meetings"
+        helpId="staff-hours-in-meetings"
+        helpContent="Staff members' percentage of work time in meetings"
+        totalValue="{{ percStaffTimeInMtgs.total | percent }}"
+        internalValue="{{ percStaffTimeInMtgs.internal | percent }}"
+        externalValue="{{ percStaffTimeInMtgs.external | percent }}"
+        goalMet=""
+        goalText="">
+      </lib-time-based-stat>
+    </div>
+    <div class="khaki-container time-based-stat-summary-with-goal">
+      <lib-time-based-stat
         label="Staff Time in Meetings"
         helpId="staff-hours-in-meetings"
-        helpContent="Staff members' total time in meetings created by staff members"
+        helpContent="Staff members' total time in meetings"
         totalValue="{{timeBlockSummary?.total?.totalSeconds | hoursMinutes}}"
         internalValue="{{timeBlockSummary?.internal?.totalSeconds | hoursMinutes}}"
         externalValue="{{timeBlockSummary?.external?.totalSeconds | hoursMinutes}}"
@@ -29,20 +41,28 @@
   <div class="flex-container">
     <div class="khaki-container time-based-stat-summary-with-goal">
       <lib-time-based-stat
-        label="Employee Daily Meeting Time"
+        label="Number of Employees"
         helpId="num-meetings"
-        helpContent="Average number of hours of meetings per employees in Khaki roster"
-        totalValue=" {{ (timeBlockSummary?.total?.totalSeconds / timeBlockSummary?.total?.numEmployees
-                  / timeBlockSummary?.total?.numWorkdays) || 0 | hoursMinutes }}"
-        internalValue=" {{ (timeBlockSummary?.internal?.totalSeconds / timeBlockSummary?.internal?.numEmployees
-                  / timeBlockSummary?.internal?.numWorkdays) || 0 | hoursMinutes }}"
-        externalValue="{{ (timeBlockSummary?.external?.totalSeconds / timeBlockSummary?.external?.numEmployees
-                  / timeBlockSummary?.external?.numWorkdays) || 0 | hoursMinutes }}"
+        helpContent="Number of employees in Khaki roster"
+        totalValue="{{timeBlockSummary?.total?.numEmployees}}"
+        internalValue=""
+        externalValue=""
         goalMet=""
         goalText="">
       </lib-time-based-stat>
     </div>
-
+    <div class="khaki-container time-based-stat-summary-with-goal">
+      <lib-time-based-stat
+        label="Employee Daily Meeting Time"
+        helpId="num-meetings"
+        helpContent="Average number of hours of meetings per employees in Khaki roster"
+        totalValue=" {{ avgDailyMeetingTime.total | hoursMinutes }}"
+        internalValue=" {{ avgDailyMeetingTime.internal | hoursMinutes }}"
+        externalValue="{{ avgDailyMeetingTime.external | hoursMinutes }}"
+        goalMet=""
+        goalText="">
+      </lib-time-based-stat>
+    </div>
     <div class="khaki-container time-based-stat-summary-with-goal">
       <lib-time-based-stat
         label="Meetings per Day per Employee"
@@ -80,21 +100,6 @@
     </div>
     <div class="khaki-container time-based-stat-summary-with-goal">
       <lib-time-based-stat
-        label="Average # of Attendees"
-        helpId="num-meetings"
-        helpContent="Average number of attendees per meeting"
-        totalValue="{{ timeBlockSummary?.total?.totalMeetingAttendees / timeBlockSummary?.total?.meetingCount | number:'1.0-1'}}"
-        internalValue="{{ timeBlockSummary?.internal?.totalMeetingAttendees / timeBlockSummary?.internal?.meetingCount | number:'1.0-1'}}"
-        externalValue="{{ timeBlockSummary?.external?.totalMeetingAttendees / timeBlockSummary?.external?.meetingCount | number:'1.0-1'}}"
-        goalMet="{{ attendeesPerMeetingGoal.met }}"
-        goalText="{{ attendeesPerMeetingGoal.desc | goalDisplay: attendeesPerMeetingGoal.min : attendeesPerMeetingGoal.max }} attendees">
-      </lib-time-based-stat>
-    </div>
-  </div>
-
-  <div class="flex-container">
-    <div class="khaki-container time-based-stat-summary-with-goal">
-      <lib-time-based-stat
         label="Average Staff Time per Meeting"
         helpId="avg-staff-hours-in-meetings"
         helpContent="Average time per staff member in meetings created by staff members"
@@ -105,17 +110,16 @@
         goalText="">
       </lib-time-based-stat>
     </div>
-
     <div class="khaki-container time-based-stat-summary-with-goal">
       <lib-time-based-stat
-        label="Number of Employees"
+        label="Average # of Attendees"
         helpId="num-meetings"
-        helpContent="Number of employees in Khaki roster"
-        totalValue="{{timeBlockSummary?.total?.numEmployees}}"
-        internalValue=""
-        externalValue=""
-        goalMet=""
-        goalText="">
+        helpContent="Average number of attendees per meeting"
+        totalValue="{{ timeBlockSummary?.total?.totalMeetingAttendees / timeBlockSummary?.total?.meetingCount | number:'1.0-1'}}"
+        internalValue="{{ timeBlockSummary?.internal?.totalMeetingAttendees / timeBlockSummary?.internal?.meetingCount | number:'1.0-1'}}"
+        externalValue="{{ timeBlockSummary?.external?.totalMeetingAttendees / timeBlockSummary?.external?.meetingCount | number:'1.0-1'}}"
+        goalMet="{{ attendeesPerMeetingGoal.met }}"
+        goalText="{{ attendeesPerMeetingGoal.desc | goalDisplay: attendeesPerMeetingGoal.min : attendeesPerMeetingGoal.max }} attendees">
       </lib-time-based-stat>
     </div>
   </div>
