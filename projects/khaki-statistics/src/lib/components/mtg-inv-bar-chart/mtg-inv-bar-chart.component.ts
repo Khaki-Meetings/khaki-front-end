@@ -115,7 +115,7 @@ export class MtgInvBarChartComponent implements OnInit {
 
     THIS WILL NEED TO BE UPDATED FOR THE NEW SERVICE W/O INT/EXT
     IF WE EVER DECIDE WE NEED IT AGAIN
-    
+
     this.graphData = this.perDepartmentStatistics.departmentsStatistics.map(
       el => {
         return {

@@ -92,7 +92,12 @@ export class MtgInvPercChartComponent implements OnInit {
           );
 
           this.single = this.chartData;
-          this.view = [chartWidth, this.single.length * 35];
+
+          var height = this.single.length * 35;
+          if (height < 100) {
+            height = 100;
+          }
+          this.view = [chartWidth, height];
           console.log('chart data', this.chartData); // was natr-historian  this.logger.debug
         });
 
