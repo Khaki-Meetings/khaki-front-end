@@ -19,8 +19,10 @@
     <div [ngClass]="loading ? 'loadingComponent' : ''">
       <div class="contentInside">
         <div class="valueRow">
-          <div class="totalValue value">
-            {{ totalValue }}
+          <div class="totalValueWrapper">
+            <div class="value totalValue">
+              {{ totalValue }}
+            </div>
           </div>
           <div class="internalExternalWrapper contentLabelCell"
             [ngClass]="(internalValue == '' && externalValue == '') ? 'hideElement' : ''">
@@ -28,7 +30,7 @@
               <div class="contentLabelCell">
                 Internal
               </div>
-              <div class="value internalValue">
+              <div class="internalExternalValue internalValue">
                 {{ internalValue }}
               </div>
             </div>
@@ -36,7 +38,7 @@
               <div class="contentLabelCell">
                 External
               </div>
-              <div class="value externalValue">
+              <div class="internalExternalValue externalValue">
                 {{ externalValue }}
               </div>
             </div>

@@ -19,11 +19,8 @@
   }
 
   .valueRow {
-    display: table-row;
-  }
-
-  .value {
-    font-size: x-large;
+    display: flex;
+    align-items: center;
   }
 
   .label {
@@ -51,14 +48,26 @@
     padding-left: 10px;
   }
 
+  .internalExternalValue {
+    font-size: x-large;
+    text-align: center;
+    vertical-align: middle;
+  }
+
   .internalExternalWrapper {
     padding-left: 10px;
+    display: table-cell;
+    flex: 1;
+  }
+
+  .totalValueWrapper {
+    flex: 1;
+    vertical-align: middle;
   }
 
   .totalValue {
-    display: table-cell;
     font-size: xx-large;
-    vertical-align: middle;
+    text-align: center;
   }
 
   .contentInside {
@@ -72,7 +81,6 @@
   }
 
   .contentLabelCell {
-    display: table-cell;
     line-height: 25px;
     vertical-align: middle;
   }
