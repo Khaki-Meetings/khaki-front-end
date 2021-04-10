@@ -1,339 +1,127 @@
 <div>
   <div class="flex-container">
-
-    <div class="khaki-container time-based-stat-summary">
-      <div class="header">
-        <div style="float:left;">
-          <div class="label">Number of Employees</div>
-        </div>
-        <div style="float:right;">
-          <div id="num-meetings-help" class="help-wrapper">
-            <mat-icon class="non-profile-icons">help_outline</mat-icon>
-            <div id="num-meetings-help-content" class="help-content">
-              Number of employees in Khaki roster
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="content">
-        <div class="mat-spinner-wrapper center" *ngIf="loading">
-          <lib-khaki-spinner></lib-khaki-spinner>
-        </div>
-        <div class="value" [ngClass]="loading? 'loadingComponent' : ''">
-          <div class="contentInside">
-            <div class="contentLabelRow">
-              <div class="contentLabelCellHide">
-                Total
-              </div>
-            </div>
-            <div class="valueRow">
-              <div class="totalValue">
-                {{timeBlockSummary?.internal?.numEmployees}}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="khaki-container time-based-stat-summary-with-goal">
+      <lib-time-based-stat
+        label="Staff % of Time in Meetings"
+        helpId="staff-hours-in-meetings"
+        helpContent="Staff members' percentage of work time in meetings"
+        totalValue="{{ percStaffTimeInMtgs.total | percent }}"
+        internalValue="{{ percStaffTimeInMtgs.internal | percent }}"
+        externalValue="{{ percStaffTimeInMtgs.external | percent }}"
+        goalMet=""
+        goalText="">
+      </lib-time-based-stat>
     </div>
+    <div class="khaki-container time-based-stat-summary-with-goal">
+      <lib-time-based-stat
+        label="Staff Time in Meetings"
+        helpId="staff-hours-in-meetings"
+        helpContent="Staff members' total time in meetings"
+        totalValue="{{timeBlockSummary?.total?.totalSeconds | hoursMinutes}}"
+        internalValue="{{timeBlockSummary?.internal?.totalSeconds | hoursMinutes}}"
+        externalValue="{{timeBlockSummary?.external?.totalSeconds | hoursMinutes}}"
+        goalMet=""
+        goalText="">
+      </lib-time-based-stat>
+    </div>
+    <div class="khaki-container time-based-stat-summary-with-goal">
+      <lib-time-based-stat
+        label="Number of Meetings"
+        helpId="num-meetings"
+        helpContent="Number of meetings created by staff members"
+        totalValue="{{ timeBlockSummary?.total?.meetingCount }}"
+        internalValue="{{ timeBlockSummary?.internal?.meetingCount }}"
+        externalValue="{{ timeBlockSummary?.external?.meetingCount }}"
+        goalMet=""
+        goalText="">
+      </lib-time-based-stat>
+    </div>
+  </div>
 
-    <div class="khaki-container time-based-stat-summary">
-      <div class="header">
-        <div style="float:left;">
-          <div class="label">Meetings per Day per Employee</div>
-        </div>
-        <div style="float:right;">
-          <div id="num-meetings-help" class="help-wrapper">
-            <mat-icon class="non-profile-icons">help_outline</mat-icon>
-            <div id="num-meetings-help-content" class="help-content">
-              Average number of meetings per employees in Khaki roster
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="content">
-        <div class="mat-spinner-wrapper center" *ngIf="loading">
-          <lib-khaki-spinner></lib-khaki-spinner>
-        </div>
-        <div [ngClass]="loading? 'loadingComponent' : ''">
-          <div class="contentInside">
-            <div class="contentLabelRow">
-              <div class="contentLabelCell">
-                Internal
-              </div>
-              <div class="contentLabelCell">
-                External
-              </div>
-            </div>
-            <div class="valueRow">
-              <div class="internalValue">
-                {{ (timeBlockSummary?.internal?.totalMeetingInternalAttendees
+  <div class="flex-container">
+    <div class="khaki-container time-based-stat-summary-with-goal">
+      <lib-time-based-stat
+        label="Number of Employees"
+        helpId="num-meetings"
+        helpContent="Number of employees in Khaki roster"
+        totalValue="{{timeBlockSummary?.total?.numEmployees}}"
+        internalValue=""
+        externalValue=""
+        goalMet=""
+        goalText="">
+      </lib-time-based-stat>
+    </div>
+    <div class="khaki-container time-based-stat-summary-with-goal">
+      <lib-time-based-stat
+        label="Employee Daily Meeting Time"
+        helpId="num-meetings"
+        helpContent="Average number of hours of meetings per employees in Khaki roster"
+        totalValue=" {{ avgDailyMeetingTime.total | hoursMinutes }}"
+        internalValue=" {{ avgDailyMeetingTime.internal | hoursMinutes }}"
+        externalValue="{{ avgDailyMeetingTime.external | hoursMinutes }}"
+        goalMet=""
+        goalText="">
+      </lib-time-based-stat>
+    </div>
+    <div class="khaki-container time-based-stat-summary-with-goal">
+      <lib-time-based-stat
+        label="Meetings per Day per Employee"
+        helpId="num-meetings"
+        helpContent="Average number of meetings per employees in Khaki roster"
+        totalValue="{{ (timeBlockSummary?.total?.totalMeetingInternalAttendees
+                  / timeBlockSummary?.total?.numWorkdays
+                  / timeBlockSummary?.total?.numEmployees) || 0 | number:'1.0-1' }}"
+        internalValue="{{ (timeBlockSummary?.internal?.totalMeetingInternalAttendees
                   / timeBlockSummary?.internal?.numWorkdays
-                  / timeBlockSummary?.internal?.numEmployees) || 0 | number:'1.0-1' }}
-              </div>
-              <div class="externalValue">
-                {{ (timeBlockSummary?.external?.totalMeetingInternalAttendees
+                  / timeBlockSummary?.internal?.numEmployees) || 0 | number:'1.0-1' }}"
+        externalValue="{{ (timeBlockSummary?.external?.totalMeetingInternalAttendees
                   / timeBlockSummary?.external?.numWorkdays
-                  / timeBlockSummary?.external?.numEmployees) || 0 | number:'1.0-1' }}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="khaki-container time-based-stat-summary">
-      <div class="header">
-        <div style="float:left;">
-          <div class="label">Employee Daily Meeting Time</div>
-        </div>
-        <div style="float:right;">
-          <div id="num-meetings-help" class="help-wrapper">
-            <mat-icon class="non-profile-icons">help_outline</mat-icon>
-            <div id="num-meetings-help-content" class="help-content">
-              Average number of hours of meetings per employees in Khaki roster
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="content">
-        <div class="mat-spinner-wrapper center" *ngIf="loading">
-          <lib-khaki-spinner></lib-khaki-spinner>
-        </div>
-        <div class="value" [ngClass]="loading? 'loadingComponent' : ''">
-          <div class="contentInside">
-            <div class="contentLabelRow">
-              <div class="contentLabelCell">
-                Internal
-              </div>
-              <div class="contentLabelCell">
-                External
-              </div>
-            </div>
-            <div class="valueRow">
-              <div class="internalValue">
-                {{ (timeBlockSummary?.internal?.totalSeconds / timeBlockSummary?.internal?.numEmployees
-                  / timeBlockSummary?.internal?.numWorkdays) || 0 | hoursMinutes
-                }}
-              </div>
-              <div class="externalValue">
-                {{ (timeBlockSummary?.external?.totalSeconds / timeBlockSummary?.external?.numEmployees
-                  / timeBlockSummary?.external?.numWorkdays) || 0 | hoursMinutes
-                }}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+                  / timeBlockSummary?.external?.numEmployees) || 0 | number:'1.0-1' }}"
+        goalMet=""
+        goalText="">
+      </lib-time-based-stat>
     </div>
 
   </div>
+
+
   <div class="flex-container">
-
-    <div class="khaki-container time-based-stat-summary">
-      <div class="header">
-        <div style="float:left;">
-          <div class="label">Staff Time in Meetings</div>
-        </div>
-        <div style="float:right;">
-          <div id="staff-hours-in-meetings-help" class="help-wrapper">
-            <mat-icon class="non-profile-icons">help_outline</mat-icon>
-            <div id="staff-hours-in-meetings-help-content" class="help-content">
-              Staff members' total time in meetings created by staff members
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="content">
-        <div class="mat-spinner-wrapper center" *ngIf="loading">
-          <lib-khaki-spinner></lib-khaki-spinner>
-        </div>
-        <div class="value" [ngClass]="loading? 'loadingComponent' : ''">
-          <div class="contentInside">
-            <div class="contentLabelRow">
-              <div class="contentLabelCell">
-                Internal
-              </div>
-              <div class="contentLabelCell">
-                External
-              </div>
-            </div>
-            <div class="valueRow">
-              <div class="internalValue">
-                {{timeBlockSummary?.internal?.totalSeconds | hoursMinutes}}
-              </div>
-              <div class="externalValue">
-                {{timeBlockSummary?.external?.totalSeconds | hoursMinutes}}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="khaki-container time-based-stat-summary-with-goal">
+      <lib-time-based-stat
+        label="Average Meeting Length"
+        helpId="num-meetings"
+        helpContent="Average time length of meetings"
+        totalValue="{{ (timeBlockSummary?.total?.meetingLengthSeconds / timeBlockSummary?.total?.meetingCount) | hoursMinutes }}"
+        internalValue="{{ (timeBlockSummary?.internal?.meetingLengthSeconds / timeBlockSummary?.internal?.meetingCount) | hoursMinutes }}"
+        externalValue="{{ (timeBlockSummary?.external?.meetingLengthSeconds / timeBlockSummary?.external?.meetingCount) | hoursMinutes }}"
+        goalMet="{{ meetingLengthGoal.met }}"
+        goalText="{{ meetingLengthGoal.desc | goalDisplayHoursMinutes: meetingLengthGoal.min : meetingLengthGoal.max }}">
+      </lib-time-based-stat>
     </div>
-    <div class="khaki-container time-based-stat-summary">
-      <div class="header">
-        <div style="float:left;">
-          <div class="label">Average Staff Time per Meeting</div>
-        </div>
-        <div style="float:right;">
-          <div id="avg-staff-hours-in-meetings-help" class="help-wrapper">
-            <mat-icon class="non-profile-icons">help_outline</mat-icon>
-            <div id="avg-staff-hours-in-meetings-help-content" class="help-content">
-              Average time per staff member in meetings created by staff members
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="content">
-        <div class="mat-spinner-wrapper center" *ngIf="loading">
-          <lib-khaki-spinner></lib-khaki-spinner>
-        </div>
-        <div class="value" [ngClass]="loading? 'loadingComponent' : ''">
-          <div class="contentInside">
-            <div class="contentLabelRow">
-              <div class="contentLabelCell">
-                Internal
-              </div>
-              <div class="contentLabelCell">
-                External
-              </div>
-            </div>
-            <div class="valueRow">
-              <div class="internalValue">
-                {{timeBlockSummary?.internal?.averageStaffSeconds | hoursMinutes}}
-              </div>
-              <div class="externalValue">
-                {{timeBlockSummary?.external?.averageStaffSeconds | hoursMinutes}}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="khaki-container time-based-stat-summary-with-goal">
+      <lib-time-based-stat
+        label="Average Staff Time per Meeting"
+        helpId="avg-staff-hours-in-meetings"
+        helpContent="Average time per staff member in meetings created by staff members"
+        totalValue="{{ timeBlockSummary?.total?.averageStaffSeconds | hoursMinutes }}"
+        internalValue="{{ timeBlockSummary?.internal?.averageStaffSeconds | hoursMinutes }}"
+        externalValue="{{ timeBlockSummary?.external?.averageStaffSeconds | hoursMinutes }}"
+        goalMet=""
+        goalText="">
+      </lib-time-based-stat>
     </div>
-    <div class="khaki-container time-based-stat-summary">
-      <div class="header">
-        <div style="float:left;">
-          <div class="label">Number of Meetings</div>
-        </div>
-        <div style="float:right;">
-          <div id="num-meetings-help" class="help-wrapper">
-            <mat-icon class="non-profile-icons">help_outline</mat-icon>
-            <div id="num-meetings-help-content" class="help-content">
-              Number of meetings created by staff members
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="content">
-        <div class="mat-spinner-wrapper center" *ngIf="loading">
-          <lib-khaki-spinner></lib-khaki-spinner>
-        </div>
-        <div class="value" [ngClass]="loading? 'loadingComponent' : ''">
-          <div class="contentInside">
-            <div class="contentLabelRow">
-              <div class="contentLabelCell">
-                Internal
-              </div>
-              <div class="contentLabelCell">
-                External
-              </div>
-            </div>
-            <div class="valueRow">
-              <div class="internalValue">
-                {{timeBlockSummary?.internal?.meetingCount}}
-              </div>
-              <div class="externalValue">
-                {{timeBlockSummary?.external?.meetingCount}}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="khaki-container time-based-stat-summary-with-goal">
+      <lib-time-based-stat
+        label="Average # of Attendees"
+        helpId="num-meetings"
+        helpContent="Average number of attendees per meeting"
+        totalValue="{{ timeBlockSummary?.total?.totalMeetingAttendees / timeBlockSummary?.total?.meetingCount | number:'1.0-1'}}"
+        internalValue="{{ timeBlockSummary?.internal?.totalMeetingAttendees / timeBlockSummary?.internal?.meetingCount | number:'1.0-1'}}"
+        externalValue="{{ timeBlockSummary?.external?.totalMeetingAttendees / timeBlockSummary?.external?.meetingCount | number:'1.0-1'}}"
+        goalMet="{{ attendeesPerMeetingGoal.met }}"
+        goalText="{{ attendeesPerMeetingGoal.desc | goalDisplay: attendeesPerMeetingGoal.min : attendeesPerMeetingGoal.max }} attendees">
+      </lib-time-based-stat>
     </div>
-
   </div>
-  <div class="flex-container">
 
-    <div class="khaki-container time-based-stat-summary">
-      <div class="header">
-        <div style="float:left;">
-          <div class="label">Average Meeting Length</div>
-        </div>
-        <div style="float:right;">
-          <div id="num-meetings-help" class="help-wrapper">
-            <mat-icon class="non-profile-icons">help_outline</mat-icon>
-            <div id="num-meetings-help-content" class="help-content">
-              Average length of meetings
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="content">
-        <div class="mat-spinner-wrapper center" *ngIf="loading">
-          <lib-khaki-spinner></lib-khaki-spinner>
-        </div>
-        <div class="value" [ngClass]="loading? 'loadingComponent' : ''">
-          <div class="contentInside">
-            <div class="contentLabelRow">
-              <div class="contentLabelCell">
-                Internal
-              </div>
-              <div class="contentLabelCell">
-                External
-              </div>
-            </div>
-            <div class="valueRow">
-              <div class="internalValue">
-                {{ (timeBlockSummary?.internal?.meetingLengthSeconds / timeBlockSummary?.internal?.meetingCount) | hoursMinutes }}
-              </div>
-              <div class="externalValue">
-                {{ (timeBlockSummary?.external?.meetingLengthSeconds / timeBlockSummary?.external?.meetingCount) | hoursMinutes }}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="khaki-container time-based-stat-summary">
-      <div class="header">
-        <div style="float:left;">
-          <div class="label">Average # of Attendees</div>
-        </div>
-        <div style="float:right;">
-          <div id="num-meetings-help" class="help-wrapper">
-            <mat-icon class="non-profile-icons">help_outline</mat-icon>
-            <div id="num-meetings-help-content" class="help-content">
-              Average number of attendees in meetings
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="content">
-        <div class="mat-spinner-wrapper center" *ngIf="loading">
-          <lib-khaki-spinner></lib-khaki-spinner>
-        </div>
-        <div class="value" [ngClass]="loading? 'loadingComponent' : ''">
-          <div class="contentInside">
-            <div class="contentLabelRow">
-              <div class="contentLabelCell">
-                Internal
-              </div>
-              <div class="contentLabelCell">
-                External
-              </div>
-            </div>
-            <div class="valueRow">
-              <div class="internalValue">
-                {{ timeBlockSummary?.internal?.totalMeetingAttendees / timeBlockSummary?.internal?.meetingCount | number:'1.0-1'}}
-              </div>
-              <div class="externalValue">
-                {{ timeBlockSummary?.external?.totalMeetingAttendees / timeBlockSummary?.external?.meetingCount | number:'1.0-1'}}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
 </div>

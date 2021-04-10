@@ -1,0 +1,68 @@
+<div class="time-based-stat-summary-with-goal">
+  <div class="header">
+    <div style="float:left;">
+      <div class="label">{{ label }}</div>
+    </div>
+    <div style="float:right;">
+      <div id="help" class="help-wrapper">
+        <mat-icon class="non-profile-icons">help_outline</mat-icon>
+        <div id="help-content" class="help-content">
+          {{ helpContent }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="content">
+    <div class="mat-spinner-wrapper center" *ngIf="loading">
+      <lib-khaki-spinner></lib-khaki-spinner>
+    </div>
+    <div [ngClass]="loading ? 'loadingComponent' : ''">
+      <div class="contentInside">
+        <div class="valueRow">
+          <div class="totalValueWrapper">
+            <div class="value totalValue">
+              {{ totalValue }}
+            </div>
+          </div>
+          <div class="internalExternalWrapper contentLabelCell"
+            [ngClass]="(internalValue == '' && externalValue == '') ? 'hideElement' : ''">
+            <div class="contentLabelRow">
+              <div class="contentLabelCell">
+                Internal
+              </div>
+              <div class="internalExternalValue internalValue">
+                {{ internalValue }}
+              </div>
+            </div>
+            <div class="contentLabelRow">
+              <div class="contentLabelCell">
+                External
+              </div>
+              <div class="internalExternalValue externalValue">
+                {{ externalValue }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="goalRowWrapper">
+    <div class="goalRow">
+       <div class="goalContent" [ngClass]="(goalText == '' && goalMet == '') ? 'hideElement' : ''">
+         <div class="goalStatusIcon"
+              [ngClass]="goalMet == 'true' ? 'goalMet' : 'goalMissed'">
+            <div *ngIf="goalMet == 'true'">
+              <mat-icon aria-hidden="false" aria-label="Goat Met">check</mat-icon>
+            </div>
+            <div *ngIf="goalMet == 'false'">
+              <mat-icon aria-hidden="false" aria-label="Goat Missed">priority_high</mat-icon>
+            </div>
+         </div>
+         <div class="goalText">
+           Goal: {{ goalText }}
+         </div>
+      </div>
+    </div>
+  </div>
+</div>

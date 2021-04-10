@@ -1,0 +1,133 @@
+@media screen and (max-width: 950px) {
+  .flex-container { flex-wrap: wrap;  }
+  .time-based-stat-summary {
+    flex-basis: 40%;
+    margin-bottom: 10px;
+  }
+}
+
+.time-based-stat-summary-with-goal {
+  display: flex;
+  flex-direction: column;
+  padding: 0px;
+  margin-left: 20px;
+
+  .header {
+    display: inline-block;
+    padding: 15px 25px 0;
+    justify-content: flex-start;
+  }
+
+  .valueRow {
+    display: flex;
+    align-items: center;
+  }
+
+  .label {
+    font-size: small;
+    white-space: pre;
+    color: #4A5568;
+    font-weight: bold;
+  }
+
+  .content {
+    clear: both;
+    flex-grow: 1;
+    padding: 0px 25px 15px;
+  }
+
+  .externalValue {
+    display: table-cell;
+    color: #EA8C00;
+    padding-left: 10px;
+  }
+
+  .internalValue {
+    display: table-cell;
+    color: #3182CE;
+    padding-left: 10px;
+  }
+
+  .internalExternalValue {
+    font-size: x-large;
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  .internalExternalWrapper {
+    padding-left: 10px;
+    display: table-cell;
+    flex: 1;
+  }
+
+  .totalValueWrapper {
+    flex: 1;
+    vertical-align: middle;
+  }
+
+  .totalValue {
+    font-size: xx-large;
+    text-align: center;
+  }
+
+  .contentInside {
+    display: table;
+    width: 90%;
+    margin-top: 10px;
+  }
+
+  .contentLabelRow {
+    display: table-row;
+  }
+
+  .contentLabelCell {
+    line-height: 25px;
+    vertical-align: middle;
+  }
+
+  .contentLabelCellHide {
+    display: table-cell;
+    visibility: hidden;
+  }
+
+  .goalRowWrapper {
+    border-radius: 0 0 8px 8px;
+    padding: 5px;
+  }
+
+  .goalContent {
+    padding: 0px 20px;
+  }
+
+  .goalMet {
+    color: #078400;
+  }
+
+  .goalMissed {
+    color: #FF0000;
+  }
+
+  .goalStatusIcon {
+    float: left;
+    mat-icon {
+      font-size: 20px;
+    }
+  }
+
+  .goalText {
+    float: left;
+    padding-left: 5px;
+  }
+
+  .hideElement {
+    visibility: hidden;
+  }
+}
+
+.time-based-stat-summary-with-goal:first-child {
+  margin-left: 0px;
+}
+
+#help:hover #help-content {
+  visibility: visible;
+}
