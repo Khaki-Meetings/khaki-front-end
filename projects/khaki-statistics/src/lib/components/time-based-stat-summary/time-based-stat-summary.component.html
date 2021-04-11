@@ -8,8 +8,8 @@
         totalValue="{{ percStaffTimeInMtgs.total | percent }}"
         internalValue="{{ percStaffTimeInMtgs.internal | percent }}"
         externalValue="{{ percStaffTimeInMtgs.external | percent }}"
-        goalMet=""
-        goalText="">
+        goalMet="{{ staffTimeInMeetingsGoal.met }}"
+        goalText="{{ staffTimeInMeetingsGoal.desc | goalDisplayPercent: staffTimeInMeetingsGoal.min : staffTimeInMeetingsGoal.max }}">>
       </lib-time-based-stat>
     </div>
     <div class="khaki-container time-based-stat-summary-with-goal">
