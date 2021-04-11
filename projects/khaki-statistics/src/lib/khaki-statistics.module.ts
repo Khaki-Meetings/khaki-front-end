@@ -42,7 +42,6 @@ import {MeetingTypeDetailPipe} from './pipes/meeting-type-detail.pipe';
 import {MeetingStartDatePipe} from './pipes/meeting-start-date.pipe';
 import {MeetingStartEndTimesPipe} from './pipes/meeting-start-end-times.pipe';
 import {KhakiSpinnerComponent} from './components/khaki-spinner/khaki-spinner.component';
-import {OrganizersStatisticsDataSource} from './components/organizers-table/data-source/organizers-statistics-data-source';
 import {MeetingsListDataSource} from './components/meetings-list/data-source/meetings-list-data-source';
 import {MatSortModule} from '@angular/material/sort';
 import { MtgInvPercChartComponent } from './components/mtg-inv-perc-chart/mtg-inv-perc-chart.component';
@@ -51,6 +50,7 @@ import { OrganizersAggregateStatisticsEffects } from './state/effects/organizers
 import { TimeBlockSummaryGoalEffects } from './state/effects/time-block-summary-goal.effects';
 import { GoalDisplayPipe } from './pipes/goal-display.pipe';
 import { GoalDisplayHoursMinutesPipe } from './pipes/goal-display-hours-minutes.pipe';
+import { GoalDisplayPercentPipe } from './pipes/goal-display-percent.pipe';
 
 @NgModule({
   declarations: [
@@ -74,6 +74,7 @@ import { GoalDisplayHoursMinutesPipe } from './pipes/goal-display-hours-minutes.
     MeetingStartEndTimesPipe,
     GoalDisplayPipe,
     GoalDisplayHoursMinutesPipe,
+    GoalDisplayPercentPipe,
     MtgInvPercChartComponent
   ],
   imports: [
