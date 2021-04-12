@@ -89,7 +89,7 @@ export class TimeBasedStatSummaryComponent implements OnInit {
        );
        this.staffTimeInMeetingsGoal = this.createGoal(
          this.timeBlockSummaryGoal?.goals?.find(x => x.measure == GoalMeasureEnum.StaffTimeInMeetings),
-         this.percStaffTimeInMtgs.total
+         this.percStaffTimeInMtgs.total * 100
        );
      }
    }
