@@ -1,17 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {TimeBlockSummariesFacadeService} from '../../state/facades/time-block-summaries-facade.service';
-import {TimeBlockSummarySm} from '../../state/models/time-block-summary-sm';
 import {ErrorSm} from '../../state/models/error-sm';
 import {HistorianService, Logging} from '@natr/historian';
 import {tap} from 'rxjs/operators';
 import { TimeBlockSummaryAggSm } from '../../state/models/time-block-summary-agg-sm';
 import { TimeBlockSummaryGoalsFacadeService } from '../../state/facades/time-block-summary-goals-facade.service';
 import { TimeBlockSummaryGoalListSm } from '../../state/models/time-block-summary-goal-list-sm';
-import { TimeBlockSummaryGoalSm } from '../../state/models/time-block-summary-goal-sm';
 import { GoalMeasureEnum } from '../../services/models/goal-measure-enum';
-import { GoalDisplayPipe } from '../../pipes/goal-display.pipe';
-import { GoalDisplayHoursMinutesPipe } from '../../pipes/goal-display-hours-minutes.pipe';
-import { TimeBasedStatComponent } from '../time-based-stat/time-based-stat.component';
 
 interface GoalData {
   min: number;
@@ -46,6 +41,7 @@ export class TimeBasedStatSummaryComponent implements OnInit {
 
   meetingLengthGoal: GoalData;
   attendeesPerMeetingGoal: GoalData;
+  staffTimeInMeetingsGoal: GoalData;
 
   constructor(private sinceTimeBlockSummariesFacade: TimeBlockSummariesFacadeService,
     private timeBlockSummaryGoalsFacadeService: TimeBlockSummaryGoalsFacadeService) {
@@ -90,6 +86,10 @@ export class TimeBasedStatSummaryComponent implements OnInit {
        this.attendeesPerMeetingGoal = this.createGoal(
          this.timeBlockSummaryGoal?.goals?.find(x => x.measure == GoalMeasureEnum.AttendeesPerMeeting),
          this.timeBlockSummary.total?.totalMeetingAttendees / this.timeBlockSummary.total?.meetingCount
+       );
+       this.staffTimeInMeetingsGoal = this.createGoal(
+         this.timeBlockSummaryGoal?.goals?.find(x => x.measure == GoalMeasureEnum.StaffTimeInMeetings),
+         this.percStaffTimeInMtgs.total
        );
      }
    }
@@ -140,8 +140,8 @@ export class TimeBasedStatSummaryComponent implements OnInit {
       .subscribe(
         timeBlockSummary => {
           this.timeBlockSummary = timeBlockSummary;
-          this.setupGoalEvalation();
           this.calculateStatData();
+          this.setupGoalEvalation();
         });
     this.timeBlockSummaryGoalsFacadeService.timeBlockGoalSummary()
       .pipe(tap(data => this.logger.debug('timeBlockSummaryGoal data', data)))

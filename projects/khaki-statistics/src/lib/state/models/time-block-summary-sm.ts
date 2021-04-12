@@ -16,4 +16,5 @@ export interface TimeBlockSummarySm extends BaseStatisticsStateSm {
   totalMeetingAttendees?: number;
   totalMeetingInternalAttendees?: number;
   meetingLengthSeconds?: number;
+  numEmployeesOverTimeThreshold?: number;
 }

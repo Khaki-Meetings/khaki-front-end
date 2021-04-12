@@ -264,7 +264,8 @@ export class StatisticsService {
                   x[1].totalMeetingAttendees,
                 averageStaffSeconds : (x[0].meetingCount + x[1].meetingCount) > 0 ?
                   (x[0].totalSeconds + x[1].totalSeconds) /
-                    (x[0].meetingCount + x[1].meetingCount) : 0
+                    (x[0].meetingCount + x[1].meetingCount) : 0,
+                numEmployeesOverTimeThreshold: x[0].numEmployeesOverTimeThreshold
               }
             };
             return timeBlockSummaryAggSm;
