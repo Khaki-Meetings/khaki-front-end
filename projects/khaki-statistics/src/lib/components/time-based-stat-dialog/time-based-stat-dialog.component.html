@@ -1,6 +1,12 @@
 <h1 mat-dialog-title>{{ data.title }}</h1>
 <div mat-dialog-content>
-  <p>Goal description here</p>
+  <div *ngIf="data.helpContent">
+    <span class="mat-dialog-section-title">Description</span>
+    <p class="mat-dialog-section-content">{{ data.helpContent }}</p>
+  </div>
+  <div *ngIf="data.displayNumberInput || data.displayTimeInput">
+    <span class="mat-dialog-section-title">Set Goal</span>
+  </div>
   <div class="inputWrapper" *ngIf="data.displayNumberInput">
     <div>
       <mat-form-field class="inputNumberWrapper">
@@ -27,7 +33,10 @@
     </div>
   </div>
 </div>
-<div mat-dialog-actions>
+<div mat-dialog-actions *ngIf="!data.displayNumberInput && !data.displayTimeInput">
+  <button mat-button (click)="onNoClick()">Close</button>
+</div>
+<div mat-dialog-actions *ngIf="data.displayNumberInput || data.displayTimeInput">
   <button mat-button (click)="onNoClick()">Cancel</button>
   <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Save</button>
 </div>
