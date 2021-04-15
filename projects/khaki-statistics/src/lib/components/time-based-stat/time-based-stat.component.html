@@ -48,7 +48,7 @@
     </div>
   </div>
   <div class="goalRowWrapper">
-    <div class="goalRow">
+    <div class="goalRow" (click)="displayGoalPopup()">
        <div class="goalContent" [ngClass]="(goalText == '' && goalMet == '') ? 'hideElement' : ''">
          <div class="goalStatusIcon"
               [ngClass]="goalMet == 'true' ? 'goalMet' : 'goalMissed'">
