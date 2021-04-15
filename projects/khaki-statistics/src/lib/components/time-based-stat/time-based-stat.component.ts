@@ -22,6 +22,7 @@ export class TimeBasedStatComponent implements OnInit {
   @Input() goal: any;
   @Input() goalMet: any;
   @Input() goalText: any;
+  @Input() measureText: any;
 
   loading = false;
 
@@ -37,16 +38,26 @@ export class TimeBasedStatComponent implements OnInit {
     this.timeBlockSummaryGoalsFacadeService.timeBlockSummaryGoalLoading().subscribe(loading => this.loading = loading);
   }
 
-  displayGoalPopup(): void {
+  displayStatisticPopup(): void {
 
     var displayTimeInput = true;
     var displayNumberInput = false;
     var label = "";
 
-    if (this.goal == "AttendeesPerMeeting" || this.goal == "StaffTimeInMeetings") {
+    if (this.goal == "AttendeesPerMeeting"
+      || this.goal == "StaffTimeInMeetings"
+      || this.goal == "MeetingPercentageThreshold"
+      || this.goal == "EmployeeMeetingsPerDay") {
       displayNumberInput = true;
       displayTimeInput = false;
     }
+
+    if (this.goal == "TotalStaffTimeInMeetings"
+      || this.goal == "TotalNumberOfMeetings") {
+      displayNumberInput = false;
+      displayTimeInput = false;
+    }
+
     if (this.goal == "AttendeesPerMeeting") {
       label = "attendees"
     }
@@ -60,13 +71,15 @@ export class TimeBasedStatComponent implements OnInit {
         goal: this.goal,
         displayTimeInput: displayTimeInput,
         displayNumberInput: displayNumberInput,
-        label: label
+        label: label,
+        helpContent: this.helpContent
       }
     });
 
     dialogRef.afterClosed().subscribe(result => {
 
-      var goalValue = result.goalValue;
+      var lteGoalValue = result.goalValue;
+      var gteGoalValue = null;
 
       if (result.goalTimeHoursValue || result.goalTimeMinutesValue) {
 
@@ -78,8 +91,13 @@ export class TimeBasedStatComponent implements OnInit {
           result.goalTimeMinutesValue = 0;
         }
 
-        goalValue = (((result.goalTimeHoursValue - 0) * 60)
+        lteGoalValue = (((result.goalTimeHoursValue - 0) * 60)
           + (result.goalTimeMinutesValue - 0)) * 60;
+      }
+
+      if (this.goal == "MeetingPercentageThreshold") {
+        gteGoalValue = result.goalValue;
+        lteGoalValue = null;
       }
 
       const url = `${this.environment.khakiBff}/goals`;
@@ -87,11 +105,12 @@ export class TimeBasedStatComponent implements OnInit {
 
       this.httpClient.post(url, {
           measure: this.goal,
-        	greaterThanOrEqualTo: null,
-        	lessThanOrEqualTo: goalValue,
-        	departmentName: null
+          greaterThanOrEqualTo: gteGoalValue,
+          lessThanOrEqualTo: lteGoalValue,
+          departmentName: null
       }).subscribe(data => {
         console.log("Goal update response: " + data);
+        this.sinceTimeBlockSummariesFacade.requestTimeBlockSummary();
         this.timeBlockSummaryGoalsFacadeService.requestTimeBlockSummaryGoal();
       });
 

@@ -42,6 +42,10 @@ export class TimeBasedStatSummaryComponent implements OnInit {
   meetingLengthGoal: GoalData;
   attendeesPerMeetingGoal: GoalData;
   staffTimeInMeetingsGoal: GoalData;
+  meetingPercentageThresholdGoal: GoalData;
+  employeeMeetingsPerDayGoal: GoalData;
+  averageStaffTimePerMeetingGoal: GoalData;
+  employeeDailyMeetingTimeGoal: GoalData;
 
   constructor(private sinceTimeBlockSummariesFacade: TimeBlockSummariesFacadeService,
     private timeBlockSummaryGoalsFacadeService: TimeBlockSummaryGoalsFacadeService) {
@@ -90,6 +94,25 @@ export class TimeBasedStatSummaryComponent implements OnInit {
        this.staffTimeInMeetingsGoal = this.createGoal(
          this.timeBlockSummaryGoal?.goals?.find(x => x.measure == GoalMeasureEnum.StaffTimeInMeetings),
          this.percStaffTimeInMtgs.total * 100
+       );
+       this.meetingPercentageThresholdGoal = this.createGoal(
+         this.timeBlockSummaryGoal?.goals?.find(x => x.measure == GoalMeasureEnum.MeetingPercentageThreshold),
+         this.timeBlockSummary.total?.numEmployeesOverTimeThreshold
+       );
+
+       this.employeeMeetingsPerDayGoal = this.createGoal(
+         this.timeBlockSummaryGoal?.goals?.find(x => x.measure == GoalMeasureEnum.EmployeeMeetingsPerDay),
+         this.timeBlockSummary?.total?.totalMeetingInternalAttendees
+                   / this.timeBlockSummary?.total?.numWorkdays
+                   / this.timeBlockSummary?.total?.numEmployees
+       );
+       this.averageStaffTimePerMeetingGoal = this.createGoal(
+         this.timeBlockSummaryGoal?.goals?.find(x => x.measure == GoalMeasureEnum.AverageStaffTimePerMeeting),
+         this.timeBlockSummary.total?.averageStaffSeconds
+       );
+       this.employeeDailyMeetingTimeGoal = this.createGoal(
+         this.timeBlockSummaryGoal?.goals?.find(x => x.measure == GoalMeasureEnum.EmployeeDailyMeetingTime),
+         this.avgDailyMeetingTime.total
        );
      }
    }

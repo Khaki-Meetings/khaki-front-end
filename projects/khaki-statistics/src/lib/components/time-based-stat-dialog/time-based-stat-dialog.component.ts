@@ -10,6 +10,7 @@ export interface DialogData {
   displayTimeInput: boolean;
   displayNumberInput: boolean;
   label: any;
+  helpContent: any;
 }
 
 @Component({
