@@ -8,6 +8,7 @@
         totalValue="{{ percStaffTimeInMtgs.total | percent }}"
         internalValue="{{ percStaffTimeInMtgs.internal | percent }}"
         externalValue="{{ percStaffTimeInMtgs.external | percent }}"
+        goal="StaffTimeInMeetings"
         goalMet="{{ staffTimeInMeetingsGoal.met }}"
         goalText="{{ staffTimeInMeetingsGoal.desc | goalDisplayPercent: staffTimeInMeetingsGoal.min : staffTimeInMeetingsGoal.max }}">>
       </lib-time-based-stat>
@@ -94,6 +95,7 @@
         totalValue="{{ (timeBlockSummary?.total?.meetingLengthSeconds / timeBlockSummary?.total?.meetingCount) | hoursMinutes }}"
         internalValue="{{ (timeBlockSummary?.internal?.meetingLengthSeconds / timeBlockSummary?.internal?.meetingCount) | hoursMinutes }}"
         externalValue="{{ (timeBlockSummary?.external?.meetingLengthSeconds / timeBlockSummary?.external?.meetingCount) | hoursMinutes }}"
+        goal="AverageMeetingLength"
         goalMet="{{ meetingLengthGoal.met }}"
         goalText="{{ meetingLengthGoal.desc | goalDisplayHoursMinutes: meetingLengthGoal.min : meetingLengthGoal.max }}">
       </lib-time-based-stat>
@@ -118,6 +120,7 @@
         totalValue="{{ timeBlockSummary?.total?.totalMeetingAttendees / timeBlockSummary?.total?.meetingCount | number:'1.0-1'}}"
         internalValue="{{ timeBlockSummary?.internal?.totalMeetingAttendees / timeBlockSummary?.internal?.meetingCount | number:'1.0-1'}}"
         externalValue="{{ timeBlockSummary?.external?.totalMeetingAttendees / timeBlockSummary?.external?.meetingCount | number:'1.0-1'}}"
+        goal="AttendeesPerMeeting"
         goalMet="{{ attendeesPerMeetingGoal.met }}"
         goalText="{{ attendeesPerMeetingGoal.desc | goalDisplay: attendeesPerMeetingGoal.min : attendeesPerMeetingGoal.max }} attendees">
       </lib-time-based-stat>

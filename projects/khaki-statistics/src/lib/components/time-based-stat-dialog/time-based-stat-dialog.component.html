@@ -1,0 +1,33 @@
+<h1 mat-dialog-title>{{ data.title }}</h1>
+<div mat-dialog-content>
+  <p>Goal description here</p>
+  <div class="inputWrapper" *ngIf="data.displayNumberInput">
+    <div>
+      <mat-form-field class="inputNumberWrapper">
+        <input matInput type="number" min="0" [(ngModel)]="data.goalValue">
+      </mat-form-field>
+    </div>
+    <div>
+      <span>{{ data.label }}</span>
+    </div>
+  </div>
+  <div class="inputWrapper" *ngIf="data.displayTimeInput">
+    <div>
+      <mat-form-field class="inputTimeWrapper">
+        <input matInput type="number" min="0" maxlength="2" [(ngModel)]="data.goalTimeHoursValue">
+      </mat-form-field>
+    </div>
+    <div>
+      <span>:</span>
+    </div>
+    <div>
+      <mat-form-field class="inputTimeWrapper">
+        <input matInput type="number" min="0" max="59" [(ngModel)]="data.goalTimeMinutesValue">
+      </mat-form-field>
+    </div>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Save</button>
+</div>
