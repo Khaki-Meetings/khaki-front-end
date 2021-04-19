@@ -8,6 +8,10 @@ import {KhakiState} from './state/reducers';
 import {Store} from '@ngrx/store';
 import {statisticsFiltersAttributeKey} from './state/statistics-filters/statistics-filters.reducer';
 import {take} from 'rxjs/operators';
+import { NavigationEnd, Router } from '@angular/router';
+import { environment } from '../environments/environment';
+
+declare let gtag: Function;
 
 @Logging
 @Component({
@@ -27,8 +31,20 @@ export class AppComponent implements OnInit {
     private tenantFacade: TenantFacadeService,
     private settingsModuleStatisticsFiltersFacade: SettingsModuleStatisticsFiltersFacade,
     private statisticsModuleStatisticsFiltersFacade: StatisticsModuleStatisticsFiltersFacade,
-    private store: Store<KhakiState>
+    private store: Store<KhakiState>,
+    public router: Router
   ) {
+
+    this.router.events.subscribe(event => {
+       if(event instanceof NavigationEnd){
+           gtag('config', environment.gtagConfig,
+                 {
+                   'page_path': event.urlAfterRedirects
+                 }
+            );
+        }
+     });
+
   }
 
   toggleDrawerShow(): void {
