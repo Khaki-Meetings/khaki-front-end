@@ -26,3 +26,18 @@
 .inputTimeWrapper {
   width:40px;
 }
+
+// new input box
+
+.mat-input-element {
+  text-align: center;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.inputLabel {
+  padding-left: 2px;
+  padding-right: 2px;
+}

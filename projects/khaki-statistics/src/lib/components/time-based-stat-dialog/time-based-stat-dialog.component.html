@@ -9,25 +9,25 @@
   </div>
   <div class="inputWrapper" *ngIf="data.displayNumberInput">
     <div>
-      <mat-form-field class="inputNumberWrapper">
+      <mat-form-field class="inputNumberWrapper" appearance="none">
         <input matInput type="number" min="0" [(ngModel)]="data.goalValue">
       </mat-form-field>
     </div>
-    <div>
+    <div class="inputLabel">
       <span>{{ data.label }}</span>
     </div>
   </div>
   <div class="inputWrapper" *ngIf="data.displayTimeInput">
     <div>
-      <mat-form-field class="inputTimeWrapper">
+      <mat-form-field class="inputTimeWrapper" appearance="none">
         <input matInput type="number" min="0" maxlength="2" [(ngModel)]="data.goalTimeHoursValue">
       </mat-form-field>
     </div>
-    <div>
+    <div class="inputLabel">
       <span>:</span>
     </div>
     <div>
-      <mat-form-field class="inputTimeWrapper">
+      <mat-form-field class="inputTimeWrapper" appearance="none">
         <input matInput type="number" min="0" max="59" [(ngModel)]="data.goalTimeMinutesValue">
       </mat-form-field>
     </div>
