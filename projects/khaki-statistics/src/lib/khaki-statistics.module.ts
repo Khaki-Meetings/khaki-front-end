@@ -8,6 +8,7 @@ import {MeetingsListComponent} from './components/meetings-list/meetings-list.co
 import {TrailingStatisticsGraphComponent} from './components/twelve-month-trailing-graph/trailing-statistics-graph.component';
 import {TimeBasedStatSummaryComponent} from './components/time-based-stat-summary/time-based-stat-summary.component';
 import {TimeBasedStatComponent} from './components/time-based-stat/time-based-stat.component';
+import {TimeBasedStatDialogComponent} from './components/time-based-stat-dialog/time-based-stat-dialog.component';
 import {NgxChartsLegendCustomComponent} from './components/ngx-charts-legend-custom/ngx-charts-legend-custom.component';
 import {LegendEntryCustomComponent} from './components/legend-entry-custom/legend-entry-custom.component';
 import {StoreModule} from '@ngrx/store';
@@ -26,7 +27,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {MatSelectModule} from '@angular/material/select';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TimeIntervalFormComponent} from './components/time-interval-form/time-interval-form.component';
 import {StatisticsFiltersChangeEffects} from './state/effects/statistics-filters-change.effects';
 import {MatPaginatorModule} from '@angular/material/paginator';
@@ -51,6 +52,9 @@ import { TimeBlockSummaryGoalEffects } from './state/effects/time-block-summary-
 import { GoalDisplayPipe } from './pipes/goal-display.pipe';
 import { GoalDisplayHoursMinutesPipe } from './pipes/goal-display-hours-minutes.pipe';
 import { GoalDisplayPercentPipe } from './pipes/goal-display-percent.pipe';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -75,7 +79,8 @@ import { GoalDisplayPercentPipe } from './pipes/goal-display-percent.pipe';
     GoalDisplayPipe,
     GoalDisplayHoursMinutesPipe,
     GoalDisplayPercentPipe,
-    MtgInvPercChartComponent
+    MtgInvPercChartComponent,
+    TimeBasedStatDialogComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -110,9 +115,13 @@ import { GoalDisplayPercentPipe } from './pipes/goal-display-percent.pipe';
     MatSelectModule,
     MatIconModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatFormFieldModule,
+    FormsModule,
+    MatDialogModule,
+    MatInputModule
   ],
-  exports: [KhakiStatisticsComponent],
+  exports: [KhakiStatisticsComponent, MatFormFieldModule],
   providers: [OrganizersAggregateStatisticsDataSource, MeetingsListDataSource]
 })
 @Logging

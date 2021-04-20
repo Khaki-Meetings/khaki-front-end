@@ -1,0 +1,43 @@
+.mat-dialog-title {
+  font-weight: bold;
+  font-size: larger;
+  line-height: 28px;
+}
+
+.mat-dialog-section-title {
+  color: #4a5568;
+  font-size: initial;
+  font-weight: 700;
+  white-space: pre;
+}
+.mat-dialog-section-content {
+  padding-top: 10px;
+}
+
+.inputWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.inputNumberWrapper {
+  width:60px;
+}
+
+.inputTimeWrapper {
+  width:40px;
+}
+
+// new input box
+
+.mat-input-element {
+  text-align: center;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.inputLabel {
+  padding-left: 2px;
+  padding-right: 2px;
+}

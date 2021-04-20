@@ -8,6 +8,7 @@
         totalValue="{{ percStaffTimeInMtgs.total | percent }}"
         internalValue="{{ percStaffTimeInMtgs.internal | percent }}"
         externalValue="{{ percStaffTimeInMtgs.external | percent }}"
+        goal="StaffTimeInMeetings"
         goalMet="{{ staffTimeInMeetingsGoal.met }}"
         goalText="{{ staffTimeInMeetingsGoal.desc | goalDisplayPercent: staffTimeInMeetingsGoal.min : staffTimeInMeetingsGoal.max }}">>
       </lib-time-based-stat>
@@ -20,6 +21,7 @@
         totalValue="{{timeBlockSummary?.total?.totalSeconds | hoursMinutes}}"
         internalValue="{{timeBlockSummary?.internal?.totalSeconds | hoursMinutes}}"
         externalValue="{{timeBlockSummary?.external?.totalSeconds | hoursMinutes}}"
+        goal="TotalStaffTimeInMeetings"
         goalMet=""
         goalText="">
       </lib-time-based-stat>
@@ -32,6 +34,7 @@
         totalValue="{{ timeBlockSummary?.total?.meetingCount }}"
         internalValue="{{ timeBlockSummary?.internal?.meetingCount }}"
         externalValue="{{ timeBlockSummary?.external?.meetingCount }}"
+        goal="TotalNumberOfMeetings"
         goalMet=""
         goalText="">
       </lib-time-based-stat>
@@ -47,8 +50,8 @@
         totalValue="{{ timeBlockSummary?.total?.numEmployeesOverTimeThreshold / timeBlockSummary?.total?.numEmployees | percent }}"
         internalValue=""
         externalValue=""
-        goalMet=""
-        goalText="">
+        goal="MeetingPercentageThreshold"
+        measureText="Threshold: {{ meetingPercentageThresholdGoal.min }}% of time in meetings">>
       </lib-time-based-stat>
     </div>
     <div class="khaki-container time-based-stat-summary-with-goal">
@@ -59,8 +62,10 @@
         totalValue=" {{ avgDailyMeetingTime.total | hoursMinutes }}"
         internalValue=" {{ avgDailyMeetingTime.internal | hoursMinutes }}"
         externalValue="{{ avgDailyMeetingTime.external | hoursMinutes }}"
-        goalMet=""
-        goalText="">
+        goal="EmployeeDailyMeetingTime"
+        goalMet="{{ employeeDailyMeetingTimeGoal.met }}"
+        goalText="{{ employeeDailyMeetingTimeGoal.desc | goalDisplayHoursMinutes: employeeDailyMeetingTimeGoal.min : employeeDailyMeetingTimeGoal.max }}">
+
       </lib-time-based-stat>
     </div>
     <div class="khaki-container time-based-stat-summary-with-goal">
@@ -77,8 +82,9 @@
         externalValue="{{ (timeBlockSummary?.external?.totalMeetingInternalAttendees
                   / timeBlockSummary?.external?.numWorkdays
                   / timeBlockSummary?.external?.numEmployees) || 0 | number:'1.0-1' }}"
-        goalMet=""
-        goalText="">
+        goal="EmployeeMeetingsPerDay"
+        goalMet="{{ employeeMeetingsPerDayGoal.met }}"
+        goalText="{{ employeeMeetingsPerDayGoal.desc | goalDisplay: employeeMeetingsPerDayGoal.min : employeeMeetingsPerDayGoal.max }} meetings">
       </lib-time-based-stat>
     </div>
 
@@ -94,6 +100,7 @@
         totalValue="{{ (timeBlockSummary?.total?.meetingLengthSeconds / timeBlockSummary?.total?.meetingCount) | hoursMinutes }}"
         internalValue="{{ (timeBlockSummary?.internal?.meetingLengthSeconds / timeBlockSummary?.internal?.meetingCount) | hoursMinutes }}"
         externalValue="{{ (timeBlockSummary?.external?.meetingLengthSeconds / timeBlockSummary?.external?.meetingCount) | hoursMinutes }}"
+        goal="AverageMeetingLength"
         goalMet="{{ meetingLengthGoal.met }}"
         goalText="{{ meetingLengthGoal.desc | goalDisplayHoursMinutes: meetingLengthGoal.min : meetingLengthGoal.max }}">
       </lib-time-based-stat>
@@ -106,8 +113,9 @@
         totalValue="{{ timeBlockSummary?.total?.averageStaffSeconds | hoursMinutes }}"
         internalValue="{{ timeBlockSummary?.internal?.averageStaffSeconds | hoursMinutes }}"
         externalValue="{{ timeBlockSummary?.external?.averageStaffSeconds | hoursMinutes }}"
-        goalMet=""
-        goalText="">
+        goal="AverageStaffTimePerMeeting"
+        goalMet="{{ averageStaffTimePerMeetingGoal.met }}"
+        goalText="{{ averageStaffTimePerMeetingGoal.desc | goalDisplayHoursMinutes: averageStaffTimePerMeetingGoal.min : averageStaffTimePerMeetingGoal.max }}">
       </lib-time-based-stat>
     </div>
     <div class="khaki-container time-based-stat-summary-with-goal">
@@ -118,6 +126,7 @@
         totalValue="{{ timeBlockSummary?.total?.totalMeetingAttendees / timeBlockSummary?.total?.meetingCount | number:'1.0-1'}}"
         internalValue="{{ timeBlockSummary?.internal?.totalMeetingAttendees / timeBlockSummary?.internal?.meetingCount | number:'1.0-1'}}"
         externalValue="{{ timeBlockSummary?.external?.totalMeetingAttendees / timeBlockSummary?.external?.meetingCount | number:'1.0-1'}}"
+        goal="AttendeesPerMeeting"
         goalMet="{{ attendeesPerMeetingGoal.met }}"
         goalText="{{ attendeesPerMeetingGoal.desc | goalDisplay: attendeesPerMeetingGoal.min : attendeesPerMeetingGoal.max }} attendees">
       </lib-time-based-stat>
