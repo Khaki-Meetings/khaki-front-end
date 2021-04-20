@@ -238,7 +238,7 @@ export class StatisticsService {
     }
 
     getTimeBlockSummary(start: Moment, end: Moment, statisticsQueryParams: StatisticsQueryParameters):
-        Observable<TimeBlockSummarySm> {
+        Observable<TimeBlockSummaryAggSm> {
 
         statisticsQueryParams.statisticsScope = StatisticsScopeSe.Internal;
         let o1: Observable<TimeBlockSummarySm> = this.getTimeBlockSummaryScoped(start, end, statisticsQueryParams);

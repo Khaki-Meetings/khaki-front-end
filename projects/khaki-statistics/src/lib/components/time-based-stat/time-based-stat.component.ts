@@ -25,6 +25,7 @@ export class TimeBasedStatComponent implements OnInit {
   @Input() measureText: any;
 
   loading = false;
+  goalLoading = false;
 
   constructor(private sinceTimeBlockSummariesFacade: TimeBlockSummariesFacadeService,
     private timeBlockSummaryGoalsFacadeService: TimeBlockSummaryGoalsFacadeService,
@@ -35,7 +36,7 @@ export class TimeBasedStatComponent implements OnInit {
 
   ngOnInit(): void {
     this.sinceTimeBlockSummariesFacade.timeBlockSummaryLoading().subscribe(loading => this.loading = loading);
-    this.timeBlockSummaryGoalsFacadeService.timeBlockSummaryGoalLoading().subscribe(loading => this.loading = loading);
+    this.timeBlockSummaryGoalsFacadeService.timeBlockSummaryGoalLoading().subscribe(loading => this.goalLoading = loading);
   }
 
   displayStatisticPopup(): void {
