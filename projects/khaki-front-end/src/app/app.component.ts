@@ -10,6 +10,7 @@ import {statisticsFiltersAttributeKey} from './state/statistics-filters/statisti
 import {take} from 'rxjs/operators';
 import { NavigationEnd, Router } from '@angular/router';
 import { environment } from '../environments/environment';
+import { GoogleAnalyticsService } from './google-analytics.service';
 
 declare let gtag: Function;
 
@@ -32,7 +33,8 @@ export class AppComponent implements OnInit {
     private settingsModuleStatisticsFiltersFacade: SettingsModuleStatisticsFiltersFacade,
     private statisticsModuleStatisticsFiltersFacade: StatisticsModuleStatisticsFiltersFacade,
     private store: Store<KhakiState>,
-    public router: Router
+    public router: Router,
+    public googleAnalyticsService: GoogleAnalyticsService
   ) {
 
     this.router.events.subscribe(event => {
@@ -43,6 +45,8 @@ export class AppComponent implements OnInit {
                  }
             );
             gtag('send', 'pageview');
+            this.googleAnalyticsService.eventEmitter("view_settings",
+              "engagement", "view_settings_action");
         }
      });
 
