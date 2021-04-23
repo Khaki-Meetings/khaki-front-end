@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { GoogleAnalyticsService } from '../../google-analytics.service';
 import { TimeBlockSummariesFacadeService } from '../../state/facades/time-block-summaries-facade.service';
 import { TimeBlockSummaryGoalsFacadeService } from '../../state/facades/time-block-summary-goals-facade.service';
 import { TimeBasedStatDialogComponent } from '../time-based-stat-dialog/time-based-stat-dialog.component';
@@ -31,6 +32,7 @@ export class TimeBasedStatComponent implements OnInit {
     private timeBlockSummaryGoalsFacadeService: TimeBlockSummaryGoalsFacadeService,
     public dialog: MatDialog,
     private httpClient: HttpClient,
+    public googleAnalyticsService: GoogleAnalyticsService,
     @Inject('environment') private environment) {
   }
 
@@ -40,6 +42,9 @@ export class TimeBasedStatComponent implements OnInit {
   }
 
   displayStatisticPopup(): void {
+
+    this.googleAnalyticsService.eventEmitter("view_stats_popup",
+      "engagement", "stats_popup_action", "stats_popup", this.goal);
 
     var displayTimeInput = true;
     var displayNumberInput = false;
