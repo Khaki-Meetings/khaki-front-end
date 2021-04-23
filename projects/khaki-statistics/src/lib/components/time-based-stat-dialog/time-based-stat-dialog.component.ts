@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { GoogleAnalyticsService } from '../../google-analytics.service';
 
 export interface DialogData {
   goal: any;
@@ -22,9 +23,17 @@ export class TimeBasedStatDialogComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<TimeBasedStatDialogComponent>,
+    public googleAnalyticsService: GoogleAnalyticsService,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 
   ngOnInit(): void {
+
+    this.dialogRef.afterClosed().subscribe(result => {
+      this.googleAnalyticsService.eventEmitter("save_stats_popup",
+        "engagement", "save_stats_popup_action", "save_stats_popup",
+      result.goal);
+    });
+
   }
 
   onNoClick(): void {

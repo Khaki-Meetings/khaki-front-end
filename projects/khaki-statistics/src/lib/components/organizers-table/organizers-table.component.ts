@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { OrganizersAggregateStatisticsFacadeService } from '../../state/facades/organizers-aggregate-statistics-facade.service';
 import { OrganizersAggregateStatisticsDataSource } from './data-source/organizers-aggregate-statistics-data-source';
 import { OrganizersAggregateStatisticsSm } from '../../state/models/organizers-aggregate-statistics-sm';
+import { GoogleAnalyticsService } from '../../google-analytics.service';
 
 @Logging
 @Component({
@@ -23,7 +24,8 @@ export class OrganizersTableComponent implements OnInit, AfterViewInit {
     private organizersAggregateStatisticsFacade: OrganizersAggregateStatisticsFacadeService,
     public organizersAggregateStatisticsDataSource: OrganizersAggregateStatisticsDataSource,
     private statisticsFiltersFacade: StatisticsFiltersFacade,
-    private router: Router
+    private router: Router,
+    public googleAnalyticsService: GoogleAnalyticsService
   ) {
   }
 
@@ -58,6 +60,8 @@ export class OrganizersTableComponent implements OnInit, AfterViewInit {
   }
 
   showMeetings(data): void {
+    this.googleAnalyticsService.eventEmitter("view_organizer_meetings",
+      "engagement", "view_organizer_meetings_action");
     this.statisticsFiltersFacade.dispatchSetOrganizer(data['organizerId']);
     this.statisticsFiltersFacade.selectOrganizer();
     this.router.navigateByUrl('/stats/meetings');

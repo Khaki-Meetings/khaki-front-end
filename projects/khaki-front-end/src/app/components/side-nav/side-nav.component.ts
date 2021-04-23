@@ -4,6 +4,7 @@ import {TenantFacadeService} from '../../state/facades/tenant-facade.service';
 import {tap} from 'rxjs/operators';
 import {HistorianService, Logging} from '@natr/historian';
 import {DOCUMENT} from '@angular/common';
+import { GoogleAnalyticsService } from '../../google-analytics.service';
 
 @Logging
 @Component({
@@ -23,7 +24,10 @@ export class SideNavComponent implements OnInit {
 
   tenantMap: Map<string, string> = new Map<string, string>();
 
-  constructor(private authService: AuthService, private tenantFacade: TenantFacadeService, @Inject(DOCUMENT) private document: Document) {
+  constructor(private authService: AuthService,
+    private tenantFacade: TenantFacadeService,
+    @Inject(DOCUMENT) private document: Document,
+    public googleAnalyticsService: GoogleAnalyticsService) {
   }
 
   ngOnInit(): void {
@@ -62,6 +66,8 @@ export class SideNavComponent implements OnInit {
   }
 
   openHelpDialog(): void {
+    this.googleAnalyticsService.eventEmitter("help",
+      "engagement", "help_action");
     document.getElementById('helpModal').style.display = 'block';
   }
 
