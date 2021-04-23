@@ -42,6 +42,7 @@ export class AppComponent implements OnInit {
                    'page_path': event.urlAfterRedirects
                  }
             );
+            gtag('send', 'pageview');
         }
      });
 

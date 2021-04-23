@@ -6,6 +6,7 @@ import {Moment} from 'moment';
 import {StatisticsFiltersFacade} from '../../state/statistics-filters/statistics-filters-facade';
 import {IntervalSe} from '../../state/statistics-filters/interval-se.enum';
 import StartOf = moment.unitOfTime.StartOf;
+import { GoogleAnalyticsService } from '../../google-analytics.service';
 
 const momentJs = moment;
 
@@ -29,7 +30,8 @@ export class TimeIntervalFormComponent implements OnInit {
 
   private defaultTimeInterval = IntervalSe.Week;
 
-  constructor(private statisticsFiltersFacade: StatisticsFiltersFacade) {
+  constructor(private statisticsFiltersFacade: StatisticsFiltersFacade,
+      public googleAnalyticsService: GoogleAnalyticsService) {
   }
 
   ngOnInit(): void {
@@ -41,6 +43,7 @@ export class TimeIntervalFormComponent implements OnInit {
           this.timeIntervalControl.patchValue(interval);
         }
       );
+    this.onChanges();
   }
 
   // noinspection JSMethodCanBeStatic
@@ -93,6 +96,17 @@ export class TimeIntervalFormComponent implements OnInit {
 
     this.timeIntervalControl.setValue(this.defaultTimeInterval);
 
-    this.timeIntervalControl.valueChanges.subscribe(newValue => this.statisticsFiltersFacade.dispatchSetInterval(newValue));
+    this.timeIntervalControl.valueChanges.subscribe(newValue => {
+      this.statisticsFiltersFacade.dispatchSetInterval(newValue)
+    });
+  }
+
+  onChanges(): void {
+    this.timeIntervalControl.valueChanges.subscribe(newValue => {
+      this.googleAnalyticsService.eventEmitter("change_time_interval",
+        "engagement", "change_time_interval_action", "change_time_interval",
+        newValue);
+    });
+
   }
 }
