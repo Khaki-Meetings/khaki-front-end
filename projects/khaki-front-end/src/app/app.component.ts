@@ -45,8 +45,10 @@ export class AppComponent implements OnInit {
                  }
             );
             gtag('send', 'pageview');
-            this.googleAnalyticsService.eventEmitter("view_settings",
-              "engagement", "view_settings_action");
+            if (event.urlAfterRedirects = '/settings') {
+              this.googleAnalyticsService.eventEmitter("view_settings",
+                "engagement", "view_settings_action");
+            }
         }
      });
 
