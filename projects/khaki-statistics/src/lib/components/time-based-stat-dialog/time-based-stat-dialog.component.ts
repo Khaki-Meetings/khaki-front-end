@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { GoogleAnalyticsService } from '../../google-analytics.service';
 
@@ -17,7 +17,8 @@ export interface DialogData {
 @Component({
   selector: 'lib-time-based-stat-dialog',
   templateUrl: './time-based-stat-dialog.component.html',
-  styleUrls: ['./time-based-stat-dialog.component.scss']
+  styleUrls: ['./time-based-stat-dialog.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class TimeBasedStatDialogComponent implements OnInit {
 
