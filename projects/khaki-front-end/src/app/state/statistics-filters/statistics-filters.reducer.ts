@@ -60,19 +60,26 @@ function calculateCalendarTimeBlock(interval: IntervalSe, subtractIntervals: num
       break;
   }
 
-  return {
+  const ret = {
     start: now.clone().utc().startOf(timeBlock).subtract(subtractIntervals, timeBlock),
     end: now.clone().utc().startOf(timeBlock)
   };
+
+  logger.debug('cal start/end', ret);
+  logger.debug('cal interval', interval);
+  return ret;
 }
 
 const startEnd = calculateTimeBlock(IntervalSe.Week, 1);
+const calendarStartEnd = calculateCalendarTimeBlock(IntervalSe.Week, 1);
 
 export const initialState: StatisticsFiltersSm = {
   interval: IntervalSe.Week,
   statisticsScope: StatisticsScopeSe.External,
   start: startEnd.start,
   end: startEnd.end,
+  calendarStart: calendarStartEnd.start,
+  calendarEnd: calendarStartEnd.end,
   organizer: ''
 };
 
@@ -89,8 +96,11 @@ export const statisticsFiltersReducer = createReducer(
         ...typeLess
       };
       const se = calculateTimeBlock(newState.interval, 1);
+      const cse = calculateCalendarTimeBlock(newState.interval, 1);
       newState.start = se.start;
       newState.end = se.end;
+      newState.calendarStart = cse.start,
+      newState.calendarEnd = cse.end,
       console.log('newState', newState); // was natr-historian  this.logger.debug
       return newState;
     }

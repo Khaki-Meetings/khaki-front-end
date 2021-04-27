@@ -55,6 +55,7 @@ import { GoalDisplayPercentPipe } from './pipes/goal-display-percent.pipe';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
+import { CalendarIntervalDisplayPipe } from './pipes/calendar-interval-display.pipe';
 
 @NgModule({
   declarations: [
@@ -79,6 +80,7 @@ import { MatInputModule } from '@angular/material/input';
     GoalDisplayPipe,
     GoalDisplayHoursMinutesPipe,
     GoalDisplayPercentPipe,
+    CalendarIntervalDisplayPipe,
     MtgInvPercChartComponent,
     TimeBasedStatDialogComponent
   ],
