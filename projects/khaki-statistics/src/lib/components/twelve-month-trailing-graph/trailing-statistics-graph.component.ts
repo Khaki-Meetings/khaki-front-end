@@ -67,6 +67,8 @@ export class TrailingStatisticsGraphComponent implements OnInit {
   interval: IntervalSe;
   start: Moment;
   end: Moment;
+  calendarStart: Moment;
+  calendarEnd: Moment;
   statisticsScope: StatisticsScopeSe;
   loading = false;
 
@@ -106,6 +108,8 @@ export class TrailingStatisticsGraphComponent implements OnInit {
         this.currentInterval = IntervalEnum[statisticsFilters.interval];
         this.start = statisticsFilters.start;
         this.end = statisticsFilters.end;
+        this.calendarStart = statisticsFilters.calendarStart;
+        this.calendarEnd = statisticsFilters.calendarEnd;
         this.statisticsScope = statisticsFilters.statisticsScope;
       });
 
@@ -174,21 +178,6 @@ export class TrailingStatisticsGraphComponent implements OnInit {
 
     });
 
-    this.graphData.forEach(x => {
-      let intVal = x.series.find(item => item.name == "Internal").value;
-
-      x.series.find(item => item.name == "External").value =
-        x.series.find(item => item.name == "External").value -
-        intVal;
-
-      let intHours = x.series.find(item => item.name == "Internal").hours;
-
-      x.series.find(item => item.name == "External").hours =
-        x.series.find(item => item.name == "External").hours -
-        intHours;
-
-    });
-
   }
 
   private getIntervalLabels(): string[] {
@@ -212,6 +201,8 @@ export class TrailingStatisticsGraphComponent implements OnInit {
 
     const timeBlocks: string[] = [];
     const currentMoment = momentJs().startOf(unit);
+    // Remove the current interval
+    currentMoment.subtract(1, unit);
     for (let i = 0; i < 12; i++) {
       timeBlocks.push(currentMoment.format(format));
       currentMoment.subtract(1, unit);

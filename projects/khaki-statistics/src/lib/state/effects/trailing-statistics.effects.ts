@@ -17,7 +17,7 @@ export class TrailingStatisticsEffects {
       ofType(loadTrailingStatistics),
       mergeMap(() => this.statisticsFiltersFacade.selectStatisticsFilters()),
       switchMap(
-        (action) => this.statisticsService.getTrailingStatistics(action.start, IntervalSe[action.interval], {...action})
+        (action) => this.statisticsService.getTrailingStatistics(action.calendarStart, IntervalSe[action.interval], {...action})
           .pipe(
             map(trailingStatistics => loadTrailingStatisticsSuccess(trailingStatistics)),
             catchError(
