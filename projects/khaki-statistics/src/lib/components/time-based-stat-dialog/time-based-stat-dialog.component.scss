@@ -1,4 +1,4 @@
-.mat-dialog-title {
+h1.mat-dialog-title {
   font-weight: bold;
   font-size: larger;
   line-height: 28px;
@@ -9,15 +9,31 @@
   font-size: initial;
   font-weight: 700;
   white-space: pre;
+  text-align: center;
 }
+
 .mat-dialog-section-content {
   padding-top: 10px;
 }
 
 .inputWrapper {
   display: flex;
-  align-items: center;
+  flex-direction: column;
 }
+.inputWrapper {
+  .ng-star-inserted {
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    align-items: center;
+  }
+}
+
+.inputNumberWrapperWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
 
 .inputNumberWrapper {
   width:60px;
@@ -40,4 +56,31 @@ input::-webkit-inner-spin-button {
 .inputLabel {
   padding-left: 2px;
   padding-right: 2px;
+}
+
+.cdk-overlay-pane.stat-dialog {
+  position: relative!important;
+}
+
+.close.mat-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 10px;
+  line-height: 18px;
+  min-width: auto;
+}
+
+.mat-dialog-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.mat-dialog-actions {
+  align-items: center;
+  justify-content: center;
+}
+
+.mat-dialog-actions .mat-button-base {
+  border: 1px solid #a0aec0;
 }

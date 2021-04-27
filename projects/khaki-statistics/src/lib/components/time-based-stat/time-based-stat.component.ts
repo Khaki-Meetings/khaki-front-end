@@ -79,7 +79,8 @@ export class TimeBasedStatComponent implements OnInit {
         displayNumberInput: displayNumberInput,
         label: label,
         helpContent: this.helpContent
-      }
+      },
+      panelClass: 'stat-dialog'
     });
 
     dialogRef.afterClosed().subscribe(result => {
