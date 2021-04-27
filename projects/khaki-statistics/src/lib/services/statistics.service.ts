@@ -119,6 +119,9 @@ export class StatisticsService {
     interval: IntervalSe,
     statisticsQueryParams: StatisticsQueryParameters
   ): Observable<TrailingStatisticsSm> {
+
+        this.logger.debug('getTrailingStatisticsScoped start', start);
+
     let params = new HttpParams();
     params = params.set('filter', statisticsQueryParams.statisticsScope.toString());
     const intervalCount = 12;

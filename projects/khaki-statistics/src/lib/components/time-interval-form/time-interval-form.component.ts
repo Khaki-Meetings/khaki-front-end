@@ -72,21 +72,53 @@ export class TimeIntervalFormComponent implements OnInit {
     };
   }
 
+  private calculateCalendarTimeBlock(interval: IntervalSe, subtractIntervals: number = 0): StartEndModel {
+    const now = moment();
+    let timeBlock: StartOf;
+    switch (interval) {
+      case IntervalSe.Day:
+        timeBlock = 'day';
+        break;
+      case IntervalSe.Week:
+        timeBlock = 'week';
+        break;
+      case IntervalSe.Month:
+        timeBlock = 'month';
+        break;
+      case IntervalSe.Year:
+        timeBlock = 'year';
+        break;
+    }
+
+    return {
+      start: now.clone().utc().startOf(timeBlock).subtract(subtractIntervals, timeBlock),
+      end: now.clone().utc().startOf(timeBlock)
+    };
+  }
+
   private buildForm(): void {
     const weekTimeBlock = this.calculateTimeBlock(IntervalSe.Week, 1);
     const monthTimeBlock = this.calculateTimeBlock(IntervalSe.Month, 1);
+    const calendarWeekTimeBlock = this.calculateCalendarTimeBlock(IntervalSe.Week, 1);
+    const calendarMonthTimeBlock = this.calculateCalendarTimeBlock(IntervalSe.Month, 1);
 
     this.timeIntervals.push({
       value: IntervalSe.Week,
       start: weekTimeBlock.start,
-      end: weekTimeBlock.end
+      end: weekTimeBlock.end,
+      calendarStart: calendarWeekTimeBlock.start,
+      calendarEnd: calendarWeekTimeBlock.end
     });
 
     this.timeIntervals.push({
       value: IntervalSe.Month,
       start: monthTimeBlock.start,
-      end: monthTimeBlock.end
+      end: monthTimeBlock.end,
+      calendarStart: calendarMonthTimeBlock.start,
+      calendarEnd: calendarMonthTimeBlock.end
     });
+
+    console.log("Time Intervals: " + JSON.stringify(this.timeIntervals));
 
     this.timeIntervalControl = new FormControl();
 
