@@ -53,6 +53,8 @@ export class StatisticsFiltersFacade {
               ...statisticsFilters,
               start: moment(statisticsFilters.start),
               end: moment(statisticsFilters.end),
+              calendarStart: moment(statisticsFilters.calendarStart),
+              calendarEnd: moment(statisticsFilters.calendarEnd),
               organizer: statisticsFilters.organizer
             }
           )

@@ -46,22 +46,27 @@
   </div>
   <div class="goalRowWrapper">
     <div class="goalRow">
-       <div class="goalContent" [ngClass]="(goalText == '' && goalMet == '') ? 'hideElement' : ''">
-         <div class="goalStatusIcon"
-              [ngClass]="goalMet == 'true' ? 'goalMet' : 'goalMissed'">
+      <div class="mat-spinner-wrapper center" *ngIf="goalLoading">
+        <lib-khaki-spinner></lib-khaki-spinner>
+      </div>
+      <div [ngClass]="goalLoading ? 'loadingComponent' : ''">
+        <div class="goalContent" [ngClass]="(goalText == '' && goalMet == '') ? 'hideElement' : ''">
+          <div class="goalStatusIcon"
+            [ngClass]="goalMet == 'true' ? 'goalMet' : 'goalMissed'">
             <div *ngIf="goalMet == 'true'">
               <mat-icon aria-hidden="false" aria-label="Goat Met">check</mat-icon>
             </div>
             <div *ngIf="goalMet == 'false'">
               <mat-icon aria-hidden="false" aria-label="Goat Missed">priority_high</mat-icon>
             </div>
-         </div>
-         <div class="goalText" *ngIf="goalText && goalText != ''">
-           Goal: {{ goalText }}
-         </div>
-         <div class="goalText" *ngIf="measureText && measureText != ''">
-           {{ measureText }}
-         </div>
+          </div>
+          <div class="goalText" *ngIf="goalText && goalText != ''">
+          Goal: {{ goalText }}
+          </div>
+          <div class="goalText" *ngIf="measureText && measureText != ''">
+          {{ measureText }}
+          </div>
+        </div>
       </div>
     </div>
   </div>

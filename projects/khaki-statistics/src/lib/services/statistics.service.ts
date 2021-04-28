@@ -119,6 +119,9 @@ export class StatisticsService {
     interval: IntervalSe,
     statisticsQueryParams: StatisticsQueryParameters
   ): Observable<TrailingStatisticsSm> {
+
+        this.logger.debug('getTrailingStatisticsScoped start', start);
+
     let params = new HttpParams();
     params = params.set('filter', statisticsQueryParams.statisticsScope.toString());
     const intervalCount = 12;
@@ -238,7 +241,7 @@ export class StatisticsService {
     }
 
     getTimeBlockSummary(start: Moment, end: Moment, statisticsQueryParams: StatisticsQueryParameters):
-        Observable<TimeBlockSummarySm> {
+        Observable<TimeBlockSummaryAggSm> {
 
         statisticsQueryParams.statisticsScope = StatisticsScopeSe.Internal;
         let o1: Observable<TimeBlockSummarySm> = this.getTimeBlockSummaryScoped(start, end, statisticsQueryParams);
