@@ -56,6 +56,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatInputModule } from '@angular/material/input';
 import { CalendarIntervalDisplayPipe } from './pipes/calendar-interval-display.pipe';
+import { DepartmentSelectorComponent } from './components/department-selector/department-selector.component';
+import { DepartmentsEffects } from './state/effects/departments.effects';
 
 @NgModule({
   declarations: [
@@ -68,6 +70,7 @@ import { CalendarIntervalDisplayPipe } from './pipes/calendar-interval-display.p
     TimeBasedStatSummaryComponent,
     TimeBasedStatComponent,
     TimeIntervalFormComponent,
+    DepartmentSelectorComponent,
     NgxChartsLegendCustomComponent,
     LegendEntryCustomComponent,
     ExternalInternalSelectorComponent,
@@ -100,6 +103,7 @@ import { CalendarIntervalDisplayPipe } from './pipes/calendar-interval-display.p
         TimeBlockSummaryEffects,
         TimeBlockSummaryGoalEffects,
         OrganizersAggregateStatisticsEffects,
+        DepartmentsEffects,
         MeetingsListEffects,
         TrailingStatisticsEffects,
         PerDepartmentStatisticsEffects,

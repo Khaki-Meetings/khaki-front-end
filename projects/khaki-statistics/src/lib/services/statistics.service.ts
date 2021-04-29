@@ -25,6 +25,7 @@ import {TrailingStatisticsAggSm} from '../state/models/trailing-statistics-agg-s
 import { OrganizersAggregateStatisticsSm } from '../state/models/organizers-aggregate-statistics-sm';
 import { TimeBlockSummaryGoalsResponseDto } from './models/time-block-summary-goals-response-dto';
 import { TimeBlockSummaryGoalListSm } from '../state/models/time-block-summary-goal-list-sm';
+import { DepartmentsListSm } from '../state/models/departments-list-sm';
 
 @Logging
 @Injectable({
@@ -169,6 +170,23 @@ export class StatisticsService {
 
   }
 
+  getDepartments(): Observable<DepartmentsListSm> {
+    console.log("getting departments");
+    const url = `${this.environment.khakiBff}/departments`;
+    return this.httpClient
+      .get(url)
+      .pipe(
+        tap(departmentData => this.logger.debug('Server response: departments', departmentData)),
+        catchError(
+          error => {
+            this.logger.debug('Failed to get departments', error);
+            return throwError('Failed to get departments');
+          }
+        ),
+        map((departmentsStatistics => departmentsStatistics as DepartmentsListSm)
+      ));
+  }
+
   getDepartmentStatisticsScoped(
     start: Moment,
     end: Moment,
@@ -243,6 +261,8 @@ export class StatisticsService {
     getTimeBlockSummary(start: Moment, end: Moment, statisticsQueryParams: StatisticsQueryParameters):
         Observable<TimeBlockSummaryAggSm> {
 
+        console.log("getTimeBlockSummary department", statisticsQueryParams.department);
+        
         statisticsQueryParams.statisticsScope = StatisticsScopeSe.Internal;
         let o1: Observable<TimeBlockSummarySm> = this.getTimeBlockSummaryScoped(start, end, statisticsQueryParams);
 

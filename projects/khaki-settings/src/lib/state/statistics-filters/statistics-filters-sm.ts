@@ -10,4 +10,5 @@ export interface StatisticsFiltersSm {
   calendarStart?: Moment;
   calendarEnd?: Moment;
   organizer: string;
+  department?: string;
 }
