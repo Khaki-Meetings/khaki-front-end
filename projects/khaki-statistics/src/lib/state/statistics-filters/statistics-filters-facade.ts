@@ -39,7 +39,7 @@ export class StatisticsFiltersFacade {
     this.store.dispatch(setIntervalAction({interval}));
   }
 
-  public dispatchSetDepartment(department: DepartmentSm): void {
+  public dispatchSetDepartment(department: string): void {
     this.logger.debug('dispatchSetDepartment', department);
     this.store.dispatch(setDepartmentAction({department}));
   }
@@ -86,7 +86,7 @@ export class StatisticsFiltersFacade {
     return this.store.select(statisticsOrganizerSelector);
   }
 
-  public selectDepartment(): Observable<DepartmentSm> {
+  public selectDepartment(): Observable<string> {
     return this.store.select(statisticsDepartmentSelector);
   }
 

@@ -14,7 +14,8 @@ export const statisticsFiltersAttributeKey = 'statisticsFilters';
 
 export const initialState: StatisticsFiltersSm = {
   statisticsScope: StatisticsScopeSe.External,
-  interval: IntervalSe.Week
+  interval: IntervalSe.Week,
+  department: ""
 };
 
 export const statisticsFiltersReducer = createReducer(

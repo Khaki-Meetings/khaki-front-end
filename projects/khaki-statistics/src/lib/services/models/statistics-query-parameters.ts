@@ -8,5 +8,5 @@ export interface StatisticsQueryParameters {
   sortColumn?: string;
   sortDirection?: SortDirection;
   statisticsScope?: StatisticsScopeSe;
-  department?: DepartmentSm;
+  department?: string;
 }

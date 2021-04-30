@@ -26,7 +26,7 @@ export class DepartmentSelectorComponent implements OnInit {
   ngOnInit(): void {
     this.departmentOptions =
       [
-        {value: "All Departments"}
+        {name: "", value: ""}
       ];
 
     this.departmentFilterControl = new FormControl();
@@ -36,10 +36,6 @@ export class DepartmentSelectorComponent implements OnInit {
       }
     );
 
-    this.departmentFilterControl.valueChanges.subscribe(newValue => {
-      this.statisticsFiltersFacade.dispatchSetDepartment(newValue)
-    });
-
     this.statisticsFiltersFacade.selectDepartment()
       .subscribe(
         department => {
@@ -48,7 +44,6 @@ export class DepartmentSelectorComponent implements OnInit {
         }
       );
 
-    this.departmentFilterControl.setValue("All Departments");
 
     this.departmentsFacade.dispatchDepartmentsList();
 
@@ -56,13 +51,23 @@ export class DepartmentSelectorComponent implements OnInit {
       .pipe(tap(map => this.logger.debug(map)))
       .subscribe(departmentMap => {
         let tmp = [
-          {value: "All Departments"}
+          { value: "", name: "All Departments" }
         ];
         departmentMap.content.forEach( function(value, key) {
-          tmp.push( { value: value.name } );
+          tmp.push( { value: value.name, name: value.name } );
         })
         this.departmentOptions = tmp;
+
+        console.log('departmentOptions', this.departmentOptions);
       });
 
+      this.departmentFilterControl.valueChanges
+      .pipe(tap(map => console.log("departmentFilterControl.valueChanges")))
+      .subscribe(newValue => {
+        console.log("departmentFilterControl.valueChanges", newValue);
+        this.statisticsFiltersFacade.dispatchSetDepartment(newValue);
+      });
+
+    this.departmentFilterControl.setValue( "" );
   }
 }

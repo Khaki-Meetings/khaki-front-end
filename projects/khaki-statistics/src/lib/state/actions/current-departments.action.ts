@@ -2,7 +2,7 @@ import {createAction, props} from '@ngrx/store';
 import { DepartmentSm } from '../models/department-sm';
 
 export interface SetCurrentDepartmentActionProp {
-  department: DepartmentSm;
+  department: string;
 }
 
 export const setCurrentDepartmentAction = createAction(

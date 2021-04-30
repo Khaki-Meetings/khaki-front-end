@@ -9,7 +9,8 @@ export const statisticsFiltersAttributeKey = 'statisticsFilters';
 export const initialState: StatisticsFiltersSm = {
   interval: IntervalSe.Week,
   statisticsScope: StatisticsScopeSe.External,
-  organizer: ''
+  organizer: '',
+  department: ''
 };
 
 

@@ -39,7 +39,8 @@ export const departmentsListReducer = createReducer(
       newState.content = newState.content.map(
         departmentList => {
           return {
-            name: departmentList.name
+            name: departmentList.name,
+            value: departmentList.value
           };
         }
       );

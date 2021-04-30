@@ -164,7 +164,6 @@ export class StatisticsService {
           internal : x[0],
           external : x[1]
         };
-        console.log("trailingStatistics: " + JSON.stringify(trailingStatisticsAggSm));
         return trailingStatisticsAggSm;
     }));
 
@@ -234,7 +233,7 @@ export class StatisticsService {
   getTimeBlockSummaryScoped(start: Moment, end: Moment, statisticsQueryParams: StatisticsQueryParameters):
     Observable<TimeBlockSummarySm> {
     let params = new HttpParams();
-    params = params.set('filter', statisticsQueryParams.statisticsScope.toString());
+    params = params.set('statisticsQueryParams.filter', statisticsQueryParams.statisticsScope.toString());
     return this.httpClient
       .get(this.getStartEndUrl(start, end, 'summary'), {params})
       .pipe(
@@ -261,8 +260,8 @@ export class StatisticsService {
     getTimeBlockSummary(start: Moment, end: Moment, statisticsQueryParams: StatisticsQueryParameters):
         Observable<TimeBlockSummaryAggSm> {
 
-        console.log("getTimeBlockSummary department", statisticsQueryParams.department);
-        
+        console.log("getTimeBlockSummary statisticsQueryParams", statisticsQueryParams);
+
         statisticsQueryParams.statisticsScope = StatisticsScopeSe.Internal;
         let o1: Observable<TimeBlockSummarySm> = this.getTimeBlockSummaryScoped(start, end, statisticsQueryParams);
 

@@ -70,9 +70,6 @@ export class TimeBasedStatSummaryComponent implements OnInit {
         met = (value <= max) ? true : false;
     }
 
-    console.log("Goal evaluation: " + min + " " + value + " " + max + " "
-      + met);
-
     return {
       min: min,
       max: max,
