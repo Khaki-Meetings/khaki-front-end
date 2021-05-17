@@ -233,7 +233,8 @@ export class StatisticsService {
   getTimeBlockSummaryScoped(start: Moment, end: Moment, statisticsQueryParams: StatisticsQueryParameters):
     Observable<TimeBlockSummarySm> {
     let params = new HttpParams();
-    params = params.set('statisticsQueryParams.filter', statisticsQueryParams.statisticsScope.toString());
+    params = params.set('filter', statisticsQueryParams.statisticsScope.toString());
+    params = params.set('department', statisticsQueryParams.department);
     return this.httpClient
       .get(this.getStartEndUrl(start, end, 'summary'), {params})
       .pipe(

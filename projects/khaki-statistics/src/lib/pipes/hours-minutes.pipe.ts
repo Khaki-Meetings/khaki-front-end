@@ -4,7 +4,8 @@ import {Pipe, PipeTransform} from '@angular/core';
 export class HoursMinutesPipe implements PipeTransform {
 
   transform(value: number): string {
-    const displayValue = value === null ? 0 : value;
+    const displayValue = value === null || Number.isNaN(value) ? 0 : value;
+    
     const hours = Math.trunc(displayValue / 60 / 60);
     const minutes = Math.trunc(displayValue / 60 % 60);
 
@@ -16,7 +17,7 @@ export class HoursMinutesPipe implements PipeTransform {
     if (hours > 1000) {
       return hours.toString();
     };
-    
+
     return hours.toString().padStart(2, "0") + ':' + minutes.toString().padStart(2, "0");
 
   }

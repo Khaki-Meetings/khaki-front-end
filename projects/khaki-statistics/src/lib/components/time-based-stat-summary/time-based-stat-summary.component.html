@@ -90,16 +90,15 @@
 
   </div>
 
-
   <div class="flex-container">
     <div class="khaki-container time-based-stat-summary-with-goal">
       <lib-time-based-stat
         label="Average Meeting Length"
         helpId="num-meetings"
         helpContent="Average time length of meetings"
-        totalValue="{{ (timeBlockSummary?.total?.meetingLengthSeconds / timeBlockSummary?.total?.meetingCount) | hoursMinutes }}"
-        internalValue="{{ (timeBlockSummary?.internal?.meetingLengthSeconds / timeBlockSummary?.internal?.meetingCount) | hoursMinutes }}"
-        externalValue="{{ (timeBlockSummary?.external?.meetingLengthSeconds / timeBlockSummary?.external?.meetingCount) | hoursMinutes }}"
+        totalValue="{{ avgMeetingLength.total | hoursMinutes }}"
+        internalValue="{{ timeBlockSummary?.internal?.averageMeetingLength | hoursMinutes }}"
+        externalValue="{{ timeBlockSummary?.external?.averageMeetingLength | hoursMinutes }}"
         goal="AverageMeetingLength"
         goalMet="{{ meetingLengthGoal.met }}"
         goalText="{{ meetingLengthGoal.desc | goalDisplayHoursMinutes: meetingLengthGoal.min : meetingLengthGoal.max }}">
@@ -110,9 +109,9 @@
         label="Average Staff Time per Meeting"
         helpId="avg-staff-hours-in-meetings"
         helpContent="Average time per staff member in meetings created by staff members"
-        totalValue="{{ timeBlockSummary?.total?.averageStaffSeconds | hoursMinutes }}"
-        internalValue="{{ timeBlockSummary?.internal?.averageStaffSeconds | hoursMinutes }}"
-        externalValue="{{ timeBlockSummary?.external?.averageStaffSeconds | hoursMinutes }}"
+        totalValue="{{ avgStaffTimePerMeeting.total | hoursMinutes }}"
+        internalValue="{{ timeBlockSummary?.internal?.averageStaffTimePerMeeting | hoursMinutes }}"
+        externalValue="{{ timeBlockSummary?.external?.averageStaffTimePerMeeting | hoursMinutes }}"
         goal="AverageStaffTimePerMeeting"
         goalMet="{{ averageStaffTimePerMeetingGoal.met }}"
         goalText="{{ averageStaffTimePerMeetingGoal.desc | goalDisplayHoursMinutes: averageStaffTimePerMeetingGoal.min : averageStaffTimePerMeetingGoal.max }}">
@@ -123,9 +122,9 @@
         label="Average # of Attendees"
         helpId="num-meetings"
         helpContent="Average number of attendees per meeting"
-        totalValue="{{ timeBlockSummary?.total?.totalMeetingAttendees / timeBlockSummary?.total?.meetingCount | number:'1.0-1'}}"
-        internalValue="{{ timeBlockSummary?.internal?.totalMeetingAttendees / timeBlockSummary?.internal?.meetingCount | number:'1.0-1'}}"
-        externalValue="{{ timeBlockSummary?.external?.totalMeetingAttendees / timeBlockSummary?.external?.meetingCount | number:'1.0-1'}}"
+        totalValue="{{ avgMeetingAttendees.total | number:'1.0-1'}}"
+        internalValue="{{ avgMeetingAttendees.internal | number:'1.0-1'}}"
+        externalValue="{{ avgMeetingAttendees.external | number:'1.0-1'}}"
         goal="AttendeesPerMeeting"
         goalMet="{{ attendeesPerMeetingGoal.met }}"
         goalText="{{ attendeesPerMeetingGoal.desc | goalDisplay: attendeesPerMeetingGoal.min : attendeesPerMeetingGoal.max }} attendees">
