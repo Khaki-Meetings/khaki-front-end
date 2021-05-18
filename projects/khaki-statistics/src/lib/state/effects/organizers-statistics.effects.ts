@@ -35,6 +35,7 @@ export class OrganizersStatisticsEffects {
               joined[1].end,
               {
                 statisticsScope: joined[1].statisticsScope,
+                department: joined[1].department,
                 page: joined[2].page,
                 count: joined[2].count,
                 sortDirection: joined[2].sortDirection,

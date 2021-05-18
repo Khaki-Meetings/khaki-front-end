@@ -88,14 +88,18 @@ export class StatisticsService {
     statisticsQueryParams: StatisticsQueryParameters
   ): Observable<OrganizersAggregateStatisticsSm> {
     let params = new HttpParams();
-    this.logger.debug('statisticsQueryParams', statisticsQueryParams);
+    this.logger.debug('getAggregateOrganizersStatistics statisticsQueryParams', statisticsQueryParams);
     const page = statisticsQueryParams.page ? statisticsQueryParams.page.toString() : '0';
     const count = statisticsQueryParams.count ? statisticsQueryParams.count.toString() : '5';
     const sortColumn = statisticsQueryParams.sortColumn ?? 'internalMeetingCount';
+    const department = statisticsQueryParams.department ?? '';
     const sortDirection: SortDirection = statisticsQueryParams.sortDirection ?? 'desc';
     params = params.set('page', page);
     params = params.set('count', count);
     params = params.set('sort', `${sortColumn},${sortDirection}`);
+
+    params = params.set('department', department);
+
     this.logger.debug('organizers agg params', params);
     this.logger.debug('organizers agg params.keys', params.keys());
     this.logger.debug('start/end', start, end);
@@ -125,6 +129,7 @@ export class StatisticsService {
 
     let params = new HttpParams();
     params = params.set('filter', statisticsQueryParams.statisticsScope.toString());
+    params = params.set('department', statisticsQueryParams.department);
     const intervalCount = 12;
     const formattedStart = start.utc().format();
     const url = `${this.environment.khakiBff}/statistics/trailing/${formattedStart}/${interval}/${intervalCount}`;
