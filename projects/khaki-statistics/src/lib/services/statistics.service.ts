@@ -25,6 +25,7 @@ import {TrailingStatisticsAggSm} from '../state/models/trailing-statistics-agg-s
 import { OrganizersAggregateStatisticsSm } from '../state/models/organizers-aggregate-statistics-sm';
 import { TimeBlockSummaryGoalsResponseDto } from './models/time-block-summary-goals-response-dto';
 import { TimeBlockSummaryGoalListSm } from '../state/models/time-block-summary-goal-list-sm';
+import { DepartmentsListSm } from '../state/models/departments-list-sm';
 
 @Logging
 @Injectable({
@@ -87,14 +88,18 @@ export class StatisticsService {
     statisticsQueryParams: StatisticsQueryParameters
   ): Observable<OrganizersAggregateStatisticsSm> {
     let params = new HttpParams();
-    this.logger.debug('statisticsQueryParams', statisticsQueryParams);
+    this.logger.debug('getAggregateOrganizersStatistics statisticsQueryParams', statisticsQueryParams);
     const page = statisticsQueryParams.page ? statisticsQueryParams.page.toString() : '0';
     const count = statisticsQueryParams.count ? statisticsQueryParams.count.toString() : '5';
     const sortColumn = statisticsQueryParams.sortColumn ?? 'internalMeetingCount';
+    const department = statisticsQueryParams.department ?? '';
     const sortDirection: SortDirection = statisticsQueryParams.sortDirection ?? 'desc';
     params = params.set('page', page);
     params = params.set('count', count);
     params = params.set('sort', `${sortColumn},${sortDirection}`);
+
+    params = params.set('department', department);
+
     this.logger.debug('organizers agg params', params);
     this.logger.debug('organizers agg params.keys', params.keys());
     this.logger.debug('start/end', start, end);
@@ -124,6 +129,7 @@ export class StatisticsService {
 
     let params = new HttpParams();
     params = params.set('filter', statisticsQueryParams.statisticsScope.toString());
+    params = params.set('department', statisticsQueryParams.department);
     const intervalCount = 12;
     const formattedStart = start.utc().format();
     const url = `${this.environment.khakiBff}/statistics/trailing/${formattedStart}/${interval}/${intervalCount}`;
@@ -163,10 +169,26 @@ export class StatisticsService {
           internal : x[0],
           external : x[1]
         };
-        console.log("trailingStatistics: " + JSON.stringify(trailingStatisticsAggSm));
         return trailingStatisticsAggSm;
     }));
 
+  }
+
+  getDepartments(): Observable<DepartmentsListSm> {
+    console.log("getting departments");
+    const url = `${this.environment.khakiBff}/departments`;
+    return this.httpClient
+      .get(url)
+      .pipe(
+        tap(departmentData => this.logger.debug('Server response: departments', departmentData)),
+        catchError(
+          error => {
+            this.logger.debug('Failed to get departments', error);
+            return throwError('Failed to get departments');
+          }
+        ),
+        map((departmentsStatistics => departmentsStatistics as DepartmentsListSm)
+      ));
   }
 
   getDepartmentStatisticsScoped(
@@ -217,6 +239,7 @@ export class StatisticsService {
     Observable<TimeBlockSummarySm> {
     let params = new HttpParams();
     params = params.set('filter', statisticsQueryParams.statisticsScope.toString());
+    params = params.set('department', statisticsQueryParams.department);
     return this.httpClient
       .get(this.getStartEndUrl(start, end, 'summary'), {params})
       .pipe(
@@ -242,6 +265,8 @@ export class StatisticsService {
 
     getTimeBlockSummary(start: Moment, end: Moment, statisticsQueryParams: StatisticsQueryParameters):
         Observable<TimeBlockSummaryAggSm> {
+
+        console.log("getTimeBlockSummary statisticsQueryParams", statisticsQueryParams);
 
         statisticsQueryParams.statisticsScope = StatisticsScopeSe.Internal;
         let o1: Observable<TimeBlockSummarySm> = this.getTimeBlockSummaryScoped(start, end, statisticsQueryParams);

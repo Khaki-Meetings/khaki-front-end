@@ -6,7 +6,8 @@ import {KhakiSettingsFeatureSm} from '../khaki-settings-feature-sm';
 
 describe('StatisticsFilters Selectors', () => {
   it('should select the feature state', () => {
-    const statsState: StatisticsFiltersSm = {statisticsScope: undefined, end: undefined, interval: undefined, start: undefined};
+    const statsState: StatisticsFiltersSm = {statisticsScope: undefined, end: undefined, interval: undefined, start: undefined,
+      organizer: undefined};
     const settingsState: KhakiSettingsFeatureSm = {
       departments: undefined,
       employees: undefined,

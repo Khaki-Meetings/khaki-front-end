@@ -80,7 +80,8 @@ export const initialState: StatisticsFiltersSm = {
   end: startEnd.end,
   calendarStart: calendarStartEnd.start,
   calendarEnd: calendarStartEnd.end,
-  organizer: ''
+  organizer: '',
+  department: ''
 };
 
 

@@ -38,6 +38,10 @@ export class TimeBasedStatSummaryComponent implements OnInit {
 
   percStaffTimeInMtgs: StatData;
   avgDailyMeetingTime: StatData;
+  avgMeetingAttendees: StatData;
+
+  avgMeetingLength: StatData;
+  avgStaffTimePerMeeting: StatData;
 
   meetingLengthGoal: GoalData;
   attendeesPerMeetingGoal: GoalData;
@@ -69,9 +73,6 @@ export class TimeBasedStatSummaryComponent implements OnInit {
     } else if (max != null) {
         met = (value <= max) ? true : false;
     }
-
-    console.log("Goal evaluation: " + min + " " + value + " " + max + " "
-      + met);
 
     return {
       min: min,
@@ -152,6 +153,48 @@ export class TimeBasedStatSummaryComponent implements OnInit {
             / this.timeBlockSummary?.total?.numWorkdays
         }
 
+     }
+
+     this.avgMeetingLength = {
+       external: 0, internal: 0, total: 0
+     }
+
+     this.avgMeetingLength.total =
+        (this.timeBlockSummary?.internal?.averageMeetingLength)
+          * (this.timeBlockSummary?.internal?.meetingCount / this.timeBlockSummary?.total?.meetingCount)
+        +
+        (this.timeBlockSummary?.external?.averageMeetingLength)
+          * (this.timeBlockSummary?.external?.meetingCount / this.timeBlockSummary?.total?.meetingCount)
+
+     this.avgStaffTimePerMeeting = {
+       external: 0, internal: 0, total: 0
+     }
+
+     this.avgStaffTimePerMeeting.total =
+        (this.timeBlockSummary?.internal?.averageStaffTimePerMeeting)
+          * (this.timeBlockSummary?.internal?.meetingCount / this.timeBlockSummary?.total?.meetingCount)
+        +
+        (this.timeBlockSummary?.external?.averageStaffTimePerMeeting)
+          * (this.timeBlockSummary?.external?.meetingCount / this.timeBlockSummary?.total?.meetingCount)
+
+     this.avgMeetingAttendees = {
+       external: 0, internal: 0, total: 0
+     }
+
+     if (this.timeBlockSummary?.internal?.meetingCount != 0) {
+        this.avgMeetingAttendees.internal = this.timeBlockSummary?.internal?.totalMeetingAttendees / this.timeBlockSummary?.internal?.meetingCount
+     }
+     if (this.timeBlockSummary?.external?.meetingCount != 0) {
+        this.avgMeetingAttendees.external = this.timeBlockSummary?.external?.totalMeetingAttendees / this.timeBlockSummary?.external?.meetingCount
+     }
+
+     if (this.timeBlockSummary?.total?.meetingCount != 0) {
+       this.avgMeetingAttendees.total =
+          (this.avgMeetingAttendees.internal)
+            * (this.timeBlockSummary?.internal?.meetingCount / this.timeBlockSummary?.total?.meetingCount)
+          +
+          (this.avgMeetingAttendees.external)
+            * (this.timeBlockSummary?.external?.meetingCount / this.timeBlockSummary?.total?.meetingCount)
      }
 
    }

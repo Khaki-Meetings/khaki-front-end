@@ -6,6 +6,7 @@ import {StatisticsFiltersSm} from './statistics-filters-sm';
 import {setCurrentTimeIntervalAction} from '../actions/current-time-interval.actions';
 import {setStatisticsScopeAction} from './set-statistics-scope.actions';
 import {CurrentLogLevel, HistorianService} from '@natr/historian';
+import { setCurrentDepartmentAction } from '../actions/current-departments.action';
 
 const logger = new HistorianService(CurrentLogLevel.LOG_LEVEL, 'StatisticsModuleStatisticsFilters');
 
@@ -13,7 +14,8 @@ export const statisticsFiltersAttributeKey = 'statisticsFilters';
 
 export const initialState: StatisticsFiltersSm = {
   statisticsScope: StatisticsScopeSe.External,
-  interval: IntervalSe.Week
+  interval: IntervalSe.Week,
+  department: ""
 };
 
 export const statisticsFiltersReducer = createReducer(
@@ -30,7 +32,8 @@ export const statisticsFiltersReducer = createReducer(
         end: action.statisticsFilters.end,
         calendarStart: action.statisticsFilters.calendarStart,
         calendarEnd: action.statisticsFilters.calendarEnd,
-        organizer: action.statisticsFilters.organizer
+        organizer: action.statisticsFilters.organizer,
+        department: action.statisticsFilters.department
       };
     }
   ),
@@ -38,6 +41,12 @@ export const statisticsFiltersReducer = createReducer(
     setCurrentTimeIntervalAction,
     (state, action) => {
       return {...state, interval: action.interval};
+    }
+  ),
+  on(
+    setCurrentDepartmentAction,
+    (state, action) => {
+      return {...state, department: action.department};
     }
   ),
   on(

@@ -20,7 +20,7 @@ export class StatisticsFiltersFacade {
   constructor(private store: Store<KhakiSettingsFeatureSm>) {
   }
 
-  dispatchSetStatisticsFilters(statisticsFilters: StatisticsFiltersSm): void {
+  public dispatchSetStatisticsFilters(statisticsFilters: StatisticsFiltersSm): void {
     this.store.dispatch(setStatisticsFiltersAction({statisticsFilters}));
   }
 

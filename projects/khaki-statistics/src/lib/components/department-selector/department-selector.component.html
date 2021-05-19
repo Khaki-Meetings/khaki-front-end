@@ -1,0 +1,5 @@
+<mat-select class="application-filter" [formControl]="departmentFilterControl">
+  <mat-option *ngFor="let opt of departmentOptions" [value]="opt.value">
+    {{opt.name}}
+  </mat-option>
+</mat-select>

@@ -17,6 +17,7 @@ import {
 import {statisticsFiltersAttributeKey, statisticsFiltersReducer} from './statistics-filters/statistics-filters.reducer';
 import { organizersAggregateStatisticsFeatureKey, organizersAggregateStatisticsReducer } from './reducers/organizers-aggregate-statistics.reducer';
 import { timeBlockSummaryGoalListReducer, timeBlockSummaryGoalsFeatureKey } from './reducers/time-block-summary-goal-list.reducer';
+import { departmentsListFeatureKey, departmentsListReducer } from './reducers/departments-list.reducer';
 
 export const khakiStatisticsFeatureKey = 'khakiStatistics';
 
@@ -28,6 +29,7 @@ export const khakiStatisticsReducers: ActionReducerMap<KhakiStatisticsFeatureSm>
   [timeBlockSummariesFeatureKey]: timeBlockSummaryReducer,
   [timeBlockSummaryGoalsFeatureKey]: timeBlockSummaryGoalListReducer,
   [trailingStatisticsFeatureKey]: trailingStatisticsReducer,
+  [departmentsListFeatureKey]: departmentsListReducer,
   [spinnerAttributeKey]: spinnerReducer,
   [statisticsFiltersAttributeKey]: statisticsFiltersReducer,
   [meetingsTablePageableAttributeKey]: meetingsTablePageableReducer,
