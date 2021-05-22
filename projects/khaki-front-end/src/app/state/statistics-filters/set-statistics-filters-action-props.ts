@@ -10,4 +10,5 @@ export interface SetStatisticsFiltersActionProps {
   calendarStart?: Moment;
   calendarEnd?: Moment;
   organizer?: string;
+  department?: string;
 }

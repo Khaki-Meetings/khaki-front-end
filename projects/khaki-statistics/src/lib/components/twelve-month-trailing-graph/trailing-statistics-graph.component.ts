@@ -121,8 +121,6 @@ export class TrailingStatisticsGraphComponent implements OnInit {
 
     const timeBlocks = this.getIntervalLabels().reverse();
 
-    console.log("trailing statistics " + JSON.stringify(this.trailingStatistics));
-
     const reverseTrailingStatistics = {
       internal: {
         timeBlockSummaries:
@@ -134,15 +132,11 @@ export class TrailingStatisticsGraphComponent implements OnInit {
       }
     } as TrailingStatisticsAggSm;
 
-    console.log("reverseTrailingStatistics " + JSON.stringify(reverseTrailingStatistics));
-
     this.graphData = reverseTrailingStatistics.internal.timeBlockSummaries.map(
       (timeBlockSummary, index) => {
         const totalSeconds = (timeBlockSummary.totalSeconds && typeof timeBlockSummary.totalSeconds === 'number')
           ? timeBlockSummary.totalSeconds : 0;
         const value = totalSeconds / 3600;
-        console.log("TIME: " + timeBlockSummary.totalSeconds + " "
-          + totalSeconds + " " + value);
         const name = timeBlocks[index];
         return {
           name,

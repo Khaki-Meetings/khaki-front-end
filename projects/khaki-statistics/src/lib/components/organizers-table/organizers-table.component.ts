@@ -20,6 +20,7 @@ import { GoogleAnalyticsService } from '../../google-analytics.service';
 })
 
 export class OrganizersTableComponent implements OnInit, AfterViewInit {
+  department: string;
   constructor(
     private organizersAggregateStatisticsFacade: OrganizersAggregateStatisticsFacadeService,
     public organizersAggregateStatisticsDataSource: OrganizersAggregateStatisticsDataSource,
@@ -50,6 +51,7 @@ export class OrganizersTableComponent implements OnInit, AfterViewInit {
         this.interval = statisticsFilters.interval;
         this.start = statisticsFilters.start;
         this.end = statisticsFilters.end;
+        this.department = statisticsFilters.department;
       });
   }
 

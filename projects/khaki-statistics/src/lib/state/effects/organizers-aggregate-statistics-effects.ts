@@ -23,11 +23,12 @@ export class OrganizersAggregateStatisticsEffects {
       ofType(loadOrganizersAggregateStatisticsAction),
       withLatestFrom(
         this.statisticsFiltersFacade.selectStatisticsFilters(),
-        this.organizersTablePageableFacade.selectOrganizersTablePageable()
+        this.organizersTablePageableFacade.selectOrganizersTablePageable(),
+                this.statisticsFiltersFacade.selectDepartment()
       ),
       tap((thing) => this.logger.debug('organizers agg thing', thing)),
       switchMap(
-        (joined: [TypedAction<'[OrganizersAggregateStatistics] Load OrganizersAggregateStatistics'>, StatisticsFiltersSm, OrganizersTablePageableSm]) => {
+        (joined: [TypedAction<'[OrganizersAggregateStatistics] Load OrganizersAggregateStatistics'>, StatisticsFiltersSm, OrganizersTablePageableSm, string]) => {
           console.log('organizers agg joined', joined); // was natr-historian  this.logger.debug
           return this.statisticsService
             .getAggregateOrganizersStatistics(
@@ -38,7 +39,8 @@ export class OrganizersAggregateStatisticsEffects {
                 page: joined[2].page,
                 count: joined[2].count,
                 sortDirection: joined[2].sortDirection,
-                sortColumn: joined[2].sortColumn
+                sortColumn: joined[2].sortColumn,
+                department: joined[3]
               }
             )
             .pipe(
