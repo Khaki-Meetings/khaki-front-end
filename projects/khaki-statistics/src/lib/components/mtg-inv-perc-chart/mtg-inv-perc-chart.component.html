@@ -35,6 +35,7 @@
           [xAxisTickFormatting]='formatXaxis'
           [xScaleMax]=100
           [showDataLabel]="showDataLabel"
+          [trimYAxisTicks]=false
           (window:resize)="onResize($event)"
           (select)="onSelect($event)"
           (activate)="onActivate($event)"
