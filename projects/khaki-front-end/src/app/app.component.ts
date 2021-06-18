@@ -4,6 +4,7 @@ import {HistorianService, Logging} from '@natr/historian';
 import {TenantFacadeService} from './state/facades/tenant-facade.service';
 import {StatisticsFiltersFacade as SettingsModuleStatisticsFiltersFacade} from 'khaki-settings';
 import {StatisticsFiltersFacade as StatisticsModuleStatisticsFiltersFacade} from 'khaki-statistics';
+import {StatisticsFiltersFacade as TeamsModuleStatisticsFiltersFacade} from 'khaki-teams';
 import {KhakiState} from './state/reducers';
 import {Store} from '@ngrx/store';
 import {statisticsFiltersAttributeKey} from './state/statistics-filters/statistics-filters.reducer';
@@ -32,6 +33,7 @@ export class AppComponent implements OnInit {
     private tenantFacade: TenantFacadeService,
     private settingsModuleStatisticsFiltersFacade: SettingsModuleStatisticsFiltersFacade,
     private statisticsModuleStatisticsFiltersFacade: StatisticsModuleStatisticsFiltersFacade,
+    private teamsModuleStatisticsFiltersFacade: TeamsModuleStatisticsFiltersFacade,
     private store: Store<KhakiState>,
     public router: Router,
     public googleAnalyticsService: GoogleAnalyticsService
@@ -106,6 +108,7 @@ export class AppComponent implements OnInit {
           console.log('statisticsFilters', statisticsFilters);  // was natr-historian  this.logger.debug
           this.settingsModuleStatisticsFiltersFacade.dispatchSetStatisticsFilters(statisticsFilters);
           this.statisticsModuleStatisticsFiltersFacade.dispatchSetStatisticsFilters(statisticsFilters);
+          this.teamsModuleStatisticsFiltersFacade.dispatchSetStatisticsFilters(statisticsFilters);
         }
       );
   }

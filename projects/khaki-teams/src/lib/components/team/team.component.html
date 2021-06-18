@@ -1,0 +1,77 @@
+<div class="component-header">
+  <div class="component-caption">
+    <div class="component-title">Team Members</div>
+    <div class="component-subtitle">{{ interval }}</div>
+  </div>
+  <div class="component-help">
+    <div id="meeting-breakdown-help" class="help-wrapper">
+      <mat-icon class="non-profile-icons">help_outline</mat-icon>
+      <div id="meeting-breakdown-help-content" class="help-content">
+        List of team members
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="component-content">
+  <div class="mat-spinner-wrapper center" *ngIf="loading">
+    <lib-khaki-spinner></lib-khaki-spinner>
+  </div>
+  <div [ngClass]="loading? 'loadingComponent' : ''">
+    <table mat-table [dataSource]="teamMembersDataSource" matSort>
+
+      <ng-container matColumnDef="avatar">
+        <th mat-header-cell *matHeaderCellDef class="table-border header-font">
+
+        </th>
+        <td mat-cell *matCellDef="let element"
+            class="table-border row-caption">
+          <img class="organizerAvatar" *ngIf="element.avatar != null"
+            src={{element.avatar}} />
+          <img class="organizerAvatar" *ngIf="element.avatar == null"
+            src="/assets/googledefaultsilhouette.png" />
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="lastName">
+        <th mat-header-cell *matHeaderCellDef class="table-border header-font col-left"
+            mat-sort-header="person.lastName">Last Name
+        </th>
+        <td mat-cell *matCellDef="let element"
+            class="table-border col-left"> {{element.lastName}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="firstName">
+        <th mat-header-cell *matHeaderCellDef class="table-border header-font col-left"
+            mat-sort-header="person.firstName">First Name
+        </th>
+        <td mat-cell *matCellDef="let element"
+            class="table-border col-left"> {{element.firstName}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef class="table-border header-font col-left">
+            Email
+        </th>
+        <td mat-cell *matCellDef="let element"
+            class="table-border col-left"> {{element.email}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="department">
+        <th mat-header-cell *matHeaderCellDef class="table-border header-font col-left"
+            mat-sort-header="department.name">Department
+        </th>
+        <td mat-cell *matCellDef="let element"
+            class="table-border col-left"> {{element.department}}
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns" class="header-font"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+  <mat-paginator #paginator [length]="dataLength" [pageSizeOptions]="[5, 10, 15]"></mat-paginator>
+</div>
