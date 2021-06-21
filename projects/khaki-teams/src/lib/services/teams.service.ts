@@ -23,11 +23,13 @@ export class TeamsService {
 
       const page = statisticsQueryParams.page ? statisticsQueryParams.page.toString() : '0';
       const count = statisticsQueryParams.count ? statisticsQueryParams.count.toString() : '5';
+      const department = statisticsQueryParams.department;
       const sortColumn = statisticsQueryParams.sortColumn ?? 'person.lastName';
       const sortDirection: SortDirection = statisticsQueryParams.sortDirection ?? 'desc';
       params = params.set('page', page);
       params = params.set('count', count);
       params = params.set('sort', `${sortColumn},${sortDirection}`);
+      params = params.set('department', department);
 
       let url = `${this.environment.khakiBff}/employees`;
 

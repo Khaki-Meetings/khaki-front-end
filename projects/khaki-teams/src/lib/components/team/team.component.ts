@@ -11,6 +11,7 @@ import { HistorianService, Logging } from '@natr/historian';
 import { map, tap } from 'rxjs/operators';
 import { ChangeDetectorRef } from '@angular/core';
 import { AfterViewChecked } from '@angular/core';
+import { StatisticsScopeSe } from '../../state/statistics-filters/statistics-scope-se.enum';
 
 @Logging
 @Component({
@@ -37,6 +38,13 @@ export class TeamComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['avatar', 'firstName', 'lastName',
     'email', 'department'];
 
+  private defaultTimeInterval = IntervalSe.Week;
+
+  private defaultStatisticsFilters = {
+    statisticsScope: StatisticsScopeSe.Internal,
+    interval: IntervalSe.Week
+  }
+
   constructor(
     public teamMembersDataSource: TeamMembersDataSource,
     private teamMembersFacade: TeamMembersFacadeService,
@@ -60,7 +68,8 @@ export class TeamComponent implements OnInit, AfterViewInit {
       this.dataLength = loading.totalElements;
     });
 
-      /*
+    this.interval = this.defaultStatisticsFilters.interval;
+
     this.logger.debug('statisticsFiltersFacade', this.statisticsFiltersFacade);
     this.logger.debug('selectStatisticsFilters',
       this.statisticsFiltersFacade.selectStatisticsFilters());
@@ -72,8 +81,9 @@ export class TeamComponent implements OnInit, AfterViewInit {
         this.start = statisticsFilters.start;
         this.end = statisticsFilters.end;
         this.department = statisticsFilters.department;
+        this.logger.debug("DEPARTMENT: " + this.department);
+        this.teamMembersFacade.dispatchLoadTeamMembers();
       });
-      */
   }
 
   ngAfterViewInit() {
