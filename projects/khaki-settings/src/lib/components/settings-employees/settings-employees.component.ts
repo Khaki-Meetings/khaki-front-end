@@ -53,6 +53,9 @@ export class SettingsEmployeesComponent implements OnInit {
         this.employees = data['content'] as EmployeeDto[];
       });
 
+    this.logger.debug('settings selectStatisticsFilters',
+      this.statisticsFiltersFacade.selectStatisticsFilters());
+
     this.statisticsFiltersFacade
       .selectStatisticsFilters()
       .subscribe(

@@ -24,6 +24,8 @@
     "build-info-once": "ng build khaki-info",
     "build-admin-with-watch": "ng build khaki-admin --watch",
     "build-admin-once": "ng build khaki-admin",
+    "build-teams-with-watch": "ng build khaki-teams --watch",
+    "build-teams-once": "ng build khaki-teams",
     "build-modules": "concurrently -k -s all -m 1 \"yarn:build-*-once\"",
     "heroku-postbuild": "yarn run build-modules && ng build -c ${KHAKI_ENV_CONFIG}"
   },

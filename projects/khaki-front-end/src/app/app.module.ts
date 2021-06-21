@@ -23,6 +23,7 @@ import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {KhakiAppStatisticsFiltersEffects} from './state/statistics-filters/khaki-app-statistics-filters-effects.service';
 import {StatisticsModuleStatisticsFiltersEffects} from './state/statistics-filters/statistics-module-statistics-filters-effects.service';
 import {SettingsModuleStatisticsFiltersEffects} from './state/statistics-filters/settings-module-statistics-filters-effects.service';
+import {TeamsModuleStatisticsFiltersEffects} from './state/statistics-filters/teams-module-statistics-filters-effects.service';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import {SettingsModuleStatisticsFiltersEffects} from './state/statistics-filters
       [
         KhakiAppStatisticsFiltersEffects,
         StatisticsModuleStatisticsFiltersEffects,
-        SettingsModuleStatisticsFiltersEffects
+        SettingsModuleStatisticsFiltersEffects,
+        TeamsModuleStatisticsFiltersEffects
       ]
     ),
     AuthModule.forRoot(
