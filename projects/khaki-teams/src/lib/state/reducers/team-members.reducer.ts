@@ -40,7 +40,7 @@ export const teamMembersReducer = createReducer(
         teamMember => {
           return {
             id: teamMember.id,
-            avatar: teamMember.avatar,
+            avatar: teamMember.avatarUrl,
             firstName: teamMember.firstName,
             lastName: teamMember.lastName,
             email: teamMember.email,

@@ -1,6 +1,6 @@
 export interface TeamMemberSm {
   id: string;
-  avatar?: string;
+  avatarUrl?: string;
   firstName?: string;
   lastName?: string;
   email?: string;
