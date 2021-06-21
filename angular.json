@@ -344,6 +344,46 @@
           }
         }
       }
+    },
+    "khaki-teams": {
+      "projectType": "library",
+      "root": "projects/khaki-teams",
+      "sourceRoot": "projects/khaki-teams/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/khaki-teams/tsconfig.lib.json",
+            "project": "projects/khaki-teams/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/khaki-teams/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/khaki-teams/src/test.ts",
+            "tsConfig": "projects/khaki-teams/tsconfig.spec.json",
+            "karmaConfig": "projects/khaki-teams/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/khaki-teams/tsconfig.lib.json",
+              "projects/khaki-teams/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "khaki-front-end",
