@@ -45,7 +45,8 @@ export const teamMembersReducer = createReducer(
             lastName: teamMember.lastName,
             email: teamMember.email,
             department: teamMember.department,
-            notify: teamMember.notify
+            totalMeetings: teamMember.totalMeetings,
+            totalSeconds: teamMember.totalSeconds
           };
         }
       );

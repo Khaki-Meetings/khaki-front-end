@@ -20,6 +20,8 @@ import { StatisticsFiltersFacade } from './state/statistics-filters/statistics-f
 import { KhakiTeamsRoutingModule } from './khaki-teams-routing.module';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatInputModule } from '@angular/material/input';
+import { HoursMinutesPipe } from './pipes/hours-minutes.pipe';
+
 
 const routes: Routes = [
   {
@@ -35,7 +37,8 @@ const routes: Routes = [
   declarations: [
     KhakiTeamsComponent,
     TeamComponent,
-    IntervalTextDetailPipe
+    IntervalTextDetailPipe,
+    HoursMinutesPipe
   ],
   imports: [
       KhakiTeamsRoutingModule,

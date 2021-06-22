@@ -36,7 +36,7 @@ export class TeamComponent implements OnInit, AfterViewInit {
   private logger: HistorianService;
 
   displayedColumns: string[] = ['avatar', 'firstName', 'lastName',
-    'email', 'department'];
+    'department', 'totalMeetings', 'totalSeconds'];
 
   private defaultTimeInterval = IntervalSe.Week;
 
@@ -77,10 +77,10 @@ export class TeamComponent implements OnInit, AfterViewInit {
     this.statisticsFiltersFacade.selectStatisticsFilters()
       .subscribe(statisticsFilters => {
         this.logger.debug('onInit', statisticsFilters);
-        this.interval = statisticsFilters.interval;
+        this.interval = statisticsFilters.interval || IntervalSe.Week;
         this.start = statisticsFilters.start;
         this.end = statisticsFilters.end;
-        this.department = statisticsFilters.department;
+        this.department = statisticsFilters.department || "";
         this.logger.debug("DEPARTMENT: " + this.department);
         this.teamMembersFacade.dispatchLoadTeamMembers();
       });
