@@ -63,9 +63,9 @@ export class TeamComponent implements OnInit, AfterViewInit {
       });
 
     this.teamMembersDataSource.teamMemberCount()
-    .subscribe(loading => {
-      this.logger.debug('onInit loading', loading);
-      this.dataLength = loading.totalElements;
+    .subscribe(members => {
+      this.logger.debug('onInit count', members);
+      this.dataLength = members.totalElements;
     });
 
     this.interval = this.defaultStatisticsFilters.interval;

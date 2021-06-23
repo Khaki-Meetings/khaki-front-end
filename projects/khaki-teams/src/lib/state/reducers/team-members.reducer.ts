@@ -18,6 +18,7 @@ export const teamMembersReducer = createReducer(
   on(
     loadTeamMembersAction,
     (state: TeamMembersSm, action) => {
+      logger.debug('teamMembersReducer loadTeamMembersAction');
       const newState = {...state};
       newState.loading = true;
       return newState;
@@ -26,6 +27,7 @@ export const teamMembersReducer = createReducer(
   on(
     loadTeamMembersFailureAction,
     (state, action) => {
+      logger.debug('teamMembersReducer loadTeamMembersFailureAction');
       const newState = {...state};
       newState.error = {...action};
       newState.loading = false;
@@ -35,6 +37,8 @@ export const teamMembersReducer = createReducer(
   on(
     loadTeamMembersSuccessAction,
     (state: TeamMembersSm, action) => {
+      logger.debug('teamMembersReducer loadTeamMembersSuccessAction');
+
       const {type, ...newState} = {...state, ...action};
       newState.content = newState.content.map(
         teamMember => {
