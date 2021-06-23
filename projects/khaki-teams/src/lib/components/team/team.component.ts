@@ -71,7 +71,7 @@ export class TeamComponent implements OnInit, AfterViewInit {
     this.interval = this.defaultStatisticsFilters.interval;
 
     this.logger.debug('statisticsFiltersFacade', this.statisticsFiltersFacade);
-    this.logger.debug('selectStatisticsFilters',
+    this.logger.debug('ngOnInit selectStatisticsFilters',
       this.statisticsFiltersFacade.selectStatisticsFilters());
 
     this.statisticsFiltersFacade.selectStatisticsFilters()
