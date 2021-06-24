@@ -36,7 +36,7 @@ export class TeamComponent implements OnInit, AfterViewInit {
   private logger: HistorianService;
 
   displayedColumns: string[] = ['avatar', 'firstName', 'lastName',
-    'email', 'department'];
+    'department', 'totalMeetings', 'totalSeconds'];
 
   private defaultTimeInterval = IntervalSe.Week;
 
@@ -63,24 +63,24 @@ export class TeamComponent implements OnInit, AfterViewInit {
       });
 
     this.teamMembersDataSource.teamMemberCount()
-    .subscribe(loading => {
-      this.logger.debug('onInit loading', loading);
-      this.dataLength = loading.totalElements;
+    .subscribe(members => {
+      this.logger.debug('onInit count', members);
+      this.dataLength = members.totalElements;
     });
 
     this.interval = this.defaultStatisticsFilters.interval;
 
     this.logger.debug('statisticsFiltersFacade', this.statisticsFiltersFacade);
-    this.logger.debug('selectStatisticsFilters',
+    this.logger.debug('ngOnInit selectStatisticsFilters',
       this.statisticsFiltersFacade.selectStatisticsFilters());
 
     this.statisticsFiltersFacade.selectStatisticsFilters()
       .subscribe(statisticsFilters => {
         this.logger.debug('onInit', statisticsFilters);
-        this.interval = statisticsFilters.interval;
+        this.interval = statisticsFilters.interval || IntervalSe.Week;
         this.start = statisticsFilters.start;
         this.end = statisticsFilters.end;
-        this.department = statisticsFilters.department;
+        this.department = statisticsFilters.department || "";
         this.logger.debug("DEPARTMENT: " + this.department);
         this.teamMembersFacade.dispatchLoadTeamMembers();
       });

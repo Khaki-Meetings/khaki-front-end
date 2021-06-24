@@ -48,7 +48,7 @@ export class StatisticsFiltersFacade {
   }
 
   public selectStatisticsFilters(): Observable<StatisticsFiltersSm> {
-    this.logger.debug('selectStatisticsFilters');
+    this.logger.debug('StatisticsFiltersFacade selectStatisticsFilters');
     return this.store.select(statisticsFiltersSelector)
       .pipe(
         map(statisticsFilters => (

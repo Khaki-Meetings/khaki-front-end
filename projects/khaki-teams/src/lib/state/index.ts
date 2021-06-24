@@ -9,6 +9,7 @@ import { teamMembersFeatureKey, teamMembersReducer } from './reducers/team-membe
 import { TeamsFeatureSm } from './teams-feature-sm';
 
 export const teamsFeatureKey = 'teams';
+export const khakiStatisticsFeatureKey = 'khakiStatistics';
 
 export const reducers: ActionReducerMap<TeamsFeatureSm> = {
   [teamMembersTablePageableAttributeKey]: teamMembersTablePageableReducer,
