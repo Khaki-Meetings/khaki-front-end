@@ -6,6 +6,7 @@ import {HistorianService, Logging} from '@natr/historian';
 import {SortDirection} from '@angular/material/sort';
 import { TeamMembersSm } from '../state/models/team-members-sm';
 import { StatisticsQueryParameters } from './models/statistics-query-parameters';
+import { Moment } from 'moment';
 
 @Logging
 @Injectable({
@@ -17,7 +18,21 @@ export class TeamsService {
   constructor(private httpClient: HttpClient, @Inject('environment') private environment) {
   }
 
-  getEmployees(statisticsQueryParams: StatisticsQueryParameters): Observable<TeamMembersSm> {
+  private getStartEndUrl(start: Moment, end: Moment): string {
+    this.logger.debug('start', start);
+    this.logger.debug('start.utc', start.utcOffset());
+    this.logger.debug('start.utc', start.utc().format());
+    const formattedStart = start.utc().format();
+    const formattedEnd = end.utc().format();
+    const url = `${this.environment.khakiBff}/employees/statistics/${formattedStart}/${formattedEnd}`;
+    this.logger.debug('url is', url);
+    return url;
+  }
+
+  getEmployees(
+    start: Moment,
+    end: Moment,
+    statisticsQueryParams: StatisticsQueryParameters): Observable<TeamMembersSm> {
 
       let params = new HttpParams();
 
@@ -30,8 +45,9 @@ export class TeamsService {
       params = params.set('count', count);
       params = params.set('sort', `${sortColumn},${sortDirection}`);
       params = params.set('department', department);
-
-      let url = `${this.environment.khakiBff}/employees`;
+      params = params.set('filter', statisticsQueryParams.statisticsScope.toString());
+      this.logger.debug('getEmployees start/end', start, end);
+      let url = this.getStartEndUrl(start, end);
 
       return this.httpClient
         .get<TeamMembersSm>(url, {params})

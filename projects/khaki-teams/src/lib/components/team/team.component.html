@@ -1,6 +1,7 @@
 <div class="component-header">
   <div class="component-caption">
     <div class="component-title">Team Members</div>
+    <div class="component-subtitle">{{ interval | intervalTextDetail: start : end}}</div>
     <div class="component-subtitle">Department: {{ department ?  department : 'All'}}</div>
   </div>
   <div class="component-help">
@@ -51,21 +52,30 @@
         </td>
       </ng-container>
 
-      <ng-container matColumnDef="email">
-        <th mat-header-cell *matHeaderCellDef class="table-border header-font col-left">
-            Email
-        </th>
-        <td mat-cell *matCellDef="let element"
-            class="table-border col-left"> {{element.email}}
-        </td>
-      </ng-container>
-
       <ng-container matColumnDef="department">
         <th mat-header-cell *matHeaderCellDef class="table-border header-font col-left"
             mat-sort-header="department.name">Department
         </th>
         <td mat-cell *matCellDef="let element"
             class="table-border col-left"> {{element.department}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="totalMeetings">
+        <th mat-header-cell *matHeaderCellDef class="table-border header-font col-right"
+            mat-sort-header="totalMeetings">Meetings
+        </th>
+        <td mat-cell *matCellDef="let element"
+            class="table-border col-right"> {{ element.totalMeetings }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="totalSeconds">
+        <th mat-header-cell *matHeaderCellDef class="table-border header-font col-right"
+            mat-sort-header="totalSeconds">Meeting Time
+        </th>
+        <td mat-cell *matCellDef="let element"
+            class="table-border col-right"> {{ element.totalSeconds | hoursMinutes }}
         </td>
       </ng-container>
 

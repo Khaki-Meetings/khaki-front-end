@@ -30,6 +30,8 @@ export class TeamMembersEffects {
           console.log('joined teamMembers', joined); // was natr-historian  this.logger.debug
           return this.teamsService
             .getEmployees(
+              joined[1].start,
+              joined[1].end,
               {
                 statisticsScope: joined[1].statisticsScope,
                 department: joined[1].department,

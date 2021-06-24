@@ -6,4 +6,6 @@ export interface TeamMemberSm {
   email?: string;
   department?: string;
   notify?: boolean;
+  totalMeetings?: number;
+  totalSeconds?: number;  
 }
