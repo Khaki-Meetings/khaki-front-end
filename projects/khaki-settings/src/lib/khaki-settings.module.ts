@@ -8,7 +8,6 @@ import {SettingsNameComponent} from './components/settings-name/settings-name.co
 import {SettingsEmployeesComponent, AddEmployeeDialogComponent} from './components/settings-employees/settings-employees.component';
 import {SettingsEmployeeComponent} from './components/settings-employee/settings-employee.component';
 import {SettingsDepartmentComponent, AddDepartmentDialogComponent} from './components/settings-department/settings-department.component';
-import {KhakiSpinnerComponent} from './components/khaki-spinner/khaki-spinner.component';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -34,6 +33,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { EmployeesDataSource } from './components/settings-employees/data-source/employees-data-source';
 import { EmployeesFacadeService } from './state/facades/employees-facade.service';
 import { EmployeesTablePageableEffects } from './state/employees-table-pageable/employees-table-pageable.effects';
+import { KhakiCommonModule } from 'khaki-common';
 
 @NgModule({
   declarations: [
@@ -47,7 +47,6 @@ import { EmployeesTablePageableEffects } from './state/employees-table-pageable/
     SettingsDepartmentComponent,
     AddEmployeeDialogComponent,
     AddDepartmentDialogComponent,
-    KhakiSpinnerComponent,
     HoursMinutesPipe,
     IntervalTextDetailPipe,
     MeetingTypeDetailPipe
@@ -65,6 +64,7 @@ import { EmployeesTablePageableEffects } from './state/employees-table-pageable/
     MatPaginatorModule,
     MatSortModule,
     MatProgressSpinnerModule,
+    KhakiCommonModule,
     StoreModule.forFeature(
       fromKhakiSettings.khakiSettingsFeatureKey,
       fromKhakiSettings.reducers,

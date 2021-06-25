@@ -1,10 +1,8 @@
-<div class="container">
-
   <div class="component-content">
-    <div class="mat-spinner-wrapper center" *ngIf="employeeStatsLoading">
+    <div class="mat-spinner-wrapper center" *ngIf="loading">
       <lib-khaki-spinner></lib-khaki-spinner>
     </div>
-    <div [ngClass]="employeeStatsLoading? 'loadingComponent' : ''">
+    <div [ngClass]="loading? 'loadingComponent' : ''">
 
       <table mat-table [dataSource]="employeesDataSource" matSort>
         <ng-container matColumnDef="avatar">
@@ -61,5 +59,3 @@
     </div>
     <mat-paginator #paginator [length]="dataLength" [pageSizeOptions]="[5, 10, 15]"></mat-paginator>
   </div>
-
-</div>

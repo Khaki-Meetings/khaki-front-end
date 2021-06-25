@@ -21,7 +21,7 @@ import { KhakiTeamsRoutingModule } from './khaki-teams-routing.module';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatInputModule } from '@angular/material/input';
 import { HoursMinutesPipe } from './pipes/hours-minutes.pipe';
-
+import { KhakiCommonModule } from 'khaki-common';
 
 const routes: Routes = [
   {
@@ -50,6 +50,7 @@ const routes: Routes = [
       MatPaginatorModule,
       MatSortModule,
       MatProgressSpinnerModule,
+      KhakiCommonModule,
       EffectsModule.forFeature(
         [
           TeamMembersEffects,

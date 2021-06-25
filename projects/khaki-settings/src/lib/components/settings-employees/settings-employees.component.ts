@@ -42,7 +42,7 @@ export class SettingsEmployeesComponent implements OnInit, AfterViewInit {
 
   dataLength: Number;
 
-  employeeStatsLoading = true;
+  loading = false;
   selectedEmployeeStats: TimeBlockSummaryResponseDto;
 
   employees: EmployeeDto[] = [];
@@ -62,7 +62,7 @@ export class SettingsEmployeesComponent implements OnInit, AfterViewInit {
     this.facadeService.selectEmployeesLoading()
       .subscribe(loading => {
         this.logger.debug('onInit loading', loading);
-        this.employeeStatsLoading = loading
+        this.loading = loading
       });
 
     this.employeesDataSource.loadTeamMembers();
@@ -134,12 +134,12 @@ export class SettingsEmployeesComponent implements OnInit, AfterViewInit {
 
   panelOpen(employee: EmployeeDto): void {
     this.logger.debug('open', employee);
-    this.employeeStatsLoading = true;
+    this.loading = true;
     this.settingsService
       .getEmployeeStats(employee.id, this.start, this.end)
       .subscribe(
         timeBlockSummary => {
-          this.employeeStatsLoading = false;
+          this.loading = false;
           this.selectedEmployeeStats = timeBlockSummary;
         }
       );

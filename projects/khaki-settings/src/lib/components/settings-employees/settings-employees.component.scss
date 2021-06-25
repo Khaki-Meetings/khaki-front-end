@@ -191,4 +191,10 @@ td.mat-cell, .mat-footer-cell {
   .mat-sort-header-container {
     justify-content: flex-end;
   }
-}  
+}
+
+.organizerAvatar {
+  height: 35px;
+  border-radius: 10px;
+  vertical-align: middle;
+}
