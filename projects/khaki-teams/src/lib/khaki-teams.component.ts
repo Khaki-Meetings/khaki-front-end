@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TeamComponent } from './components/team/team.component';
+import { KhakiSpinnerComponent } from 'khaki-common';
 
 @Component({
   selector: 'lib-khaki-teams',
