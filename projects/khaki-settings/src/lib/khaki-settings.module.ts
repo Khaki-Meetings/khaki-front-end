@@ -28,6 +28,12 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {HoursMinutesPipe} from './pipes/hours-minutes.pipe';
 import {IntervalTextDetailPipe} from './pipes/interval-text-detail.pipe';
 import {MeetingTypeDetailPipe} from './pipes/meeting-type-detail.pipe';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { EmployeesDataSource } from './components/settings-employees/data-source/employees-data-source';
+import { EmployeesFacadeService } from './state/facades/employees-facade.service';
+import { EmployeesTablePageableEffects } from './state/employees-table-pageable/employees-table-pageable.effects';
 
 @NgModule({
   declarations: [
@@ -55,6 +61,10 @@ import {MeetingTypeDetailPipe} from './pipes/meeting-type-detail.pipe';
     MatFormFieldModule,
     FormsModule,
     MatInputModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatProgressSpinnerModule,
     StoreModule.forFeature(
       fromKhakiSettings.khakiSettingsFeatureKey,
       fromKhakiSettings.reducers,
@@ -66,21 +76,26 @@ import {MeetingTypeDetailPipe} from './pipes/meeting-type-detail.pipe';
       [
         SettingsEffects,
         EmployeesEffects,
-        DepartmentsEffects
+        DepartmentsEffects,
+        EmployeesTablePageableEffects
       ]
     ),
     MatProgressSpinnerModule,
   ],
   exports: [
     KhakiSettingsComponent
-  ]
+  ],
+  providers: [EmployeesDataSource]
 })
 @Logging
 export class KhakiSettingsModule {
   private logger: HistorianService;
 
-  constructor(private statisticsFiltersFacade: StatisticsFiltersFacade) {
+  constructor(
+        public employeesFacade: EmployeesFacadeService,
+        private statisticsFiltersFacade: StatisticsFiltersFacade) {
     this.logger.debug('initiated');
+    employeesFacade.requestEmployees();
     statisticsFiltersFacade.dispatchLoadSharedStatistics();
   }
 }
