@@ -6,10 +6,12 @@ import {departmentsAttributeKey} from './reducers/departments.reducer';
 import {DepartmentsResponseDto} from '../services/models/departmentsResponseDto';
 import {statisticsFiltersAttributeKey} from './statistics-filters/statistics-filters.reducer';
 import {StatisticsFiltersSm} from './statistics-filters/statistics-filters-sm';
+import { employeesTablePageableAttributeKey, EmployeesTablePageableSm } from './employees-table-pageable/employees-table-pageable.reducer';
 
 export interface KhakiSettingsFeatureSm {
   [userProfileAttributeKey]: UserProfileResponseDto;
   [employeesAttributeKey]: EmployeesResponseDto;
   [departmentsAttributeKey]: DepartmentsResponseDto;
   [statisticsFiltersAttributeKey]: StatisticsFiltersSm;
+  [employeesTablePageableAttributeKey]: EmployeesTablePageableSm;
 }

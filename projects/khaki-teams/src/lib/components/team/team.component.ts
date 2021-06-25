@@ -1,9 +1,8 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { IntervalSe } from '../../state/statistics-filters/interval-se.enum';
 import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
 import { Moment } from 'moment';
 import { TeamMembersDataSource } from './data-source/team-members-data-source';
-import { ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { StatisticsFiltersFacade } from '@khaki/statistics';
 import { TeamMembersFacadeService } from '../../state/facades/team-members-facade.service';

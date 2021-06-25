@@ -5,7 +5,9 @@ import {loadEmployees, loadEmployeesSuccess} from '../actions/employees.actions'
 export const employeesAttributeKey = 'employees';
 
 export const initialState: EmployeesResponseDto = {
-  employees: []
+    content: [],
+    number: 0,
+    loading: false
 };
 
 export const employeesReducer = createReducer(
@@ -19,4 +21,3 @@ export const employeesReducer = createReducer(
     }
   )
 );
-

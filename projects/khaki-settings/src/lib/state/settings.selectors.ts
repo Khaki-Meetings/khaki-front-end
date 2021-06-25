@@ -21,3 +21,8 @@ export const departmentsSelector = createSelector(
   khakiSettingsFeatureSelector,
   (state: KhakiSettingsFeatureSm) => state[departmentsAttributeKey]
 );
+
+export const employeesLoadingSelector = createSelector(
+  khakiSettingsFeatureSelector,
+  (state: KhakiSettingsFeatureSm) => state[employeesAttributeKey].loading
+);

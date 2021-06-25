@@ -1,6 +1,6 @@
 import {Inject, Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {map, tap} from 'rxjs/operators';
 import {HistorianService, Logging} from '@natr/historian';
 import {UserProfileResponseDto} from './models/userProfileResponseDto';
@@ -9,7 +9,8 @@ import {DepartmentsResponseDto} from './models/departmentsResponseDto';
 import {OrganizationResponseDto} from './models/organizationResponseDto';
 import {Moment} from 'moment/moment';
 import {TimeBlockSummaryResponseDto} from './models/time-block-summary-response-dto';
-
+import { SortDirection } from '@angular/material/sort';
+import {StatisticsQueryParameters} from './models/statistics-query-parameters';
 
 @Logging
 @Injectable({
@@ -59,12 +60,24 @@ export class SettingsService {
       );
   }
 
-  getEmployees(): Observable<EmployeesResponseDto> {
+  getEmployees(statisticsQueryParams: StatisticsQueryParameters): Observable<EmployeesResponseDto> {
     let url = '/assets/employeesData.json';
     if (this.environment.khakiBff) {
       url = `${this.environment.khakiBff}/employees`;
     }
-    return this.httpClient.get<EmployeesResponseDto>(url).pipe(tap(data => this.logger.debug('employee list', data)));
+
+    let params = new HttpParams();
+    const page = statisticsQueryParams.page ? statisticsQueryParams.page.toString() : '0';
+    const count = statisticsQueryParams.count ? statisticsQueryParams.count.toString() : '5';
+    const sortColumn = statisticsQueryParams.sortColumn ?? 'person.lastName';
+    const sortDirection: SortDirection = statisticsQueryParams.sortDirection ?? 'desc';
+    params = params.set('page', page);
+    params = params.set('count', count);
+    params = params.set('sort', `${sortColumn},${sortDirection}`);
+
+    return this.httpClient
+      .get<EmployeesResponseDto>(url, {params})
+      .pipe(tap(data => this.logger.debug('employee list', data)));
   }
 
   getEmployeeStats(employeeId: string, start: Moment, end: Moment): Observable<any> {

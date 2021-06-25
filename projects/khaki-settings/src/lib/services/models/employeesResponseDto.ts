@@ -1,3 +1,5 @@
+import { PageableSm } from '../../state/models/pageable-sm';
+
 export interface EmployeeDto {
   id: string;
   avatar?: string;
@@ -8,6 +10,5 @@ export interface EmployeeDto {
   notify?: boolean;
 }
 
-export interface EmployeesResponseDto {
-  employees: EmployeeDto[];
+export interface EmployeesResponseDto extends PageableSm<EmployeeDto> {
 }
