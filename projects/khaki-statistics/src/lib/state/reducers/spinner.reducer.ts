@@ -8,4 +8,3 @@ export const spinnerAttributeKey = 'spinner';
 export const spinnerReducer = createReducer(
   initialState
 );
-

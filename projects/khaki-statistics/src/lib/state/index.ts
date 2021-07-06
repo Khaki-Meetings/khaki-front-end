@@ -4,7 +4,6 @@ import {meetingsListFeatureKey, meetingsListReducer} from './reducers/meetings-l
 import {perDepartmentStatisticsFeatureKey, perDepartmentStatisticsReducer} from './reducers/per-department-statistics.reducer';
 import {timeBlockSummariesFeatureKey, timeBlockSummaryReducer} from './reducers/time-block-summary.reducer';
 import {trailingStatisticsFeatureKey, trailingStatisticsReducer} from './reducers/trailing-statistics.reducer';
-import {spinnerAttributeKey, spinnerReducer} from './reducers/spinner.reducer';
 import {KhakiStatisticsFeatureSm} from './models/khaki-statistics-feature-sm';
 import {
   organizersTablePageableAttributeKey,
@@ -18,6 +17,7 @@ import {statisticsFiltersAttributeKey, statisticsFiltersReducer} from './statist
 import { organizersAggregateStatisticsFeatureKey, organizersAggregateStatisticsReducer } from './reducers/organizers-aggregate-statistics.reducer';
 import { timeBlockSummaryGoalListReducer, timeBlockSummaryGoalsFeatureKey } from './reducers/time-block-summary-goal-list.reducer';
 import { departmentsListFeatureKey, departmentsListReducer } from './reducers/departments-list.reducer';
+import { spinnerAttributeKey, spinnerReducer } from './reducers/spinner.reducer';
 
 export const khakiStatisticsFeatureKey = 'khakiStatistics';
 
