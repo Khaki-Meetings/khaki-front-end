@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {HistorianService, Logging} from '@natr/historian';
+import { KhakiSpinnerComponent } from 'khaki-common';
 
 @Logging
 @Component({
