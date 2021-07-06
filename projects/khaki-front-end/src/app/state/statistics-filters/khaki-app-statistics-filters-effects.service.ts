@@ -5,6 +5,7 @@ import {tap, withLatestFrom} from 'rxjs/operators';
 import {setStatisticsFiltersAction} from './set-statistics-filters.actions';
 import {StatisticsFiltersFacade as SettingsModuleStatisticsFiltersFacade} from 'khaki-settings';
 import {StatisticsFiltersFacade as StatisticsModuleStatisticsFiltersFacade} from 'khaki-statistics';
+import {StatisticsFiltersFacade as TeamsModuleStatisticsFiltersFacade} from 'khaki-teams';
 import {Store} from '@ngrx/store';
 import {KhakiState} from '../reducers';
 import {statisticsFiltersAttributeKey} from './statistics-filters.reducer';
@@ -26,6 +27,7 @@ export class KhakiAppStatisticsFiltersEffects {
         console.log('joined', joined); // was natr-historian  this.logger.debug
         this.statisticsModuleStatisticsFiltersFacade.dispatchSetStatisticsFilters(joined[1]);
         this.settingsModuleStatisticsFiltersFacade.dispatchSetStatisticsFilters(joined[1]);
+        this.teamsModuleStatisticsFiltersFacade.dispatchSetStatisticsFilters(joined[1]);
       }),
     ),
     {dispatch: false}
@@ -33,6 +35,7 @@ export class KhakiAppStatisticsFiltersEffects {
 
   constructor(
     private actions$: Actions,
+    private teamsModuleStatisticsFiltersFacade: TeamsModuleStatisticsFiltersFacade,
     private settingsModuleStatisticsFiltersFacade: SettingsModuleStatisticsFiltersFacade,
     private statisticsModuleStatisticsFiltersFacade: StatisticsModuleStatisticsFiltersFacade,
     private store: Store<KhakiState>

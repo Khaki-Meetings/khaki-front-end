@@ -14,6 +14,8 @@
     "e2e": "ng e2e",
     "test-once": "ng test --watch=false",
     "watch-all-modules": "concurrently -k -s all \"yarn:build-*-with-watch\"",
+    "build-common-with-watch": "ng build khaki-common --watch",
+    "build-common-once": "ng build khaki-common",
     "build-statistics-with-watch": "ng build khaki-statistics --watch",
     "build-statistics-once": "ng build khaki-statistics",
     "build-profile-with-watch": "ng build khaki-profile --watch",
@@ -24,6 +26,8 @@
     "build-info-once": "ng build khaki-info",
     "build-admin-with-watch": "ng build khaki-admin --watch",
     "build-admin-once": "ng build khaki-admin",
+    "build-teams-with-watch": "ng build khaki-teams --watch",
+    "build-teams-once": "ng build khaki-teams",
     "build-modules": "concurrently -k -s all -m 1 \"yarn:build-*-once\"",
     "heroku-postbuild": "yarn run build-modules && ng build -c ${KHAKI_ENV_CONFIG}"
   },

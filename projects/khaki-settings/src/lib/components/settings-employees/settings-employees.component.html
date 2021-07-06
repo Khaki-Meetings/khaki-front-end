@@ -1,49 +1,61 @@
-<div class="container">
-  <mat-accordion multi="false">
+  <div class="component-content">
+    <div class="mat-spinner-wrapper center" *ngIf="loading">
+      <lib-khaki-spinner></lib-khaki-spinner>
+    </div>
+    <div [ngClass]="loading? 'loadingComponent' : ''">
 
-    <mat-expansion-panel
-      *ngFor="let employee of getEmployees()"
-      class="mat-elevation-z0"
-      (opened)="panelOpen(employee)"
-    >
-      <mat-expansion-panel-header>
-        <div class="employee-table-emp">
-          <div><img *ngIf="employee.avatar" [src]="employee.avatar"/></div>
-        </div>
-        <div class="employee-info">
-          <div>
-            <div class="employee-name">
-              <span class="name">{{employee.firstName}} {{employee.lastName}}</span>
-              <span>{{employee.department}}</span>
-            </div>
-          </div>
-          <div>
-            <span class="text-detail">{{employee.email}}</span>
-          </div>
-        </div>
-      </mat-expansion-panel-header>
-      <div>
-        <ng-template matExpansionPanelContent>
-          <div class="mat-spinner-wrapper center" *ngIf="employeeStatsLoading">
-            <lib-khaki-spinner></lib-khaki-spinner>
-          </div>
-          <div *ngIf="!employeeStatsLoading">
-            <div>
-              {{interval | intervalTextDetail: start: end}}
-            </div>
-            <div>
-              Total Time: {{selectedEmployeeStats.totalSeconds | hoursMinutes}}
-            </div>
-            <div>
-              Meetings: {{selectedEmployeeStats.meetingCount}}
-            </div>
-          </div>
-        </ng-template>
-      </div>
-    </mat-expansion-panel>
-  </mat-accordion>
-  <div class="arrows">
-    <mat-icon [ngClass]="{'disable': isLast()}" class="down arrow" (click)="moveDown()">keyboard_arrow_right</mat-icon>
-    <mat-icon [ngClass]="{'disable': isFirst()}" class="up arrow" (click)="moveUp()">keyboard_arrow_right</mat-icon>
+      <table mat-table [dataSource]="employeesDataSource" matSort>
+        <ng-container matColumnDef="avatar">
+          <th mat-header-cell *matHeaderCellDef class="table-border header-font">
+          </th>
+          <td mat-cell *matCellDef="let element"
+              class="table-border row-caption">
+            <img class="organizerAvatar" *ngIf="element.avatar != null"
+              src={{element.avatar}} />
+            <img class="organizerAvatar" *ngIf="element.avatar == null"
+              src="/assets/googledefaultsilhouette.png" />
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="lastName">
+          <th mat-header-cell *matHeaderCellDef class="table-border header-font col-left"
+              mat-sort-header="person.lastName">Last Name
+          </th>
+          <td mat-cell *matCellDef="let element"
+              class="table-border col-left"> {{element.lastName}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="firstName">
+          <th mat-header-cell *matHeaderCellDef class="table-border header-font col-left"
+              mat-sort-header="person.firstName">First Name
+          </th>
+          <td mat-cell *matCellDef="let element"
+              class="table-border col-left"> {{element.firstName}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="department">
+          <th mat-header-cell *matHeaderCellDef class="table-border header-font col-left"
+              mat-sort-header="department.name">Department
+          </th>
+          <td mat-cell *matCellDef="let element"
+              class="table-border col-left"> {{element.department}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef class="table-border header-font col-left"
+              >Email
+          </th>
+          <td mat-cell *matCellDef="let element"
+              class="table-border col-left"> {{element.email}}
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns" class="header-font"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+    <mat-paginator #paginator [length]="dataLength" [pageSizeOptions]="[5, 10, 15]"></mat-paginator>
   </div>
-</div>

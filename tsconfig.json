@@ -43,6 +43,14 @@
       "khaki-admin": [
         "dist/khaki-admin/khaki-admin",
         "dist/khaki-admin"
+      ],
+      "khaki-teams": [
+        "dist/khaki-teams/khaki-teams",
+        "dist/khaki-teams"
+      ],
+      "khaki-common": [
+        "dist/khaki-common/khaki-common",
+        "dist/khaki-common"
       ]
     }
   }

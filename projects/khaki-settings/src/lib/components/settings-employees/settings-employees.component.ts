@@ -1,4 +1,4 @@
-import {Component, ElementRef, Inject, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Inject, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {EmployeesFacadeService} from '../../state/facades/employees-facade.service';
@@ -9,6 +9,10 @@ import {StatisticsFiltersFacade} from '../../state/statistics-filters/statistics
 import {mergeMap} from 'rxjs/operators';
 import {TimeBlockSummaryResponseDto} from '../../services/models/time-block-summary-response-dto';
 import {Moment} from 'moment/moment';
+import { EmployeesDataSource } from './data-source/employees-data-source';
+import { IntervalSe } from '../../state/models/interval-se';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 
 export interface DialogData {
   data: string;
@@ -20,22 +24,25 @@ export interface DialogData {
   templateUrl: './settings-employees.component.html',
   styleUrls: ['./settings-employees.component.scss']
 })
-export class SettingsEmployeesComponent implements OnInit {
+export class SettingsEmployeesComponent implements OnInit, AfterViewInit {
   constructor(
     private router: Router,
     public dialog: MatDialog,
     private facadeService: EmployeesFacadeService,
     private statisticsFiltersFacade: StatisticsFiltersFacade,
-    private settingsService: SettingsService
+    private settingsService: SettingsService,
+    public employeesDataSource: EmployeesDataSource,
   ) {
   }
 
   private logger: HistorianService;
-  interval;
+  interval: IntervalSe;
   start: Moment;
   end: Moment;
 
-  employeeStatsLoading = true;
+  dataLength: Number;
+
+  loading = false;
   selectedEmployeeStats: TimeBlockSummaryResponseDto;
 
   employees: EmployeeDto[] = [];
@@ -43,15 +50,31 @@ export class SettingsEmployeesComponent implements OnInit {
   pos = 0;
   maxShow = 6;
 
+  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: false}) sort: MatSort;
+
+  displayedColumns: string[] = ['avatar',
+    'firstName', 'lastName', 'department', 'email'];
 
   ngOnInit(): void {
     this.facadeService.requestEmployees();
 
-    this.settingsService
-      .getEmployees()
-      .subscribe(data => {
-        this.employees = data['content'] as EmployeeDto[];
+    this.facadeService.selectEmployeesLoading()
+      .subscribe(loading => {
+        this.logger.debug('onInit loading', loading);
+        this.loading = loading
       });
+
+    this.employeesDataSource.loadTeamMembers();
+
+    this.employeesDataSource.employeeCount()
+      .subscribe(members => {
+        this.logger.debug('onInit count', members);
+        this.dataLength = members.totalElements;
+    });
+
+    this.logger.debug('settings selectStatisticsFilters',
+      this.statisticsFiltersFacade.selectStatisticsFilters());
 
     this.statisticsFiltersFacade
       .selectStatisticsFilters()
@@ -65,8 +88,11 @@ export class SettingsEmployeesComponent implements OnInit {
 
   }
 
-  getEmployees(): EmployeeDto[] {
-    return this.employees.slice(this.pos, this.pos + this.maxShow);
+  ngAfterViewInit() {
+    this.logger.debug('ngAfterViewInit');
+    this.logger.debug('paginator is', this.paginator);
+    this.employeesDataSource.paginator = this.paginator;
+    this.employeesDataSource.sort = this.sort;
   }
 
   editEmployee(employee): void {
@@ -81,7 +107,6 @@ export class SettingsEmployeesComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      // this.animal = result;
     });
   }
 
@@ -109,12 +134,12 @@ export class SettingsEmployeesComponent implements OnInit {
 
   panelOpen(employee: EmployeeDto): void {
     this.logger.debug('open', employee);
-    this.employeeStatsLoading = true;
+    this.loading = true;
     this.settingsService
       .getEmployeeStats(employee.id, this.start, this.end)
       .subscribe(
         timeBlockSummary => {
-          this.employeeStatsLoading = false;
+          this.loading = false;
           this.selectedEmployeeStats = timeBlockSummary;
         }
       );
