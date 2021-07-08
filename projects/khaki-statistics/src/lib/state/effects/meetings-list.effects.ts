@@ -34,6 +34,7 @@ export class MeetingsListEffects {
               joined[1].start,
               joined[1].end,
               joined[1].organizer,
+              joined[1].attendee,
               {
                 statisticsScope: joined[1].statisticsScope,
                 page: joined[2].page,

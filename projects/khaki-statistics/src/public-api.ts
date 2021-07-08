@@ -8,6 +8,7 @@ export * from './lib/state/statistics-filters/set-statistics-filters.actions';
 export * from './lib/state/statistics-filters/set-interval.actions';
 export * from './lib/state/statistics-filters/set-department.actions';
 export * from './lib/state/statistics-filters/set-organizer.actions';
+export * from './lib/state/statistics-filters/set-attendee.actions';
 export * from './lib/state/statistics-filters/set-statistics-scope.actions';
 export * from './lib/state/statistics-filters/load-shared-statistics.actions';
 export * from './lib/state/statistics-filters/statistics-filters-facade';
