@@ -32,3 +32,9 @@ export const statisticsDepartmentSelector = createSelector(
     //  state => state[statisticsFiltersAttributeKey].department
   (state: KhakiStatisticsFeatureSm) => state[statisticsFiltersAttributeKey].department
 );
+
+export const statisticsAttendeeSelector = createSelector(
+  teamMembersFeatureSelector,
+    //  state => state[statisticsFiltersAttributeKey].department
+  (state: KhakiStatisticsFeatureSm) => state[statisticsFiltersAttributeKey].attendee
+);
