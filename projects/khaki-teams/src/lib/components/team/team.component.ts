@@ -11,6 +11,7 @@ import { map, tap } from 'rxjs/operators';
 import { ChangeDetectorRef } from '@angular/core';
 import { AfterViewChecked } from '@angular/core';
 import { StatisticsScopeSe } from '../../state/statistics-filters/statistics-scope-se.enum';
+import { Router } from '@angular/router';
 
 @Logging
 @Component({
@@ -47,7 +48,8 @@ export class TeamComponent implements OnInit, AfterViewInit {
   constructor(
     public teamMembersDataSource: TeamMembersDataSource,
     private teamMembersFacade: TeamMembersFacadeService,
-    private statisticsFiltersFacade: StatisticsFiltersFacade) {
+    private statisticsFiltersFacade: StatisticsFiltersFacade,
+    private router: Router) {
   }
 
   ngOnInit(): void {
@@ -90,6 +92,16 @@ export class TeamComponent implements OnInit, AfterViewInit {
     this.logger.debug('paginator is', this.paginator);
     this.teamMembersDataSource.paginator = this.paginator;
     this.teamMembersDataSource.sort = this.sort;
+  }
+
+  showMeetings(data): void {
+
+    this.logger.debug('Data', data);
+
+    this.statisticsFiltersFacade.dispatchSetOrganizer(data['id']);
+    this.statisticsFiltersFacade.selectOrganizer();
+
+    this.router.navigateByUrl('/stats/meetings');
   }
 
 }

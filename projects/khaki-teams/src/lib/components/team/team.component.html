@@ -80,7 +80,7 @@
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns" class="header-font"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="showMeetings(row)"></tr>
     </table>
   </div>
   <mat-paginator #paginator [length]="dataLength" [pageSizeOptions]="[5, 10, 15]"></mat-paginator>
