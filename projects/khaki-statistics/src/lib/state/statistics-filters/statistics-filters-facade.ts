@@ -4,7 +4,7 @@ import {StatisticsFiltersSm} from './statistics-filters-sm';
 import {KhakiStatisticsFeatureSm} from '../models/khaki-statistics-feature-sm';
 import {setStatisticsFiltersAction} from './set-statistics-filters.actions';
 import {Observable} from 'rxjs';
-import {statisticsFiltersSelector, statisticsIntervalSelector, statisticsScopeSelector, statisticsOrganizerSelector, statisticsDepartmentSelector} from './statistics-filters.selectors';
+import {statisticsFiltersSelector, statisticsIntervalSelector, statisticsScopeSelector, statisticsOrganizerSelector, statisticsDepartmentSelector, statisticsAttendeeSelector} from './statistics-filters.selectors';
 import {map, take} from 'rxjs/operators';
 import {HistorianService, Logging} from '@natr/historian';
 import {StatisticsScopeSe} from './statistics-scope-se.enum';
@@ -17,6 +17,7 @@ import * as momentJs from 'moment/moment';
 import { setDepartmentAction } from './set-department.actions';
 import { loadDepartmentsListAction } from '../actions/departments-list.actions';
 import { DepartmentSm } from '../models/department-sm';
+import { setAttendeeAction } from './set-attendee.actions';
 
 const moment = momentJs;
 
@@ -49,6 +50,11 @@ export class StatisticsFiltersFacade {
     this.store.dispatch(setOrganizerAction({organizer}));
   }
 
+  public dispatchSetAttendee(attendee: string): void {
+    this.logger.debug('attendee', attendee);
+    this.store.dispatch(setAttendeeAction({attendee}));
+  }
+
   public dispatchSetStatisticsScope(filter: StatisticsScopeSe): void {
     this.logger.debug('dispatchSetStatisticsScope', filter);
     this.store.dispatch(setStatisticsScopeAction({scope: filter}));
@@ -65,7 +71,8 @@ export class StatisticsFiltersFacade {
               calendarStart: moment(statisticsFilters.calendarStart),
               calendarEnd: moment(statisticsFilters.calendarEnd),
               organizer: statisticsFilters.organizer,
-              department: statisticsFilters.department
+              department: statisticsFilters.department,
+              attendee: statisticsFilters.attendee
             }
           )
         )
@@ -84,6 +91,10 @@ export class StatisticsFiltersFacade {
 
   public selectOrganizer(): Observable<string> {
     return this.store.select(statisticsOrganizerSelector);
+  }
+
+  public selectAttendee(): Observable<string> {
+    return this.store.select(statisticsAttendeeSelector);
   }
 
   public selectDepartment(): Observable<string> {

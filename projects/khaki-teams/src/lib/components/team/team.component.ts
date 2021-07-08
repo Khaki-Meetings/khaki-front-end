@@ -96,10 +96,10 @@ export class TeamComponent implements OnInit, AfterViewInit {
 
   showMeetings(data): void {
 
-    this.logger.debug('Data', data);
+    this.logger.debug('showMeetings Data', data);
 
-    this.statisticsFiltersFacade.dispatchSetOrganizer(data['id']);
-    this.statisticsFiltersFacade.selectOrganizer();
+    this.statisticsFiltersFacade.dispatchSetAttendee(data['id']);
+    this.statisticsFiltersFacade.selectAttendee();
 
     this.router.navigateByUrl('/stats/meetings');
   }

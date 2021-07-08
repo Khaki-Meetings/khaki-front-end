@@ -316,6 +316,7 @@ export class StatisticsService {
     start: Moment,
     end: Moment,
     organizer: string,
+    attendee: string,
     statisticsQueryParams: StatisticsQueryParameters
   ): Observable<MeetingsListSm> {
     let params = new HttpParams();
@@ -328,6 +329,7 @@ export class StatisticsService {
     params = params.set('count', count);
     params = params.set('sort', `${sortColumn},${sortDirection}`);
     params = params.set('organizer', organizer);
+    params = params.set('attendee', attendee);
     this.logger.debug('meetings params', params);
     this.logger.debug('meetings params.keys', params.keys());
     this.logger.debug('start/end', start, end);

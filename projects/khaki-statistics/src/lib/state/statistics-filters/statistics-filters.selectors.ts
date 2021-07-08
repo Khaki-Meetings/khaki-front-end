@@ -23,6 +23,11 @@ export const statisticsOrganizerSelector = createSelector(
   (state: KhakiStatisticsFeatureSm) => state[statisticsFiltersAttributeKey].organizer
 );
 
+export const statisticsAttendeeSelector = createSelector(
+  khakiStatisticsFeatureSelector,
+  (state: KhakiStatisticsFeatureSm) => state[statisticsFiltersAttributeKey].attendee
+);
+
 export const statisticsDepartmentSelector = createSelector(
   khakiStatisticsFeatureSelector,
   (state: KhakiStatisticsFeatureSm) => state[statisticsFiltersAttributeKey].department

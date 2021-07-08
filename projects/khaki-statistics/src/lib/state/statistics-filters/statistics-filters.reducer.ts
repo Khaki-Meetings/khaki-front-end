@@ -33,7 +33,8 @@ export const statisticsFiltersReducer = createReducer(
         calendarStart: action.statisticsFilters.calendarStart,
         calendarEnd: action.statisticsFilters.calendarEnd,
         organizer: action.statisticsFilters.organizer,
-        department: action.statisticsFilters.department
+        department: action.statisticsFilters.department,
+        attendee: action.statisticsFilters.attendee
       };
     }
   ),
