@@ -6,8 +6,6 @@ import {timeBlockSummariesFeatureKey} from '../reducers/time-block-summary.reduc
 import {TimeBlockSummarySm} from './time-block-summary-sm';
 import {trailingStatisticsFeatureKey} from '../reducers/trailing-statistics.reducer';
 import {TrailingStatisticsSm} from './trailing-statistics-sm';
-import {spinnerAttributeKey} from '../reducers/spinner.reducer';
-import {SpinnerSm} from './spinner-sm';
 import {organizersTablePageableAttributeKey, OrganizersTablePageableSm} from '../organizers-table-pageable/organizers-table-pageable.reducer';
 import {StatisticsFiltersSm} from '../statistics-filters/statistics-filters-sm';
 import {statisticsFiltersAttributeKey} from '../statistics-filters/statistics-filters.reducer';
@@ -23,6 +21,8 @@ import { TimeBlockSummaryGoalSm } from './time-block-summary-goal-sm';
 import { TimeBlockSummaryGoalListSm } from './time-block-summary-goal-list-sm';
 import { departmentsListFeatureKey } from '../reducers/departments-list.reducer';
 import { DepartmentsListSm } from './departments-list-sm';
+import { spinnerAttributeKey } from '../reducers/spinner.reducer';
+import { SpinnerSm } from './spinner-sm';
 
 export interface KhakiStatisticsFeatureSm {
   [organizersStatisticsFeatureKey]: OrganizersStatisticsSm;

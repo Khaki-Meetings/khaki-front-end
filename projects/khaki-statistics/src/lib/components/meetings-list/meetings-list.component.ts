@@ -40,6 +40,7 @@ export class MeetingsListComponent implements OnInit, AfterViewInit {
     start: Moment;
     end: Moment;
     organizer: string;
+    attendee: string;
     person: PersonSm;
 
     ngOnInit(): void {
@@ -50,6 +51,7 @@ export class MeetingsListComponent implements OnInit, AfterViewInit {
           this.start = statisticsFilters.start;
           this.end = statisticsFilters.end;
           this.organizer = statisticsFilters.organizer;
+          this.attendee = statisticsFilters.attendee;
         });
 
     }
@@ -59,8 +61,16 @@ export class MeetingsListComponent implements OnInit, AfterViewInit {
       this.meetingsListDataSource.paginator = this.paginator;
       this.meetingsListDataSource.sort = this.sort;
 
-      this.statisticsService.getPerson(this.organizer).subscribe(val => {
-        this.person = val;
-      });
+      if (this.organizer) {
+        this.statisticsService.getPerson(this.organizer).subscribe(val => {
+          this.person = val;
+        });
+      }
+
+      if (this.attendee) {
+        this.statisticsService.getPerson(this.attendee).subscribe(val => {
+          this.person = val;
+        });
+      }
     }
 }

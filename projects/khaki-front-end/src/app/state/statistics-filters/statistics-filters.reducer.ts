@@ -81,7 +81,8 @@ export const initialState: StatisticsFiltersSm = {
   calendarStart: calendarStartEnd.start,
   calendarEnd: calendarStartEnd.end,
   organizer: '',
-  department: ''
+  department: '',
+  attendee: ''
 };
 
 

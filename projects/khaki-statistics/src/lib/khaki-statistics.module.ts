@@ -42,7 +42,6 @@ import {IntervalTextDetailPipe} from './pipes/interval-text-detail.pipe';
 import {MeetingTypeDetailPipe} from './pipes/meeting-type-detail.pipe';
 import {MeetingStartDatePipe} from './pipes/meeting-start-date.pipe';
 import {MeetingStartEndTimesPipe} from './pipes/meeting-start-end-times.pipe';
-import {KhakiSpinnerComponent} from './components/khaki-spinner/khaki-spinner.component';
 import {MeetingsListDataSource} from './components/meetings-list/data-source/meetings-list-data-source';
 import {MatSortModule} from '@angular/material/sort';
 import { MtgInvPercChartComponent } from './components/mtg-inv-perc-chart/mtg-inv-perc-chart.component';
@@ -58,6 +57,7 @@ import { MatInputModule } from '@angular/material/input';
 import { CalendarIntervalDisplayPipe } from './pipes/calendar-interval-display.pipe';
 import { DepartmentSelectorComponent } from './components/department-selector/department-selector.component';
 import { DepartmentsEffects } from './state/effects/departments.effects';
+import { KhakiCommonModule } from 'khaki-common';
 
 @NgModule({
   declarations: [
@@ -74,7 +74,6 @@ import { DepartmentsEffects } from './state/effects/departments.effects';
     NgxChartsLegendCustomComponent,
     LegendEntryCustomComponent,
     ExternalInternalSelectorComponent,
-    KhakiSpinnerComponent,
     HoursMinutesPipe,
     IntervalTextDetailPipe,
     MeetingTypeDetailPipe,
@@ -125,7 +124,8 @@ import { DepartmentsEffects } from './state/effects/departments.effects';
     MatFormFieldModule,
     FormsModule,
     MatDialogModule,
-    MatInputModule
+    MatInputModule,
+    KhakiCommonModule
   ],
   exports: [KhakiStatisticsComponent, MatFormFieldModule],
   providers: [OrganizersAggregateStatisticsDataSource, MeetingsListDataSource]
