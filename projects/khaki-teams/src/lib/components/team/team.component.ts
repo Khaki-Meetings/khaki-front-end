@@ -30,7 +30,8 @@ export class TeamComponent implements OnInit, AfterViewInit {
   interval: IntervalSe;
   start: Moment;
   end: Moment;
-
+  attendee: string;
+  
   dataLength: Number;
 
   private logger: HistorianService;
@@ -60,8 +61,16 @@ export class TeamComponent implements OnInit, AfterViewInit {
     this.teamMembersFacade.selectTeamMembersLoading()
       .subscribe(loading => {
         this.logger.debug('onInit loading', loading);
-        this.loading = loading
+        this.loading = loading;
       });
+
+      this.teamMembersFacade.selectTeamsFilters()
+        .subscribe(teamsFilters => {
+          this.logger.debug('onInit', teamsFilters);
+          this.attendee = teamsFilters.attendee;
+          this.logger.debug("attendee: " + this.attendee);
+          this.teamMembersFacade.dispatchLoadTeamMembers();
+        });
 
     this.teamMembersDataSource.teamMemberCount()
     .subscribe(members => {
@@ -98,8 +107,11 @@ export class TeamComponent implements OnInit, AfterViewInit {
 
     this.logger.debug('showMeetings Data', data);
 
-    this.statisticsFiltersFacade.dispatchSetAttendee(data['id']);
-    this.statisticsFiltersFacade.selectAttendee();
+  //  this.statisticsFiltersFacade.dispatchSetAttendee(data['id']);
+//    this.statisticsFiltersFacade.selectAttendee();
+
+    this.teamMembersFacade.dispatchSetAttendee(data['id']);
+    this.teamMembersFacade.selectAttendee();
 
     this.router.navigateByUrl('/stats/meetings');
   }

@@ -11,7 +11,7 @@ export const initialState: StatisticsFiltersSm = {
   statisticsScope: StatisticsScopeSe.External,
   organizer: '',
   department: '',
-  attendee: ''
+  //attendee: ''
 };
 
 

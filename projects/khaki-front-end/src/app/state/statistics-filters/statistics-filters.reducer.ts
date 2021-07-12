@@ -82,7 +82,7 @@ export const initialState: StatisticsFiltersSm = {
   calendarEnd: calendarStartEnd.end,
   organizer: '',
   department: '',
-  attendee: ''
+//  attendee: ''
 };
 
 

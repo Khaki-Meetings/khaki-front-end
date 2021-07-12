@@ -7,6 +7,7 @@ import {Store} from '@ngrx/store';
 import {loadTeamMembersAction} from '../actions/team-members.actions';
 import {teamMembersLoadingSelector, teamMembersSelector } from '../teams.selectors';
 import { Logging } from '@natr/historian';
+import { setAttendeeAction } from '../team-filters/set-attendee.actions';
 
 @Logging
 @Injectable({
@@ -33,6 +34,14 @@ export class TeamMembersFacadeService {
 
   setTeamMembers(data: TeamMembersSm): void {
     throw new NotImplementedException();
+  }
+
+  public dispatchSetAttendee(attendee: string): void {
+    this.store.dispatch(setAttendeeAction({attendee}));
+  }
+
+  selectAttendee(): Observable<boolean> {
+    return this.store.select(teamMembersLoadingSelector);
   }
 
 }
