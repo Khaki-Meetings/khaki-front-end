@@ -16,7 +16,10 @@ export const teamsFiltersReducer = createReducer(
   on(
     setTeamsFiltersAction,
     (state, action) => {
-      return action.teamsFilters;
+      return {
+        ...state,
+        attendee: action.attendee
+      }
     }
   )
 );

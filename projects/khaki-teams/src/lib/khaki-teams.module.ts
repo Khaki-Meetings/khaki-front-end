@@ -22,13 +22,19 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatInputModule } from '@angular/material/input';
 import { HoursMinutesPipe } from './pipes/hours-minutes.pipe';
 import { KhakiCommonModule } from 'khaki-common';
+import { MeetingsListComponent } from './components/meetings-list/meetings-list.component';
+import { MeetingsListDataSource } from './components/meetings-list/data-source/meetings-list-data-source';
+import { MeetingsListEffects } from './state/effects/meetings-list.effects';
+import { MeetingsTablePageableEffects } from './state/meetings-table-pageable/meetings-table-pageable.effects';
+import { MeetingsListFacadeService } from './state/facades/meetings-list-facade.service';
+import { MeetingStartDatePipe } from './pipes/meeting-start-date.pipe';
+import { MeetingStartEndTimesPipe } from './pipes/meeting-start-end-times.pipe';
 
 const routes: Routes = [
   {
     path: '',
     component: KhakiTeamsComponent,
     children: [
-      {path: '', component: KhakiTeamsComponent}
     ]
   }
 ];
@@ -36,9 +42,12 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     KhakiTeamsComponent,
+    MeetingsListComponent,
     TeamComponent,
     IntervalTextDetailPipe,
-    HoursMinutesPipe
+    HoursMinutesPipe,
+    MeetingStartDatePipe,
+    MeetingStartEndTimesPipe
   ],
   imports: [
       KhakiTeamsRoutingModule,
@@ -54,7 +63,9 @@ const routes: Routes = [
       EffectsModule.forFeature(
         [
           TeamMembersEffects,
-          TeamMembersTablePageableEffects
+          TeamMembersTablePageableEffects,
+          MeetingsListEffects,
+          MeetingsTablePageableEffects
         ]
       ),
       StoreModule.forFeature(
@@ -66,7 +77,7 @@ const routes: Routes = [
       ),
   ],
   exports: [KhakiTeamsComponent],
-  providers: [TeamMembersDataSource]
+  providers: [TeamMembersDataSource, MeetingsListDataSource]
 })
 
 @Logging
@@ -74,10 +85,12 @@ export class KhakiTeamsModule {
   private logger: HistorianService;
   constructor(
     public teamMembersFacade: TeamMembersFacadeService,
+    public meetingsListFacade: MeetingsListFacadeService,
     private statisticsFiltersFacade: StatisticsFiltersFacade) {
     this.logger.debug('teamMembersFacade', teamMembersFacade);
     this.logger.debug('statisticsFiltersFacade', statisticsFiltersFacade);
     teamMembersFacade.dispatchLoadTeamMembers();
+    meetingsListFacade.dispatchLoadMeetingsList();
     statisticsFiltersFacade.dispatchLoadSharedStatistics();
   }
 
