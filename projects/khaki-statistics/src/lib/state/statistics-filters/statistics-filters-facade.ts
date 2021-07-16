@@ -4,7 +4,7 @@ import {StatisticsFiltersSm} from './statistics-filters-sm';
 import {KhakiStatisticsFeatureSm} from '../models/khaki-statistics-feature-sm';
 import {setStatisticsFiltersAction} from './set-statistics-filters.actions';
 import {Observable} from 'rxjs';
-import {statisticsFiltersSelector, statisticsIntervalSelector, statisticsScopeSelector, statisticsOrganizerSelector, statisticsDepartmentSelector, statisticsAttendeeSelector} from './statistics-filters.selectors';
+import {statisticsFiltersSelector, statisticsIntervalSelector, statisticsScopeSelector, statisticsOrganizerSelector, statisticsDepartmentSelector} from './statistics-filters.selectors';
 import {map, take} from 'rxjs/operators';
 import {HistorianService, Logging} from '@natr/historian';
 import {StatisticsScopeSe} from './statistics-scope-se.enum';
@@ -91,10 +91,6 @@ export class StatisticsFiltersFacade {
 
   public selectOrganizer(): Observable<string> {
     return this.store.select(statisticsOrganizerSelector);
-  }
-
-  public selectAttendee(): Observable<string> {
-    return this.store.select(statisticsAttendeeSelector);
   }
 
   public selectDepartment(): Observable<string> {

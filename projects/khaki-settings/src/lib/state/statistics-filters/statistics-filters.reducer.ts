@@ -10,8 +10,7 @@ export const initialState: StatisticsFiltersSm = {
   interval: IntervalSe.Week,
   statisticsScope: StatisticsScopeSe.External,
   organizer: '',
-  department: '',
-  attendee: ''
+  department: ''
 };
 
 

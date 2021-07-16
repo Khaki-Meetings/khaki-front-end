@@ -30,6 +30,7 @@ export class TeamComponent implements OnInit, AfterViewInit {
   interval: IntervalSe;
   start: Moment;
   end: Moment;
+  attendee: string;
 
   dataLength: Number;
 
@@ -54,54 +55,48 @@ export class TeamComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
 
-    this.teamMembersDataSource.loadTeamMembers();
-
-    this.logger.debug('ngOnInit');
     this.teamMembersFacade.selectTeamMembersLoading()
       .subscribe(loading => {
-        this.logger.debug('onInit loading', loading);
-        this.loading = loading
+        this.loading = loading;
+      });
+
+    this.teamMembersFacade.selectTeamsFilters()
+      .subscribe(teamsFilter => {
+        if (teamsFilter) {
+          this.attendee = teamsFilter.attendee;
+        }
+        this.teamMembersFacade.dispatchLoadTeamMembers();
       });
 
     this.teamMembersDataSource.teamMemberCount()
-    .subscribe(members => {
-      this.logger.debug('onInit count', members);
+      .subscribe(members => {
       this.dataLength = members.totalElements;
     });
 
     this.interval = this.defaultStatisticsFilters.interval;
 
-    this.logger.debug('statisticsFiltersFacade', this.statisticsFiltersFacade);
-    this.logger.debug('ngOnInit selectStatisticsFilters',
-      this.statisticsFiltersFacade.selectStatisticsFilters());
-
     this.statisticsFiltersFacade.selectStatisticsFilters()
       .subscribe(statisticsFilters => {
-        this.logger.debug('onInit', statisticsFilters);
         this.interval = statisticsFilters.interval || IntervalSe.Week;
         this.start = statisticsFilters.start;
         this.end = statisticsFilters.end;
         this.department = statisticsFilters.department || "";
-        this.logger.debug("DEPARTMENT: " + this.department);
         this.teamMembersFacade.dispatchLoadTeamMembers();
       });
   }
 
   ngAfterViewInit() {
-    this.logger.debug('ngAfterViewInit');
-    this.logger.debug('paginator is', this.paginator);
     this.teamMembersDataSource.paginator = this.paginator;
     this.teamMembersDataSource.sort = this.sort;
   }
 
   showMeetings(data): void {
 
-    this.logger.debug('showMeetings Data', data);
+    this.teamMembersFacade.dispatchSetAttendee(data['id']);
+    this.teamMembersFacade.selectAttendee();
 
-    this.statisticsFiltersFacade.dispatchSetAttendee(data['id']);
-    this.statisticsFiltersFacade.selectAttendee();
+    this.router.navigateByUrl('/teams/meetings');
 
-    this.router.navigateByUrl('/stats/meetings');
   }
 
 }
