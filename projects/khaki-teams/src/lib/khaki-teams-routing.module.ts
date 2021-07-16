@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {KhakiTeamsComponent} from './khaki-teams.component';
 import {TeamComponent} from './components/team/team.component';
+import { MeetingsListComponent } from './components/meetings-list/meetings-list.component';
 
 const routes: Routes = [
   {
@@ -9,11 +10,16 @@ const routes: Routes = [
     component: KhakiTeamsComponent,
     children: [
       {
-        path: 'team',
+        path: '',
         component: TeamComponent
       },
+      {
+        path: 'meetings',
+        component: MeetingsListComponent
+      }
     ]
-  }
+  },
+  {path: 'teams', component: TeamComponent}
 ];
 
 @NgModule({

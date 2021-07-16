@@ -1,6 +1,5 @@
 import {createSelector} from '@ngrx/store';
 import {KhakiStatisticsFeatureSm} from '../models/khaki-statistics-feature-sm';
-import { khakiStatisticsFeatureSelector } from '../statistics.selectors';
 import { teamMembersFeatureSelector } from '../teams.selectors';
 import {statisticsFiltersAttributeKey} from './statistics-filters.reducer';
 
@@ -11,30 +10,20 @@ export const statisticsFiltersSelector = createSelector(
 
 export const statisticsOrganizerSelector = createSelector(
   teamMembersFeatureSelector,
-//  state => state[statisticsFiltersAttributeKey].organizer
   (state: KhakiStatisticsFeatureSm) => state[statisticsFiltersAttributeKey].organizer
 );
 
 export const statisticsScopeSelector = createSelector(
   teamMembersFeatureSelector,
-//  state => state[statisticsFiltersAttributeKey].statisticsScope
   (state: KhakiStatisticsFeatureSm) => state[statisticsFiltersAttributeKey].statisticsScope
 );
 
 export const statisticsIntervalSelector = createSelector(
   teamMembersFeatureSelector,
-//  state => state[statisticsFiltersAttributeKey].interval
   (state: KhakiStatisticsFeatureSm) => state[statisticsFiltersAttributeKey].interval
 );
 
 export const statisticsDepartmentSelector = createSelector(
   teamMembersFeatureSelector,
-    //  state => state[statisticsFiltersAttributeKey].department
   (state: KhakiStatisticsFeatureSm) => state[statisticsFiltersAttributeKey].department
-);
-
-export const statisticsAttendeeSelector = createSelector(
-  teamMembersFeatureSelector,
-    //  state => state[statisticsFiltersAttributeKey].department
-  (state: KhakiStatisticsFeatureSm) => state[statisticsFiltersAttributeKey].attendee
 );

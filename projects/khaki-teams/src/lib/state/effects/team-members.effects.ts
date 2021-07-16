@@ -11,6 +11,8 @@ import {StatisticsFiltersFacade} from '../statistics-filters/statistics-filters-
 import { loadTeamMembersAction, loadTeamMembersFailureAction, loadTeamMembersSuccessAction } from '../actions/team-members.actions';
 import { TeamMembersTablePageableSm } from '../team-members-table-pageable/team-members-table-pageable.reducer';
 import { TeamMembersTablePageableFacade } from '../team-members-table-pageable/team-members-table-pageable-facade.service';
+import { setAttendeeAction } from '../team-filters/set-attendee.actions';
+import { setTeamsFiltersAction } from '../team-filters/set-teams-filters.actions';
 
 @Logging
 @Injectable()
@@ -27,7 +29,6 @@ export class TeamMembersEffects {
       tap((thing) => this.logger.debug('teamMembers thing ', thing)),
       switchMap(
         (joined: [TypedAction<'[TeamMembers] Load TeamMembers'>, StatisticsFiltersSm, TeamMembersTablePageableSm]) => {
-          console.log('joined teamMembers', joined); // was natr-historian  this.logger.debug
           return this.teamsService
             .getEmployees(
               joined[1].start,
@@ -59,5 +60,14 @@ export class TeamMembersEffects {
     private teamMembersTablePageableFacade: TeamMembersTablePageableFacade
   ) {
   }
+
+  teamsSetAttendeeEffect$ = createEffect(
+    () => this.actions$.pipe(
+      ofType(setAttendeeAction),
+      map(action => {
+        return setTeamsFiltersAction({attendee: action.attendee});
+      }),
+    )
+  );
 
 }
