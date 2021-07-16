@@ -18,7 +18,8 @@ const routes: Routes = [
         component: MeetingsListComponent
       }
     ]
-  }
+  },
+  {path: 'teams', component: TeamComponent}
 ];
 
 @NgModule({

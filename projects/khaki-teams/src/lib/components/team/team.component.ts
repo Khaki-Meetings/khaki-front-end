@@ -55,8 +55,6 @@ export class TeamComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
 
-    this.teamMembersDataSource.loadTeamMembers();
-
     this.teamMembersFacade.selectTeamMembersLoading()
       .subscribe(loading => {
         this.loading = loading;
