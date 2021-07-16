@@ -42,18 +42,6 @@ export class StatisticsModuleStatisticsFiltersEffects extends BaseChildrenStatis
     )
   );
 
-/*
-  statisticsSetAttendeeEffect$ = createEffect(
-    () => this.actions$.pipe(
-      ofType(setAttendeeAction),
-      map(action => {
-        console.log('effect', action); // was natr-historian  this.logger.debug
-        return setStatisticsFiltersAction({attendee: action.attendee});
-      }),
-    )
-  );
-  */
-
   statisticsSetStatisticsScopeEffect$ = createEffect(
     () => this.actions$.pipe(
       ofType(setStatisticsScopeAction),
