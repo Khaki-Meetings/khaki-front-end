@@ -34,6 +34,8 @@ import { EmployeesDataSource } from './components/settings-employees/data-source
 import { EmployeesFacadeService } from './state/facades/employees-facade.service';
 import { EmployeesTablePageableEffects } from './state/employees-table-pageable/employees-table-pageable.effects';
 import { KhakiCommonModule } from 'khaki-common';
+import { EditEmployeeDialogComponent } from './components/edit-employee-dialog/edit-employee-dialog.component';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -47,6 +49,7 @@ import { KhakiCommonModule } from 'khaki-common';
     SettingsDepartmentComponent,
     AddEmployeeDialogComponent,
     AddDepartmentDialogComponent,
+    EditEmployeeDialogComponent,
     HoursMinutesPipe,
     IntervalTextDetailPipe,
     MeetingTypeDetailPipe
@@ -63,6 +66,7 @@ import { KhakiCommonModule } from 'khaki-common';
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
+    MatSelectModule,
     MatProgressSpinnerModule,
     KhakiCommonModule,
     StoreModule.forFeature(

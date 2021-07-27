@@ -13,6 +13,7 @@ import { EmployeesDataSource } from './data-source/employees-data-source';
 import { IntervalSe } from '../../state/models/interval-se';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { EditEmployeeDialogComponent } from '../edit-employee-dialog/edit-employee-dialog.component';
 
 export interface DialogData {
   data: string;
@@ -54,7 +55,7 @@ export class SettingsEmployeesComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort, {static: false}) sort: MatSort;
 
   displayedColumns: string[] = ['avatar',
-    'firstName', 'lastName', 'department', 'email'];
+    'firstName', 'lastName', 'department', 'email', 'actions'];
 
   ngOnInit(): void {
     this.facadeService.requestEmployees();
@@ -143,6 +144,24 @@ export class SettingsEmployeesComponent implements OnInit, AfterViewInit {
           this.selectedEmployeeStats = timeBlockSummary;
         }
       );
+  }
+
+  openDialogEdit(row) {
+    console.log("row" + row.id);
+
+    const dialogRef = this.dialog.open(EditEmployeeDialogComponent, {
+        data: {
+          id: row.id,
+          firstName: row.firstName,
+          lastName: row.lastName,
+          email: row.email,
+          department: row.department
+        }
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        console.log(`Dialog result: ${result}`);
+      });
   }
 
 }
