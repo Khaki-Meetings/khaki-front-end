@@ -160,7 +160,8 @@ export class SettingsEmployeesComponent implements OnInit, AfterViewInit {
       });
 
       dialogRef.afterClosed().subscribe(result => {
-        console.log(`Dialog result: ${result}`);
+        // This will force a refresh on the table. Kinda hacky but effective.
+        this.paginator._changePageSize(this.paginator.pageSize);
       });
   }
 

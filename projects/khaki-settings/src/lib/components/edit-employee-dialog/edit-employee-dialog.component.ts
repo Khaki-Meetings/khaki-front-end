@@ -1,9 +1,10 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import { HistorianService, Logging } from '@natr/historian';
 import { DepartmentDto } from '../../services/models/departmentsResponseDto';
+import { EmployeeDto } from '../../services/models/employeesResponseDto';
 import { SettingsService } from '../../services/settings.service';
 import { DepartmentsFacadeService } from '../../state/facades/departments-facade.service';
 
@@ -11,7 +12,8 @@ import { DepartmentsFacadeService } from '../../state/facades/departments-facade
 @Component({
   selector: 'lib-edit-employee-dialog',
   templateUrl: './edit-employee-dialog.component.html',
-  styleUrls: ['./edit-employee-dialog.component.css']
+  styleUrls: ['./edit-employee-dialog.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class EditEmployeeDialogComponent { //} implements OnInit {
 
@@ -20,7 +22,7 @@ export class EditEmployeeDialogComponent { //} implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<EditEmployeeDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data:
-    { id: number, firstName: string, lastName: string, department: string,
+    { id: string, firstName: string, lastName: string, department: string,
       email: string },
       private departmentsFacadeService: DepartmentsFacadeService,
       private settingsService: SettingsService) {  }
@@ -42,7 +44,13 @@ export class EditEmployeeDialogComponent { //} implements OnInit {
   }
 
   save(): void {
-    this.logger.debug("Updated data: ", this.data);
+    const employeeDto = this.data as EmployeeDto;
+
+    this.settingsService.updateEmployee(this.data.id, employeeDto)
+      .subscribe(result => {
+          this.logger.debug("updateEmployee response: ", result);
+      });
+
     this.dialogRef.close();
   }
 

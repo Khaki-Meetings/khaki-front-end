@@ -1,25 +1,27 @@
-<h2 mat-dialog-title>Edit Employee</h2>
+<h2 mat-dialog-title class="component-title">Edit Employee</h2>
 <div mat-dialog-content>
   <form class="example-container">
+    <div>
+      <span class="header-font">First Name</span>
+    </div>
     <mat-form-field appearance="none">
-      <mat-label>First Name</mat-label>
       <input matInput placeholder="" name="data.firstName" [(ngModel)]="data.firstName">
     </mat-form-field>
+    <div>
+      <span class="header-font">Last Name</span>
+    </div>
     <mat-form-field appearance="none">
-      <mat-label>Last Name</mat-label>
       <input matInput placeholder="" name="data.lastName" [(ngModel)]="data.lastName">
     </mat-form-field>
+    <div>
+      <span class="header-font">Department</span>
+    </div>
     <mat-form-field appearance="none">
-      <mat-label>Department</mat-label>
       <mat-select [(value)]="data.department">
         <mat-option *ngFor="let dept of departments"
           [value]="dept.name">{{dept.name}}
         </mat-option>
       </mat-select>
-    </mat-form-field>
-    <mat-form-field appearance="none">
-      <mat-label>Email</mat-label>
-      <input matInput  placeholder="" name="data.email" [(ngModel)]="data.email">
     </mat-form-field>
   </form>
 </div>
