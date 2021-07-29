@@ -4,7 +4,7 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {map, tap} from 'rxjs/operators';
 import {HistorianService, Logging} from '@natr/historian';
 import {UserProfileResponseDto} from './models/userProfileResponseDto';
-import {EmployeesResponseDto} from './models/employeesResponseDto';
+import {EmployeeDto, EmployeesResponseDto} from './models/employeesResponseDto';
 import {DepartmentsResponseDto} from './models/departmentsResponseDto';
 import {OrganizationResponseDto} from './models/organizationResponseDto';
 import {Moment} from 'moment/moment';
@@ -56,6 +56,20 @@ export class SettingsService {
       .pipe(
         map(
           (data: UserProfileResponseDto) => data as UserProfileResponseDto
+        ),
+      );
+  }
+
+  updateEmployee(id: string, employeeData: EmployeeDto): Observable<EmployeeDto> {
+    let url = '/assets/userProfileData.json';
+    if (this.environment.khakiBff) {
+      url = `${this.environment.khakiBff}/employees/userProfile/${id}`;
+    }
+    return this.httpClient
+      .put(url, employeeData)
+      .pipe(
+        map(
+          (data: EmployeeDto) => data as EmployeeDto
         ),
       );
   }
