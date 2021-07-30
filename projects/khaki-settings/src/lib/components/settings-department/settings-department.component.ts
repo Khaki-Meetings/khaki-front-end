@@ -1,14 +1,20 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {DepartmentsFacadeService} from '../../state/facades/departments-facade.service';
 import {DepartmentDto} from '../../services/models/departmentsResponseDto';
 import {SettingsService} from '../../services/settings.service';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { HistorianService, Logging } from '@natr/historian';
+import { DepartmentsDataSource } from './data-source/departments-data-source';
+import { StatisticsFiltersFacade } from '@khaki/statistics';
 
 export interface DialogData {
   data: string;
 }
 
+@Logging
 @Component({
   selector: 'lib-settings-department',
   templateUrl: './settings-department.component.html',
@@ -21,19 +27,54 @@ export class SettingsDepartmentComponent implements OnInit {
   pos = 0;
   maxShow = 9;
 
+  private logger: HistorianService;
+  loading = false;
+  dataLength: Number;
+
+  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: false}) sort: MatSort;
+
+  displayedColumns: string[] = ['name'];
+
   constructor(private router: Router, public dialog: MatDialog,
               private departmentsFacadeService: DepartmentsFacadeService,
-              private settingsService: SettingsService) {
+              private settingsService: SettingsService,
+              private statisticsFiltersFacade: StatisticsFiltersFacade,
+              public departmentsDataSource: DepartmentsDataSource) {
   }
 
   ngOnInit(): void {
     this.departmentsFacadeService.requestDepartments();
 
-    this.settingsService
-      .getDepartments()
-      .subscribe(data => {
-        this.departments = data['content'] as DepartmentDto[];
+      this.departmentsFacadeService.requestDepartmentsPageable();
+
+      this.departmentsFacadeService.selectDepartmentsPageableLoading()
+        .subscribe(loading => {
+          this.logger.debug('onInit loading', loading);
+          this.loading = loading
+        });
+
+      this.departmentsDataSource.loadDepartments();
+
+      this.departmentsDataSource.departmentsCount()
+        .subscribe(members => {
+          this.logger.debug('departmentsDataSource onInit count', members);
+          this.dataLength = members.totalElements;
       });
+
+      this.settingsService
+        .getDepartments()
+        .subscribe(data => {
+          this.departments = data['content'] as DepartmentDto[];
+        });
+
+  }
+
+  ngAfterViewInit() {
+    this.logger.debug('ngAfterViewInit');
+    this.logger.debug('paginator is', this.paginator);
+    this.departmentsDataSource.paginator = this.paginator;
+    this.departmentsDataSource.sort = this.sort;
   }
 
   getDepartments(): DepartmentDto[] {

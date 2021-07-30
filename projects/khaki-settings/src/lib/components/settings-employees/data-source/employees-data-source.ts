@@ -59,11 +59,6 @@ export class EmployeesDataSource extends DataSource<EmployeeDto> {
     return this.employeesFacade.employees()
       .pipe(
         tap(teamMembers => {
-          console.log("teamMembers: " + JSON.stringify(teamMembers));
-          console.log("teamMembers: " + teamMembers.totalElements);
-          console.log("teamMembers: " + teamMembers.size);
-          console.log("teamMembers: " + this.pPaginator);
-
           if (this.pPaginator) {
             this.pPaginator.length = teamMembers.totalElements;
             this.pPaginator.pageSize = teamMembers.size;
@@ -74,6 +69,8 @@ export class EmployeesDataSource extends DataSource<EmployeeDto> {
   }
 
   employeeCount(): Observable<EmployeesResponseDto> {
+    this.logger.debug("employeesCount()", this.employeesFacade.employees())
+
     return this.employeesFacade.employees();
   }
 
