@@ -1,0 +1,34 @@
+
+
+{
+  "content" : [
+      { "id":"faac7c9a-1942-482b-b682-be203dea34e2","name":"Department A" },
+      { "id":"faac7c9a-1942-482b-b682-be203dea34e2","name":"Department B" },
+      { "id":"faac7c9a-1942-482b-b682-be203dea34e2","name":"Department C" }
+  ],
+  "pageable" : {
+    "sort" : {
+      "sorted":true,
+      "unsorted":false,
+      "empty":false
+    },
+    "pageNumber":0,
+    "pageSize":5,
+    "offset":0,
+    "unpaged":false,
+    "paged":true
+  },
+  "totalPages":1,
+  "totalElements":3,
+  "last":false,
+  "first":true,
+  "number":0,
+  "size":3,
+  "numberOfElements":3,
+  "sort" : {
+    "sorted":true,
+    "unsorted":false,
+    "empty":false
+  },
+  "empty":false
+}
