@@ -178,6 +178,10 @@ td.mat-cell, .mat-footer-cell {
   font-size: larger;
 }
 
+td.mat-cell-no-data {
+  text-align: center;
+}
+
 .mat-row:hover {
   background-color: #b7e9f7;
   cursor: pointer;

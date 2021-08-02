@@ -17,6 +17,11 @@
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns" class="header-font"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell mat-cell-no-data" colspan="6">No records found</td>
+      </tr>
+
     </table>
   </div>
   <mat-paginator #paginator [length]="dataLength" [pageSizeOptions]="[5, 10, 15]"></mat-paginator>
