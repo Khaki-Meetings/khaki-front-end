@@ -177,8 +177,18 @@ export class StatisticsService {
   getDepartments(): Observable<DepartmentsListSm> {
     console.log("getting departments");
     const url = `${this.environment.khakiBff}/departments`;
+
+    let params = new HttpParams();
+    const page = '0';
+    const count = '1000';
+    const sortColumn = 'name';
+    const sortDirection = 'asc';
+    params = params.set('page', page);
+    params = params.set('count', count);
+    params = params.set('sort', `${sortColumn},${sortDirection}`);
+
     return this.httpClient
-      .get(url)
+      .get(url, {params})
       .pipe(
         tap(departmentData => this.logger.debug('Server response: departments', departmentData)),
         catchError(

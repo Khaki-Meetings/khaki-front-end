@@ -34,6 +34,11 @@ import { EmployeesDataSource } from './components/settings-employees/data-source
 import { EmployeesFacadeService } from './state/facades/employees-facade.service';
 import { EmployeesTablePageableEffects } from './state/employees-table-pageable/employees-table-pageable.effects';
 import { KhakiCommonModule } from 'khaki-common';
+import { EditEmployeeDialogComponent } from './components/edit-employee-dialog/edit-employee-dialog.component';
+import { MatSelectModule } from '@angular/material/select';
+import { DepartmentsDataSource } from './components/settings-department/data-source/departments-data-source';
+import { DepartmentsFacadeService } from './state/facades/departments-facade.service';
+import { DepartmentsTablePageableEffects } from './state/departments-table-pageable/departments-table-pageable.effects';
 
 @NgModule({
   declarations: [
@@ -47,6 +52,7 @@ import { KhakiCommonModule } from 'khaki-common';
     SettingsDepartmentComponent,
     AddEmployeeDialogComponent,
     AddDepartmentDialogComponent,
+    EditEmployeeDialogComponent,
     HoursMinutesPipe,
     IntervalTextDetailPipe,
     MeetingTypeDetailPipe
@@ -63,6 +69,7 @@ import { KhakiCommonModule } from 'khaki-common';
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
+    MatSelectModule,
     MatProgressSpinnerModule,
     KhakiCommonModule,
     StoreModule.forFeature(
@@ -77,7 +84,8 @@ import { KhakiCommonModule } from 'khaki-common';
         SettingsEffects,
         EmployeesEffects,
         DepartmentsEffects,
-        EmployeesTablePageableEffects
+        EmployeesTablePageableEffects,
+        DepartmentsTablePageableEffects
       ]
     ),
     MatProgressSpinnerModule,
@@ -85,7 +93,10 @@ import { KhakiCommonModule } from 'khaki-common';
   exports: [
     KhakiSettingsComponent
   ],
-  providers: [EmployeesDataSource]
+  providers: [
+    EmployeesDataSource,
+    DepartmentsDataSource
+  ]
 })
 @Logging
 export class KhakiSettingsModule {
@@ -93,9 +104,12 @@ export class KhakiSettingsModule {
 
   constructor(
         public employeesFacade: EmployeesFacadeService,
-        private statisticsFiltersFacade: StatisticsFiltersFacade) {
+        private statisticsFiltersFacade: StatisticsFiltersFacade,
+        public departmentsFacadeService: DepartmentsFacadeService
+        ) {
     this.logger.debug('initiated');
     employeesFacade.requestEmployees();
+    departmentsFacadeService.requestDepartmentsPageable();
     statisticsFiltersFacade.dispatchLoadSharedStatistics();
   }
 }

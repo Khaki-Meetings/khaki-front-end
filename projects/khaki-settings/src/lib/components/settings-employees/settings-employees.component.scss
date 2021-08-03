@@ -183,6 +183,10 @@ td.mat-cell, .mat-footer-cell {
   cursor: pointer;
 }
 
+td.mat-cell-no-data {
+  text-align: center;
+}
+
 #meeting-breakdown-help:hover #meeting-breakdown-help-content {
   visibility: visible;
 }
