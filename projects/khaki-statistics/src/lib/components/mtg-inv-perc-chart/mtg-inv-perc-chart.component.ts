@@ -84,7 +84,7 @@ export class MtgInvPercChartComponent implements OnInit {
           this.graphData.forEach(
             departmentData => {
               const newDataPoint = {
-                name: departmentData.name,
+                name: departmentData.name ? departmentData.name : 'Not Found',
                 series: departmentData.series
               };
               this.chartData.push(newDataPoint);
@@ -92,13 +92,13 @@ export class MtgInvPercChartComponent implements OnInit {
           );
 
           this.single = this.chartData;
+          console.log('chart data', this.chartData); // was natr-historian  this.logger.debug
 
           var height = this.single.length * 35;
           if (height < 100) {
             height = 100;
           }
           this.view = [chartWidth, height];
-          console.log('chart data', this.chartData); // was natr-historian  this.logger.debug
         });
 
     this.statisticsFiltersFacadeService.selectStatisticsFilters()
@@ -114,25 +114,32 @@ export class MtgInvPercChartComponent implements OnInit {
   }
 
   private createGraphData(): void {
+    console.log("createGraphData");
       this.graphData = this.perDepartmentStatistics.internal.departmentsStatistics.map(
       el => {
         return {
           name: el.department,
           series: [{
             name: "Internal",
-            value: el.totalSeconds / el.inventorySecondsAvailable * 100,
+            value: el.totalSeconds /
+              (el.inventorySecondsAvailable != 0 ? el.inventorySecondsAvailable : 1)
+              * 100,
             hours: el.totalSeconds,
             inventorySecondsAvailable: el.inventorySecondsAvailable
           }]
         };
       });
 
+      console.log('graph data X', this.graphData);
+
       this.perDepartmentStatistics.external.departmentsStatistics.forEach(x => {
         if (this.graphData.find(item => item.name == x.department) != null) {
           this.graphData.find(item => item.name == x.department).series.push(
             {
               name: "External",
-              value: x.totalSeconds / x.inventorySecondsAvailable * 100,
+              value: x.totalSeconds /
+                (x.inventorySecondsAvailable != 0 ? x.inventorySecondsAvailable : 1)
+                * 100,
               hours: x.totalSeconds,
               inventorySecondsAvailable: x.inventorySecondsAvailable
             }
@@ -144,7 +151,9 @@ export class MtgInvPercChartComponent implements OnInit {
               series: [
                 {
                 name: "External",
-                value: x.totalSeconds / x.inventorySecondsAvailable * 100,
+                value: x.totalSeconds /
+                  (x.inventorySecondsAvailable != 0 ? x.inventorySecondsAvailable : 1)
+                  * 100,
                 hours: x.totalSeconds,
                 inventorySecondsAvailable: x.inventorySecondsAvailable
               }]
