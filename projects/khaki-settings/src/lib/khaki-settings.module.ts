@@ -40,6 +40,7 @@ import { DepartmentsDataSource } from './components/settings-department/data-sou
 import { DepartmentsFacadeService } from './state/facades/departments-facade.service';
 import { DepartmentsTablePageableEffects } from './state/departments-table-pageable/departments-table-pageable.effects';
 import { AddTeamDialogComponent } from './components/add-team-dialog/add-team-dialog.component';
+import { EditTeamDialogComponent } from './components/edit-team-dialog/edit-team-dialog.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { AddTeamDialogComponent } from './components/add-team-dialog/add-team-di
     AddDepartmentDialogComponent,
     EditEmployeeDialogComponent,
     AddTeamDialogComponent,
+    EditTeamDialogComponent,
     HoursMinutesPipe,
     IntervalTextDetailPipe,
     MeetingTypeDetailPipe
