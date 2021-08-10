@@ -39,6 +39,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { DepartmentsDataSource } from './components/settings-department/data-source/departments-data-source';
 import { DepartmentsFacadeService } from './state/facades/departments-facade.service';
 import { DepartmentsTablePageableEffects } from './state/departments-table-pageable/departments-table-pageable.effects';
+import { AddTeamDialogComponent } from './components/add-team-dialog/add-team-dialog.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { DepartmentsTablePageableEffects } from './state/departments-table-pagea
     AddEmployeeDialogComponent,
     AddDepartmentDialogComponent,
     EditEmployeeDialogComponent,
+    AddTeamDialogComponent,
     HoursMinutesPipe,
     IntervalTextDetailPipe,
     MeetingTypeDetailPipe

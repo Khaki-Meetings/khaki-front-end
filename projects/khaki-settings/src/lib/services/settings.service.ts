@@ -5,7 +5,7 @@ import {map, tap} from 'rxjs/operators';
 import {HistorianService, Logging} from '@natr/historian';
 import {UserProfileResponseDto} from './models/userProfileResponseDto';
 import {EmployeeDto, EmployeesResponseDto} from './models/employeesResponseDto';
-import {DepartmentsResponseDto, DepartmentsResponsePageableDto} from './models/departmentsResponseDto';
+import {DepartmentDto, DepartmentsResponseDto, DepartmentsResponsePageableDto} from './models/departmentsResponseDto';
 import {OrganizationResponseDto} from './models/organizationResponseDto';
 import {Moment} from 'moment/moment';
 import {TimeBlockSummaryResponseDto} from './models/time-block-summary-response-dto';
@@ -127,6 +127,20 @@ export class SettingsService {
     return this.httpClient
       .get<DepartmentsResponsePageableDto>(url, {params})
       .pipe(tap(data => this.logger.debug('departments list', data)));
+  }
+
+  addDepartment(name: string): Observable<DepartmentDto> {
+    let url = '/assets/userProfileData.json';
+    if (this.environment.khakiBff) {
+      url = `${this.environment.khakiBff}/departments`;
+    }
+    return this.httpClient
+      .post(url, name)
+      .pipe(
+        map(
+          (data: DepartmentDto) => data as DepartmentDto
+        ),
+      );
   }
 
 }
