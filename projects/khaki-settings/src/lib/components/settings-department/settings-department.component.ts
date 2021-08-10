@@ -137,10 +137,7 @@ export class SettingsDepartmentComponent implements OnInit {
     const dialogRef = this.dialog.open(EditTeamDialogComponent, {
         data: {
           id: row.id,
-          firstName: row.firstName,
-          lastName: row.lastName,
-          email: row.email,
-          department: row.department
+          name: row.name
         }
       });
 
