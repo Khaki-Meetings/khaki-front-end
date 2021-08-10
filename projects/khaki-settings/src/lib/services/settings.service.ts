@@ -143,4 +143,18 @@ export class SettingsService {
       );
   }
 
+  updateDepartment(id: string, departmentData: DepartmentDto): Observable<DepartmentDto> {
+    let url = '/assets/departmentsData.json';
+    if (this.environment.khakiBff) {
+      url = `${this.environment.khakiBff}/departments/${id}`;
+    }
+    return this.httpClient
+      .put(url, departmentData.name)
+      .pipe(
+        map(
+          (data: DepartmentDto) => data as DepartmentDto
+        ),
+      );
+  }
+
 }
