@@ -9,6 +9,7 @@ import { MatSort } from '@angular/material/sort';
 import { HistorianService, Logging } from '@natr/historian';
 import { DepartmentsDataSource } from './data-source/departments-data-source';
 import { StatisticsFiltersFacade } from '@khaki/statistics';
+import { AddTeamDialogComponent } from '../add-team-dialog/add-team-dialog.component';
 
 export interface DialogData {
   data: string;
@@ -113,6 +114,20 @@ export class SettingsDepartmentComponent implements OnInit {
 
   isFirst(): boolean {
     return this.pos === 0;
+  }
+
+  openDialogAdd() {
+
+    const dialogRef = this.dialog.open(AddTeamDialogComponent, {
+        data: {
+          name: ''
+        }
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        // This will force a refresh on the table. Kinda hacky but effective.
+        this.paginator._changePageSize(this.paginator.pageSize);
+      });
   }
 }
 
