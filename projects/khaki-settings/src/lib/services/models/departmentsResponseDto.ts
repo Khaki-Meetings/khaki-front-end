@@ -1,6 +1,7 @@
 import { PageableSm } from '../../state/models/pageable-sm';
 
 export interface DepartmentDto {
+    id: string;
     name?: string;
 }
 
