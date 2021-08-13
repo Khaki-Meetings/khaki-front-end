@@ -1,0 +1,37 @@
+<h2 mat-dialog-title class="component-title">Add Employee</h2>
+<div mat-dialog-content>
+  <form class="example-container">
+    <div>
+      <span class="header-font">First Name</span>
+    </div>
+    <mat-form-field appearance="none">
+      <input matInput placeholder="" name="data.firstName" [(ngModel)]="data.firstName">
+    </mat-form-field>
+    <div>
+      <span class="header-font">Last Name</span>
+    </div>
+    <mat-form-field appearance="none">
+      <input matInput placeholder="" name="data.lastName" [(ngModel)]="data.lastName">
+    </mat-form-field>
+    <div>
+      <span class="header-font">Email</span>
+    </div>
+    <mat-form-field appearance="none">
+      <input matInput placeholder="" name="data.email" [(ngModel)]="data.email">
+    </mat-form-field>
+    <div>
+      <span class="header-font">Department</span>
+    </div>
+    <mat-form-field appearance="none">
+      <mat-select [(value)]="data.department">
+        <mat-option *ngFor="let dept of departments"
+          [value]="dept.name">{{dept.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button class="mat-raised-button" (click)="cancel()">Cancel</button>
+  <button mat-button class="mat-raised-button mat-primary" (click)="save()">Save</button>
+</div>

@@ -14,6 +14,7 @@ import { IntervalSe } from '../../state/models/interval-se';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { EditEmployeeDialogComponent } from '../edit-employee-dialog/edit-employee-dialog.component';
+import { AddEmployeeDialogComponent } from '../add-employee-dialog/add-employee-dialog.component';
 
 export interface DialogData {
   data: string;
@@ -165,8 +166,25 @@ export class SettingsEmployeesComponent implements OnInit, AfterViewInit {
       });
   }
 
-}
 
+  openDialogAdd() {
+    const dialogRef = this.dialog.open(AddEmployeeDialogComponent, {
+        data: {
+          firstName: '',
+          lastName: '',
+          email: '',
+          department: ''
+        }
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        // This will force a refresh on the table. Kinda hacky but effective.
+        this.paginator._changePageSize(this.paginator.pageSize);
+      });
+  }
+
+}
+/*
 @Logging
 @Component({
   selector: 'lib-add-employee-dialog',
@@ -214,4 +232,4 @@ export class AddEmployeeDialogComponent {
   }
 
 
-}
+}*/

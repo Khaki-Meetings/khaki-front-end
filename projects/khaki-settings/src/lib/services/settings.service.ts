@@ -74,6 +74,20 @@ export class SettingsService {
       );
   }
 
+  createEmployee(employeeData: EmployeeDto): Observable<EmployeeDto> {
+    let url = '/assets/userProfileData.json';
+    if (this.environment.khakiBff) {
+      url = `${this.environment.khakiBff}/employees/userProfile`;
+    }
+    return this.httpClient
+      .post(url, employeeData)
+      .pipe(
+        map(
+          (data: EmployeeDto) => data as EmployeeDto
+        ),
+      );
+  }
+
   getEmployees(statisticsQueryParams: StatisticsQueryParameters): Observable<EmployeesResponseDto> {
     let url = '/assets/employeesData.json';
     if (this.environment.khakiBff) {
