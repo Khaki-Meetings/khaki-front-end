@@ -99,16 +99,35 @@ div.center-90 {
 }
 
 .component-header {
-  padding: 10px;
-  overflow: visible;
+  display: flex;
 
-  .component-caption {
-    float: left;
-    padding: 0 0 20px;
-  }
+  padding: 10px;
+  margin-bottom: 20px;
+  flex-direction: row;
 
   .component-help {
-    float: right;
+    vertical-align: middle;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+  }
+
+  .component-buttons {
+    vertical-align: middle;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    margin-left: auto;
+    padding-right: 50px;
+  }
+
+  .component-caption {
+    vertical-align: middle;
+    align-items: left;
+    justify-content: center;
+    display: flex;
+    padding: 0px;
+    flex-direction: column;
   }
 }
 
@@ -132,7 +151,7 @@ div.center-90 {
   display: inline-block;
   mat-icon {
     font-size: 16px;
-    color: #b7babd;
+    color: #718096;
   }
 }
 
