@@ -210,3 +210,7 @@ td.mat-cell-no-data {
 .mat-form-field {
   padding-bottom: initial;
 }
+
+#department-help:hover #department-help-content {
+  visibility: visible;
+}
