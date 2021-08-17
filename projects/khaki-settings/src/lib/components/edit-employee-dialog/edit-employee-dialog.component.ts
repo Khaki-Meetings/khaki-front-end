@@ -12,8 +12,7 @@ import { DepartmentsFacadeService } from '../../state/facades/departments-facade
 @Component({
   selector: 'lib-edit-employee-dialog',
   templateUrl: './edit-employee-dialog.component.html',
-  styleUrls: ['./edit-employee-dialog.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./edit-employee-dialog.component.scss']
 })
 export class EditEmployeeDialogComponent { //} implements OnInit {
 

@@ -8,8 +8,7 @@ import { DepartmentsFacadeService } from '../../state/facades/departments-facade
 @Component({
   selector: 'lib-edit-team-dialog',
   templateUrl: './edit-team-dialog.component.html',
-  styleUrls: ['./edit-team-dialog.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./edit-team-dialog.component.scss']
 })
 export class EditTeamDialogComponent implements OnInit {
 
