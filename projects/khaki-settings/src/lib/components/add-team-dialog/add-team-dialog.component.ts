@@ -9,8 +9,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 @Component({
   selector: 'lib-add-team-dialog',
   templateUrl: './add-team-dialog.component.html',
-  styleUrls: ['./add-team-dialog.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  styleUrls: ['./add-team-dialog.component.scss']
 })
 export class AddTeamDialogComponent implements OnInit {
 
