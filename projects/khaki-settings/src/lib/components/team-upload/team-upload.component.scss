@@ -1,0 +1,29 @@
+.file-input {
+  display: none;
+}
+
+.text-block {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.file-upload {
+  display: flex;
+  align-items: center;
+  justify-content: center;gap: 10px;
+}
+
+.non-profile-icons {
+  font-size: 30px;
+  padding-right: 7px;
+}
+
+.mat-icon {
+  fill: none;
+}
+
+button.upload-btn {
+    border: none;
+    background: none;
+}

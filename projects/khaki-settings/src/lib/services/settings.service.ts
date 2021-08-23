@@ -171,4 +171,19 @@ export class SettingsService {
       );
   }
 
+  uploadFile(formData: FormData): Observable<boolean> {
+    let url = '';
+    if (this.environment.khakiBff) {
+      url = `${this.environment.khakiBff}/departments/import`;
+    }
+
+    return this.httpClient
+      .post(url, formData)
+      .pipe(
+        map(
+          (data: boolean) => data as boolean
+        ),
+      );
+  }
+
 }

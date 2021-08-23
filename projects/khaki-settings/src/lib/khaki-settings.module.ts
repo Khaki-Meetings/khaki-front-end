@@ -42,6 +42,7 @@ import { DepartmentsTablePageableEffects } from './state/departments-table-pagea
 import { AddTeamDialogComponent } from './components/add-team-dialog/add-team-dialog.component';
 import { EditTeamDialogComponent } from './components/edit-team-dialog/edit-team-dialog.component';
 import { AddEmployeeDialogComponent } from './components/add-employee-dialog/add-employee-dialog.component';
+import { CsvContentVerificationComponent, TeamUploadComponent } from './components/team-upload/team-upload.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,8 @@ import { AddEmployeeDialogComponent } from './components/add-employee-dialog/add
     EditEmployeeDialogComponent,
     AddTeamDialogComponent,
     EditTeamDialogComponent,
+    TeamUploadComponent,
+    CsvContentVerificationComponent,
     HoursMinutesPipe,
     IntervalTextDetailPipe,
     MeetingTypeDetailPipe
