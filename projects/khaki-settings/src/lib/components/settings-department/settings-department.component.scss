@@ -202,3 +202,15 @@ td.mat-cell-no-data {
   border-radius: 10px;
   vertical-align: middle;
 }
+
+.mat-paginator-page-size {
+    align-items: center;
+}
+
+.mat-form-field {
+  padding-bottom: initial;
+}
+
+#department-help:hover #department-help-content {
+  visibility: visible;
+}

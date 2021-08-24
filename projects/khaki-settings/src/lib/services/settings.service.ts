@@ -5,7 +5,7 @@ import {map, tap} from 'rxjs/operators';
 import {HistorianService, Logging} from '@natr/historian';
 import {UserProfileResponseDto} from './models/userProfileResponseDto';
 import {EmployeeDto, EmployeesResponseDto} from './models/employeesResponseDto';
-import {DepartmentsResponseDto, DepartmentsResponsePageableDto} from './models/departmentsResponseDto';
+import {DepartmentDto, DepartmentsResponseDto, DepartmentsResponsePageableDto} from './models/departmentsResponseDto';
 import {OrganizationResponseDto} from './models/organizationResponseDto';
 import {Moment} from 'moment/moment';
 import {TimeBlockSummaryResponseDto} from './models/time-block-summary-response-dto';
@@ -74,6 +74,20 @@ export class SettingsService {
       );
   }
 
+  createEmployee(employeeData: EmployeeDto): Observable<EmployeeDto> {
+    let url = '/assets/userProfileData.json';
+    if (this.environment.khakiBff) {
+      url = `${this.environment.khakiBff}/employees/userProfile`;
+    }
+    return this.httpClient
+      .post(url, employeeData)
+      .pipe(
+        map(
+          (data: EmployeeDto) => data as EmployeeDto
+        ),
+      );
+  }
+
   getEmployees(statisticsQueryParams: StatisticsQueryParameters): Observable<EmployeesResponseDto> {
     let url = '/assets/employeesData.json';
     if (this.environment.khakiBff) {
@@ -127,6 +141,49 @@ export class SettingsService {
     return this.httpClient
       .get<DepartmentsResponsePageableDto>(url, {params})
       .pipe(tap(data => this.logger.debug('departments list', data)));
+  }
+
+  addDepartment(name: string): Observable<DepartmentDto> {
+    let url = '/assets/userProfileData.json';
+    if (this.environment.khakiBff) {
+      url = `${this.environment.khakiBff}/departments`;
+    }
+    return this.httpClient
+      .post(url, name)
+      .pipe(
+        map(
+          (data: DepartmentDto) => data as DepartmentDto
+        ),
+      );
+  }
+
+  updateDepartment(id: string, departmentData: DepartmentDto): Observable<DepartmentDto> {
+    let url = '/assets/departmentsData.json';
+    if (this.environment.khakiBff) {
+      url = `${this.environment.khakiBff}/departments/${id}`;
+    }
+    return this.httpClient
+      .put(url, departmentData.name)
+      .pipe(
+        map(
+          (data: DepartmentDto) => data as DepartmentDto
+        ),
+      );
+  }
+
+  uploadFile(formData: FormData): Observable<boolean> {
+    let url = '';
+    if (this.environment.khakiBff) {
+      url = `${this.environment.khakiBff}/departments/import`;
+    }
+
+    return this.httpClient
+      .post(url, formData)
+      .pipe(
+        map(
+          (data: boolean) => data as boolean
+        ),
+      );
   }
 
 }

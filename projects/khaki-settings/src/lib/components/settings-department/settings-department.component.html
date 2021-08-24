@@ -1,28 +1,57 @@
-<div class="component-content">
-  <div class="mat-spinner-wrapper center" *ngIf="loading">
-    <lib-khaki-spinner></lib-khaki-spinner>
+<div>
+  <div class="component-header">
+    <div class="component-caption">
+      <div class="component-title">Department</div>
+    </div>
+    <div class="component-buttons">
+      <button mat-button class="mat-raised-button" (click)="openDialogAdd()">Add New</button>
+    </div>
+    <div class="component-help">
+      <div id="department-help" class="help-wrapper">
+        <mat-icon class="non-profile-icons">help_outline</mat-icon>
+        <div id="department-help-content" class="help-content">
+          All departments of your organization
+        </div>
+      </div>
+    </div>
   </div>
-  <div [ngClass]="loading? 'loadingComponent' : ''">
 
-    <table mat-table [dataSource]="departmentsDataSource" matSort>
+  <div class="component-content">
+    <div class="mat-spinner-wrapper center" *ngIf="loading">
+      <lib-khaki-spinner></lib-khaki-spinner>
+    </div>
+    <div [ngClass]="loading? 'loadingComponent' : ''">
 
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef class="table-border header-font col-left"
-            mat-sort-header="name">Name
-        </th>
-        <td mat-cell *matCellDef="let element"
-            class="table-border col-left"> {{element.name}}
-        </td>
-      </ng-container>
+      <table mat-table [dataSource]="departmentsDataSource" matSort>
 
-      <tr mat-header-row *matHeaderRowDef="displayedColumns" class="header-font"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef class="table-border header-font col-left"
+              mat-sort-header="name">Name
+          </th>
+          <td mat-cell *matCellDef="let element"
+              class="table-border col-left"> {{element.name}}
+          </td>
+        </ng-container>
 
-      <tr class="mat-row" *matNoDataRow>
-        <td class="mat-cell mat-cell-no-data" colspan="6">No records found</td>
-      </tr>
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef class="table-border header-font col-left">
+            Actions
+          </th>
+          <td mat-cell *matCellDef="let element" class="table-border col-left">
+              <a (click)= "openDialogEdit(element)">Edit</a>
+          </td>
+        </ng-container>
 
-    </table>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns" class="header-font"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell mat-cell-no-data" colspan="6">No records found</td>
+        </tr>
+
+      </table>
+    </div>
+    <mat-paginator #paginator [length]="dataLength" [pageSizeOptions]="[5, 10, 15]"></mat-paginator>
   </div>
-  <mat-paginator #paginator [length]="dataLength" [pageSizeOptions]="[5, 10, 15]"></mat-paginator>
+
 </div>

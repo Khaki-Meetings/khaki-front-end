@@ -5,7 +5,7 @@ import {SettingsHeaderComponent} from './components/settings-header/settings-hea
 import {SettingsMainComponent} from './components/settings-main/settings-main.component';
 import {SettingsOptionsComponent} from './components/settings-options/settings-options.component';
 import {SettingsNameComponent} from './components/settings-name/settings-name.component';
-import {SettingsEmployeesComponent, AddEmployeeDialogComponent} from './components/settings-employees/settings-employees.component';
+import {SettingsEmployeesComponent} from './components/settings-employees/settings-employees.component';
 import {SettingsEmployeeComponent} from './components/settings-employee/settings-employee.component';
 import {SettingsDepartmentComponent, AddDepartmentDialogComponent} from './components/settings-department/settings-department.component';
 import {MatIconModule} from '@angular/material/icon';
@@ -39,6 +39,10 @@ import { MatSelectModule } from '@angular/material/select';
 import { DepartmentsDataSource } from './components/settings-department/data-source/departments-data-source';
 import { DepartmentsFacadeService } from './state/facades/departments-facade.service';
 import { DepartmentsTablePageableEffects } from './state/departments-table-pageable/departments-table-pageable.effects';
+import { AddTeamDialogComponent } from './components/add-team-dialog/add-team-dialog.component';
+import { EditTeamDialogComponent } from './components/edit-team-dialog/edit-team-dialog.component';
+import { AddEmployeeDialogComponent } from './components/add-employee-dialog/add-employee-dialog.component';
+import { CsvContentVerificationComponent, TeamUploadComponent } from './components/team-upload/team-upload.component';
 
 @NgModule({
   declarations: [
@@ -50,9 +54,13 @@ import { DepartmentsTablePageableEffects } from './state/departments-table-pagea
     SettingsEmployeesComponent,
     SettingsEmployeeComponent,
     SettingsDepartmentComponent,
-    AddEmployeeDialogComponent,
     AddDepartmentDialogComponent,
+    AddEmployeeDialogComponent,
     EditEmployeeDialogComponent,
+    AddTeamDialogComponent,
+    EditTeamDialogComponent,
+    TeamUploadComponent,
+    CsvContentVerificationComponent,
     HoursMinutesPipe,
     IntervalTextDetailPipe,
     MeetingTypeDetailPipe

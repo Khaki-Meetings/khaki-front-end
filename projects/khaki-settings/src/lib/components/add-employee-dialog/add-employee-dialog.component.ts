@@ -1,25 +1,22 @@
 import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import {MatSelectModule} from '@angular/material/select';
-import { HistorianService, Logging } from '@natr/historian';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { HistorianService } from '@natr/historian';
 import { DepartmentDto } from '../../services/models/departmentsResponseDto';
 import { EmployeeDto } from '../../services/models/employeesResponseDto';
 import { SettingsService } from '../../services/settings.service';
 import { DepartmentsFacadeService } from '../../state/facades/departments-facade.service';
 
-@Logging
 @Component({
-  selector: 'lib-edit-employee-dialog',
-  templateUrl: './edit-employee-dialog.component.html',
-  styleUrls: ['./edit-employee-dialog.component.scss']
+  selector: 'lib-add-employee-dialog',
+  templateUrl: './add-employee-dialog.component.html',
+  styleUrls: ['./add-employee-dialog.component.scss']
 })
-export class EditEmployeeDialogComponent { //} implements OnInit {
+export class AddEmployeeDialogComponent implements OnInit {
 
   private logger: HistorianService;
 
   constructor(
-    public dialogRef: MatDialogRef<EditEmployeeDialogComponent>,
+    public dialogRef: MatDialogRef<AddEmployeeDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data:
     { id: string, firstName: string, lastName: string, department: string,
       email: string },
@@ -45,9 +42,9 @@ export class EditEmployeeDialogComponent { //} implements OnInit {
   save(): void {
     const employeeDto = this.data as EmployeeDto;
 
-    this.settingsService.updateEmployee(this.data.id, employeeDto)
+    this.settingsService.createEmployee(employeeDto)
       .subscribe(result => {
-          this.logger.debug("updateEmployee response: ", result);
+          this.logger.debug("createEmployee response: ", result);
       });
 
     this.dialogRef.close();
