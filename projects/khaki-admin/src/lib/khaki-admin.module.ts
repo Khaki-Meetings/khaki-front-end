@@ -12,6 +12,7 @@ import {MatProgressBar, MatProgressBarModule} from '@angular/material/progress-b
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {EffectsModule} from '@ngrx/effects';
 import {ClientOnboardingEffects} from './state/client-onboarding/client-onboarding.effects';
+import { MatIconModule } from '@angular/material/icon';
 
 const routes: Routes = [
   {
@@ -34,7 +35,8 @@ const routes: Routes = [
     EffectsModule.forFeature([ClientOnboardingEffects]),
     MatButtonModule,
     MatProgressBarModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatIconModule
   ],
   exports: [KhakiAdminComponent]
 })
