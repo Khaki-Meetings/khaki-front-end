@@ -12,6 +12,10 @@ import {MatProgressBar, MatProgressBarModule} from '@angular/material/progress-b
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {EffectsModule} from '@ngrx/effects';
 import {ClientOnboardingEffects} from './state/client-onboarding/client-onboarding.effects';
+import { MatIconModule } from '@angular/material/icon';
+import { CalendarImportComponent } from './components/calendar-import/calendar-import.component';
+import { MatSelectModule } from '@angular/material/select';
+import { CommonModule } from '@angular/common';
 
 const routes: Routes = [
   {
@@ -24,7 +28,11 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [KhakiAdminComponent, ClientOnboardingComponent],
+  declarations: [
+    KhakiAdminComponent,
+    ClientOnboardingComponent,
+    CalendarImportComponent
+  ],
   imports: [
     RouterModule.forChild(routes),
     ReactiveFormsModule,
@@ -34,9 +42,14 @@ const routes: Routes = [
     EffectsModule.forFeature([ClientOnboardingEffects]),
     MatButtonModule,
     MatProgressBarModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatIconModule,
+    MatSelectModule,
+    CommonModule
   ],
-  exports: [KhakiAdminComponent]
+  exports: [
+    KhakiAdminComponent
+  ]
 })
 export class KhakiAdminModule {
 }
