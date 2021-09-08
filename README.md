@@ -45,10 +45,12 @@ yarn run build-teams-with-watch
 
 ## Modules
 
-Common - common functions, components, etc
-Statistics - the main page
-Profile - profile information
-Settings - configuration for the organization: team members, teams, etc...
-Info - not in use
-Admin - functions for Khaki administrators
-Teams - analysis for the current team
+| Module | Purpose |
+| ------ | ------ |
+| Common | common functions, components, etc |
+| Statistics | the main page |
+| Profile | profile information |
+| Settings | configuration for the organization: team members, teams, etc... |
+| Info | not in use |
+| Admin | functions for Khaki administrators |
+| Teams | analysis for the current team |
